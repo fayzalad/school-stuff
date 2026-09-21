@@ -1,0 +1,2530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICNF102 Field Reference</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{ color-scheme: light dark; }
+  html,body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<div class="titleblock">
+  <div class="tb-row tb-top">
+    <div class="tb-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="30" height="30"><path d="M4 20h9M27 20h9M13 20a7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7z" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+    </div>
+    <div class="tb-id">
+      <span class="tb-doc">DOC ICNF102-SG</span>
+      <span class="tb-title">Communication Network Fundamentals — Field Reference</span>
+    </div>
+    <div class="tb-sp"></div>
+    <div class="searchwrap">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="find a term…" autocomplete="off" aria-label="Filter the guide by keyword">
+    </div>
+    <button class="themebtn" id="themebtn" aria-label="Switch theme" title="Switch theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <button class="sheetbtn" id="menubtn" aria-expanded="false" aria-controls="toc">Sheet index</button>
+  </div>
+  <div class="tb-row tb-meta">
+    <span><b>REV</b> 2026.C</span><span><b>SCOPE</b> NQF 6 · 15 credits</span><span><b>SHEETS</b> 21 + reference</span>
+    <span class="tb-legend" aria-hidden="true">
+      <i data-w="orange"></i>Foundations &amp; L1–2<i data-w="green"></i>Layer 3<i data-w="blue"></i>L4–7 &amp; Services<i data-w="brown"></i>Practice
+    </span>
+  </div>
+</div>
+
+<div class="shell">
+<nav class="toc" id="toc" aria-label="Sheet index">
+  <div class="grp">Foundations</div>
+  <a href="#m1" data-w="orange"><span class="n">01</span>Communication &amp; Rules</a>
+  <a href="#m2" data-w="orange"><span class="n">02</span>Models &amp; Encapsulation</a>
+  <div class="grp">Layers 1–2</div>
+  <a href="#m3" data-w="orange"><span class="n">03</span>Physical Layer &amp; Media</a>
+  <a href="#m4" data-w="orange"><span class="n">04</span>Data Link &amp; Ethernet</a>
+  <a href="#m5" data-w="orange"><span class="n">05</span>Switching</a>
+  <div class="grp">Layer 3</div>
+  <a href="#m6" data-w="green"><span class="n">06</span>Network Layer &amp; IP</a>
+  <a href="#m7" data-w="green"><span class="n">07</span>Address Resolution</a>
+  <a href="#m8" data-w="green"><span class="n">08</span>IPv4 Addressing</a>
+  <a href="#m9" data-w="green"><span class="n">09</span>IPv6 Addressing</a>
+  <a href="#m10" data-w="green"><span class="n">10</span>Subnetting</a>
+  <a href="#m11" data-w="green"><span class="n">11</span>VLSM</a>
+  <div class="grp">Layers 4–7</div>
+  <a href="#m12" data-w="blue"><span class="n">12</span>Transport Layer</a>
+  <a href="#m13" data-w="blue"><span class="n">13</span>Application Layer</a>
+  <div class="grp">Services &amp; Routing</div>
+  <a href="#m14" data-w="blue"><span class="n">14</span>DHCP</a>
+  <a href="#m15" data-w="blue"><span class="n">15</span>NAT</a>
+  <a href="#m16" data-w="blue"><span class="n">16</span>VLANs</a>
+  <a href="#m17" data-w="blue"><span class="n">17</span>Routing Concepts</a>
+  <a href="#m18" data-w="blue"><span class="n">18</span>RIPv2</a>
+  <div class="grp">Practice</div>
+  <a href="#m19" data-w="brown"><span class="n">19</span>Small Networks &amp; Security</a>
+  <a href="#m20" data-w="brown"><span class="n">20</span>IOS Configuration</a>
+  <a href="#m21" data-w="brown"><span class="n">21</span>Case Study Walkthrough</a>
+  <div class="grp">Reference</div>
+  <a href="#ref" data-w="brown"><span class="n">↘</span>Tables &amp; Cheat Sheets</a>
+</nav>
+
+<main>
+<div class="hero">
+  <div class="hero-num" aria-hidden="true">SHEET 00</div>
+  <h1>Everything ICNF102 asks you to know, in the order it teaches it.</h1>
+  <p>Twenty-one sheets from the rules of communication to a working router-on-a-stick, drawn from the course slide decks, Packet Tracer labs and the 2026 study guide. Every sheet ends in a self-test you can answer before you look.</p>
+  <div class="facts">
+    <span>TM1 Theory 40%</span><span>TM2 Practical 35%</span><span>TM3 Case Study 15%</span><span>TM4 Weekly 10%</span><span>Course mark 40% + Exam 60%</span>
+  </div>
+</div>
+
+<section id="m1" data-w="orange">
+<h2 data-sheet="01"><span class="num">01</span>Communication &amp; the Rules</h2>
+<p class="lead">Before any protocol, three things must exist and a set of rules must govern them. Nearly every "why" answer later in the course traces back to one of the rules below.</p>
+
+<h3>The three elements of every communication</h3>
+<ul>
+  <li><b>Source</b> (sender) — the device that originates the message.</li>
+  <li><b>Destination</b> (receiver) — the device that interprets it.</li>
+  <li><b>Channel</b> (media) — the path the message travels along.</li>
+</ul>
+<p>Rules — <span class="dfn">protocols</span> — govern all methods of communication, human or machine.</p>
+
+<h3>What protocols must define</h3>
+<p>General communication requires an identified sender and receiver, a common language and grammar, agreed speed and timing of delivery, and confirmation or acknowledgement requirements. <b>Network</b> protocols additionally define five things you should be able to list from memory:</p>
+<div class="tw">
+<table><caption>The five network communication rules</caption>
+<thead><tr><th>Rule</th><th>What it governs</th></tr></thead>
+<tbody>
+<tr><td class="m">Message encoding</td><td>Converting information into an acceptable form for transmission; <b>decoding</b> reverses it. Bits become patterns of light, sound or electrical impulses.</td></tr>
+<tr><td class="m">Message formatting &amp; encapsulation</td><td>The structure a message must use. Format depends on message type and the channel delivering it.</td></tr>
+<tr><td class="m">Message size</td><td>Encoding must suit the medium; long messages are broken into pieces that fit.</td></tr>
+<tr><td class="m">Message timing</td><td>Flow control, response timeout, access method — see below.</td></tr>
+<tr><td class="m">Message delivery options</td><td>Unicast, multicast, broadcast (and anycast in IPv6).</td></tr>
+</tbody></table>
+</div>
+
+<h3>Message timing, broken down</h3>
+<ul>
+  <li><b>Flow control</b> — manages the <i>rate</i> of transmission: how much can be sent and how fast.</li>
+  <li><b>Response timeout</b> — how long a device waits when it hears no reply from the destination.</li>
+  <li><b>Access method</b> — determines <i>when</i> a device may send. This is where <span class="dfn">collisions</span> arise: two devices transmit at once and both messages corrupt. Some protocols are <b>proactive</b> (try to prevent collisions); others are <b>reactive</b> (recover after one).</li>
+</ul>
+
+<h3>Delivery options</h3>
+<div class="split">
+  <div class="card"><h5>Unicast</h5><p>One to one. A single source to a single destination.</p></div>
+  <div class="card"><h5>Multicast</h5><p>One to many — a defined group, typically not everyone.</p></div>
+  <div class="card"><h5>Broadcast</h5><p>One to all on the local network.</p></div>
+</div>
+<div class="box trap"><span class="tag">Classic trap</span><p>Broadcast is used in IPv4 but is <b>not an option in IPv6</b>. IPv6 replaces its uses with multicast and adds <b>anycast</b> — one address assigned to multiple devices, reached at whichever is nearest.</p></div>
+
+<h3>Protocol types and functions</h3>
+<div class="tw">
+<table><caption>Protocol categories</caption>
+<thead><tr><th>Type</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td class="m">Network communications</td><td>Enable two or more devices to communicate over one or more networks.</td></tr>
+<tr><td class="m">Network security</td><td>Secure data — authentication, data integrity, data encryption.</td></tr>
+<tr><td class="m">Routing</td><td>Let routers exchange route information, compare paths and select the best one.</td></tr>
+<tr><td class="m">Service discovery</td><td>Automatic detection of devices or services.</td></tr>
+</tbody></table>
+</div>
+<div class="tw">
+<table><caption>Protocol functions</caption>
+<thead><tr><th>Function</th><th>What it provides</th></tr></thead>
+<tbody>
+<tr><td class="m">Addressing</td><td>Identifies sender and receiver.</td></tr>
+<tr><td class="m">Reliability</td><td>Guaranteed delivery.</td></tr>
+<tr><td class="m">Flow control</td><td>Data flows at an efficient rate.</td></tr>
+<tr><td class="m">Sequencing</td><td>Uniquely labels each transmitted segment.</td></tr>
+<tr><td class="m">Error detection</td><td>Determines whether data was corrupted in transit.</td></tr>
+<tr><td class="m">Application interface</td><td>Process-to-process communication between network applications.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Standards organisations</h3>
+<p>Open standards encourage <b>interoperability, competition and innovation</b>. Standards bodies are vendor-neutral, non-profit organisations.</p>
+<div class="tw mono">
+<table><caption>Who does what</caption>
+<thead><tr><th>Body</th><th>Responsibility</th></tr></thead>
+<tbody>
+<tr><td>ISOC</td><td>Internet Society — promotes the open development and evolution of the internet.</td></tr>
+<tr><td>IAB</td><td>Internet Architecture Board — management and development of internet standards.</td></tr>
+<tr><td>IETF</td><td>Develops, updates and maintains internet and TCP/IP technologies. Maintains the TCP/IP suite; developed IPv6.</td></tr>
+<tr><td>IRTF</td><td>Long-term research on internet and TCP/IP protocols.</td></tr>
+<tr><td>ICANN</td><td>Coordinates IP address allocation, domain name management and other assignments.</td></tr>
+<tr><td>IANA</td><td>Oversees and manages IP address allocation, domain names and protocol identifiers <i>for</i> ICANN. Assigns port numbers.</td></tr>
+<tr><td>IEEE</td><td>Standards in power, healthcare, telecommunications and networking — including Ethernet (802.3), Wi-Fi (802.11) and MAC address rules.</td></tr>
+<tr><td>EIA</td><td>Electrical wiring, connectors and the 19-inch equipment racks.</td></tr>
+<tr><td>TIA</td><td>Radio equipment, cellular towers, VoIP devices, satellite. TIA/EIA-568 is the LAN cabling standard.</td></tr>
+<tr><td>ITU-T</td><td>Video compression, IPTV, broadband such as DSL.</td></tr>
+<tr><td>ISO</td><td>With ITU, developed the OSI reference model.</td></tr>
+</tbody></table>
+</div>
+
+<details class="st"><summary>Self-test — Module 01</summary><div class="body">
+<ol>
+<li>Which timing rule decides <i>when</i> a device may transmit?<span class="a">Access method.</span></li>
+<li>A protocol that tries to stop collisions happening at all is described as what?<span class="a">Proactive (CSMA/CA); a reactive protocol like CSMA/CD recovers after the collision.</span></li>
+<li>Which delivery option exists in IPv6 but not IPv4, and which exists in IPv4 but not IPv6?<span class="a">Anycast is IPv6-only; broadcast is IPv4-only.</span></li>
+<li>Which organisation assigns port numbers, and which assigns the 24-bit OUI in a MAC address?<span class="a">IANA assigns port numbers; the IEEE assigns OUIs.</span></li>
+<li>Name the three elements common to all communication methods.<span class="a">Source, destination, channel (media).</span></li>
+</ol>
+</div></details>
+</section>
+<section id="m2" data-w="orange">
+<h2 data-sheet="02"><span class="num">02</span>Reference Models &amp; Encapsulation</h2>
+<p class="lead">Two layered models, one encapsulation process, and the PDU names that go with it. Expect to be asked which layer a protocol lives at, and what the data is called at that point.</p>
+
+<h3>Why layer at all</h3>
+<ul>
+  <li><b>Assists protocol design</b> — each layer has defined information to act on and defined interfaces above and below.</li>
+  <li><b>Fosters competition</b> — products from different vendors interoperate.</li>
+  <li><b>Isolates change</b> — a technology change in one layer doesn't affect the others.</li>
+  <li><b>Provides a common language</b> for describing networking functions.</li>
+</ul>
+
+<h3>The OSI model — seven layers</h3>
+<div class="tw">
+<table><caption>OSI reference model · "Please Do Not Throw Salami Pizza Away"</caption>
+<thead><tr><th>#</th><th>Layer</th><th>Function</th><th>PDU</th></tr></thead>
+<tbody>
+<tr><td class="m">7</td><td><b>Application</b></td><td>Protocols for process-to-process communication.</td><td class="m">Data</td></tr>
+<tr><td class="m">6</td><td><b>Presentation</b></td><td>Common representation of data: <b>formatting, compression, encryption</b>.</td><td class="m">Data</td></tr>
+<tr><td class="m">5</td><td><b>Session</b></td><td>Organises dialogue and manages data exchange — creates, maintains and restarts sessions.</td><td class="m">Data</td></tr>
+<tr><td class="m">4</td><td><b>Transport</b></td><td>Segments, transfers and reassembles data for individual communications.</td><td class="m">Segment</td></tr>
+<tr><td class="m">3</td><td><b>Network</b></td><td>Exchanges individual pieces of data over the network between identified end devices.</td><td class="m">Packet</td></tr>
+<tr><td class="m">2</td><td><b>Data Link</b></td><td>Exchanges data frames between devices over a common media.</td><td class="m">Frame</td></tr>
+<tr><td class="m">1</td><td><b>Physical</b></td><td>Mechanical, electrical, functional and procedural means to transmit bits.</td><td class="m">Bits</td></tr>
+</tbody></table>
+</div>
+
+<h3>The TCP/IP model — four layers</h3>
+<div class="tw">
+<table><caption>TCP/IP model and how it maps to OSI</caption>
+<thead><tr><th>TCP/IP layer</th><th>Description</th><th>Maps to OSI</th></tr></thead>
+<tbody>
+<tr><td class="m">Application</td><td>Represents data to the user, plus encoding and dialog control.</td><td>7, 6, 5</td></tr>
+<tr><td class="m">Transport</td><td>Supports communication between devices across diverse networks.</td><td>4</td></tr>
+<tr><td class="m">Internet</td><td>Determines the best path through the network.</td><td>3</td></tr>
+<tr><td class="m">Network Access</td><td>Controls the hardware devices and media that make up the network.</td><td>2, 1</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">The comparison, in one line</span><p>OSI <b>splits</b> TCP/IP's Network Access layer into Data Link + Physical, and its Application layer into Application + Presentation + Session. The TCP/IP suite does <b>not specify which protocols to use</b> when transmitting over a physical medium — that is why OSI layers 1–2 are needed to describe media access.</p></div>
+
+<h3>Protocol suites</h3>
+<p>A <span class="dfn">protocol suite</span> is a group of inter-related protocols necessary to perform a communication function. The main ones:</p>
+<ul>
+  <li><b>TCP/IP (Internet Protocol Suite)</b> — most common; maintained by the <b>IETF</b>. It is an <b>open standard</b> (freely available, usable by any vendor) and <b>standards-based</b> (endorsed by the industry, approved by a standards organisation to ensure interoperability).</li>
+  <li><b>OSI protocols</b> — developed by <b>ISO</b> and <b>ITU</b>.</li>
+  <li><b>AppleTalk</b> — proprietary, Apple Inc.</li>
+  <li><b>Novell NetWare</b> — proprietary, Novell Inc.</li>
+</ul>
+
+<h3>How four protocols cooperate to load one web page</h3>
+<div class="tw">
+<table><caption>Protocol interaction</caption>
+<thead><tr><th>Protocol</th><th>Layer</th><th>Function</th></tr></thead>
+<tbody>
+<tr><td class="m">HTTP</td><td>Application</td><td>Governs how a web server and web client interact; defines content and format.</td></tr>
+<tr><td class="m">TCP</td><td>Transport</td><td>Manages the individual conversations, provides guaranteed delivery and flow control.</td></tr>
+<tr><td class="m">IP</td><td>Internet</td><td>Delivers messages globally from sender to receiver; assigns addresses.</td></tr>
+<tr><td class="m">Ethernet</td><td>Network Access</td><td>Delivers messages from one NIC to another NIC on the same Ethernet LAN.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Segmenting, sequencing, encapsulating</h3>
+<ul>
+  <li><b>Segmenting</b> — breaking messages into smaller units. Two benefits: <b>increases speed</b> (large data can cross the network without tying up the link) and <b>increases efficiency</b> (only failed segments are retransmitted, not the whole stream).</li>
+  <li><b>Multiplexing</b> — interleaving multiple streams of segmented data together.</li>
+  <li><b>Sequencing</b> — numbering segments so the message can be reassembled at the destination. <b>TCP</b> does this.</li>
+  <li><b>Encapsulation</b> — each protocol adds its own header information as data moves down the stack.</li>
+</ul>
+
+<h4>Encapsulation, web server to client</h4>
+<ol class="steps">
+<li>Server prepares the HTML page; <b>HTTP</b> hands the data to the transport layer.</li>
+<li>Transport layer breaks the data into <b>segments</b> and identifies each one.</li>
+<li>IP source and destination addresses are added, creating an IP <b>packet</b>.</li>
+<li>Ethernet information is added, creating the Ethernet (data link) <b>frame</b>.</li>
+<li>The frame is delivered to the nearest router; <b>each router adds new data link information</b> before forwarding.</li>
+</ol>
+<p><b>De-encapsulation</b> at the client removes headers in the opposite order: Ethernet header, then IP header, then transport header, then HTTP data goes to the browser.</p>
+
+<h3>Addressing at two layers</h3>
+<div class="split">
+  <div class="card"><h5>Network layer (IP)</h5><p>Delivers the packet from the <b>original source to the final destination</b>. <b>Does not change</b> end to end (NAT excepted). Split into a <b>network portion</b> (left-most bits) and a <b>host portion</b>.</p></div>
+  <div class="card"><h5>Data link layer (MAC)</h5><p>Delivers the frame from <b>one NIC to another NIC on the same network</b>. Re-written at <b>every router hop</b>.</p></div>
+</div>
+<div class="box exam"><span class="tag">Exam focus — same network vs remote</span>
+<p><b>Same network:</b> destination MAC = the MAC of the destination device.</p>
+<p><b>Remote network:</b> destination MAC = the MAC of the <b>default gateway</b> (nearest router interface). The router strips the Layer 2 information and adds new data link information before forwarding out the exit interface. The <b>IP addresses never change</b>.</p></div>
+
+<details class="st"><summary>Self-test — Module 02</summary><div class="body">
+<ol>
+<li>Which OSI layer handles compression and encryption?<span class="a">Presentation (layer 6).</span></li>
+<li>Name the PDUs in order, top of the stack to the wire.<span class="a">Data → Segment → Packet → Frame → Bits.</span></li>
+<li>A packet crosses four routers. How many times does the source IP change? The source MAC?<span class="a">IP: zero times. MAC: re-written at every hop — four times.</span></li>
+<li>Two benefits of segmenting messages?<span class="a">Increases speed and increases efficiency (only lost segments are resent).</span></li>
+<li>Which two OSI layers does the TCP/IP Network Access layer cover?<span class="a">Data Link and Physical.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m3" data-w="orange">
+<h2 data-sheet="03"><span class="num">03</span>Physical Layer &amp; Media</h2>
+<p class="lead">Layer 1 accepts a complete frame from the data link layer and encodes it as signals on the local media. Three media forms, three copper impairments, and a bandwidth/throughput/goodput distinction that gets asked almost every year.</p>
+
+<h3>What the physical layer does</h3>
+<ul>
+  <li>Transports the bits that make up a data link frame across the network media.</li>
+  <li><b>Accepts a complete frame</b> from the data link layer and encodes it as a series of signals transmitted onto the local media.</li>
+  <li>Encoded bits are received by either an end device or an intermediate device.</li>
+</ul>
+<p><b>Standards bodies for layer 1:</b> ISO, TIA/EIA, ITU, ANSI, IEEE.</p>
+
+<h3>Three functions the standards define</h3>
+<ul>
+  <li><b>Physical components</b> — hardware, media, connectors.</li>
+  <li><b>Encoding</b> — converting a stream of data bits into a predefined "code".</li>
+  <li><b>Signalling</b> — how bits are represented: what signal means <code>1</code> and what means <code>0</code>. A long pulse might be 1, a short pulse 0.</li>
+</ul>
+
+<h3>Bandwidth, throughput, goodput</h3>
+<div class="tw">
+<table><caption>Three measures that are not the same thing</caption>
+<thead><tr><th>Term</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="m">Bandwidth</td><td>The <b>capacity</b> of a medium to carry data — how much data can flow in a given time. <b>Not speed:</b> in both 10 Mb/s and 100 Mb/s Ethernet the bits travel at the speed of electricity; what differs is the <b>number of bits transmitted per second</b>.</td></tr>
+<tr><td class="m">Throughput</td><td>The <b>measured</b> transfer of bits across the media over a given period. Usually <b>lower</b> than the stated bandwidth because of the amount of traffic, the type of traffic, and latency added by devices between source and destination.</td></tr>
+<tr><td class="m">Goodput</td><td>Throughput <b>minus</b> traffic overhead for establishing sessions, acknowledgements and encapsulation. The useful data rate.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Copper media</h3>
+<p>Data is transmitted on copper as <b>electrical pulses</b>. Three impairments, and the countermeasure for each:</p>
+<div class="tw">
+<table><caption>Copper impairments</caption>
+<thead><tr><th>Impairment</th><th>What it is</th><th>Countermeasure</th></tr></thead>
+<tbody>
+<tr><td class="m">Attenuation</td><td>The longer the signal travels, the more it deteriorates.</td><td>Strict <b>distance limitations</b> on all copper media.</td></tr>
+<tr><td class="m">EMI / RFI</td><td>Electromagnetic or radio frequency interference distorts and corrupts the signal.</td><td><b>Shielding</b> the cable.</td></tr>
+<tr><td class="m">Crosstalk</td><td>Disturbance caused by the electric or magnetic field of a signal on one wire affecting an adjacent wire.</td><td><b>Twisting</b> opposing circuit wire pairs together.</td></tr>
+</tbody></table>
+</div>
+
+<h4>Coaxial cable</h4>
+<p>Copper conductor → flexible plastic insulation → woven copper braid or metallic foil (second wire in the circuit <i>and</i> a shield) → outer cable jacket. UTP has essentially replaced coax in modern Ethernet, but coax survives in <b>wireless installations</b> (attaching antennas) and <b>cable internet</b>.</p>
+
+<h4>UTP vs STP</h4>
+<div class="split">
+  <div class="card"><h5>UTP — Unshielded Twisted Pair</h5><p>The <b>most common</b> networking media. Four pairs of colour-coded wires twisted together. Terminated with <b>RJ-45</b>. No shielding — relies entirely on <b>cancellation</b>: two wires placed close together have exactly opposite magnetic fields which cancel outside EMI/RFI. The <b>number of twists per pair is varied</b> to enhance the cancellation effect.</p></div>
+  <div class="card"><h5>STP — Shielded Twisted Pair</h5><p>Better noise protection, significantly <b>more expensive</b> and harder to install. Also uses <b>RJ-45</b>. Combines <b>shielding</b> (against EMI/RFI) with <b>twisting</b> (against crosstalk). Four pairs, each in a foil shield, all wrapped in an overall metallic braid or foil.</p></div>
+</div>
+
+<h4>UTP categories — TIA/EIA-568</h4>
+<div class="tw">
+<table><caption>Cable categories</caption>
+<thead><tr><th>Category</th><th>Use</th><th>Rate</th></tr></thead>
+<tbody>
+<tr><td class="m">Cat 3</td><td>Voice communication — most often phone lines.</td><td class="m">—</td></tr>
+<tr><td class="m">Cat 5</td><td>Data. Supports 100 Mb/s; can support 1000 Mb/s but <b>not recommended</b>.</td><td class="m">100 Mb/s</td></tr>
+<tr><td class="m">Cat 5e</td><td>Data.</td><td class="m">1000 Mb/s</td></tr>
+<tr><td class="m">Cat 6</td><td>Data. An added <b>separator between each pair</b> allows higher speeds.</td><td class="m">1 Gb/s – 10 Gb/s (10 Gb/s not recommended)</td></tr>
+</tbody></table>
+</div>
+<p>TIA/EIA-568 also describes the wire colour codes to pin assignments (<b>pinouts</b>). The <b>RJ-45 connector</b> is the male component crimped onto the cable; the <b>socket</b> is the female component in a device, wall, partition outlet or patch panel.</p>
+<p><b>UTP testing parameters:</b> wire map, cable length, signal loss due to attenuation, crosstalk.</p>
+
+<h3>Fibre-optic cabling</h3>
+<p>Bits are encoded as <b>light pulses</b>. Transmits over longer distances at higher bandwidths, with less attenuation, and is <b>completely immune to EMI and RFI</b>. A flexible but extremely thin strand of very pure glass, not much bigger than a human hair.</p>
+<p><b>Four industries:</b> enterprise networks, Fibre-to-the-Home (FTTH), long-haul networks, submarine cable networks.</p>
+<div class="tw">
+<table><caption>Fibre cable design, centre outwards</caption>
+<thead><tr><th>Layer</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td class="m">Core</td><td>The light transmission element at the centre — silica or glass. Light pulses travel through here.</td></tr>
+<tr><td class="m">Cladding</td><td>Acts like a <b>mirror</b>, reflecting light back into the core to keep it there as it travels.</td></tr>
+<tr><td class="m">Buffer</td><td>Shields core and cladding from damage.</td></tr>
+<tr><td class="m">Strengthening material</td><td>Prevents the fibre from being stretched when pulled — often the same material used in bulletproof vests.</td></tr>
+<tr><td class="m">Jacket</td><td>Protects against abrasion, moisture and contaminants.</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">Remember</span><p>Light travels in <b>one direction only</b> over optical fibre, so <b>two fibres are required</b> to support full-duplex operation. Patch cord jacket colours: <b>yellow = single-mode</b>, <b>orange (or aqua) = multimode</b>.</p></div>
+<p><b>Connectors:</b> <b>ST</b> (straight-tip, one of the first, twist-on/twist-off lock), <b>SC</b> (subscriber / square / standard, push-pull, used with both multimode and single-mode), <b>LC</b> simplex (a smaller SC, popular for its size), and <b>duplex multimode LC</b>.</p>
+<p><b>Three termination and splicing errors:</b> <b>misalignment</b> (fibres not precisely aligned), <b>end gap</b> (media do not completely touch), <b>end finish</b> (ends not well polished, or dirt present). Field-test by shining a bright flashlight into one end; use an <b>OTDR</b> (Optical Time Domain Reflectometer) to test each segment properly.</p>
+
+<h3>Wireless media</h3>
+<p>Carries electromagnetic signals representing the binary digits, using radio or microwave frequencies. Four areas of concern:</p>
+<ul>
+  <li><b>Coverage area</b> — building construction materials and local terrain limit coverage.</li>
+  <li><b>Interference</b> — disrupted by fluorescent lights, microwave ovens and other wireless communications.</li>
+  <li><b>Security</b> — unauthorised devices and users can gain access to the transmission.</li>
+  <li><b>Shared medium</b> — only one device can send or receive at a time; the medium is shared among all wireless users.</li>
+</ul>
+<div class="tw mono">
+<table><caption>Wireless standards</caption>
+<thead><tr><th>Standard</th><th>Technology</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>IEEE 802.11</td><td>Wi-Fi</td><td>Uses <b>CSMA/CA</b> — the wireless NIC must wait until the channel is clear.</td></tr>
+<tr><td>IEEE 802.15</td><td>Bluetooth</td><td>Wireless Personal Area Network (WPAN); device <b>pairing</b>, 1–100 m.</td></tr>
+<tr><td>IEEE 802.16</td><td>WiMAX</td><td>Worldwide Interoperability for Microwave Access — wireless broadband access.</td></tr>
+</tbody></table>
+</div>
+<p><b>A wireless LAN needs:</b> a <b>wireless access point</b> (concentrates the wireless signals and connects to the existing copper infrastructure) and <b>wireless NIC adapters</b> in each host. Home and small-business wireless routers integrate <b>router + switch + access point</b> in one device.</p>
+
+<details class="st"><summary>Self-test — Module 03</summary><div class="body">
+<ol>
+<li>Bits travel at the speed of electricity on both a 10 Mb/s and a 100 Mb/s link. What actually differs?<span class="a">The number of bits transmitted per second — bandwidth is capacity, not speed.</span></li>
+<li>Throughput minus session, acknowledgement and encapsulation overhead is called what?<span class="a">Goodput.</span></li>
+<li>Which impairment is countered by twisting the pairs, and which by shielding?<span class="a">Twisting counters crosstalk; shielding counters EMI/RFI.</span></li>
+<li>Why do you need two fibre strands for one full-duplex link?<span class="a">Light travels in only one direction over a fibre.</span></li>
+<li>Which fibre layer acts as a mirror, and what does it achieve?<span class="a">The cladding — it reflects light back into the core, keeping it in the core as it travels.</span></li>
+<li>Which cable category adds a separator between each wire pair?<span class="a">Cat 6.</span></li>
+</ol>
+</div></details>
+</section>
+<section id="m4" data-w="orange">
+<h2 data-sheet="04"><span class="num">04</span>Data Link Layer &amp; Ethernet</h2>
+<p class="lead">Layer 2 prepares network data for the physical network. Two sublayers, two duplex modes, two access methods, one frame you must know field by field.</p>
+
+<h3>The two sublayers</h3>
+<div class="split">
+  <div class="card"><h5>LLC — Logical Link Control</h5><p>The <b>upper</b> sublayer. Communicates with the <b>network layer</b>. Identifies which network layer protocol is being used for the frame, allowing multiple Layer 3 protocols (IPv4 <i>and</i> IPv6) to use the same interface and media.</p></div>
+  <div class="card"><h5>MAC — Media Access Control</h5><p>The <b>lower</b> sublayer. Defines the media access processes performed by the <b>hardware</b>. Provides data link addressing and access to network technologies; communicates with Ethernet (copper/fibre) and with wireless technologies like Wi-Fi and Bluetooth.</p></div>
+</div>
+
+<h4>The MAC sublayer's two responsibilities</h4>
+<ul>
+  <li><b>Data encapsulation</b> — three functions: <b>frame delimiting</b>, <b>addressing</b>, <b>error detection</b>.</li>
+  <li><b>Media access control</b> — controls frame placement on and off the media (like traffic rules on a road) and handles media recovery.</li>
+</ul>
+
+<h3>Duplex</h3>
+<div class="tw">
+<table><caption>Half vs full duplex</caption>
+<thead><tr><th>Mode</th><th>Behaviour</th><th>Where you see it</th></tr></thead>
+<tbody>
+<tr><td class="m">Half-duplex</td><td>Both devices can transmit and receive, but <b>not simultaneously</b>.</td><td>Legacy topologies, Ethernet <b>hubs</b>, and all <b>WLANs</b>.</td></tr>
+<tr><td class="m">Full-duplex</td><td>Both devices can transmit and receive <b>at the same time</b>. The data link layer assumes the media is available to both nodes at any time.</td><td>Ethernet <b>switches</b> — full-duplex by default, but will drop to half-duplex when connecting to a hub.</td></tr>
+</tbody></table>
+</div>
+<div class="box trap"><span class="tag">Classic trap</span><p><b>Duplex mismatch</b> — one port at half-duplex while the other is full-duplex — is a common cause of Ethernet performance problems. Most devices avoid it using <b>autonegotiation</b>, which exchanges speed and duplex capabilities and picks the highest performance mode.</p></div>
+
+<h3>Media access control methods</h3>
+<div class="tw">
+<table><caption>Three access methods</caption>
+<thead><tr><th>Method</th><th>How it works</th></tr></thead>
+<tbody>
+<tr><td class="m">Controlled access</td><td>Each node has its <b>own turn</b> to use the medium. Legacy <b>Token Ring</b> LANs are the example.</td></tr>
+<tr><td class="m">CSMA/CD</td><td><b>Collision Detection</b> — used in <b>half-duplex Ethernet</b> LANs. If two devices transmit at once a collision occurs; both detect it, both sets of data are corrupted and must be resent. Comes into effect <b>after</b> the collision.</td></tr>
+<tr><td class="m">CSMA/CA</td><td><b>Collision Avoidance</b> — used in <b>802.11 wireless</b>. Detects whether the media is clear and <b>waits before transmitting</b>. Does not detect collisions; tries to avoid them. Comes into effect <b>before</b> the collision.</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">Why switches changed everything</span><p>Ethernet LANs using <b>switches do not use a contention-based system</b>, because the switch port and the host NIC both operate in full-duplex. No contention means no collisions, which means CSMA/CD is not needed.</p></div>
+
+<h3>Ethernet</h3>
+<ul>
+  <li>The most widely used LAN technology; defined in <b>IEEE 802.2</b> (LLC) and <b>802.3</b> (MAC/physical).</li>
+  <li>Operates at the <b>data link and physical layers</b>.</li>
+  <li>Supports 10 Mb/s, 100 Mb/s, 1000 Mb/s (1 Gb/s), 10 Gb/s, 40 Gb/s and 100 Gb/s.</li>
+</ul>
+
+<h4>Frame size limits — memorise these numbers</h4>
+<div class="tw">
+<table><caption>Ethernet frame sizes (Destination MAC through FCS)</caption>
+<thead><tr><th>Size</th><th>Name</th><th>Outcome</th></tr></thead>
+<tbody>
+<tr><td class="m">&lt; 64 bytes</td><td><b>Collision fragment</b> / <b>runt frame</b></td><td>Dropped by the receiving device.</td></tr>
+<tr><td class="m">64 – 1518 bytes</td><td>Valid frame</td><td>Processed.</td></tr>
+<tr><td class="m">up to 1600 bytes</td><td><b>Baby giant</b> frame</td><td>Oversized.</td></tr>
+<tr><td class="m">up to 9216 bytes</td><td><b>Jumbo</b> frame</td><td>Oversized.</td></tr>
+</tbody></table>
+</div>
+<p>If a transmitted frame is smaller than the minimum or larger than the maximum, <b>the receiving device drops it</b>.</p>
+
+<h3>MAC addresses</h3>
+<ul>
+  <li>A <b>48-bit</b> binary value expressed as <b>12 hexadecimal digits</b> — 4 bits per hex digit. Example: <code>00:1B:44:11:3A:B7</code>.</li>
+  <li>Hexadecimal is base-16, using <b>0–9 and A–F</b>. Usually written with a <code>0x</code> prefix in text (e.g. <code>0x73</code>). Used for MAC addresses <b>and IPv6 addresses</b>.</li>
+  <li>Rules are established by the <b>IEEE</b>, which assigns each vendor a <b>3-byte (24-bit) OUI</b> — Organizationally Unique Identifier.</li>
+</ul>
+<div class="bits">MAC = <em>00:1B:44</em> : <s>11:3A:B7</s>   →   <em>OUI (24 bits, IEEE-assigned)</em> + <s>vendor-assigned unique value (24 bits)</s></div>
+<p><b>The two IEEE rules for vendors:</b> every MAC assigned to a device must use that vendor's OUI as the first 3 bytes, and all MACs with the same OUI must have a unique value in the last 3 bytes.</p>
+<p>The MAC address is often called the <span class="dfn">burned-in address (BIA)</span> because it is encoded permanently into the ROM chip. At startup the <b>NIC copies the MAC address from ROM into RAM</b>.</p>
+<p><b>Viewing it:</b> <code>ipconfig /all</code> on Windows; <code>ifconfig</code> on macOS or Linux.</p>
+
+<h4>Three MAC address types</h4>
+<div class="tw">
+<table><caption>Unicast, broadcast, multicast</caption>
+<thead><tr><th>Type</th><th>Destination MAC</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td class="m">Unicast</td><td>The specific device's MAC</td><td>One transmitting device to one destination device. Requires a matching destination IP in the packet header and destination MAC in the frame header.</td></tr>
+<tr><td class="m">Broadcast</td><td class="m">FF-FF-FF-FF-FF-FF</td><td>48 ones in binary. The IPv4 broadcast packet has <b>all 1s in the host portion</b>. Used by <b>DHCP and ARP</b>. Excessive broadcasts reduce performance.</td></tr>
+<tr><td class="m">Multicast</td><td class="m">01-00-5E-xx-xx-xx</td><td>Multicast group IP range <b>224.0.0.0 – 239.255.255.255</b>; IPv6 multicast begins <b>FF00::/8</b>. The multicast IP requires a corresponding multicast MAC starting <code>01-00-5E</code>.</td></tr>
+</tbody></table>
+</div>
+
+<details class="st"><summary>Self-test — Module 04</summary><div class="body">
+<ol>
+<li>Which sublayer talks to the network layer, and which to the hardware?<span class="a">LLC talks to the network layer; MAC handles the hardware/media.</span></li>
+<li>Give the minimum and maximum valid Ethernet frame size, and the name for one below the minimum.<span class="a">64 to 1518 bytes; below 64 it is a collision fragment or runt frame.</span></li>
+<li>CSMA/CD acts before or after a collision? CSMA/CA?<span class="a">CSMA/CD acts after; CSMA/CA acts before.</span></li>
+<li>Why don't switched Ethernet LANs need CSMA/CD?<span class="a">Switch port and host NIC both operate full-duplex, so there is no contention and no collisions.</span></li>
+<li>What are the first 24 bits of a MAC address called and who assigns them?<span class="a">The OUI, assigned by the IEEE.</span></li>
+<li>What is the broadcast MAC address, and which multicast prefix corresponds to an IPv4 multicast group?<span class="a">FF-FF-FF-FF-FF-FF; multicast MACs begin 01-00-5E.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m5" data-w="orange">
+<h2 data-sheet="05"><span class="num">05</span>LAN Switching</h2>
+<p class="lead">A Layer 2 switch makes forwarding decisions using <b>only</b> the Layer 2 MAC addresses. How it learns them, how it forwards, and the three forwarding methods.</p>
+
+<h3>The MAC address table</h3>
+<p>Also called the <span class="dfn">CAM table</span> (content addressable memory). A switch that has just powered on has an <b>empty</b> table — it has not learned anything yet.</p>
+
+<h4>Learning — always from the SOURCE address</h4>
+<ol class="steps">
+<li>The switch examines <b>all incoming frames</b> for new <b>source</b> MAC address information.</li>
+<li>If the source MAC is unknown, it is added to the table along with the <b>port number</b> it arrived on.</li>
+<li>If the source MAC already exists, the switch <b>updates the refresh timer</b> for that entry.</li>
+</ol>
+<p>By default most Ethernet switches keep an entry for <b>5 minutes</b>.</p>
+
+<h4>Forwarding — always using the DESTINATION address</h4>
+<div class="tw">
+<table><caption>Forwarding decision logic</caption>
+<thead><tr><th>Destination MAC is…</th><th>Switch action</th></tr></thead>
+<tbody>
+<tr><td>Broadcast or multicast</td><td><b>Flood</b> out all ports except the incoming port.</td></tr>
+<tr><td>Unicast, found in the table</td><td><b>Forward</b> out the one specified port.</td></tr>
+<tr><td>Unicast, <b>not</b> in the table (<b>unknown unicast</b>)</td><td><b>Flood</b> out all ports except the incoming port.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Frame forwarding methods</h3>
+<div class="tw">
+<table><caption>Store-and-forward vs cut-through</caption>
+<thead><tr><th>Method</th><th>Behaviour</th><th>Trade-off</th></tr></thead>
+<tbody>
+<tr><td class="m">Store-and-forward</td><td>Receives the <b>entire frame</b> and computes the <b>CRC</b>. If the CRC is valid it looks up the destination address and forwards out the correct port.</td><td>Full <b>error checking</b>; highest latency.</td></tr>
+<tr><td class="m">Cut-through: fast-forward</td><td>Buffers just enough to read the destination MAC, then forwards immediately. <b>No error checking.</b></td><td><b>Lowest latency</b> — the most typical form of cut-through.</td></tr>
+<tr><td class="m">Cut-through: fragment-free</td><td>Stores the <b>first 64 bytes</b> before forwarding.</td><td>A <b>compromise</b> between store-and-forward and fast-forward — catches collision fragments.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Memory buffering</h3>
+<p>A switch may buffer frames before forwarding — also used when the destination port is <b>busy due to congestion</b>.</p>
+<div class="split">
+  <div class="card"><h5>Port-based memory</h5><p>Frames are stored in queues <b>linked to specific incoming and outgoing ports</b>. A frame is transmitted only once all frames ahead of it have been transmitted.</p></div>
+  <div class="card"><h5>Shared memory</h5><p>All frames go into a <b>common buffer shared by all ports</b> on the switch.</p></div>
+</div>
+
+<h3>Auto-MDIX</h3>
+<p>Connections between specific device types — switch-to-switch, switch-to-router, switch-to-host, router-to-host — once required a specific <b>crossover</b> or <b>straight-through</b> cable. <span class="dfn">Auto-MDIX</span> (automatic medium-dependent interface crossover) lets the switch <b>detect the cable type and configure the interface accordingly</b>. Enabled by default since IOS 12.2(18)SE; the command is <code>mdix auto</code> in interface configuration mode.</p>
+
+<details class="st"><summary>Self-test — Module 05</summary><div class="body">
+<ol>
+<li>Which MAC address does a switch learn from, and which does it forward on?<span class="a">It learns from the source MAC and forwards using the destination MAC.</span></li>
+<li>A frame's destination MAC is not in the table. What happens, and what is this called?<span class="a">It is flooded out all ports except the incoming one — an unknown unicast.</span></li>
+<li>Which forwarding method computes the CRC, and which has the lowest latency?<span class="a">Store-and-forward computes the CRC; fast-forward cut-through has the lowest latency.</span></li>
+<li>How many bytes does fragment-free switching store first, and why that number?<span class="a">64 bytes — the minimum valid frame size, so it can discard collision fragments.</span></li>
+<li>Default MAC table entry age on most switches?<span class="a">5 minutes.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m6" data-w="green">
+<h2 data-sheet="06"><span class="num">06</span>Network Layer &amp; the IP Packet</h2>
+<p class="lead">Four operations, three characteristics of IP, two packet headers, and how a host decides whether a destination is local or remote.</p>
+
+<h3>Four basic operations of the network layer</h3>
+<ol><li><b>Addressing end devices</b></li><li><b>Encapsulation</b></li><li><b>Routing</b></li><li><b>De-encapsulation</b></li></ol>
+<p>IP encapsulates the transport layer segment. The packet is examined by <b>all Layer 3 devices</b> as it traverses the network, and the <b>IP addressing does not change</b> from source to destination — except where NAT is involved.</p>
+
+<h3>The three characteristics of IP</h3>
+<div class="tw">
+<table><caption>IP is deliberately low-overhead</caption>
+<thead><tr><th>Characteristic</th><th>What it means</th></tr></thead>
+<tbody>
+<tr><td class="m">Connectionless</td><td>IP does <b>not establish a connection</b> before sending. No synchronisations or acknowledgements. The destination receives the packet when it arrives, with no prior notification. If connection-oriented behaviour is needed, another protocol handles it — typically <b>TCP</b>.</td></tr>
+<tr><td class="m">Best effort</td><td>IP does <b>not guarantee delivery</b>. Reduced overhead because there is no mechanism to resend lost data. It expects no acknowledgements and does not know whether the other device is even operational.</td></tr>
+<tr><td class="m">Media independent</td><td>IP does not concern itself with the frame type at the data link layer or the media type at the physical layer. It can be sent over <b>copper, fibre or wireless</b>.</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">IP is unreliable — and that is by design</span><p>IP cannot manage or fix undelivered or corrupt packets, cannot retransmit after an error, and cannot realign out-of-sequence packets. It must <b>rely on other protocols</b> for these functions.</p></div>
+
+<h4>MTU and fragmentation</h4>
+<ul>
+  <li>The network layer establishes the <span class="dfn">MTU</span> (Maximum Transmission Unit), using control information received from the data link layer.</li>
+  <li><b>Fragmentation</b> is when Layer 3 splits an IPv4 packet into smaller units — for example when a router goes from Ethernet to a slow WAN with a smaller MTU. <b>Fragmenting causes latency.</b></li>
+  <li><b>IPv6 does not fragment packets.</b> Routers never fragment IPv6.</li>
+</ul>
+
+<h3>The IPv4 header</h3>
+<div class="tw">
+<table><caption>Significant IPv4 header fields</caption>
+<thead><tr><th>Field</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td class="m">Version</td><td>4-bit field = <code>0100</code> for IPv4.</td></tr>
+<tr><td class="m">Differentiated Services (DS)</td><td>Used for <b>QoS</b> — DiffServ DS field, or the older IntServ ToS (Type of Service).</td></tr>
+<tr><td class="m">Header Checksum</td><td>Detects corruption in the <b>IPv4 header</b>.</td></tr>
+<tr><td class="m">Time to Live (TTL)</td><td>Layer 3 <b>hop count</b>. Each router decrements it; when it reaches <b>zero the router discards the packet</b>.</td></tr>
+<tr><td class="m">Protocol</td><td>Identifies the next-level protocol: ICMP, TCP, UDP, etc.</td></tr>
+<tr><td class="m">Identification, Flags, Fragment Offset</td><td>Used for <b>fragmentation</b>.</td></tr>
+<tr><td class="m">Source IPv4 Address</td><td><b>32-bit</b> source address.</td></tr>
+<tr><td class="m">Destination IPv4 Address</td><td><b>32-bit</b> destination address.</td></tr>
+</tbody></table>
+</div>
+<p>The header is read in binary, <b>4 bytes per line</b>, left to right. The two most important fields are source and destination.</p>
+
+<h3>The IPv6 header</h3>
+<p><b>Three limitations of IPv4</b> that IPv6 exists to solve:</p>
+<ol>
+  <li><b>IPv4 address depletion</b> — we have essentially run out.</li>
+  <li><b>Lack of end-to-end connectivity</b> — private addressing and NAT extended IPv4's life but ended direct communication with public addressing.</li>
+  <li><b>Increased network complexity</b> — NAT was a temporary fix; manipulating header addressing causes latency and troubleshooting difficulty.</li>
+</ol>
+<p><b>Three IPv6 improvements:</b> increased address space (<b>128 bits</b>, not 32), improved packet handling (simplified header with fewer fields), and eliminating the need for NAT.</p>
+<div class="box trap"><span class="tag">Classic trap</span><p>The IPv6 header is <b>simplified but not smaller</b> — it is fixed at <b>40 bytes</b>. Three IPv4 fields were removed to improve performance: <b>Flags</b>, <b>Fragment Offset</b> and <b>Header Checksum</b>.</p></div>
+<div class="tw">
+<table><caption>Significant IPv6 header fields</caption>
+<thead><tr><th>Field</th><th>Description</th><th>IPv4 equivalent</th></tr></thead>
+<tbody>
+<tr><td class="m">Version</td><td>4-bit field = <code>0110</code>.</td><td>Version</td></tr>
+<tr><td class="m">Traffic Class</td><td>Used for QoS.</td><td>DiffServ / DS</td></tr>
+<tr><td class="m">Flow Label</td><td><b>20-bit</b> field — tells devices to handle identical flow labels the same way.</td><td>—</td></tr>
+<tr><td class="m">Payload Length</td><td><b>16-bit</b> — length of the data portion.</td><td>Total Length</td></tr>
+<tr><td class="m">Next Header</td><td>Identifies the next-level protocol: ICMP, TCP, UDP.</td><td>Protocol</td></tr>
+<tr><td class="m">Hop Limit</td><td>Layer 3 hop count.</td><td><b>Replaces TTL</b></td></tr>
+<tr><td class="m">Source IPv6 Address</td><td><b>128-bit</b> source.</td><td>Source IPv4</td></tr>
+<tr><td class="m">Destination IPv6 Address</td><td><b>128-bit</b> destination.</td><td>Destination IPv4</td></tr>
+</tbody></table>
+</div>
+<p><b>Extension headers (EH)</b> are optional, carry optional network layer information, sit <b>between the IPv6 header and the payload</b>, and may be used for fragmentation, security and mobility support.</p>
+
+<h3>How a host routes</h3>
+<p>Packets are <b>always created at the source</b>, and <b>every host device creates its own routing table</b>. A host can send packets to three places:</p>
+<ul>
+  <li><b>Itself</b> — <code>127.0.0.1</code> (IPv4) or <code>::1</code> (IPv6).</li>
+  <li><b>Local hosts</b> — on the same LAN.</li>
+  <li><b>Remote hosts</b> — not on the same LAN.</li>
+</ul>
+<div class="tw">
+<table><caption>How the source determines local vs remote</caption>
+<thead><tr><th>Protocol</th><th>Method</th></tr></thead>
+<tbody>
+<tr><td class="m">IPv4</td><td>Uses <b>its own IP address and subnet mask</b>, plus the destination IP address.</td></tr>
+<tr><td class="m">IPv6</td><td>Uses the <b>network address and prefix advertised by the local router</b>.</td></tr>
+</tbody></table>
+</div>
+<p><b>Local</b> traffic is dumped out the host interface for an intermediary device to handle. <b>Remote</b> traffic is forwarded to the <b>default gateway</b>.</p>
+
+<h4>The default gateway</h4>
+<ul>
+  <li>A router or Layer 3 switch can be a default gateway.</li>
+  <li>It must have an <b>IP address in the same range as the rest of the LAN</b>.</li>
+  <li>It can accept data from the LAN and forward traffic off the LAN, and can route to other networks.</li>
+  <li><b>No default gateway, or a bad one → traffic cannot leave the LAN.</b></li>
+  <li>A host learns it <b>statically or via DHCP</b> in IPv4; IPv6 sends it through a <b>Router Solicitation / Advertisement</b>, or it is configured manually.</li>
+  <li>A default gateway is a <b>static route</b> that acts as the <b>route of last resort</b>.</li>
+</ul>
+<p><b>Host routing table commands (Windows):</b> <code>route print</code> or <code>netstat -r</code>. Both display three sections: <b>Interface List</b> (interfaces and MAC addressing), <b>IPv4 Routing Table</b>, <b>IPv6 Routing Table</b>.</p>
+
+<h3>The router routing table</h3>
+<div class="tw">
+<table><caption>Three types of route</caption>
+<thead><tr><th>Type</th><th>How it gets there</th></tr></thead>
+<tbody>
+<tr><td class="m">Directly connected</td><td><b>Automatically</b> added, provided the interface is <b>active and has addressing</b>.</td></tr>
+<tr><td class="m">Remote</td><td>Learned <b>manually</b> (static route) or <b>dynamically</b> (routing protocol).</td></tr>
+<tr><td class="m">Default route</td><td>Forwards all traffic in a specific direction when there is <b>no match</b> in the routing table.</td></tr>
+</tbody></table>
+</div>
+<div class="tw mono">
+<table><caption>show ip route — route source codes</caption>
+<thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>L</td><td>Directly connected <b>local interface IP address</b></td></tr>
+<tr><td>C</td><td>Directly connected <b>network</b></td></tr>
+<tr><td>S</td><td><b>Static</b> route, manually configured</td></tr>
+<tr><td>O</td><td><b>OSPF</b></td></tr>
+<tr><td>D</td><td><b>EIGRP</b></td></tr>
+<tr><td>R</td><td><b>RIP</b></td></tr>
+<tr><td>S*</td><td><b>Default</b> route</td></tr>
+</tbody></table>
+</div>
+<div class="box exam"><span class="tag">Exam focus</span><p>The router uses the <b>longest subnet mask / prefix match</b>: the route with the greatest number of matching far-left bits against the destination IP is always the preferred route. A routing table entry also carries the <b>route source</b>, <b>destination network</b>, <b>administrative distance</b>, <b>metric</b>, <b>next-hop</b>, <b>route timestamp</b> and <b>outgoing interface</b>.</p></div>
+
+<details class="st"><summary>Self-test — Module 06</summary><div class="body">
+<ol>
+<li>List the three characteristics of IP.<span class="a">Connectionless, best effort, media independent.</span></li>
+<li>Which IPv4 field does Hop Limit replace, and which three IPv4 fields were removed in IPv6?<span class="a">Hop Limit replaces TTL; Flags, Fragment Offset and Header Checksum were removed.</span></li>
+<li>How big is the IPv6 header?<span class="a">Fixed at 40 bytes — simplified but not smaller.</span></li>
+<li>What exactly does an IPv4 host use to decide if a destination is local?<span class="a">Its own IP address and subnet mask, together with the destination IP address.</span></li>
+<li>Two conditions before a directly connected route appears in the routing table?<span class="a">The interface must be active (up) and must have addressing configured.</span></li>
+<li>Two routes could match a packet. Which wins?<span class="a">The longest prefix match — the most matching far-left bits.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m7" data-w="green">
+<h2 data-sheet="07"><span class="num">07</span>Address Resolution — ARP &amp; ND</h2>
+<p class="lead">A device knows an IP address and needs the MAC address that goes with it. IPv4 uses ARP; IPv6 does <b>not</b> use ARP at all.</p>
+
+<h3>The two addresses on every Ethernet host</h3>
+<ul>
+  <li><b>Layer 2 physical address (MAC)</b> — used for NIC-to-NIC communication on the <b>same</b> Ethernet network.</li>
+  <li><b>Layer 3 logical address (IP)</b> — used to send the packet from source device to destination device, end to end.</li>
+</ul>
+<div class="box exam"><span class="tag">Exam focus — the one rule to never get wrong</span>
+<p>Destination IP on the <b>same</b> network → destination MAC is that of the <b>destination device</b>.</p>
+<p>Destination IP on a <b>remote</b> network → destination MAC is that of the <b>default gateway</b> (the router interface).</p></div>
+
+<h3>ARP — Address Resolution Protocol (IPv4)</h3>
+<p>A device uses ARP to determine the destination MAC address of a <b>local</b> device when it knows its IPv4 address. <b>Two functions:</b></p>
+<ol><li>Resolving IPv4 addresses to MAC addresses.</li><li>Maintaining an <b>ARP table</b> of IPv4-to-MAC mappings.</li></ol>
+
+<h4>The ARP decision process</h4>
+<ol class="steps">
+<li>To send a frame, the device searches its <b>ARP table</b>.</li>
+<li>If the destination IPv4 is on the <b>same network</b>, it looks up <b>the destination IPv4 address</b>.</li>
+<li>If the destination IPv4 is on a <b>different network</b>, it looks up <b>the IPv4 address of the default gateway</b>.</li>
+<li>If found, the corresponding MAC becomes the destination MAC in the frame.</li>
+<li>If no entry exists, the device sends an <b>ARP request</b> — a broadcast. The owner replies with an <b>ARP reply</b>, and the device adds the IPv4/MAC pair to its ARP table.</li>
+</ol>
+
+<h4>ARP table maintenance</h4>
+<ul>
+  <li>Entries are <b>not permanent</b> — removed when the <b>ARP cache timer</b> expires. Duration differs by operating system.</li>
+  <li>Entries can also be removed <b>manually</b> by an administrator.</li>
+</ul>
+<pre class="cli"><span class="p">R1#</span> <b>show ip arp</b>
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  192.168.10.1            -   a0e0.af0d.e140  ARPA   GigabitEthernet0/0/0
+
+<span class="p">C:\Users\PC&gt;</span> <b>arp -a</b>
+Interface: 192.168.1.124 --- 0x10
+  Internet Address      Physical Address      Type
+  192.168.1.1           c8-d7-19-cc-a0-86     dynamic
+  192.168.1.101         08-3e-0c-f5-f7-77     dynamic</pre>
+
+<h4>Two ARP problems</h4>
+<ul>
+  <li><b>ARP broadcasting</b> — ARP requests are received and processed by <b>every device</b> on the local network. Excessive broadcasts reduce performance.</li>
+  <li><b>ARP spoofing</b> — replies can be spoofed by a threat actor to perform an <b>ARP poisoning</b> attack. Enterprise-level switches include mitigation techniques.</li>
+</ul>
+
+<h3>IPv6 Neighbor Discovery (ND / NDP)</h3>
+<p>IPv6 <b>does not use ARP</b>. It uses the ND protocol, carried in <b>ICMPv6</b>, which provides <b>address resolution, router discovery and redirection services</b>.</p>
+<div class="tw">
+<table><caption>The four ND message types plus redirect</caption>
+<thead><tr><th>Message</th><th>Between</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td class="m">Neighbor Solicitation (NS)</td><td>device ↔ device</td><td><b>Address resolution</b> and <b>Duplicate Address Detection</b>. Sent using special Ethernet and IPv6 multicast addresses.</td></tr>
+<tr><td class="m">Neighbor Advertisement (NA)</td><td>device ↔ device</td><td>The reply to an NS.</td></tr>
+<tr><td class="m">Router Solicitation (RS)</td><td>device → router</td><td><b>Router discovery</b> — a host asks for addressing information. Sent to <code>ff02::2</code> (all-routers).</td></tr>
+<tr><td class="m">Router Advertisement (RA)</td><td>router → devices</td><td>Provides addressing information to hosts. Sent to <code>ff02::1</code> (all-nodes).</td></tr>
+<tr><td class="m">Redirect</td><td>router → device</td><td>Better <b>next-hop selection</b>.</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">Mapping it across</span><p>ARP request ≈ <b>Neighbor Solicitation</b>. ARP reply ≈ <b>Neighbor Advertisement</b>. NS/NA are <b>device-to-device</b>; RS/RA are <b>device-to-router</b>.</p></div>
+
+<details class="st"><summary>Self-test — Module 07</summary><div class="body">
+<ol>
+<li>A host sends to 8.8.8.8. Whose MAC goes in the destination field of the frame?<span class="a">The default gateway's MAC — the destination is on a remote network.</span></li>
+<li>Which two ND messages replace the ARP request and reply?<span class="a">Neighbor Solicitation and Neighbor Advertisement.</span></li>
+<li>Which multicast address does an RS go to, and which does an RA go to?<span class="a">RS → ff02::2 (all-routers); RA → ff02::1 (all-nodes).</span></li>
+<li>Two functions of ARP?<span class="a">Resolve IPv4 to MAC, and maintain the ARP table of mappings.</span></li>
+<li>Command to see the ARP table on a Cisco router? On Windows?<span class="a">show ip arp on the router; arp -a on Windows.</span></li>
+</ol>
+</div></details>
+</section>
+<section id="m8" data-w="green">
+<h2 data-sheet="08"><span class="num">08</span>IPv4 Addressing</h2>
+<p class="lead">Private ranges, special-use addresses, the legacy classes and why CIDR replaced them. These are pure recall marks — learn the numbers exactly.</p>
+
+<h3>Private addresses — RFC 1918</h3>
+<p>Introduced in the <b>mid 1990s</b> because of IPv4 depletion. <b>Not globally routable</b> — used only in internal networks, and <b>must be translated to a public IPv4 address</b> (by NAT) to be routable.</p>
+<div class="tw mono">
+<table><caption>The three private blocks — memorise</caption>
+<thead><tr><th>Block</th><th>Range</th><th>Class origin</th></tr></thead>
+<tbody>
+<tr><td>10.0.0.0/8</td><td>10.0.0.0 – 10.255.255.255</td><td>One Class A network</td></tr>
+<tr><td>172.16.0.0/12</td><td>172.16.0.0 – 172.<b>31</b>.255.255</td><td>16 Class B networks</td></tr>
+<tr><td>192.168.0.0/16</td><td>192.168.0.0 – 192.168.255.255</td><td>256 Class C networks</td></tr>
+</tbody></table>
+</div>
+<div class="box trap"><span class="tag">Classic trap</span><p>The 172 block ends at <b>172.31</b>.255.255, not 172.16.255.255 and not 172.32.x.x. The <code>/12</code> prefix is what gives it 16 consecutive /16 networks.</p></div>
+
+<h3>Special-use addresses</h3>
+<div class="tw mono">
+<table><caption>Special user IPv4 addresses</caption>
+<thead><tr><th>Range</th><th>Name</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>127.0.0.0/8</td><td>Loopback</td><td>Used <b>on a host to test whether the TCP/IP configuration is operational</b>. Usually written 127.0.0.1. IPv6 equivalent: <code>::1</code>.</td></tr>
+<tr><td>169.254.0.0/16</td><td>Link-local / <b>APIPA</b></td><td>Automatic Private IP Addressing — used by a Windows client to <b>self-configure when no DHCP server is available</b>. Seeing one of these is a diagnosis: DHCP failed.</td></tr>
+<tr><td>192.0.2.0/24</td><td>TEST-NET</td><td>Reserved for <b>teaching and learning</b> — documentation and examples.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Legacy classful addressing (RFC 790, 1981)</h3>
+<div class="tw mono">
+<table><caption>The three host-assignable classes</caption>
+<thead><tr><th>Class</th><th>Range</th><th>Default mask</th><th>Designed for</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>0.0.0.0 – 127.0.0.0</td><td>/8</td><td>Extremely large networks — more than <b>16 million</b> host addresses</td></tr>
+<tr><td>B</td><td>128.0.0.0 – 191.255.0.0</td><td>/16</td><td>Moderate to large networks — up to approximately <b>65 000</b> hosts</td></tr>
+<tr><td>C</td><td>192.0.0.0 – 223.255.255.0</td><td>/24</td><td>Small networks — a maximum of <b>254</b> hosts</td></tr>
+</tbody></table>
+</div>
+
+<h3>Classless addressing — CIDR</h3>
+<p>Classful addressing <b>wasted addresses and exhausted the IPv4 supply</b>. Classless addressing arrived in the <b>1990s</b>: <span class="dfn">CIDR</span> — Classless Inter-Domain Routing, pronounced "cider" — allowed service providers to allocate IPv4 addresses <b>on any address bit boundary (prefix length)</b> rather than only at a class A, B or C boundary.</p>
+
+<h3>Who hands out public addresses</h3>
+<p>IANA allocates to five <b>Regional Internet Registries (RIRs)</b>:</p>
+<div class="tw mono">
+<table><caption>The five RIRs</caption>
+<thead><tr><th>RIR</th><th>Region</th></tr></thead>
+<tbody>
+<tr><td>ARIN</td><td>North America</td></tr>
+<tr><td>RIPE</td><td>Europe, the Middle East and Central Asia</td></tr>
+<tr><td>APNIC</td><td>Asia and the Pacific</td></tr>
+<tr><td>AfriNIC</td><td>Africa</td></tr>
+<tr><td>LACNIC</td><td>Latin America and some Caribbean islands</td></tr>
+</tbody></table>
+</div>
+
+<h3>Connectivity verification</h3>
+<p><b>ICMPv4</b> is the messaging protocol for IPv4; <b>ICMPv6</b> provides the same services for IPv6. Messages common to both:</p>
+<ul><li><b>Host confirmation</b></li><li><b>Destination or Service Unreachable</b></li><li><b>Time exceeded</b></li><li><b>Route redirection</b></li></ul>
+<div class="tw">
+<table><caption>Testing in order</caption>
+<thead><tr><th>Test</th><th>Command</th><th>Proves</th></tr></thead>
+<tbody>
+<tr><td>Local TCP/IP stack</td><td class="m">ping 127.0.0.1 &nbsp;/&nbsp; ping ::1</td><td>IP is properly installed on the host.</td></tr>
+<tr><td>Local LAN</td><td class="m">ping &lt;local host&gt;</td><td>The host can communicate on the local network.</td></tr>
+<tr><td>Default gateway</td><td class="m">ping &lt;gateway&gt;</td><td>The host can reach its exit from the LAN.</td></tr>
+<tr><td>The path</td><td class="m">tracert / traceroute</td><td>Generates a list of <b>hops successfully reached</b> along the path.</td></tr>
+</tbody></table>
+</div>
+<p><b>RTT</b> (Round Trip Time) is the time for the packet to reach the remote host and for the response to return. An <b>asterisk (*)</b> indicates a lost packet.</p>
+<div class="tw mono">
+<table><caption>IOS ping indicators</caption>
+<thead><tr><th>Char</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>!</td><td>Successful receipt of an echo reply — validates a Layer 3 connection.</td></tr>
+<tr><td>.</td><td>Time expired waiting for an echo reply — a connectivity problem somewhere along the path.</td></tr>
+<tr><td>U</td><td>A router along the path replied with an ICMP <b>Type 3 destination unreachable</b> — it doesn't know the direction to the destination network, or couldn't find the host on it.</td></tr>
+</tbody></table>
+</div>
+<p><code>ping</code> uses ICMP <b>echo (Type 8)</b> and <b>echo reply (Type 0)</b>. A Windows ping sends <b>four</b> messages; the IOS ping sends <b>five</b>. <b>Extended ping</b> is entered in privileged EXEC mode by typing <code>ping</code> with <b>no destination address</b>, which then prompts for parameters; the same applies to <b>extended traceroute</b>. In Windows, <b>Ctrl-C</b> interrupts a <code>tracert</code>.</p>
+
+<details class="st"><summary>Self-test — Module 08</summary><div class="body">
+<ol>
+<li>Give the three private ranges with prefixes, exactly.<span class="a">10.0.0.0/8, 172.16.0.0/12 (to 172.31.255.255), 192.168.0.0/16.</span></li>
+<li>A PC has 169.254.12.9. What has gone wrong?<span class="a">It could not reach a DHCP server, so it self-configured an APIPA link-local address.</span></li>
+<li>What does CIDR allow that classful addressing did not?<span class="a">Allocation on any address bit boundary (any prefix length), not just /8, /16 or /24.</span></li>
+<li>Which RIR serves Africa?<span class="a">AfriNIC.</span></li>
+<li>What do a <code>U</code> and a <code>.</code> mean in IOS ping output?<span class="a">U = a router returned ICMP Type 3 destination unreachable; . = timed out waiting for an echo reply.</span></li>
+<li>Which two ICMP types does ping use?<span class="a">Type 8 echo and Type 0 echo reply.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m9" data-w="green">
+<h2 data-sheet="09"><span class="num">09</span>IPv6 Addressing</h2>
+<p class="lead">128 bits written as eight hextets, two compression rules, three address types, and the SLAAC/DHCPv6 decision tree. Compression questions are almost guaranteed marks if you apply the rules mechanically.</p>
+
+<h3>Migration and coexistence — three techniques</h3>
+<div class="split">
+  <div class="card"><h5>Dual stack</h5><p>Devices run <b>both IPv4 and IPv6 protocol stacks simultaneously</b>.</p></div>
+  <div class="card"><h5>Tunnelling</h5><p>The <b>IPv6 packet is encapsulated inside an IPv4 packet</b>.</p></div>
+  <div class="card"><h5>Translation</h5><p><b>NAT64</b> allows IPv6-enabled devices to communicate with IPv4 devices.</p></div>
+</div>
+
+<h3>Representation — the two rules</h3>
+<p>An IPv6 address is 128 bits, written as <b>eight 16-bit hextets</b> of four hex digits each. The <b>prefix length</b> indicates the network portion and can range from <b>0 to 128</b>; the typical prefix for most LANs is <b>/64</b>.</p>
+
+<h4>Rule 1 — omit leading zeros</h4>
+<p>Leading zeros in any 16-bit section may be omitted. This applies <b>only to leading zeros</b> — omitting trailing zeros would make the address ambiguous.</p>
+<div class="bits">Before: 2001:<em>0</em>DB8:<em>000</em>1:5270:<em>0</em>127:<em>00</em>AB:CAFE:<em>0</em>E1F /64</div>
+<div class="bits">After:&nbsp; 2001:DB8:1:5270:127:AB:CAFE:E1F /64</div>
+
+<h4>Rule 2 — the double colon</h4>
+<p>A <b>double colon (::)</b> can replace any <b>single, contiguous string of one or more all-zero hextets</b>. It may be used <b>only once</b> within an address — twice would produce more than one possible resulting address.</p>
+<div class="bits">Preferred:&nbsp; 2001 : 0db8 : <em>0000</em> : 1111 : <em>0000</em> : <em>0000</em> : <em>0000</em> : 0200</div>
+<div class="bits">Compressed: 2001:db8:0:1111<em>::</em>200</div>
+<div class="box exam"><span class="tag">Exam focus — why the first zero group stayed</span><p>In the example above the <code>0000</code> in position 3 becomes <code>0</code> (rule 1), not <code>::</code>, because <code>::</code> is spent on the <b>longer</b> run of three zero hextets later in the address. Apply rule 1 everywhere, then spend <code>::</code> once on the longest contiguous zero run.</p></div>
+<p>Another worked example: <code>2001:db8:cafe:1:0:0:0:1</code> → <code>2001:db8:cafe:1::1</code>.</p>
+
+<h3>The three IPv6 address types</h3>
+<div class="tw">
+<table><caption>Unicast, multicast, anycast</caption>
+<thead><tr><th>Type</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="m">Unicast</td><td>A single source IPv6 address — identifies one interface.</td></tr>
+<tr><td class="m">Multicast</td><td>Sends a single IPv6 packet to <b>multiple destinations</b>. Begins <code>FF00::/8</code>.</td></tr>
+<tr><td class="m">Anycast</td><td>Any IPv6 unicast address that can be <b>assigned to multiple devices</b>.</td></tr>
+</tbody></table>
+</div>
+<p><b>There is no IPv6 broadcast.</b></p>
+
+<h4>Three kinds of unicast</h4>
+<div class="tw">
+<table><caption>IPv6 unicast addresses</caption>
+<thead><tr><th>Kind</th><th>Range</th><th>Scope</th></tr></thead>
+<tbody>
+<tr><td class="m">Global unicast (GUA)</td><td class="m">2000::/3</td><td>Globally unique and <b>internet routable</b>. Only addresses with the first three bits <code>001</code> are currently being assigned.</td></tr>
+<tr><td class="m">Link-local (LLA)</td><td class="m">FE80::/10</td><td>Communicates with other devices on the <b>same local link only</b> — confined to a single link. <b>Created even if the device has no GUA</b>, automatically when the interface comes up.</td></tr>
+<tr><td class="m">Unique local</td><td class="m">FC00::/7</td><td>Local addressing within a site or between a limited number of sites.</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">Remember</span><p>Typically it is the <b>link-local address of the router</b> that is used as the <b>default gateway</b> for other devices on the link. The <code>%</code> and number at the end of an LLA on a Windows host is the <b>Zone ID / Scope ID</b>, used by the OS to tie the LLA to a specific interface.</p></div>
+
+<h4>Structure of a global unicast address</h4>
+<div class="bits"><em>2001:0db8:acad</em> : <s>0001</s> : 0000:0000:0000:0001</div>
+<div class="bits"><em>global routing prefix (/48 typical)</em> + <s>subnet ID</s> + interface ID (64 bits)</div>
+<ul>
+  <li><b>Global routing prefix</b> — the network portion, assigned by the provider. Typically <b>/48</b>.</li>
+  <li><b>Subnet ID</b> — used to subnet within an organisation.</li>
+  <li><b>Interface ID</b> — equivalent to the host portion of an IPv4 address. Usually 64 bits.</li>
+</ul>
+
+<h3>How a host gets a GUA</h3>
+<p>Configured <b>statically</b> with <code>ipv6 address <i>ipv6-address/prefix-length</i></code> on a router interface, or dynamically. By default an IPv6-enabled router <b>periodically sends ICMPv6 RAs</b> — every <b>200 seconds</b>, or on receiving an RS. The RA <i>suggests</i> how to configure; <b>the host makes the final decision</b>.</p>
+
+<h4>The three RA flags</h4>
+<div class="tw">
+<table><caption>A, O and M</caption>
+<thead><tr><th>Flag</th><th>Name</th><th>Signifies</th></tr></thead>
+<tbody>
+<tr><td class="m">A</td><td>Address Autoconfiguration</td><td>Use <b>SLAAC</b> to create an IPv6 GUA.</td></tr>
+<tr><td class="m">O</td><td>Other Configuration</td><td>Additional information is available from a <b>stateless DHCPv6</b> server.</td></tr>
+<tr><td class="m">M</td><td>Managed Address Configuration</td><td>Use a <b>stateful DHCPv6</b> server to obtain a GUA.</td></tr>
+</tbody></table>
+</div>
+<div class="tw">
+<table><caption>The three RA options</caption>
+<thead><tr><th>Option</th><th>Flags</th><th>Behaviour</th></tr></thead>
+<tbody>
+<tr><td class="m">1 — SLAAC only</td><td class="m">A=1, O=0, M=0</td><td><b>The default.</b> Client uses the GUA prefix from the RA, creates its own interface ID, and takes DNS, MTU and default gateway from the RA.</td></tr>
+<tr><td class="m">2 — SLAAC + stateless DHCPv6</td><td class="m">A=1, O=1, M=0</td><td>SLAAC for the GUA and default gateway; a <b>stateless DHCPv6 server for other information</b>.</td></tr>
+<tr><td class="m">3 — Stateful DHCPv6</td><td class="m">A=0, M=1</td><td><b>DHCPv6 for everything else</b>; the <b>router's link-local address</b> is still used for the default gateway.</td></tr>
+</tbody></table>
+</div>
+<div class="box trap"><span class="tag">Classic trap</span><p><b>DHCPv6 never supplies the default gateway.</b> That can only be obtained dynamically from the <b>Router Advertisement</b>. DHCPv6 is defined in RFC 3315.</p></div>
+
+<h3>SLAAC</h3>
+<p><span class="dfn">Stateless Address Autoconfiguration</span> lets hosts create their own unique GUA <b>without a DHCPv6 server</b> — useful because not every network has one, but every device needs a GUA. It is <b>stateless</b>: no server maintains address information about which addresses are in use and which are free.</p>
+<p>The host acquires its <b>64-bit subnet information from the RA</b> and must generate the remaining <b>64-bit interface ID</b> itself, by one of two methods:</p>
+<div class="split">
+  <div class="card"><h5>Randomly generated</h5><p>The 64-bit interface ID is generated randomly by the client OS. <b>This is the method Windows 10 uses</b>, chosen for privacy.</p></div>
+  <div class="card"><h5>EUI-64</h5><p>Built from the host's 48-bit MAC address. Some OSs avoid it for <b>privacy</b> reasons, because it exposes the MAC address.</p></div>
+</div>
+
+<h4>The EUI-64 process — three parts</h4>
+<ol class="steps">
+<li><b>24-bit OUI</b> from the client MAC address, with the <b>7th bit — the Universally/Locally (U/L) bit — reversed</b>.</li>
+<li>The inserted <b>16-bit value <code>FFFE</code></b> (hexadecimal) in the middle.</li>
+<li><b>24-bit device identifier</b> from the client MAC address.</li>
+</ol>
+<div class="bits">MAC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>FC:99:47</em> : <s>75:CE:E0</s></div>
+<div class="bits">EUI-64 ID&nbsp;&nbsp;<em>FE99:47</em><span class="hl">FF:FE</span><s>75:CEE0</s>&nbsp;&nbsp;&nbsp;(FC → FE: the U/L bit flipped)</div>
+
+<h4>Duplicate Address Detection (DAD)</h4>
+<ol class="steps">
+<li>The host sends an ICMPv6 <b>Neighbor Solicitation</b> with a specially constructed <b>solicited-node multicast address</b> containing the <b>last 24 bits</b> of its IPv6 address.</li>
+<li>If <b>no</b> device replies with a Neighbor Advertisement, the address is virtually guaranteed unique and can be used.</li>
+<li>If an <b>NA is received</b>, the address is not unique and the host must generate a new interface ID.</li>
+</ol>
+<p>DAD is arguably unnecessary — a 64-bit interface ID gives 18 quintillion possibilities — but the <b>IETF recommends it</b>, so most operating systems perform DAD on <b>all</b> IPv6 unicast addresses regardless of how they were configured.</p>
+<p><b>Key multicast addresses:</b> <code>ff02::1</code> = all-nodes, <code>ff02::2</code> = all-routers.</p>
+
+<details class="st"><summary>Self-test — Module 09</summary><div class="body">
+<ol>
+<li>Compress <code>2001:0db8:0000:0000:00ab:0000:0000:1234</code>.<span class="a">2001:db8::ab:0:0:1234 — :: takes the first (leading) run of two zero hextets, and it can only be used once, so the later run compresses to 0:0 by rule 1. (Either run is a legal choice of length 2; the first is conventional.)</span></li>
+<li>Which prefix is a link-local address? A global unicast?<span class="a">FE80::/10 link-local; 2000::/3 global unicast.</span></li>
+<li>Which RA flag combination is the default, and what is it called?<span class="a">A=1, O=0, M=0 — SLAAC only.</span></li>
+<li>Where does a stateful DHCPv6 client get its default gateway?<span class="a">From the RA — the router's link-local address. DHCPv6 never provides it.</span></li>
+<li>What value is inserted into the middle of a MAC address to form an EUI-64 interface ID, and which bit is flipped?<span class="a">FFFE is inserted; the 7th bit (U/L bit) of the OUI is reversed.</span></li>
+<li>How often does a router send unsolicited RAs?<span class="a">Every 200 seconds.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m10" data-w="green">
+<h2 data-sheet="10"><span class="num">10</span>Subnetting</h2>
+<p class="lead">The method from the "Subnetting Made Easy" deck, applied step by step to two worked examples. Learn the procedure, not the answers — the exam changes the numbers.</p>
+
+<h3>Step 0 — the powers of 2 table</h3>
+<p>Write this out before you do anything else. Every subnetting question is solved from it.</p>
+<div class="tw mono">
+<table><caption>Powers of 2</caption>
+<thead><tr><th>2ⁿ</th><th>2⁰</th><th>2¹</th><th>2²</th><th>2³</th><th>2⁴</th><th>2⁵</th><th>2⁶</th><th>2⁷</th><th>2⁸</th><th>2⁹</th><th>2¹⁰</th><th>2¹¹</th><th>2¹²</th></tr></thead>
+<tbody>
+<tr><td>Value</td><td>1</td><td>2</td><td>4</td><td>8</td><td>16</td><td>32</td><td>64</td><td>128</td><td>256</td><td>512</td><td>1024</td><td>2048</td><td>4096</td></tr>
+<tr><td>Usable hosts (2ⁿ−2)</td><td>—</td><td>0</td><td>2</td><td>6</td><td>14</td><td>30</td><td>62</td><td>126</td><td>254</td><td>510</td><td>1022</td><td>2046</td><td>4094</td></tr>
+</tbody></table>
+</div>
+
+<h3>The six-step method</h3>
+<ol class="steps">
+<li><b>Write out your powers of 2 table.</b></li>
+<li><b>Write out your existing subnet mask in binary.</b></li>
+<li><b>Apply the formula 2ⁿ − 2 ≥ X</b>, where X is the number of hosts required per subnet and n is the number of <b>host bits</b> needed for the answer to be ≥ X.</li>
+<li><b>Write out the new subnet mask</b>, keeping only the required number of host bits (0s) and converting all unneeded 0s into network bits (1s).</li>
+<li><b>Note the octet containing the last network bit.</b> That is the octet you increment in to find the next subnet.</li>
+<li><b>Calculate the broadcast address and usable host range</b> for each subnet.</li>
+</ol>
+<div class="box key"><span class="tag">Why minus 2</span><p>Two addresses in every subnet are unusable by hosts: the <b>network address</b> (all host bits 0) and the <b>broadcast address</b> (all host bits 1). Hence 2ⁿ − 2 usable hosts. The number of <b>subnets</b> created, by contrast, is 2^(bits borrowed) with <b>no subtraction</b>.</p></div>
+
+<h3>Worked example A — 192.168.10.0/24, 50 hosts per subnet</h3>
+<p><b>Step 2 — existing mask.</b> /24 means 24 network bits, leaving 8 host bits:</p>
+<div class="bits">11111111.11111111.11111111.<s>00000000</s>&nbsp;&nbsp;→ /24</div>
+<p><b>Step 3 — the formula.</b> We need 50 hosts, so 2ⁿ − 2 ≥ 50. Try n = 5: 2⁵ − 2 = 30 ✗. Try n = 6: <b>2⁶ − 2 = 62 ✓</b>. So we keep <b>6 host bits</b>.</p>
+<p><b>Step 4 — new mask.</b> Convert the 2 unneeded host bits into network bits:</p>
+<div class="bits">11111111.11111111.11111111.<em>11</em><s>000000</s>&nbsp;&nbsp;→ /26  =  255.255.255.192</div>
+<p><b>Step 5 — the increment.</b> The last network bit is in the <b>4th octet</b>, and that octet has <b>6 host bits</b> → increment by <b>2⁶ = 64</b> in the 4th octet.</p>
+<p><b>Step 6 — build the table.</b> Start with the original network address but the <b>new mask</b>. Each broadcast address is <b>one less than the next network address</b>; the usable range is <b>network + 1 to broadcast − 1</b>.</p>
+<div class="tw mono">
+<table><caption>192.168.10.0/24 subnetted to /26</caption>
+<thead><tr><th>Network</th><th>Usable host range</th><th>Broadcast</th></tr></thead>
+<tbody>
+<tr><td>192.168.10.0/26</td><td>192.168.10.1 – 192.168.10.62</td><td>192.168.10.63</td></tr>
+<tr><td>192.168.10.64/26</td><td>192.168.10.65 – 192.168.10.126</td><td>192.168.10.127</td></tr>
+<tr><td>192.168.10.128/26</td><td>192.168.10.129 – 192.168.10.190</td><td>192.168.10.191</td></tr>
+<tr><td>192.168.10.192/26</td><td>192.168.10.193 – 192.168.10.254</td><td>192.168.10.255</td></tr>
+</tbody></table>
+</div>
+
+<h3>Worked example B — 172.16.0.0/16, 1000 hosts per subnet</h3>
+<p>Don't panic — identical steps, the increment just lands in a different octet.</p>
+<p><b>Given mask</b> /16:</p>
+<div class="bits">11111111.11111111.<s>00000000.00000000</s>&nbsp;&nbsp;→ /16</div>
+<p><b>Formula:</b> 2¹⁰ − 2 = 1022 ≥ 1000 ✓ → keep <b>10 host bits</b>.</p>
+<div class="bits">11111111.11111111.<em>111111</em><s>00.00000000</s>&nbsp;&nbsp;→ /22  =  255.255.252.0</div>
+<p><b>Increment:</b> the network bits end in the <b>3rd octet</b>, which has <b>2 host bits</b> → increment by <b>2² = 4</b> in the 3rd octet.</p>
+<div class="tw mono">
+<table><caption>172.16.0.0/16 subnetted to /22</caption>
+<thead><tr><th>Network</th><th>Usable host range</th><th>Broadcast</th></tr></thead>
+<tbody>
+<tr><td>172.16.0.0/22</td><td>172.16.0.1 – 172.16.3.254</td><td>172.16.3.255</td></tr>
+<tr><td>172.16.4.0/22</td><td>172.16.4.1 – 172.16.7.254</td><td>172.16.7.255</td></tr>
+<tr><td>172.16.8.0/22</td><td>172.16.8.1 – 172.16.11.254</td><td>172.16.11.255</td></tr>
+<tr><td>172.16.12.0/22</td><td>172.16.12.1 – 172.16.15.254</td><td>172.16.15.255</td></tr>
+</tbody></table>
+</div>
+<div class="box exam"><span class="tag">Exam focus — subnetting on subnet count instead of host count</span>
+<p>The 11.7.5 lab asks the reverse question: 192.168.100.0/24 with <b>5 subnets</b> needed, each with <b>at least 25 addresses</b>. Borrow <b>3 bits</b> (2³ = 8 subnets ≥ 5), leaving 5 host bits → 2⁵ − 2 = <b>30 usable hosts</b> ≥ 25 ✓. New mask <b>/27 = 255.255.255.224</b>, increment <b>32</b>. If your usable-host answer comes out below the requirement, <b>you borrowed too many bits</b>.</p></div>
+<div class="tw mono">
+<table><caption>The /27 table from that lab</caption>
+<thead><tr><th>#</th><th>Subnet</th><th>First usable</th><th>Last usable</th><th>Broadcast</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>192.168.100.0</td><td>.1</td><td>.30</td><td>.31</td></tr>
+<tr><td>1</td><td>192.168.100.32</td><td>.33</td><td>.62</td><td>.63</td></tr>
+<tr><td>2</td><td>192.168.100.64</td><td>.65</td><td>.94</td><td>.95</td></tr>
+<tr><td>3</td><td>192.168.100.96</td><td>.97</td><td>.126</td><td>.127</td></tr>
+<tr><td>4</td><td>192.168.100.128</td><td>.129</td><td>.158</td><td>.159</td></tr>
+<tr><td>5</td><td>192.168.100.160</td><td>.161</td><td>.190</td><td>.191</td></tr>
+<tr><td>6</td><td>192.168.100.192</td><td>.193</td><td>.222</td><td>.223</td></tr>
+<tr><td>7</td><td>192.168.100.224</td><td>.225</td><td>.254</td><td>.255</td></tr>
+</tbody></table>
+</div>
+
+<details class="st"><summary>Self-test — Module 10</summary><div class="body">
+<ol>
+<li>You need 100 hosts per subnet from a /24. What prefix, mask and increment?<span class="a">2⁷−2 = 126 ≥ 100, so keep 7 host bits → /25, 255.255.255.128, increment 128.</span></li>
+<li>Subnet 10.0.0.0/8 for 4000 hosts each. Prefix and increment?<span class="a">2¹²−2 = 4094 ≥ 4000 → 12 host bits → /20 (255.255.240.0). Network bits end in the 3rd octet with 4 host bits there, so increment 16 in the 3rd octet.</span></li>
+<li>How do you find any broadcast address quickly?<span class="a">One less than the next network address.</span></li>
+<li>Why is it 2ⁿ−2 for hosts but 2ⁿ for subnets?<span class="a">Each subnet loses its network address and broadcast address to hosts; no such loss applies when counting subnets.</span></li>
+<li>Your calculation gives fewer usable hosts than required. What did you do wrong?<span class="a">Borrowed too many bits — go back one power of 2.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m11" data-w="green">
+<h2 data-sheet="11"><span class="num">11</span>VLSM</h2>
+<p class="lead">VLSM is simply taking one of your existing subnets and subnetting it further using the same technique. The discipline is the ordering: <b>largest requirement first</b>.</p>
+
+<h3>The rule</h3>
+<ol class="steps">
+<li><b>List every subnet requirement and sort it largest to smallest</b> by host count.</li>
+<li><b>Allocate the largest LAN from the start of the address space</b>, using the smallest mask that fits it.</li>
+<li><b>Continue down the list</b>, each subnet starting where the previous one's broadcast address ended.</li>
+<li><b>Put point-to-point WAN links last</b> — they need exactly 2 usable addresses, so a <b>/30</b>.</li>
+</ol>
+<div class="box trap"><span class="tag">Why largest first</span><p>Allocating a small subnet at the start of the block fragments the space and leaves no contiguous run big enough for the large LAN later. Sorting descending guarantees each block lands on a legal boundary for its own mask.</p></div>
+
+<h3>Worked example — 10.11.48.0/24 (the 11.9.3 lab)</h3>
+<p>Requirements: 60, 30, 14 and 6 hosts, plus one router-to-router link.</p>
+<div class="tw mono">
+<table><caption>VLSM allocation, largest first</caption>
+<thead><tr><th>Subnet</th><th>Hosts needed</th><th>Network / CIDR</th><th>Mask</th><th>First usable</th><th>Broadcast</th></tr></thead>
+<tbody>
+<tr><td>Host-D LAN</td><td>60</td><td>10.11.48.0/26</td><td>255.255.255.192</td><td>10.11.48.1</td><td>10.11.48.63</td></tr>
+<tr><td>Host-B LAN</td><td>30</td><td>10.11.48.64/27</td><td>255.255.255.224</td><td>10.11.48.65</td><td>10.11.48.95</td></tr>
+<tr><td>Host-A LAN</td><td>14</td><td>10.11.48.96/28</td><td>255.255.255.240</td><td>10.11.48.97</td><td>10.11.48.111</td></tr>
+<tr><td>Host-C LAN</td><td>6</td><td>10.11.48.112/29</td><td>255.255.255.248</td><td>10.11.48.113</td><td>10.11.48.119</td></tr>
+<tr><td>B1–B2 WAN link</td><td>2</td><td>10.11.48.120/30</td><td>255.255.255.252</td><td>10.11.48.121</td><td>10.11.48.123</td></tr>
+</tbody></table>
+</div>
+<p>Check each one against the formula: /26 → 2⁶−2 = <b>62</b> ≥ 60 ✓ · /27 → <b>30</b> ≥ 30 ✓ · /28 → <b>14</b> ≥ 14 ✓ · /29 → <b>6</b> ≥ 6 ✓ · /30 → <b>2</b> ≥ 2 ✓. Note how each requirement lands <i>exactly</i> on its mask — a well-designed question often does this, so if a number is off by one you have mis-sorted.</p>
+
+<h3>The addressing convention these labs use</h3>
+<p>Both Packet Tracer labs assign addresses the same way, and so does the case study. Learn the convention — it saves you decisions under time pressure:</p>
+<ul>
+  <li><b>First usable address</b> → the first router's LAN and WAN interfaces.</li>
+  <li><b>Last usable address on the WAN link</b> → the second router's WAN interface.</li>
+  <li><b>Second usable address</b> → the switch (its VLAN 1 SVI).</li>
+  <li><b>Last usable address</b> → the PCs / hosts in each subnet.</li>
+</ul>
+<div class="box exam"><span class="tag">Exam focus — the /30 and the /31 trap</span><p>A point-to-point serial or router-to-router link needs <b>two</b> usable addresses, which means a <b>/30 (255.255.255.252)</b> — four addresses total, minus network and broadcast. Students who reason "two hosts, so 2¹ = 2, so /31" lose the mark: 2¹ − 2 = <b>0</b> usable hosts. Always run the −2.</p></div>
+
+<details class="st"><summary>Self-test — Module 11</summary><div class="body">
+<ol>
+<li>Requirements are 12, 100, 28 and 2 hosts from 192.168.5.0/24. In what order do you allocate, and what are the four prefixes?<span class="a">100 first (/25), then 28 (/27), then 12 (/28), then 2 (/30).</span></li>
+<li>Complete that allocation.<span class="a">192.168.5.0/25 (100 hosts), 192.168.5.128/27 (28), 192.168.5.160/28 (12), 192.168.5.176/30 (2).</span></li>
+<li>Why is /31 wrong for a two-host WAN link?<span class="a">2¹−2 = 0 usable addresses. You need /30, which gives exactly 2.</span></li>
+<li>What single sentence defines VLSM?<span class="a">Taking an existing subnet and subnetting it further using the same technique, so masks vary in length across the design.</span></li>
+<li>In these labs, which address goes to the switch?<span class="a">The second usable address in the subnet.</span></li>
+</ol>
+</div></details>
+</section>
+<section id="m12" data-w="blue">
+<h2 data-sheet="12"><span class="num">12</span>Transport Layer</h2>
+<p class="lead">The link between the application layer and the lower layers responsible for network transmission. TCP versus UDP, port numbers, the three-way handshake, and how reliability and flow control actually work.</p>
+
+<h3>Responsibilities</h3>
+<ul>
+  <li>Responsible for <b>logical communications between applications</b> running on different hosts.</li>
+  <li><b>Tracking individual conversations</b>.</li>
+  <li><b>Segmenting data and reassembling segments</b>; adding header information.</li>
+  <li><b>Identifying, separating and managing multiple conversations</b>.</li>
+  <li>Uses <b>segmentation and multiplexing</b> to interleave different conversations on the same network.</li>
+</ul>
+<p>IP does not specify how delivery takes place; transport layer protocols specify how to transfer messages between hosts and manage the <b>reliability requirements</b> of a conversation.</p>
+
+<h3>TCP vs UDP</h3>
+<div class="tw">
+<table><caption>The comparison you will be asked to make</caption>
+<thead><tr><th>Property</th><th>TCP</th><th>UDP</th></tr></thead>
+<tbody>
+<tr><td>Connection</td><td><b>Connection-oriented</b> — negotiates and establishes a session before forwarding traffic</td><td><b>Connectionless</b> — no session establishment</td></tr>
+<tr><td>Reliability</td><td><b>Reliable</b> — ensures every segment sent arrives</td><td><b>Best effort</b> — no acknowledgement that data was received</td></tr>
+<tr><td>Ordering</td><td><b>Same-order delivery</b> — resequences data that arrives out of order</td><td>Data reconstructed <b>in the order received</b>; no way to reorder</td></tr>
+<tr><td>Lost data</td><td><b>Retransmitted</b> after a timeout</td><td>Lost segments are <b>not resent</b></td></tr>
+<tr><td>Flow control</td><td><b>Supported</b> — can ask the sending application to slow down</td><td>Sender is <b>not informed</b> about resource availability</td></tr>
+<tr><td>State</td><td><b>Stateful</b> — tracks the state of the session, what was sent and what was acknowledged</td><td><b>Stateless</b></td></tr>
+<tr><td>Overhead</td><td>Higher; header is <b>20 bytes</b> minimum</td><td>Low; header is <b>8 bytes (64 bits)</b>, only 4 fields</td></tr>
+<tr><td>PDU name</td><td><b>Segment</b></td><td><b>Datagram</b></td></tr>
+</tbody></table>
+</div>
+
+<h4>TCP's five basic operations</h4>
+<ol>
+  <li><b>Number and track</b> data segments transmitted to a specific host from a specific application.</li>
+  <li><b>Acknowledge</b> received data.</li>
+  <li><b>Retransmit</b> any unacknowledged data after a certain amount of time.</li>
+  <li><b>Sequence</b> data that might arrive in the wrong order.</li>
+  <li><b>Send data at an efficient rate</b> acceptable to the receiver.</li>
+</ol>
+
+<h4>When to use which</h4>
+<div class="tw">
+<table><caption>Choosing the right protocol</caption>
+<thead><tr><th>Use</th><th>When</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td class="m">TCP</td><td>All the data must arrive and be processed <b>in its proper sequence</b>.</td><td>HTTP/HTTPS, FTP, SMTP, POP3, IMAP, SSH, Telnet</td></tr>
+<tr><td class="m">UDP</td><td><b>Live video and multimedia</b> — can tolerate some loss but require little or no delay.</td><td>VoIP, live streaming video</td></tr>
+<tr><td class="m">UDP</td><td><b>Simple request-and-reply</b> applications with minimal data, where retransmission can be done quickly.</td><td>DNS, DHCP</td></tr>
+<tr><td class="m">UDP</td><td>Applications that <b>handle reliability themselves</b>, or where flow control, error detection and recovery are not required.</td><td>SNMP, TFTP</td></tr>
+</tbody></table>
+</div>
+
+<h3>The headers</h3>
+<div class="tw">
+<table><caption>TCP header fields</caption>
+<thead><tr><th>Field</th><th>Size</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td class="m">Source Port</td><td class="m">16 bits</td><td>Identifies the source application.</td></tr>
+<tr><td class="m">Destination Port</td><td class="m">16 bits</td><td>Identifies the destination application.</td></tr>
+<tr><td class="m">Sequence Number</td><td class="m">32 bits</td><td>Used for <b>data reassembly</b>.</td></tr>
+<tr><td class="m">Acknowledgment Number</td><td class="m">32 bits</td><td>Indicates data has been received and the <b>next byte expected</b> from the source.</td></tr>
+<tr><td class="m">Header Length</td><td class="m">4 bits</td><td>Known as "data offset" — length of the TCP header.</td></tr>
+<tr><td class="m">Reserved</td><td class="m">6 bits</td><td>Reserved for future use.</td></tr>
+<tr><td class="m">Control bits</td><td class="m">6 bits</td><td>The flags: URG, ACK, PSH, RST, SYN, FIN.</td></tr>
+<tr><td class="m">Window size</td><td class="m">16 bits</td><td>Number of bytes that can be accepted at one time.</td></tr>
+<tr><td class="m">Checksum</td><td class="m">16 bits</td><td>Error checking of the segment header <b>and data</b>.</td></tr>
+<tr><td class="m">Urgent</td><td class="m">16 bits</td><td>Indicates whether the contained data is urgent.</td></tr>
+</tbody></table>
+</div>
+<div class="tw">
+<table><caption>UDP header — only four fields</caption>
+<thead><tr><th>Field</th><th>Size</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td class="m">Source Port</td><td class="m">16 bits</td><td>Identifies the source application.</td></tr>
+<tr><td class="m">Destination Port</td><td class="m">16 bits</td><td>Identifies the destination application.</td></tr>
+<tr><td class="m">Length</td><td class="m">16 bits</td><td>Length of the UDP datagram header.</td></tr>
+<tr><td class="m">Checksum</td><td class="m">16 bits</td><td>Error checking of the datagram header and data.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Port numbers and sockets</h3>
+<p>TCP and UDP use port numbers to manage <b>multiple simultaneous conversations</b>. The <b>source port</b> is associated with the originating application on the local host; the <b>destination port</b> with the destination application on the remote host.</p>
+<p>A <span class="dfn">socket</span> is the combination of an <b>IP address and a port number</b>. Sockets let multiple processes on one client distinguish themselves from each other, and let multiple connections to one server process be told apart.</p>
+<div class="tw">
+<table><caption>The three port groups</caption>
+<thead><tr><th>Group</th><th>Range</th><th>Assigned by / to</th></tr></thead>
+<tbody>
+<tr><td class="m">Well-known</td><td class="m">0 – 1023</td><td>Reserved for common services — web browsers, email clients, remote access. Lets clients easily identify the service they need.</td></tr>
+<tr><td class="m">Registered</td><td class="m">1024 – 49151</td><td>Assigned <b>by IANA</b> to a requesting entity for specific processes — typically individual applications a user chose to install. Example: Cisco registered <b>1812</b> for RADIUS authentication.</td></tr>
+<tr><td class="m">Private / dynamic</td><td class="m">49152 – 65535</td><td>Also called <b>ephemeral</b> ports. The client OS assigns these <b>dynamically</b> when a connection is initiated; used to identify the client application.</td></tr>
+</tbody></table>
+</div>
+<div class="tw mono">
+<table><caption>Well-known ports — learn every row</caption>
+<thead><tr><th>Port</th><th>Protocol</th><th>Application</th></tr></thead>
+<tbody>
+<tr><td>20</td><td>TCP</td><td>FTP — <b>data</b></td></tr>
+<tr><td>21</td><td>TCP</td><td>FTP — <b>control</b></td></tr>
+<tr><td>22</td><td>TCP</td><td>SSH — Secure Shell</td></tr>
+<tr><td>23</td><td>TCP</td><td>Telnet</td></tr>
+<tr><td>25</td><td>TCP</td><td>SMTP — sending mail</td></tr>
+<tr><td>53</td><td>UDP, TCP</td><td>DNS</td></tr>
+<tr><td>67</td><td>UDP</td><td>DHCP — <b>server</b></td></tr>
+<tr><td>68</td><td>UDP</td><td>DHCP — <b>client</b></td></tr>
+<tr><td>69</td><td>UDP</td><td>TFTP</td></tr>
+<tr><td>80</td><td>TCP</td><td>HTTP</td></tr>
+<tr><td>110</td><td>TCP</td><td>POP3 — retrieving mail</td></tr>
+<tr><td>143</td><td>TCP</td><td>IMAP — retrieving mail</td></tr>
+<tr><td>161</td><td>UDP</td><td>SNMP</td></tr>
+<tr><td>443</td><td>TCP</td><td>HTTPS</td></tr>
+</tbody></table>
+</div>
+<p><code>netstat</code> verifies active connections — unexplained TCP connections can pose a major security threat.</p>
+<pre class="cli"><span class="p">C:\&gt;</span> <b>netstat</b>
+Active Connections
+ Proto  Local Address          Foreign Address           State
+ TCP    192.168.1.124:3158     207.138.126.152:http      ESTABLISHED
+ TCP    192.168.1.124:3166     www.cisco.com:http        ESTABLISHED
+<i>       ^ ephemeral source port     ^ well-known destination port</i></pre>
+
+<h3>TCP server processes</h3>
+<ul>
+  <li>Each application process running on a server is configured to use a port number.</li>
+  <li>A server <b>cannot have two services assigned to the same port number</b> within the same transport layer service.</li>
+  <li>An active application assigned to a port is considered <b>open</b> — the transport layer accepts and processes segments addressed to it.</li>
+</ul>
+
+<h3>The three-way handshake</h3>
+<ol class="steps">
+<li>The initiating client requests a <b>client-to-server</b> communication session. <span class="mono">(SYN)</span></li>
+<li>The server <b>acknowledges</b> the client-to-server session <b>and requests a server-to-client</b> session. <span class="mono">(SYN, ACK)</span></li>
+<li>The initiating client <b>acknowledges</b> the server-to-client session. <span class="mono">(ACK)</span></li>
+</ol>
+<h4>Its three functions</h4>
+<ol>
+  <li><b>Establishes that the destination device is present</b> on the network.</li>
+  <li><b>Verifies that the destination has an active service</b> and is accepting requests on that destination port.</li>
+  <li><b>Informs the destination</b> that the source client intends to establish a session on that port.</li>
+</ol>
+
+<h4>Session termination — four steps</h4>
+<ol class="steps">
+<li>The client has no more data to send and sends a segment with the <b>FIN</b> flag set.</li>
+<li>The server sends an <b>ACK</b> to acknowledge the FIN, terminating client-to-server.</li>
+<li>The server sends a <b>FIN</b> to terminate the server-to-client session.</li>
+<li>The client responds with an <b>ACK</b> to acknowledge the server's FIN.</li>
+</ol>
+<div class="box trap"><span class="tag">Classic trap</span><p>Establishment is <b>three</b> steps; termination is <b>four</b>. Both directions must be closed independently, which is why there is no combined FIN-ACK-FIN shortcut.</p></div>
+
+<h4>The six control bit flags</h4>
+<div class="tw mono">
+<table><caption>TCP flags</caption>
+<thead><tr><th>Flag</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>URG</td><td>Urgent pointer field significant</td></tr>
+<tr><td>ACK</td><td>Acknowledgment — used in <b>connection establishment and session termination</b></td></tr>
+<tr><td>PSH</td><td>Push function</td></tr>
+<tr><td>RST</td><td><b>Reset</b> the connection when an error or timeout occurs</td></tr>
+<tr><td>SYN</td><td><b>Synchronize sequence numbers</b> — used in connection establishment</td></tr>
+<tr><td>FIN</td><td>No more data from sender — used in <b>session termination</b></td></tr>
+</tbody></table>
+</div>
+
+<h3>Reliability and flow control</h3>
+<h4>Guaranteed and ordered delivery</h4>
+<p>Segments may not arrive, or may arrive out of order. All data must be received and reassembled into the original order — <b>sequence numbers</b> in each header achieve this.</p>
+<h4>Data loss and retransmission</h4>
+<p>TCP retransmits segments for unacknowledged data. <span class="dfn">SACK</span> (Selective Acknowledgment) is an optional feature <b>negotiated during the three-way handshake</b>: if both hosts support it, the receiver can explicitly acknowledge which segments were received, <b>including discontinuous ones</b> — so only the truly missing bytes are resent.</p>
+<h4>Window size and sliding windows</h4>
+<ul>
+  <li><b>Flow control</b> is the amount of data the destination can receive and process reliably. It maintains reliability by <b>adjusting the rate of data flow</b> between source and destination for a given session.</li>
+  <li><b>Sliding windows</b> — the destination sends acknowledgements as it processes bytes received, and the source's send window is <b>continually adjusted</b> in response.</li>
+</ul>
+<h4>Maximum Segment Size</h4>
+<div class="box key"><span class="tag">The MSS calculation — know the arithmetic</span>
+<p><span class="dfn">MSS</span> is the maximum amount of <b>data</b> the destination device can receive. A common MSS with IPv4 is <b>1460 bytes</b>.</p>
+<p>A host determines it by subtracting the IP and TCP headers from the Ethernet <b>MTU</b> of 1500 bytes:</p>
+<p class="mono">1500 (MTU) − 20 (IPv4 header) − 20 (TCP header) = <b>1460 bytes</b></p></div>
+<h4>Congestion avoidance</h4>
+<p>When congestion occurs, packets are <b>discarded by the overloaded router</b>. To avoid and control it, TCP employs several congestion handling mechanisms, timers and algorithms.</p>
+
+<h3>UDP communication</h3>
+<ul>
+  <li><b>Low overhead</b> — a small datagram header and <b>no network management traffic</b>.</li>
+  <li><b>Reassembly</b> — UDP does not track sequence numbers and has <b>no way to reorder</b> datagrams. It reassembles data <b>in the order received</b> and forwards it to the application.</li>
+  <li><b>Server processes</b> — assigned well-known or registered port numbers; UDP forwards the application data based on the port number.</li>
+  <li><b>Client processes</b> — the client <b>dynamically selects</b> a port number from the private range as its source port; the destination is usually the well-known port of the server process. The <b>same pair of ports is used in all datagrams</b> of that transaction.</li>
+</ul>
+
+<details class="st"><summary>Self-test — Module 12</summary><div class="body">
+<ol>
+<li>How many bytes is a UDP header, and how many fields?<span class="a">8 bytes (64 bits), four fields: source port, destination port, length, checksum.</span></li>
+<li>Why is DNS mostly UDP but listed as both UDP and TCP on port 53?<span class="a">It is a simple request-and-reply application with minimal data where retransmission is quick, which suits UDP; TCP is used for larger transfers such as zone transfers.</span></li>
+<li>Derive an MSS of 1460 from first principles.<span class="a">1500-byte Ethernet MTU − 20-byte IPv4 header − 20-byte TCP header = 1460 bytes of data.</span></li>
+<li>Which two flags appear in establishment, and which in termination?<span class="a">SYN and ACK establish; FIN and ACK terminate.</span></li>
+<li>What is negotiated during the handshake that lets a receiver acknowledge discontinuous segments?<span class="a">SACK — selective acknowledgment.</span></li>
+<li>Give the three port ranges with their names.<span class="a">0–1023 well-known, 1024–49151 registered, 49152–65535 private/dynamic (ephemeral).</span></li>
+<li>DHCP server and client ports?<span class="a">Server 67, client 68 — both UDP.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m13" data-w="blue">
+<h2 data-sheet="13"><span class="num">13</span>Application Layer</h2>
+<p class="lead">The interface between applications and the network. The top three OSI layers, two network models, and the protocols that carry the web, email, names, addresses and files.</p>
+
+<h3>The upper three layers</h3>
+<p>The application, presentation and session layers of OSI together define the functions of the <b>TCP/IP application layer</b>. The application layer provides the <b>interface between the applications used to communicate and the underlying network</b>.</p>
+<div class="split">
+  <div class="card"><h5>Presentation — three functions</h5><p><b>1.</b> Formatting (presenting) data at the source into a format the destination can receive. <b>2.</b> <b>Compressing</b> data so the destination can decompress it. <b>3.</b> <b>Encrypting</b> for transmission and decrypting on receipt.</p></div>
+  <div class="card"><h5>Session — two functions</h5><p><b>1.</b> Creates and maintains <b>dialogs</b> between source and destination applications. <b>2.</b> Handles the exchange of information to <b>initiate dialogs, keep them active, and restart sessions</b> that are disrupted or long idle.</p></div>
+</div>
+<p>For communication to succeed, the application layer protocols on source and destination <b>must be compatible</b>.</p>
+
+<h3>Client-server vs peer-to-peer</h3>
+<div class="tw">
+<table><caption>Two models</caption>
+<thead><tr><th>Model</th><th>How it works</th></tr></thead>
+<tbody>
+<tr><td class="m">Client-server</td><td>The device <b>requesting</b> information is the <b>client</b>; the device <b>responding</b> is the <b>server</b>. Application layer protocols describe the format of requests and responses. Client and server processes are both considered to be in the application layer.</td></tr>
+<tr><td class="m">Peer-to-peer (P2P)</td><td>Two or more computers share resources (printers, files) <b>without a dedicated server</b>. Every connected end device — a <b>peer</b> — can function as <b>both server and client</b>. One machine may be server for one transaction while simultaneously client for another; <b>roles are set per request</b>.</td></tr>
+</tbody></table>
+</div>
+<p>A <b>P2P application</b> lets a device act as both client and server <b>within the same communication</b>. Some use a <b>hybrid system</b> where each peer accesses an <b>index server</b> to get the location of a resource stored on another peer. Common P2P networks: <b>BitTorrent, Direct Connect, eDonkey, Freenet</b>.</p>
+
+<h3>HTTP and HTML</h3>
+<h4>Loading a page, step by step</h4>
+<ol class="steps">
+<li>The browser interprets the <b>three parts of the URL</b>: <code>http</code> (the protocol or scheme), <code>www.cisco.com</code> (the server name), <code>index.html</code> (the specific filename requested).</li>
+<li>The browser <b>checks with a name server</b> to convert <code>www.cisco.com</code> into a numeric IP address, then connects. The client sends a <b>GET</b> request asking for <code>index.html</code>.</li>
+<li>The server responds by sending the <b>HTML code</b> for the page to the browser.</li>
+<li>The browser <b>deciphers the HTML and formats the page</b> for the browser window.</li>
+</ol>
+<div class="tw">
+<table><caption>The three common HTTP message types</caption>
+<thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td class="m">GET</td><td>A client <b>request for data</b> — the browser asks for HTML pages.</td></tr>
+<tr><td class="m">POST</td><td><b>Uploads data files</b> to the web server, such as form data.</td></tr>
+<tr><td class="m">PUT</td><td><b>Uploads resources or content</b> to the web server, such as an image.</td></tr>
+</tbody></table>
+</div>
+<p><b>HTTP is not a secure protocol.</b> For secure communications across the internet, <b>HTTPS</b> should be used.</p>
+
+<h3>Email — three protocols</h3>
+<p>Email is a <b>store-and-forward</b> method of sending, storing and retrieving messages. Messages are stored in databases on mail servers; clients communicate with the servers.</p>
+<div class="tw">
+<table><caption>SMTP, POP and IMAP</caption>
+<thead><tr><th>Protocol</th><th>Port</th><th>Behaviour</th></tr></thead>
+<tbody>
+<tr><td class="m">SMTP</td><td class="m">TCP 25</td><td><b>Used to SEND mail.</b> The client SMTP process connects to the server SMTP process on port 25. The server either places the message in a local account (if the recipient is local) or <b>forwards it to another mail server</b>. If the destination server is offline or busy, SMTP <b>spools</b> messages to send later. Message format requires a <b>header</b> (recipient and sender addresses) and a <b>body</b>.</td></tr>
+<tr><td class="m">POP3</td><td class="m">TCP 110</td><td><b>Used to RETRIEVE mail.</b> Mail is <b>downloaded to the client and then DELETED on the server</b>. The server passively listens on port 110; when a client connects, the server sends a greeting, then commands and responses are exchanged until the connection closes. Because POP does not store messages, it is <b>not recommended where a centralised backup is needed</b>.</td></tr>
+<tr><td class="m">IMAP</td><td class="m">TCP 143</td><td><b>Used to RETRIEVE mail.</b> <b>Copies</b> of messages are downloaded; the <b>originals stay on the server</b> until manually deleted. When the user deletes a message, the server <b>synchronises</b> that action and deletes it too.</td></tr>
+</tbody></table>
+</div>
+<div class="box exam"><span class="tag">Exam focus</span><p>SMTP <b>sends</b>; POP and IMAP <b>receive</b>. The distinction between POP and IMAP is where the message lives afterwards: POP <b>deletes from the server</b>, IMAP <b>keeps it on the server and synchronises</b>.</p></div>
+
+<h3>DNS</h3>
+<p>Domain names convert numeric IP addresses into a simple, recognisable name. A <b>fully-qualified domain name (FQDN)</b> such as <code>www.cisco.com</code> is easier to remember than <code>198.133.219.25</code>. The DNS protocol defines an automated service matching resource names to numeric addresses, including the format for <b>queries, responses and data</b>.</p>
+<div class="tw mono">
+<table><caption>DNS resource record types</caption>
+<thead><tr><th>Record</th><th>Resolves to</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>An end device <b>IPv4</b> address</td></tr>
+<tr><td>AAAA</td><td>An end device <b>IPv6</b> address — pronounced "quad-A"</td></tr>
+<tr><td>NS</td><td>An <b>authoritative name server</b></td></tr>
+<tr><td>MX</td><td>A <b>mail exchange</b> record</td></tr>
+</tbody></table>
+</div>
+<p><b>Resolution process:</b> the server first looks at its own records. If it cannot resolve the name from stored records, it <b>contacts other servers</b>. Once a match is found and returned, the server <b>temporarily stores (caches)</b> the address in case the same name is requested again.</p>
+<div class="tw">
+<table><caption>The four DNS message sections</caption>
+<thead><tr><th>Section</th><th>Contains</th></tr></thead>
+<tbody>
+<tr><td class="m">Question</td><td>The question for the name server.</td></tr>
+<tr><td class="m">Answer</td><td>Resource records answering the question.</td></tr>
+<tr><td class="m">Authority</td><td>Resource records pointing toward an authority.</td></tr>
+<tr><td class="m">Additional</td><td>Resource records holding additional information.</td></tr>
+</tbody></table>
+</div>
+<p><b>Hierarchy:</b> DNS uses a hierarchical system. Each server maintains a specific database file and is <b>only responsible for name-to-IP mappings for its small portion</b> of the structure. When a server receives a request outside its <b>DNS zone</b>, it <b>forwards the request</b> to another server in the proper zone. Top-level domain examples: <code>.com</code> (business or industry), <code>.org</code> (non-profit), <code>.au</code> (Australia).</p>
+<p><b><code>nslookup</code></b> lets a user manually query the configured DNS servers to resolve a host name, and troubleshoot name resolution issues or verify name server status. When issued, it displays the <b>default DNS server</b> configured for the host; a host or domain name can then be entered at the prompt.</p>
+
+<h3>File sharing</h3>
+<div class="tw">
+<table><caption>FTP vs SMB</caption>
+<thead><tr><th>Protocol</th><th>How it works</th></tr></thead>
+<tbody>
+<tr><td class="m">FTP</td><td>Developed for data transfers between client and server. <b>Two connections:</b> the first for <b>control</b> traffic on <b>TCP port 21</b> (client commands and server replies), the second for the <b>actual data transfer</b> on <b>TCP port 20</b>, created every time there is data to transfer. Transfer can go in <b>either direction</b> — the client can download (pull) or upload (push).</td></tr>
+<tr><td class="m">SMB</td><td>Server Message Block — a client/server, <b>request-response</b> file sharing protocol. Unlike FTP, clients establish a <b>long-term connection</b>; once established, the user can access server resources <b>as though they were local</b>. Three functions of SMB messages: <b>start, authenticate and terminate sessions</b>; <b>control file and printer access</b>; <b>allow an application to send or receive messages</b> to or from another device.</td></tr>
+</tbody></table>
+</div>
+
+<details class="st"><summary>Self-test — Module 13</summary><div class="body">
+<ol>
+<li>Which OSI layer compresses and encrypts, and which restarts a disrupted dialog?<span class="a">Presentation compresses and encrypts; Session restarts disrupted or idle dialogs.</span></li>
+<li>In a P2P network, when is a peer a client and when a server?<span class="a">Roles are set on a per-request basis — it can be both, even simultaneously for different transactions.</span></li>
+<li>Name the three parts of the URL <code>http://www.cisco.com/index.html</code>.<span class="a">Protocol/scheme (http), server name (www.cisco.com), filename (index.html).</span></li>
+<li>Which email protocol deletes messages from the server, and which synchronises deletions?<span class="a">POP deletes on download; IMAP keeps originals on the server and synchronises deletions.</span></li>
+<li>Which DNS record type resolves an IPv6 address?<span class="a">AAAA ("quad-A").</span></li>
+<li>Why does FTP use two ports, and which is which?<span class="a">Port 21 carries control traffic (commands and replies); port 20 carries the actual data transfer.</span></li>
+<li>What does SMB do that FTP does not?<span class="a">Establishes a long-term connection so remote resources can be used as though local.</span></li>
+</ol>
+</div></details>
+</section>
+<section id="m14" data-w="blue">
+<h2 data-sheet="14"><span class="num">14</span>DHCPv4</h2>
+<p class="lead">Four messages to get a lease, two to renew, and a router configuration you will be asked to reproduce from memory in the practical test.</p>
+
+<h3>Concepts</h3>
+<ul>
+  <li>DHCPv4 assigns IPv4 addresses, subnet masks, gateways and other parameters <b>dynamically</b>. Since desktop clients make up the bulk of network nodes, it is an extremely useful time-saver.</li>
+  <li>A <b>dedicated server</b> is scalable and relatively easy to manage — but in a small branch or <b>SOHO</b> site a Cisco router can provide DHCPv4 without one. Cisco IOS includes an optional, full-featured DHCPv4 server.</li>
+  <li>The server <b>leases</b> an address from a <b>pool</b> for a limited period. Leases are typically <b>24 hours to a week or more</b>. When a lease expires the client must ask for another address — <b>though it is typically reassigned the same one</b>.</li>
+  <li>The lease mechanism ensures clients that <b>move or power off do not keep addresses they no longer need</b>. On expiry the address returns to the pool for reallocation.</li>
+</ul>
+
+<h3>Obtaining a lease — four steps, DORA</h3>
+<ol class="steps">
+<li><b>DHCPDISCOVER</b> — the client <b>broadcasts</b> to identify any available DHCP servers.</li>
+<li><b>DHCPOFFER</b> — a server replies offering a lease. <b>If the client receives more than one offer</b> (multiple servers on the network) <b>it must choose one</b>.</li>
+<li><b>DHCPREQUEST</b> — the client identifies the <b>explicit server and lease offer</b> it is accepting.</li>
+<li><b>DHCPACK</b> — the server acknowledges that the lease has been finalised.</li>
+</ol>
+<p>If the offer is no longer valid, the server responds with a <b>DHCPNAK</b> (negative acknowledgment) and the process must begin again with a new DHCPDISCOVER.</p>
+
+<h3>Renewing a lease — two steps</h3>
+<ol class="steps">
+<li><b>DHCPREQUEST</b> — before the lease expires the client sends this <b>directly (unicast) to the server that originally offered the address</b>. If no DHCPACK arrives within a specified time, the client <b>broadcasts</b> another DHCPREQUEST so another server can extend the lease.</li>
+<li><b>DHCPACK</b> — the server verifies the lease information and returns this.</li>
+</ol>
+<p>Per RFC 2131, DHCPOFFER and DHCPACK <b>can be sent as unicast or broadcast</b>.</p>
+<div class="box key"><span class="tag">DHCPv6 equivalents</span><p>The DHCPv6 messages are <b>SOLICIT, ADVERTISE, INFORMATION REQUEST</b> and <b>REPLY</b>. And remember: DHCPv6 does <b>not</b> provide a default gateway — that comes only from the RA.</p></div>
+
+<h3>Configuring a Cisco IOS DHCPv4 server</h3>
+<ol class="steps">
+<li><b>Exclude addresses.</b> Exclude anything statically assigned — routers, servers, printers, management interfaces — to prevent duplicate-address errors. The command can be entered multiple times.</li>
+<li><b>Define a pool name</b> with <code>ip dhcp pool <i>pool-name</i></code>, which moves you into DHCP config mode (<code>Router(dhcp-config)#</code>).</li>
+<li><b>Configure the pool</b> — at minimum the network and the default gateway.</li>
+</ol>
+<div class="tw mono">
+<table><caption>Pool configuration commands</caption>
+<thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>network <i>network-number</i> [mask | /prefix-length]</td><td>Define the address pool</td></tr>
+<tr><td>default-router <i>address</i></td><td>Define the default gateway (up to 8 addresses)</td></tr>
+<tr><td>dns-server <i>address</i></td><td>Define a DNS server</td></tr>
+<tr><td>domain-name <i>domain</i></td><td>Define the domain name</td></tr>
+<tr><td>lease {days [hours [minutes]] | infinite}</td><td>Define the lease duration</td></tr>
+<tr><td>netbios-name-server <i>address</i></td><td>Define the NetBIOS WINS server</td></tr>
+</tbody></table>
+</div>
+<pre class="cli"><i>! Exclude the statically-assigned addresses FIRST</i>
+<span class="p">R2(config)#</span> <b>ip dhcp excluded-address</b> 192.168.10.1 192.168.10.10
+<span class="p">R2(config)#</span> <b>ip dhcp excluded-address</b> 192.168.30.1 192.168.30.10
+<i>! Then define each pool (names are case-sensitive)</i>
+<span class="p">R2(config)#</span> <b>ip dhcp pool</b> R1-LAN
+<span class="p">R2(dhcp-config)#</span> <b>network</b> 192.168.10.0 255.255.255.0
+<span class="p">R2(dhcp-config)#</span> <b>default-router</b> 192.168.10.1
+<span class="p">R2(dhcp-config)#</span> <b>dns-server</b> 192.168.20.254</pre>
+
+<h4>Verification</h4>
+<div class="tw mono">
+<table><caption>DHCPv4 verification commands</caption>
+<thead><tr><th>Command</th><th>Shows</th></tr></thead>
+<tbody>
+<tr><td>show running-config | section dhcp</td><td>Only the DHCPv4 commands configured on the router.</td></tr>
+<tr><td>show ip dhcp binding</td><td>All <b>IPv4-address-to-MAC-address bindings</b> provided by the service.</td></tr>
+<tr><td>show ip dhcp server statistics</td><td>Count information on DHCPv4 messages sent and received.</td></tr>
+<tr><td>ipconfig /all</td><td>On the client — confirms it received address, mask, gateway, DNS and DNS suffix.</td></tr>
+</tbody></table>
+</div>
+<pre class="cli"><span class="p">R2#</span> <b>show ip dhcp binding</b>
+IP address       Client-ID/Hardware address   Lease expiration   Type
+192.168.10.11    0002.4AA5.1470               --                 Automatic
+192.168.30.11    0004.9A97.2535               --                 Automatic</pre>
+
+<h3>DHCP relay</h3>
+<p>In a hierarchical network, enterprise servers are usually <b>centralised</b> — DHCP, DNS, TFTP, FTP — and clients are <b>not on the same subnet</b>. Clients locate services using <b>broadcast</b> messages, and <b>a router does not forward broadcasts</b>. So a client on a different network than the DHCP server gets nothing.</p>
+<p>The fix is the <b><code>ip helper-address</code></b> interface command. The router then accepts broadcast DHCPv4 requests and <b>forwards them as a unicast</b> to the server's IP address. Verify with <code>show ip interface</code>.</p>
+<pre class="cli"><span class="p">R1(config)#</span> <b>interface</b> g0/0
+<span class="p">R1(config-if)#</span> <b>ip helper-address</b> 10.1.1.2   <i>! the DHCP server's address</i></pre>
+<div class="box exam"><span class="tag">Exam focus — the other eight services</span><p><code>ip helper-address</code> relays <b>eight UDP services by default</b>, not only DHCP: <b>port 37 Time, 49 TACACS, 53 DNS, 67 DHCP/BOOTP server, 68 DHCP/BOOTP client, 69 TFTP, 137 NetBIOS name service, 138 NetBIOS datagram service.</b></p></div>
+
+<h3>Configuring a router as a DHCPv4 client</h3>
+<p>Used where a router gets its address <b>from the ISP</b> — typical for SOHO and branch sites, where the Ethernet interface connects to a cable or DSL modem. One command:</p>
+<pre class="cli"><span class="p">R2(config)#</span> <b>interface</b> g0/1
+<span class="p">R2(config-if)#</span> <b>ip address dhcp</b>
+<span class="p">R2(config-if)#</span> <b>no shutdown</b>
+<span class="p">R2#</span> <b>show ip interface brief</b>   <i>! confirm the DHCP-allocated address</i></pre>
+<p>Home routers are typically already set to <b>"Automatic Configuration – DHCP"</b> on the WAN page, so customers can plug in and connect.</p>
+
+<details class="st"><summary>Self-test — Module 14</summary><div class="body">
+<ol>
+<li>Name the four lease-acquisition messages in order.<span class="a">DHCPDISCOVER, DHCPOFFER, DHCPREQUEST, DHCPACK.</span></li>
+<li>Which two messages renew a lease, and is the first unicast or broadcast?<span class="a">DHCPREQUEST then DHCPACK; the renewal DHCPREQUEST is unicast directly to the original server.</span></li>
+<li>Why must you exclude addresses before creating the pool?<span class="a">To stop the server leasing addresses already statically assigned to routers, servers and printers, which would cause duplicate-address errors.</span></li>
+<li>A PC on the R1 LAN can't get an address from a server on R2. What command fixes it and where?<span class="a">ip helper-address &lt;server IP&gt; on R1's LAN interface — the interface the clients are attached to.</span></li>
+<li>One command to show which client has which address?<span class="a">show ip dhcp binding.</span></li>
+<li>Which command makes a router interface act as a DHCP client?<span class="a">ip address dhcp in interface configuration mode.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m15" data-w="blue">
+<h2 data-sheet="15"><span class="num">15</span>NAT</h2>
+<p class="lead">Three types, six terms, five advantages and five disadvantages, and the configuration for each type. NAT is configured at the <b>border router</b>.</p>
+
+<h3>What NAT is</h3>
+<ul>
+  <li>A process to <b>translate network IPv4 addresses</b> — private to public.</li>
+  <li>Its purpose is to <b>conserve public IPv4 addresses</b>.</li>
+  <li>It is <b>configured at the border router</b> for translation.</li>
+</ul>
+
+<h4>The six NAT terms</h4>
+<div class="tw">
+<table><caption>NAT terminology</caption>
+<thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td class="m">Inside local</td><td>The <b>private</b> address of a device on the inside network — what the host is actually configured with.</td></tr>
+<tr><td class="m">Inside global</td><td>The <b>public</b> address that the inside device appears as to the outside world.</td></tr>
+<tr><td class="m">Outside local</td><td>The address of an outside device as it appears to the inside network.</td></tr>
+<tr><td class="m">Outside global</td><td>The real public address of the outside destination device.</td></tr>
+<tr><td class="m">Inside address</td><td>Any address on the inside (private) network.</td></tr>
+<tr><td class="m">Outside address</td><td>Any address on the outside (public) network.</td></tr>
+</tbody></table>
+</div>
+
+<h3>The three types of NAT</h3>
+<div class="tw">
+<table><caption>Static, dynamic and PAT</caption>
+<thead><tr><th>Type</th><th>Mapping</th><th>Key points</th></tr></thead>
+<tbody>
+<tr><td class="m">Static NAT</td><td><b>One-to-one</b></td><td>Configured by the administrator and <b>remains constant</b>. Used for servers that must be reachable from outside at a predictable address.</td></tr>
+<tr><td class="m">Dynamic NAT</td><td><b>One-to-one, from a pool</b></td><td>Uses a <b>pool</b> of public addresses assigned on a <b>first-come, first-served</b> basis. Requires <b>enough public addresses for the total number of simultaneous sessions</b>. A device <b>cannot reach external networks if no addresses remain</b> in the pool.</td></tr>
+<tr><td class="m">PAT (NAT overload)</td><td><b>Many-to-one</b></td><td>Maps <b>multiple private addresses to a single public address</b> (or a few). Uses <b>port numbers</b> to forward response packets to the correct internal device, and <b>validates that incoming packets were requested</b>.</td></tr>
+</tbody></table>
+</div>
+
+<h3>Advantages and disadvantages</h3>
+<div class="split">
+  <div class="card"><h5>Advantages</h5><p>Conserves the legally registered addressing scheme · Increases the flexibility of connections to the public network · Provides consistency for internal addressing schemes · Provides network security</p></div>
+  <div class="card"><h5>Disadvantages</h5><p>Performance is degraded · End-to-end functionality is degraded · End-to-end IP traceability is lost · Tunnelling is more complicated · Initiating TCP connections can be disrupted</p></div>
+</div>
+
+<h3>Configuration</h3>
+<h4>Static NAT</h4>
+<pre class="cli"><i>! 1. Map the inside local address to the inside global (public) address</i>
+<span class="p">R1(config)#</span> <b>ip nat inside source static</b> 172.16.16.1 64.100.50.1
+<i>! 2. Identify which interfaces are inside and which are outside</i>
+<span class="p">R1(config)#</span> <b>interface</b> g0/0
+<span class="p">R1(config-if)#</span> <b>ip nat inside</b>
+<span class="p">R1(config)#</span> <b>interface</b> s0/0/0
+<span class="p">R1(config-if)#</span> <b>ip nat outside</b></pre>
+
+<h4>Dynamic NAT</h4>
+<pre class="cli"><i>! 1. Define the pool of public addresses</i>
+<span class="p">R1(config)#</span> <b>ip nat pool</b> NAT-POOL 209.165.200.226 209.165.200.240 <b>netmask</b> 255.255.255.224
+<i>! 2. Standard ACL permitting the addresses to be translated</i>
+<span class="p">R1(config)#</span> <b>access-list</b> 1 <b>permit</b> 192.168.0.0 0.0.255.255
+<i>! 3. Bind the ACL to the pool</i>
+<span class="p">R1(config)#</span> <b>ip nat inside source list</b> 1 <b>pool</b> NAT-POOL
+<i>! 4. Identify inside and outside interfaces (as above)</i></pre>
+
+<h4>PAT — two forms</h4>
+<pre class="cli"><i>! Form 1 — overload an address POOL: identical to dynamic NAT plus "overload"</i>
+<span class="p">R1(config)#</span> <b>ip nat inside source list</b> 1 <b>pool</b> NAT-POOL <b>overload</b>
+
+<i>! Form 2 — overload a SINGLE address, the exit interface's own</i>
+<span class="p">R1(config)#</span> <b>access-list</b> 1 <b>permit</b> 192.168.0.0 0.0.255.255
+<span class="p">R1(config)#</span> <b>ip nat inside source list</b> 1 <b>interface</b> s0/0/0 <b>overload</b></pre>
+<div class="box key"><span class="tag">The one word that changes everything</span><p>Dynamic NAT and PAT-with-a-pool are the <b>same four commands</b>. The only difference is the keyword <b><code>overload</code></b> at the end of the <code>ip nat inside source list</code> statement. Without it, one inside host consumes one public address; with it, many share one.</p></div>
+
+<h4>Verification</h4>
+<div class="tw mono">
+<table><caption>NAT verification and clearing</caption>
+<thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>show ip nat translations</td><td>The active translation table.</td></tr>
+<tr><td>show ip nat translations verbose</td><td>Same, with timers and additional detail.</td></tr>
+<tr><td>show ip nat statistics</td><td>Hit and miss counts, active translations, configured interfaces.</td></tr>
+<tr><td>show run | include nat</td><td>Quickly confirm whether any NAT commands exist at all.</td></tr>
+<tr><td>clear ip nat statistics</td><td>Reset the counters.</td></tr>
+<tr><td>clear ip nat translations *</td><td>Clear all dynamic translations.</td></tr>
+</tbody></table>
+</div>
+<div class="box exam"><span class="tag">Exam focus — the static NAT lab's lesson</span><p>In lab 6.4.5, before NAT is configured, packets from outside to the server's <b>private</b> address 172.16.16.1 <b>never leave the internet cloud</b> — private addresses are not routable on the internet. After <code>ip nat inside source static 172.16.16.1 64.100.50.1</code>, outside hosts reach the server at its <b>public</b> address instead. A ping to the router's own public interface succeeded even before NAT, because that address was already public — don't take that as evidence NAT was working.</p></div>
+
+<details class="st"><summary>Self-test — Module 15</summary><div class="body">
+<ol>
+<li>Which NAT type gives a one-to-one permanent mapping, and which gives many-to-one?<span class="a">Static NAT is one-to-one and permanent; PAT (NAT overload) is many-to-one.</span></li>
+<li>What happens under dynamic NAT when the pool is exhausted?<span class="a">Further inside devices cannot communicate with any external network until an address is released.</span></li>
+<li>What does PAT use to return responses to the right internal host?<span class="a">Port numbers — it also validates that incoming packets were requested.</span></li>
+<li>Your host is 10.1.1.5 and appears outside as 203.0.113.9. Name both terms.<span class="a">10.1.1.5 is the inside local address; 203.0.113.9 is the inside global address.</span></li>
+<li>Turn a dynamic NAT config into PAT with the fewest keystrokes.<span class="a">Add the keyword overload to the end of the ip nat inside source list statement.</span></li>
+<li>Two disadvantages of NAT?<span class="a">Any two of: degraded performance, degraded end-to-end functionality, lost end-to-end IP traceability, more complicated tunnelling, disrupted TCP connection initiation.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m16" data-w="blue">
+<h2 data-sheet="16"><span class="num">16</span>VLANs</h2>
+<p class="lead">A VLAN is a <b>logical partition of a Layer 2 network</b>. Segmentation, trunking, the four VLAN types, and the three inter-VLAN routing options.</p>
+
+<h3>Definition and behaviour</h3>
+<ul>
+  <li>VLANs <b>virtually segment LAN devices regardless of the physical location</b> of the user or device — IT staff on the first, second and third floors can all be on one VLAN while HR and Sales are on others.</li>
+  <li>Multiple partitions can be created and <b>multiple VLANs can co-exist</b>. Virtual partitioning takes place <b>inside a Layer 2 device, usually a switch</b>.</li>
+  <li><b>Each VLAN is a broadcast domain</b>, and one VLAN can <b>span multiple physical LAN segments</b>.</li>
+  <li>Hosts on the same VLAN are <b>unaware of the VLAN's existence</b>.</li>
+  <li>VLANs are <b>mutually isolated</b> — packets can pass between VLANs <b>only via a Layer 3 device</b> such as a router.</li>
+</ul>
+
+<h3>Configuring a VLAN and assigning access ports</h3>
+<pre class="cli"><span class="p">Switch(config)#</span> <b>vlan</b> 2
+<span class="p">Switch(config-vlan)#</span> <b>name</b> IT
+<span class="p">Switch(config)#</span> <b>interface range</b> Fa0/1 - Fa0/10
+<span class="p">Switch(config-if)#</span> <b>switchport mode access</b>
+<span class="p">Switch(config-if)#</span> <b>switchport access vlan</b> 2</pre>
+
+<h3>Trunks</h3>
+<ul>
+  <li>A <b>VLAN trunk</b> is a <b>point-to-point link that carries more than one VLAN</b>.</li>
+  <li>Established <b>between switches</b> to support communication within VLANs that span switches.</li>
+  <li><b>Trunk ports are not associated with any VLAN.</b></li>
+</ul>
+<pre class="cli"><span class="p">Switch(config)#</span> <b>interface</b> GigabitEthernet0/1
+<span class="p">Switch(config-if)#</span> <b>switchport mode trunk</b>
+<span class="p">Switch(config-if)#</span> <b>switchport trunk native vlan</b> 99
+<span class="p">Switch(config-if)#</span> <b>switchport trunk allowed vlan</b> 10,20,30,99</pre>
+
+<h3>The four VLAN types</h3>
+<div class="tw">
+<table><caption>VLAN types</caption>
+<thead><tr><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td class="m">Default VLAN</td><td><b>VLAN 1.</b> All switch ports are members of VLAN 1 by default.</td></tr>
+<tr><td class="m">Native VLAN</td><td>Carries all <b>untagged</b> traffic — traffic that does not originate from a VLAN port, e.g. from switches. <b>VLAN 1 by default.</b></td></tr>
+<tr><td class="m">Data VLAN</td><td>Created for specific groups of users or devices; carries <b>user-generated traffic</b>.</td></tr>
+<tr><td class="m">Management VLAN</td><td>Carries <b>network management traffic</b> — SSH, SNMP, Syslog and more. VLAN 1 is the default used for management.</td></tr>
+</tbody></table>
+</div>
+
+<h3>VLAN ranges</h3>
+<div class="tw">
+<table><caption>Normal vs extended range</caption>
+<thead><tr><th>Range</th><th>IDs</th><th>Stored in</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="m">Normal range</td><td class="m">1 – 1005</td><td><code>vlan.dat</code> in <b>flash</b></td><td>IDs <b>1002–1005 are reserved</b> for legacy Token Ring and FDDI VLANs — automatically created and <b>cannot be removed</b>.</td></tr>
+<tr><td class="m">Extended range</td><td class="m">1006 – 4096</td><td>The <b>running configuration</b> (NVRAM)</td><td><b>VTP does not learn extended VLANs.</b></td></tr>
+</tbody></table>
+</div>
+
+<h3>Inter-VLAN routing</h3>
+<p>Layer 2 switches <b>cannot forward traffic between VLANs without the assistance of a router</b>. Inter-VLAN routing forwards traffic from one VLAN to another. <b>Three options:</b></p>
+<div class="split">
+  <div class="card"><h5>Legacy inter-VLAN routing</h5><p>One <b>physical router interface per VLAN</b>. Doesn't scale — a router runs out of interfaces quickly.</p></div>
+  <div class="card"><h5>Router-on-a-stick</h5><p>One physical interface carries all VLANs over a <b>trunk</b>, divided into <b>sub-interfaces</b> — one per VLAN, each with its own IP address acting as that VLAN's default gateway.</p></div>
+  <div class="card"><h5>Layer 3 switching with SVIs</h5><p>The switch itself routes, using <b>switched virtual interfaces</b>. Fastest, no external router required.</p></div>
+</div>
+
+<h4>Router-on-a-stick configuration</h4>
+<pre class="cli"><i>! On the SWITCH: the link to the router must be a trunk</i>
+<span class="p">S1(config)#</span> <b>interface</b> Gi0/1
+<span class="p">S1(config-if)#</span> <b>switchport mode trunk</b>
+
+<i>! On the ROUTER: one sub-interface per VLAN, each dot1Q-tagged</i>
+<span class="p">B1(config)#</span> <b>interface</b> Gi0/1
+<span class="p">B1(config-if)#</span> <b>no shutdown</b>          <i>! the PHYSICAL interface needs no IP address</i>
+<span class="p">B1(config)#</span> <b>interface</b> Gi0/1<b>.10</b>
+<span class="p">B1(config-subif)#</span> <b>encapsulation dot1Q</b> 10
+<span class="p">B1(config-subif)#</span> <b>ip address</b> 172.16.10.254 255.255.255.0
+<span class="p">B1(config)#</span> <b>interface</b> Gi0/1<b>.20</b>
+<span class="p">B1(config-subif)#</span> <b>encapsulation dot1Q</b> 20
+<span class="p">B1(config-subif)#</span> <b>ip address</b> 172.16.20.254 255.255.255.0</pre>
+<div class="box trap"><span class="tag">Classic trap</span><p>Three things students forget on router-on-a-stick: the <b>physical</b> interface must be brought up with <code>no shutdown</code> (but gets <b>no IP address</b>); each sub-interface needs <code>encapsulation dot1Q <i>vlan-id</i></code> <b>before</b> its IP address; and the switch-side port must be <b>a trunk, not an access port</b>. The sub-interface address becomes the <b>PCs' default gateway</b>.</p></div>
+
+<details class="st"><summary>Self-test — Module 16</summary><div class="body">
+<ol>
+<li>How many broadcast domains do five VLANs create?<span class="a">Five — each VLAN is its own broadcast domain.</span></li>
+<li>What is a trunk, and which VLAN is it associated with?<span class="a">A point-to-point link carrying more than one VLAN; trunk ports are not associated with any VLAN.</span></li>
+<li>Which VLAN carries untagged traffic, and what is its default ID?<span class="a">The native VLAN; VLAN 1 by default.</span></li>
+<li>Where are normal-range VLANs stored, and extended-range?<span class="a">Normal range in vlan.dat in flash; extended range in the running configuration.</span></li>
+<li>Which VLAN IDs cannot be removed and why?<span class="a">1002–1005, reserved for legacy Token Ring and FDDI and created automatically.</span></li>
+<li>Name the three inter-VLAN routing options.<span class="a">Legacy inter-VLAN routing, router-on-a-stick, and Layer 3 switching using SVIs.</span></li>
+<li>Does the physical interface get an IP address in router-on-a-stick?<span class="a">No — only the sub-interfaces do. The physical interface just needs no shutdown.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m17" data-w="blue">
+<h2 data-sheet="17"><span class="num">17</span>Routing Concepts</h2>
+<p class="lead">Static versus dynamic, what a routing table entry actually contains, and the two tie-breakers: administrative distance and metric.</p>
+
+<h3>Static routing</h3>
+<ul>
+  <li>Must be <b>configured manually</b>.</li>
+  <li>Must be <b>adjusted manually</b> by the administrator when the topology changes.</li>
+  <li>Good for <b>small, non-redundant networks</b>.</li>
+  <li>Often used <b>alongside a dynamic routing protocol</b> for configuring a <b>default route</b>.</li>
+</ul>
+
+<h3>Dynamic routing</h3>
+<p>Dynamic routes automatically:</p>
+<ol>
+  <li><b>Discover remote networks</b></li>
+  <li><b>Maintain up-to-date routing information</b></li>
+  <li><b>Choose the best path</b> to the destination</li>
+  <li><b>Find new best paths</b> when there is a topology change</li>
+</ol>
+<p>Dynamic routing can also <b>share static default routes</b> with other routers. It is the best choice for <b>large networks</b>, and it helps the administrator by <b>providing redundant paths</b> and <b>automatically implementing the alternate path when a link goes down</b>.</p>
+
+<h4>The three components of a dynamic routing protocol</h4>
+<div class="tw">
+<table><caption>What every routing protocol is made of</caption>
+<thead><tr><th>Component</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td class="m">Routing protocol messages</td><td>Discover neighbouring routers, exchange routing information, and maintain accurate information about the network.</td></tr>
+<tr><td class="m">Algorithms</td><td>Facilitate learning routing information and <b>best path determination</b>.</td></tr>
+<tr><td class="m">Data structures</td><td>Routing tables or databases kept <b>in RAM</b>.</td></tr>
+</tbody></table>
+</div>
+
+<h4>The protocols by name</h4>
+<ul>
+  <li><b>RIP</b> → updated to <b>RIPv2</b> to accommodate network growth. <b>RIPv2 does not scale</b> to current larger implementations.</li>
+  <li><b>OSPF</b> — Open Shortest Path First.</li>
+  <li><b>IS-IS</b> — Intermediate System-to-Intermediate System.</li>
+  <li><b>EIGRP</b> — Enhanced IGRP.</li>
+  <li><b>BGP</b> — Border Gateway Protocol, used <b>between internet service providers</b>.</li>
+</ul>
+
+<h3>Routing table entries — the fields</h3>
+<div class="tw">
+<table><caption>What each field tells you</caption>
+<thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td class="m">Route source</td><td><b>How the route was learned</b> — C/L directly connected, S static, O OSPF, D EIGRP, R RIP.</td></tr>
+<tr><td class="m">Destination network</td><td>The network address and prefix.</td></tr>
+<tr><td class="m">Administrative distance</td><td><b>Trustworthiness</b> of the route source. <b>Lower is more trustworthy.</b></td></tr>
+<tr><td class="m">Metric</td><td>Value assigned to reach the network. <b>Lower is the preferred route.</b></td></tr>
+<tr><td class="m">Next hop</td><td>The IP address of the <b>next router</b> to forward the packet to.</td></tr>
+<tr><td class="m">Outgoing interface</td><td>The <b>exit interface</b> used to forward the packet.</td></tr>
+<tr><td class="m">Route timestamp</td><td>How long ago the route was learned or updated.</td></tr>
+</tbody></table>
+</div>
+<div class="box exam"><span class="tag">Exam focus — three different tie-breakers, in order</span>
+<p><b>1. Longest prefix match</b> decides <i>which route entry applies</i> to a packet — the most matching far-left bits always wins, regardless of anything else.</p>
+<p><b>2. Administrative distance</b> decides <i>which source's route gets installed</i> when two protocols learn the same network. Lower AD wins — a static route (AD 1) beats RIP (AD 120).</p>
+<p><b>3. Metric</b> decides between <i>two routes from the same protocol</i>. Lower metric wins.</p></div>
+
+<h3>IPv6 routing tables</h3>
+<p>Displayed with <code>show ipv6 route</code>. An IPv6 routing table includes directly connected, static and dynamically learned routes, with the same field set: route source (<b>C</b> directly connected, <b>L</b> local, <b>S</b> static, <b>R</b> RIP, <b>O</b> OSPF, <b>D</b> EIGRP), administrative distance, metric, next hop and outgoing interface.</p>
+
+<details class="st"><summary>Self-test — Module 17</summary><div class="body">
+<ol>
+<li>Four things dynamic routing does automatically?<span class="a">Discovers remote networks, maintains up-to-date information, chooses the best path, and finds a new best path after a topology change.</span></li>
+<li>Where are routing data structures kept?<span class="a">In RAM.</span></li>
+<li>Is a lower administrative distance better or worse? A lower metric?<span class="a">Lower is better in both cases — lower AD is more trustworthy, lower metric is preferred.</span></li>
+<li>Which protocol runs between ISPs?<span class="a">BGP.</span></li>
+<li>Two routes to the same network, one static and one from RIP. Which is installed, and why?<span class="a">The static route — administrative distance 1 beats RIP's 120.</span></li>
+<li>When is static routing the right choice?<span class="a">Small non-redundant networks, and for configuring a default route alongside a dynamic protocol.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m18" data-w="blue">
+<h2 data-sheet="18"><span class="num">18</span>RIPv2</h2>
+<p class="lead">The four facts about RIPv2, and the six commands that appear in both the lab and the case study.</p>
+
+<h3>The four facts</h3>
+<div class="tw">
+<table><caption>RIPv2 at a glance — expect all four to be asked</caption>
+<thead><tr><th>Property</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Protocol type</td><td><b>Distance vector</b></td></tr>
+<tr><td>Metric</td><td><b>Hop count</b></td></tr>
+<tr><td>Administrative distance</td><td><b>120</b></td></tr>
+<tr><td>Update interval</td><td>Every <b>30 seconds</b></td></tr>
+</tbody></table>
+</div>
+<p><b>RIPv1 is a classful routing protocol</b> for IPv4; RIPv2 is classless and supports VLSM — which is why you must always enable version 2 and disable auto-summary.</p>
+
+<h3>Configuration, command by command</h3>
+<pre class="cli"><span class="p">R1(config)#</span> <b>router rip</b>                   <i>! enter RIP config mode (no router rip disables it)</i>
+<span class="p">R1(config-router)#</span> <b>version 2</b>            <i>! enable RIPv2</i>
+<span class="p">R1(config-router)#</span> <b>no auto-summary</b>      <i>! stop summarising at classful boundaries</i>
+<span class="p">R1(config-router)#</span> <b>network</b> 172.16.10.0     <i>! advertise each connected network</i>
+<span class="p">R1(config-router)#</span> <b>network</b> 10.0.0.0
+<span class="p">R1(config-router)#</span> <b>passive-interface</b> Gi0/0  <i>! stop updates out a LAN-facing interface</i>
+<span class="p">R1(config-router)#</span> <b>default-information originate</b>  <i>! share the default route into RIP</i></pre>
+<div class="tw">
+<table><caption>What each command does</caption>
+<thead><tr><th>Command</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td class="m">router rip</td><td>Enables the RIP process (RIPv1 by default). <code>no router rip</code> disables RIP.</td></tr>
+<tr><td class="m">version 2</td><td>Enables RIPv2. Verify with <code>show ip protocols</code>.</td></tr>
+<tr><td class="m">network <i>address</i></td><td>Enables RIP on <b>all interfaces belonging to that network</b>, and <b>advertises the network</b> in RIP updates sent every 30 seconds.</td></tr>
+<tr><td class="m">no auto-summary</td><td>RIPv2 <b>automatically summarises at major network boundaries</b>; this disables it. Verify with <code>show ip protocols</code>.</td></tr>
+<tr><td class="m">passive-interface <i>intf</i></td><td><b>Stops routing updates out that interface</b> but <b>still advertises that network</b> to other routers. Needed because updates go out all RIP-enabled interfaces by default, and sending them to LANs <b>wastes bandwidth, wastes resources and is a security risk</b>.</td></tr>
+<tr><td class="m">default-information originate</td><td>Instructs the router to <b>send its default static route information in RIP updates</b> — how you propagate a default route to the rest of the RIP domain.</td></tr>
+</tbody></table>
+</div>
+
+<h4>Verification</h4>
+<div class="tw mono">
+<table><caption>Two commands</caption>
+<thead><tr><th>Command</th><th>Shows</th></tr></thead>
+<tbody>
+<tr><td>show ip protocols</td><td>The IPv4 routing protocols configured on the router — version, auto-summary state, networks advertised, passive interfaces.</td></tr>
+<tr><td>show ip route</td><td>The RIP routes actually installed in the routing table, marked <b>R</b>.</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">Best route = longest match</span><p>Worth repeating here because it is the routing table's fundamental rule: the best match is the route with the <b>most far-left matching bits</b> against the destination IPv4 address. The route with the <b>longest match is always preferred</b>.</p></div>
+
+<details class="st"><summary>Self-test — Module 18</summary><div class="body">
+<ol>
+<li>RIPv2's metric, administrative distance and update interval?<span class="a">Hop count; AD 120; updates every 30 seconds.</span></li>
+<li>Why must you type <code>no auto-summary</code> in a VLSM design?<span class="a">RIPv2 automatically summarises at classful boundaries, which destroys VLSM subnet information.</span></li>
+<li>What does <code>passive-interface</code> stop, and what does it still do?<span class="a">It stops routing updates being sent out that interface, but the network is still advertised to other routers.</span></li>
+<li>You have a default static route on HQ. How do the other RIP routers learn it?<span class="a">default-information originate on HQ.</span></li>
+<li>Which command confirms RIPv2 is running with auto-summary off?<span class="a">show ip protocols.</span></li>
+<li>Is RIPv1 classful or classless?<span class="a">Classful — which is why it cannot support VLSM.</span></li>
+</ol>
+</div></details>
+</section>
+<section id="m19" data-w="brown">
+<h2 data-sheet="19"><span class="num">19</span>Small Networks, Security &amp; Troubleshooting</h2>
+<p class="lead">Device selection, scaling, verification tools, the attack taxonomy and the six-step troubleshooting method. This module is where the theory test harvests easy marks.</p>
+
+<h3>Designing a small network</h3>
+<p>Most businesses are small, so most business networks are small. A small network design is usually simple, typically with a <b>single WAN connection</b> provided by DSL, cable or Ethernet. Large networks need an IT department; small networks are managed by a local technician or a contracted professional.</p>
+<h4>Four device selection factors</h4>
+<ol><li><b>Cost</b></li><li><b>Speed and types of ports/interfaces</b></li><li><b>Expandability</b></li><li><b>Operating system features and services</b></li></ol>
+<p><b>IP addressing:</b> create a scheme and use it. All hosts and devices within an internetwork must have a <b>unique address</b>.</p>
+
+<h3>Applications, protocols and real-time traffic</h3>
+<div class="split">
+  <div class="card"><h5>Network applications</h5><p>Applications that <b>implement application layer protocols</b> and can communicate directly with the lower layers of the protocol stack.</p></div>
+  <div class="card"><h5>Application layer services</h5><p>For applications that are <b>not network-aware</b> — programs that interface with the network and <b>prepare the data for transfer</b>.</p></div>
+</div>
+<p><b>Common protocols in a small network:</b> Telnet and <b>SSH</b> for remote access (SSH being the secure choice); HTTP/HTTPS for web; SMTP to send mail with POP3 or IMAP to retrieve it; FTP and <b>SFTP</b> for file transfer; DHCP for IP configuration; DNS for name resolution. A single server can provide <b>multiple services</b> — it might be an email, FTP and SSH server at once.</p>
+<h4>Four real-time considerations</h4>
+<ul>
+  <li><b>Infrastructure</b> — does it have the capacity and capability to support real-time applications?</li>
+  <li><b>VoIP</b> — typically <b>less expensive</b> than IP telephony, but at the cost of <b>quality and features</b>.</li>
+  <li><b>IP telephony</b> — employs <b>dedicated servers for call control and signalling</b>.</li>
+  <li><b>Real-time applications</b> — the network must support <b>QoS</b> to minimise latency. <b>RTP</b> and <b>RTCP</b> are the two protocols that support real-time applications.</li>
+</ul>
+
+<h3>Scaling up — four required elements</h3>
+<div class="tw">
+<table><caption>What you need before you grow a network</caption>
+<thead><tr><th>Element</th><th>Contents</th></tr></thead>
+<tbody>
+<tr><td class="m">Network documentation</td><td>Physical and logical topology.</td></tr>
+<tr><td class="m">Device inventory</td><td>List of devices that use or comprise the network.</td></tr>
+<tr><td class="m">Budget</td><td>Itemised IT budget, including the fiscal year equipment purchasing budget.</td></tr>
+<tr><td class="m">Traffic analysis</td><td>Protocols, applications and services and their respective traffic requirements, documented.</td></tr>
+</tbody></table>
+</div>
+<h4>Protocol analysis — two rules for capturing</h4>
+<ul>
+  <li><b>Capture traffic during peak utilisation times</b> to get a good representation of the different traffic types.</li>
+  <li><b>Perform the capture on different network segments and devices</b>, since some traffic is local to a particular segment.</li>
+</ul>
+<p>Information is evaluated based on the <b>source and destination of the traffic</b> and the <b>type of traffic</b> being sent.</p>
+<p><b>Employee utilisation snapshots</b> capture: OS and OS version, CPU utilisation, RAM utilisation, drive utilisation, non-network applications, network applications. Taken over time they identify <b>evolving protocol requirements and associated traffic flows</b>.</p>
+
+<h3>Network baseline</h3>
+<p>One of the most effective tools for monitoring and troubleshooting performance. A simple method: <b>copy and paste the results of ping, trace or other relevant commands into a text file</b>, time-stamp it with the date, and save it into an archive for later retrieval and comparison. Consider <b>error messages</b> and <b>host-to-host response times</b>.</p>
+
+<h3>Host and IOS verification commands</h3>
+<div class="tw mono">
+<table><caption>Windows host commands</caption>
+<thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>ipconfig</td><td>The four important settings: address, mask, router (gateway), DNS.</td></tr>
+<tr><td>ipconfig /all</td><td>Adds the <b>MAC address</b> and full Layer 3 detail.</td></tr>
+<tr><td>ipconfig /release</td><td>Releases the DHCP lease.</td></tr>
+<tr><td>ipconfig /renew</td><td>Renews the DHCP lease.</td></tr>
+<tr><td>ipconfig /displaydns</td><td>Displays all <b>cached DNS entries</b> — the DNS Client service stores previously resolved names in memory to optimise resolution.</td></tr>
+<tr><td>route print / netstat -r</td><td>The host routing table.</td></tr>
+<tr><td>netstat</td><td>Active TCP connections.</td></tr>
+<tr><td>arp -a</td><td>The ARP table.</td></tr>
+<tr><td>nslookup</td><td>Manually query DNS.</td></tr>
+<tr><td>tracert</td><td>Trace the path. <b>Ctrl-C</b> to interrupt.</td></tr>
+</tbody></table>
+</div>
+<p><b>macOS:</b> <code>ifconfig</code> verifies the interface IP configuration; also <code>networksetup -listallnetworkservices</code> and <code>networksetup -getinfo &lt;network service&gt;</code>. In the GUI: <b>Network Preferences &gt; Advanced</b>.</p>
+<div class="tw mono">
+<table><caption>IOS show commands</caption>
+<thead><tr><th>Command</th><th>Verifies</th></tr></thead>
+<tbody>
+<tr><td>show running-config</td><td>The current configuration and settings.</td></tr>
+<tr><td>show startup-config</td><td>The contents of <b>NVRAM</b>.</td></tr>
+<tr><td>show interfaces</td><td>Interface status and any error messages.</td></tr>
+<tr><td>show ip interface</td><td>Layer 3 information of an interface.</td></tr>
+<tr><td>show ip interface brief</td><td>An abbreviated <b>summary of key information for all interfaces</b> — one of the most frequently used commands.</td></tr>
+<tr><td>show arp</td><td>The list of known hosts on the local Ethernet LANs.</td></tr>
+<tr><td>show ip route</td><td>Layer 3 routing information.</td></tr>
+<tr><td>show protocols</td><td>Which protocols are operational.</td></tr>
+<tr><td>show version</td><td>Memory, interfaces and licences of the device.</td></tr>
+<tr><td>show flash</td><td>Files stored in flash, including the IOS image.</td></tr>
+<tr><td>show cdp neighbors</td><td>CDP neighbours — see below.</td></tr>
+<tr><td>show cdp neighbors detail</td><td>Reveals the <b>IP address</b> of a neighbouring device.</td></tr>
+</tbody></table>
+</div>
+<h4>What CDP reports about each neighbour</h4>
+<ul>
+  <li><b>Device identifiers</b> — the configured host name of the switch, router or other device.</li>
+  <li><b>Address list</b> — up to one network layer address for each protocol supported.</li>
+  <li><b>Port identifier</b> — the name of the local and remote port, e.g. <code>FastEthernet 0/0</code>.</li>
+  <li><b>Capabilities list</b> — whether the device is a Layer 2 or Layer 3 switch.</li>
+  <li><b>Platform</b> — the hardware platform of the device.</li>
+</ul>
+
+<h3>Network security</h3>
+<h4>Three types of malware</h4>
+<div class="tw">
+<table><caption>Virus vs worm vs Trojan</caption>
+<thead><tr><th>Type</th><th>Distinguishing behaviour</th></tr></thead>
+<tbody>
+<tr><td class="m">Virus</td><td>Propagates by <b>inserting a copy of itself into another program</b>, becoming part of it. Spreads from computer to computer, leaving infections as it travels.</td></tr>
+<tr><td class="m">Worm</td><td>Replicates functional copies of itself and causes the same kind of damage, but is <b>standalone software</b> — it does <b>not require a host program or human help</b> to propagate.</td></tr>
+<tr><td class="m">Trojan horse</td><td>Harmful software that <b>looks legitimate</b>. Does <b>not reproduce by infecting other files</b>; must spread through <b>user interaction</b> — opening an email attachment, downloading and running a file.</td></tr>
+</tbody></table>
+</div>
+<h4>Three categories of network attack</h4>
+<div class="tw">
+<table><caption>Attack taxonomy</caption>
+<thead><tr><th>Category</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="m">Reconnaissance</td><td>The <b>discovery and mapping</b> of systems, services or vulnerabilities. Threat actors use internet tools such as <b>nslookup and whois</b> to determine the IP address space assigned to a corporation, then <b>ping</b> the publicly available addresses to find active ones.</td></tr>
+<tr><td class="m">Access</td><td>The <b>unauthorised manipulation of data, system access or user privileges</b>. Exploits known vulnerabilities in authentication services, FTP services and web services.</td></tr>
+<tr><td class="m">Denial of service</td><td>The <b>disabling or corruption</b> of networks, systems or services.</td></tr>
+</tbody></table>
+</div>
+<h4>The four access attacks</h4>
+<div class="tw">
+<table><caption>Access attack types</caption>
+<thead><tr><th>Attack</th><th>How it works</th></tr></thead>
+<tbody>
+<tr><td class="m">Password attacks</td><td>Implemented using <b>brute force, Trojan horse and packet sniffers</b>.</td></tr>
+<tr><td class="m">Trust exploitation</td><td>A threat actor uses <b>unauthorised privileges</b> to gain access to a system, possibly compromising the target.</td></tr>
+<tr><td class="m">Port redirection</td><td>A threat actor uses a <b>compromised system as a base for attacks against other targets</b> — e.g. using SSH (port 22) to reach compromised host A, which host B trusts, then Telnet (port 23) from A to B.</td></tr>
+<tr><td class="m">Man-in-the-middle</td><td>The threat actor is <b>positioned between two legitimate entities</b> to read or modify the data passing between them.</td></tr>
+</tbody></table>
+</div>
+<h4>DoS and DDoS</h4>
+<p>DoS attacks are the most publicised form and among the most difficult to eliminate. They <b>prevent authorised people from using a service by consuming system resources</b>. They are relatively simple to conduct even by an unskilled threat actor, and interrupt communication causing significant loss of time and money.</p>
+<p>A <b>DDoS</b> is similar but <b>originates from multiple, coordinated sources</b>. A threat actor builds a network of infected hosts called <b>zombies</b>; a network of zombies is a <b>botnet</b>; the actor uses a <b>command and control (CnC)</b> program to instruct the botnet to carry out the attack.</p>
+
+<h4>Mitigation</h4>
+<ul>
+  <li><b>Defence in depth</b> (a layered approach) — a combination of networking devices and services working in tandem. Devices and services include a <b>VPN</b>, <b>ASA firewall</b>, <b>IPS</b>, <b>ESA/WSA</b> and an <b>AAA server</b>.</li>
+  <li><b>Upgrade, update and patch</b> — keep current with the latest antivirus versions. <b>The most effective way to mitigate a worm attack is to download security updates from the OS vendor and patch all vulnerable systems.</b> Make end systems download updates automatically.</li>
+  <li><b>AAA</b> ("triple A") — the primary framework for access control on network devices. <b>Authentication</b>: who is permitted to access the network. <b>Authorisation</b>: what actions they may perform. <b>Accounting</b>: a record of what was done. Like a credit card — it identifies who can use it, how much they can spend, and keeps account of what was bought.</li>
+</ul>
+
+<h3>The six troubleshooting steps</h3>
+<ol class="steps">
+<li><b>Identify the problem.</b> Tools can be used, but <b>a conversation with the user is often very helpful</b>.</li>
+<li><b>Establish a theory of probable causes.</b> This step often yields more than a few probable causes.</li>
+<li><b>Test the theory to determine cause.</b> A technician may apply a <b>quick fix</b> to test; if that doesn't correct it, research further to establish the exact cause.</li>
+<li><b>Establish a plan of action and implement the solution.</b></li>
+<li><b>Verify the solution and implement preventive measures.</b> Verify <b>full</b> functionality.</li>
+<li><b>Document findings, actions and outcomes.</b> Very important for future reference.</li>
+</ol>
+
+<details class="st"><summary>Self-test — Module 19</summary><div class="body">
+<ol>
+<li>Which malware needs no host program and no human help to spread?<span class="a">A worm.</span></li>
+<li>Which malware must spread through user interaction and does not infect other files?<span class="a">A Trojan horse.</span></li>
+<li>An attacker uses nslookup and whois against a company. Which attack category is this?<span class="a">Reconnaissance.</span></li>
+<li>What is a botnet, and what instructs it?<span class="a">A network of infected hosts (zombies), instructed by a command and control (CnC) program.</span></li>
+<li>Most effective way to mitigate a worm attack?<span class="a">Download security updates from the OS vendor and patch all vulnerable systems.</span></li>
+<li>Expand AAA and give the credit card analogy.<span class="a">Authentication, authorisation, accounting — who can use the card, how much they may spend, and a record of what they bought.</span></li>
+<li>Give the six troubleshooting steps in order.<span class="a">Identify the problem; establish a theory of probable causes; test the theory; establish a plan and implement; verify and implement preventive measures; document findings, actions and outcomes.</span></li>
+<li>Two rules for capturing traffic for protocol analysis?<span class="a">Capture during peak utilisation times, and capture on different segments and devices.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m20" data-w="brown">
+<h2 data-sheet="20"><span class="num">20</span>IOS Configuration Essentials</h2>
+<p class="lead">The initial-settings sequence from the switch and router labs, reproduced in full. In the practical test this is muscle memory — and the order matters.</p>
+
+<h3>The command modes</h3>
+<div class="tw mono">
+<table><caption>Navigating the CLI</caption>
+<thead><tr><th>Prompt</th><th>Mode</th><th>Entered with</th></tr></thead>
+<tbody>
+<tr><td>Switch&gt;</td><td>User EXEC</td><td>(default on login)</td></tr>
+<tr><td>Switch#</td><td><b>Privileged EXEC</b></td><td><code>enable</code></td></tr>
+<tr><td>Switch(config)#</td><td>Global configuration</td><td><code>configure terminal</code> (<code>config t</code>)</td></tr>
+<tr><td>Switch(config-line)#</td><td>Line configuration</td><td><code>line console 0</code> / <code>line vty 0 15</code></td></tr>
+<tr><td>Switch(config-if)#</td><td>Interface configuration</td><td><code>interface</code> <i>type/number</i></td></tr>
+<tr><td>Switch(config-vlan)#</td><td>VLAN configuration</td><td><code>vlan</code> <i>id</i></td></tr>
+<tr><td>Router(dhcp-config)#</td><td>DHCP pool configuration</td><td><code>ip dhcp pool</code> <i>name</i></td></tr>
+<tr><td>Router(config-subif)#</td><td>Sub-interface configuration</td><td><code>interface</code> <i>type/number.subid</i></td></tr>
+<tr><td>Router(config-router)#</td><td>Router (protocol) configuration</td><td><code>router rip</code></td></tr>
+</tbody></table>
+</div>
+<p><b>All switch commands are accessible from privileged EXEC mode.</b> Because many privileged commands configure operating parameters, privileged access <b>should be password-protected</b>. The privileged EXEC command set includes everything in user EXEC mode plus <code>configure</code>, through which the remaining modes are reached.</p>
+
+<h3>The full initial configuration</h3>
+<pre class="cli"><span class="p">Switch&gt;</span> <b>enable</b>
+<span class="p">Switch#</span> <b>configure terminal</b>
+<span class="p">Switch(config)#</span> <b>hostname</b> S1
+
+<i>! Secure the console line — the login command is what ENFORCES the password</i>
+<span class="p">S1(config)#</span> <b>line console 0</b>
+<span class="p">S1(config-line)#</span> <b>password</b> letmein
+<span class="p">S1(config-line)#</span> <b>login</b>
+<span class="p">S1(config-line)#</span> <b>exit</b>
+
+<i>! Secure privileged EXEC mode. "enable secret" is encrypted and OVERRIDES "enable password"</i>
+<span class="p">S1(config)#</span> <b>enable password</b> c1$c0
+<span class="p">S1(config)#</span> <b>enable secret</b> itsasecret
+
+<i>! Encrypt the remaining plain-text passwords</i>
+<span class="p">S1(config)#</span> <b>service password-encryption</b>
+
+<i>! Message of the day — shown BEFORE login, to warn unauthorised users</i>
+<span class="p">S1(config)#</span> <b>banner motd</b> "This is a secure system. Authorized Access Only!"
+<span class="p">S1(config)#</span> <b>exit</b>
+
+<i>! Save running-config (RAM) to startup-config (NVRAM)</i>
+<span class="p">S1#</span> <b>copy running-config startup-config</b>
+Destination filename [startup-config]? <i>[Enter]</i>
+Building configuration...
+[OK]</pre>
+
+<h4>The lab questions you must be able to answer</h4>
+<div class="tw">
+<table><caption>Answers to the Packet Tracer question prompts</caption>
+<thead><tr><th>Question</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Why is the <code>login</code> command required?</td><td>Without it the console password is configured but <b>not enforced</b> — you would not be prompted for it.</td></tr>
+<tr><td>Why is <code>startup-config is not present</code>?</td><td>The configuration has <b>never been saved to NVRAM</b>. NVRAM is empty on a new or erased device.</td></tr>
+<tr><td>Which command displays the contents of NVRAM?</td><td><code>show startup-config</code>.</td></tr>
+<tr><td>Why is the <code>enable secret</code> password displayed differently?</td><td>It is stored <b>hashed/encrypted</b> in the configuration file, not in plain text.</td></tr>
+<tr><td>Why does <code>enable secret</code> work and <code>enable password</code> no longer?</td><td><b>enable secret overrides enable password.</b> When both are configured you must enter the secret.</td></tr>
+<tr><td>After <code>service password-encryption</code>, are new passwords plain text?</td><td><b>No — encrypted.</b> The command applies to passwords configured afterwards as well as existing ones.</td></tr>
+<tr><td>When is the MOTD banner displayed?</td><td><b>Before</b> the login prompt, whenever anyone logs into the device.</td></tr>
+<tr><td>Why should every device have a MOTD banner?</td><td>To <b>warn unauthorised users that access is prohibited</b> — it provides legal notice.</td></tr>
+<tr><td>Shortest unambiguous form of <code>copy running-config startup-config</code>?</td><td><code>copy run start</code>.</td></tr>
+<tr><td>How would you guess which flash file is the IOS image?</td><td>It is <b>by far the largest file</b>, and its name contains the platform and version with a <code>.bin</code> extension.</td></tr>
+</tbody></table>
+</div>
+<div class="box trap"><span class="tag">Classic trap — three password commands, three jobs</span>
+<p><code>line console 0</code> + <code>password</code> + <code>login</code> → protects <b>console access</b>.</p>
+<p><code>enable password</code> → protects <b>privileged EXEC</b>, stored in <b>plain text</b>.</p>
+<p><code>enable secret</code> → protects <b>privileged EXEC</b>, stored <b>encrypted</b>, and <b>wins over enable password</b>.</p>
+<p><code>service password-encryption</code> → encrypts the <b>other</b> plain-text passwords in the config file.</p></div>
+
+<h3>Interfaces and the SVI</h3>
+<pre class="cli"><i>! Router interface</i>
+<span class="p">R1(config)#</span> <b>interface</b> g0/0
+<span class="p">R1(config-if)#</span> <b>ip address</b> 192.168.10.1 255.255.255.0
+<span class="p">R1(config-if)#</span> <b>description</b> LAN gateway
+<span class="p">R1(config-if)#</span> <b>no shutdown</b>          <i>! REQUIRED — router interfaces are down by default</i>
+
+<i>! Switch management address (SVI) plus its default gateway</i>
+<span class="p">S1(config)#</span> <b>interface vlan 1</b>
+<span class="p">S1(config-if)#</span> <b>ip address</b> 192.168.10.2 255.255.255.0
+<span class="p">S1(config-if)#</span> <b>no shutdown</b>
+<span class="p">S1(config)#</span> <b>ip default-gateway</b> 192.168.10.1
+
+<i>! A loopback — always up, useful for testing and for advertising into RIP</i>
+<span class="p">B1(config)#</span> <b>interface loopback 1</b>
+<span class="p">B1(config-if)#</span> <b>ip address</b> 192.168.10.1 255.255.255.255
+
+<i>! Copy the startup config to flash as a backup</i>
+<span class="p">R1#</span> <b>copy startup-config flash</b></pre>
+<div class="box key"><span class="tag">Two things that catch everyone</span><p><b>1.</b> A router interface will not come up without <code>no shutdown</code>, and a directly connected route will not appear in the routing table until the interface is <b>up and addressed</b>. <b>2.</b> A switch uses <code>ip default-gateway</code> (global), not a route — it is a Layer 2 device with one management IP on an SVI.</p></div>
+
+<details class="st"><summary>Self-test — Module 20</summary><div class="body">
+<ol>
+<li>You set a console password but are never prompted for it. What did you omit?<span class="a">The login command under line console 0.</span></li>
+<li>Both <code>enable password</code> and <code>enable secret</code> are set. Which do you type?<span class="a">The enable secret — it overrides the enable password.</span></li>
+<li>Which command shows NVRAM, and why might it report nothing?<span class="a">show startup-config; it is empty because the configuration has never been saved.</span></li>
+<li>Abbreviate the save command as far as it will go.<span class="a">copy run start.</span></li>
+<li>A router interface is configured with an address but the route is missing from the table. Why?<span class="a">The interface is administratively down — it needs no shutdown.</span></li>
+<li>How does a switch reach other networks for management traffic?<span class="a">Via ip default-gateway, with its management address on the VLAN 1 SVI.</span></li>
+</ol>
+</div></details>
+</section>
+
+<section id="m21" data-w="brown">
+<h2 data-sheet="21"><span class="num">21</span>Case Study Walkthrough</h2>
+<p class="lead">The TM3 case study assembles almost everything in this guide into one build: addressing, VLANs, router-on-a-stick, RIPv2 and a redistributed default route. Here is the reasoning behind each requirement.</p>
+
+<h3>The topology and addressing logic</h3>
+<div class="tw mono">
+<table><caption>Case study addressing table</caption>
+<thead><tr><th>Device</th><th>S0/0/0</th><th>S0/0/1</th><th>Gi0/0</th><th>Loopback 1</th></tr></thead>
+<tbody>
+<tr><td>HQ</td><td>10.0.0.1/30</td><td>10.0.0.5/30</td><td>200.0.0.1/30</td><td>—</td></tr>
+<tr><td>B1</td><td>10.0.0.2/30</td><td>—</td><td>sub-interfaces, last IP in each subnet</td><td>192.168.10.1/32</td></tr>
+<tr><td>B2</td><td>—</td><td>10.0.0.6/30</td><td>172.16.30.14/28</td><td>192.168.20.1/32</td></tr>
+<tr><td>PC1</td><td colspan="3">172.16.10.1/24 (VLAN 10)</td><td>—</td></tr>
+<tr><td>PC2</td><td colspan="3">172.16.20.1/24 (VLAN 20)</td><td>—</td></tr>
+<tr><td>PC3</td><td colspan="3">172.16.30.1/28</td><td>—</td></tr>
+</tbody></table>
+</div>
+<p>Note what the address choices tell you: <b>/30 on every serial link</b> (two usable addresses — see Module 11), <b>/32 on the loopbacks</b> (a host route, always up), and PC3 on a <b>/28</b> whose gateway is <b>172.16.30.14</b> — the <b>last usable address</b> in 172.16.30.0/28 (range .1–.14, broadcast .15). The same "last usable address" convention gives you the sub-interface addresses on B1: <b>172.16.10.254</b> for VLAN 10 and <b>172.16.20.254</b> for VLAN 20, which are also the PCs' default gateways.</p>
+
+<h3>Task 1 — basic configuration</h3>
+<pre class="cli"><span class="p">Switch(config)#</span> <b>hostname</b> Left_SW
+
+<span class="p">HQ(config)#</span> <b>enable secret</b> Case1          <i>! ENCRYPTED, so "secret" not "password"</i>
+<span class="p">HQ(config)#</span> <b>banner motd</b> "YOU SHALL NOT PASS"</pre>
+
+<h3>Task 2 — VLANs on the switch</h3>
+<pre class="cli"><span class="p">Left_SW(config)#</span> <b>vlan 10</b>
+<span class="p">Left_SW(config)#</span> <b>vlan 20</b>                    <i>! no names required</i>
+
+<span class="p">Left_SW(config)#</span> <b>interface range</b> Fa0/1 - 9
+<span class="p">Left_SW(config-if-range)#</span> <b>switchport mode access</b>
+<span class="p">Left_SW(config-if-range)#</span> <b>switchport access vlan 10</b>
+
+<span class="p">Left_SW(config)#</span> <b>interface range</b> Fa0/10 - 19
+<span class="p">Left_SW(config-if-range)#</span> <b>switchport mode access</b>
+<span class="p">Left_SW(config-if-range)#</span> <b>switchport access vlan 20</b>
+
+<i>! The uplink to B1 must be a TRUNK — and leave the native VLAN alone</i>
+<span class="p">Left_SW(config)#</span> <b>interface</b> Gi0/1
+<span class="p">Left_SW(config-if)#</span> <b>switchport mode trunk</b></pre>
+
+<h3>Task 3 — router-on-a-stick on B1</h3>
+<pre class="cli"><span class="p">B1(config)#</span> <b>interface</b> Gi0/1
+<span class="p">B1(config-if)#</span> <b>no shutdown</b>                  <i>! no IP address on the physical interface</i>
+
+<span class="p">B1(config)#</span> <b>interface</b> Gi0/1<b>.10</b>
+<span class="p">B1(config-subif)#</span> <b>encapsulation dot1Q 10</b>
+<span class="p">B1(config-subif)#</span> <b>ip address</b> 172.16.10.254 255.255.255.0
+
+<span class="p">B1(config)#</span> <b>interface</b> Gi0/1<b>.20</b>
+<span class="p">B1(config-subif)#</span> <b>encapsulation dot1Q 20</b>
+<span class="p">B1(config-subif)#</span> <b>ip address</b> 172.16.20.254 255.255.255.0</pre>
+
+<h3>Task 4 — routing</h3>
+<pre class="cli"><i>! ---- On B1 ----</i>
+<span class="p">B1(config)#</span> <b>router rip</b>
+<span class="p">B1(config-router)#</span> <b>version 2</b>
+<span class="p">B1(config-router)#</span> <b>no auto-summary</b>
+<span class="p">B1(config-router)#</span> <b>network</b> 172.16.0.0
+<span class="p">B1(config-router)#</span> <b>network</b> 10.0.0.0
+<span class="p">B1(config-router)#</span> <b>network</b> 192.168.10.0      <i>! the loopback</i>
+
+<i>! ---- On B2 ----</i>
+<span class="p">B2(config)#</span> <b>router rip</b>
+<span class="p">B2(config-router)#</span> <b>version 2</b>
+<span class="p">B2(config-router)#</span> <b>no auto-summary</b>
+<span class="p">B2(config-router)#</span> <b>network</b> 172.16.0.0
+<span class="p">B2(config-router)#</span> <b>network</b> 10.0.0.0
+<span class="p">B2(config-router)#</span> <b>network</b> 192.168.20.0      <i>! the loopback</i>
+
+<i>! ---- On HQ: RIP for the internal links only, NOT the ISP link ----</i>
+<span class="p">HQ(config)#</span> <b>router rip</b>
+<span class="p">HQ(config-router)#</span> <b>version 2</b>
+<span class="p">HQ(config-router)#</span> <b>no auto-summary</b>
+<span class="p">HQ(config-router)#</span> <b>network</b> 10.0.0.0           <i>! 200.0.0.0 is deliberately absent</i>
+
+<i>! Default route out to the ISP, using the EXIT INTERFACE as instructed</i>
+<span class="p">HQ(config)#</span> <b>ip route</b> 0.0.0.0 0.0.0.0 <b>Gi0/0</b>
+
+<i>! Share that default route with B1 and B2 through RIP</i>
+<span class="p">HQ(config)#</span> <b>router rip</b>
+<span class="p">HQ(config-router)#</span> <b>default-information originate</b></pre>
+<div class="box exam"><span class="tag">Exam focus — the four decisions that carry the marks</span>
+<p><b>1.</b> <code>version 2</code> and <code>no auto-summary</code> on <b>all three</b> routers. The design uses 172.16.10.0/24, 172.16.20.0/24 and 172.16.30.0/28 — different masks inside one classful network, so auto-summary would break it.</p>
+<p><b>2.</b> Advertise the <b>loopbacks</b> (192.168.10.0 and 192.168.20.0) but <b>not the ISP link</b> (200.0.0.0). The brief says so explicitly, and the default route is what reaches the internet instead.</p>
+<p><b>3.</b> The default route uses the <b>exit interface</b> (<code>Gi0/0</code>), not a next-hop address.</p>
+<p><b>4.</b> <code>default-information originate</code> is the <b>only</b> thing that gets that default route to B1 and B2. Without it the PCs cannot ping the ISP loopback 1.1.1.1 even though everything internal works.</p></div>
+
+<h3>Task 5 — testing</h3>
+<p>The two success criteria are: <b>all PCs can ping everywhere</b>, and <b>all PCs can ping the ISP loopback 1.1.1.1</b>. Verify in this order — each step isolates a different layer:</p>
+<ol class="steps">
+<li><code>show ip interface brief</code> on each router — every used interface <b>up/up</b>.</li>
+<li>Ping the PC's own <b>default gateway</b> — proves the VLAN, the access port, the trunk and the sub-interface address all match.</li>
+<li>Ping across the <b>serial link</b> (10.0.0.1 ↔ 10.0.0.2) — proves the /30 addressing.</li>
+<li><code>show ip route</code> on B1 and B2 — expect <b>R</b> entries for the far-side networks, and <b>R*</b> (or a gateway of last resort) for the default route.</li>
+<li><code>show ip protocols</code> — confirm version 2, auto-summary off, and the right networks advertised.</li>
+<li>Ping <b>1.1.1.1</b> from each PC. Failure here with everything else working points squarely at <code>default-information originate</code>.</li>
+</ol>
+
+<details class="st"><summary>Self-test — Module 21</summary><div class="body">
+<ol>
+<li>PC3 is on 172.16.30.0/28. What is its gateway and why?<span class="a">172.16.30.14 — the last usable address (range .1–.14, broadcast .15), per the case study's convention.</span></li>
+<li>Why is 200.0.0.0 excluded from RIP on HQ?<span class="a">The brief excludes the ISP link; internal routers reach the internet via the redistributed default route instead.</span></li>
+<li>All internal pings work but no PC can reach 1.1.1.1. Most likely omission?<span class="a">default-information originate on HQ.</span></li>
+<li>Why does this design require no auto-summary?<span class="a">It uses /24 and /28 masks inside 172.16.0.0, so summarising to the classful boundary would discard the VLSM information.</span></li>
+<li>Which interface on B1 gets no IP address, and what does it still need?<span class="a">The physical Gi0/1 — it still needs no shutdown.</span></li>
+<li>What prefix is on each serial link and each loopback?<span class="a">/30 on the serial links, /32 on the loopbacks.</span></li>
+</ol>
+</div></details>
+</section>
+<section id="ref" data-w="brown">
+<h2 data-sheet="↘"><span class="num">↘</span>Reference — Tables &amp; Cheat Sheets</h2>
+<p class="lead">The lookup tables worth knowing cold, in one place. If you memorise nothing else, memorise this section.</p>
+
+<h3>Subnet mask reference</h3>
+<div class="tw mono">
+<table><caption>Every mask you will meet, with increment and usable hosts</caption>
+<thead><tr><th>CIDR</th><th>Subnet mask</th><th>Increment</th><th>Host bits</th><th>Usable hosts</th></tr></thead>
+<tbody>
+<tr><td>/8</td><td>255.0.0.0</td><td>1 (2nd octet)</td><td>24</td><td>16 777 214</td></tr>
+<tr><td>/16</td><td>255.255.0.0</td><td>1 (3rd octet)</td><td>16</td><td>65 534</td></tr>
+<tr><td>/20</td><td>255.255.240.0</td><td>16 (3rd octet)</td><td>12</td><td>4 094</td></tr>
+<tr><td>/22</td><td>255.255.252.0</td><td>4 (3rd octet)</td><td>10</td><td>1 022</td></tr>
+<tr><td>/23</td><td>255.255.254.0</td><td>2 (3rd octet)</td><td>9</td><td>510</td></tr>
+<tr><td>/24</td><td>255.255.255.0</td><td>1 (3rd octet)</td><td>8</td><td>254</td></tr>
+<tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>7</td><td>126</td></tr>
+<tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>6</td><td>62</td></tr>
+<tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>5</td><td>30</td></tr>
+<tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>4</td><td>14</td></tr>
+<tr><td>/29</td><td>255.255.255.248</td><td>8</td><td>3</td><td>6</td></tr>
+<tr><td>/30</td><td>255.255.255.252</td><td>4</td><td>2</td><td><b>2</b> — point-to-point links</td></tr>
+<tr><td>/32</td><td>255.255.255.255</td><td>—</td><td>0</td><td>host route / loopback</td></tr>
+</tbody></table>
+</div>
+<div class="box key"><span class="tag">Deriving the mask octet from the increment</span><p>The interesting octet's value is <b>256 − increment</b>. Increment 64 → 256−64 = <b>192</b> → /26. Increment 16 → <b>240</b> → /28. It works in any octet: increment 4 in the 3rd octet → 252 → 255.255.<b>252</b>.0 = /22.</p></div>
+
+<h3>Binary to decimal</h3>
+<div class="tw mono">
+<table><caption>Bit positions in one octet</caption>
+<thead><tr><th>Position</th><th>2⁷</th><th>2⁶</th><th>2⁵</th><th>2⁴</th><th>2³</th><th>2²</th><th>2¹</th><th>2⁰</th></tr></thead>
+<tbody>
+<tr><td>Value</td><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+<tr><td>Cumulative (mask)</td><td>128</td><td>192</td><td>224</td><td>240</td><td>248</td><td>252</td><td>254</td><td>255</td></tr>
+</tbody></table>
+</div>
+
+<h3>Hexadecimal</h3>
+<div class="tw mono">
+<table><caption>Hex ↔ decimal ↔ binary — needed for MAC and IPv6</caption>
+<thead><tr><th>Hex</th><th>Dec</th><th>Binary</th><th>Hex</th><th>Dec</th><th>Binary</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0000</td><td>8</td><td>8</td><td>1000</td></tr>
+<tr><td>1</td><td>1</td><td>0001</td><td>9</td><td>9</td><td>1001</td></tr>
+<tr><td>2</td><td>2</td><td>0010</td><td>A</td><td>10</td><td>1010</td></tr>
+<tr><td>3</td><td>3</td><td>0011</td><td>B</td><td>11</td><td>1011</td></tr>
+<tr><td>4</td><td>4</td><td>0100</td><td>C</td><td>12</td><td>1100</td></tr>
+<tr><td>5</td><td>5</td><td>0101</td><td>D</td><td>13</td><td>1101</td></tr>
+<tr><td>6</td><td>6</td><td>0110</td><td>E</td><td>14</td><td>1110</td></tr>
+<tr><td>7</td><td>7</td><td>0111</td><td>F</td><td>15</td><td>1111</td></tr>
+</tbody></table>
+</div>
+
+<h3>Every address range in the course</h3>
+<div class="tw mono">
+<table><caption>Address ranges to recognise on sight</caption>
+<thead><tr><th>Range / prefix</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td>10.0.0.0/8</td><td>Private (RFC 1918)</td></tr>
+<tr><td>172.16.0.0/12</td><td>Private — through 172.31.255.255</td></tr>
+<tr><td>192.168.0.0/16</td><td>Private</td></tr>
+<tr><td>127.0.0.0/8</td><td>IPv4 loopback — tests the local TCP/IP stack</td></tr>
+<tr><td>169.254.0.0/16</td><td>APIPA link-local — DHCP failed</td></tr>
+<tr><td>192.0.2.0/24</td><td>TEST-NET — teaching and documentation</td></tr>
+<tr><td>224.0.0.0 – 239.255.255.255</td><td>IPv4 multicast</td></tr>
+<tr><td>01-00-5E-xx-xx-xx</td><td>Multicast MAC prefix</td></tr>
+<tr><td>FF-FF-FF-FF-FF-FF</td><td>Broadcast MAC (48 ones)</td></tr>
+<tr><td>::1</td><td>IPv6 loopback</td></tr>
+<tr><td>2000::/3</td><td>IPv6 global unicast (first three bits 001)</td></tr>
+<tr><td>FC00::/7</td><td>IPv6 unique local</td></tr>
+<tr><td>FE80::/10</td><td>IPv6 link-local</td></tr>
+<tr><td>FF00::/8</td><td>IPv6 multicast</td></tr>
+<tr><td>ff02::1</td><td>IPv6 all-nodes multicast — destination of RAs</td></tr>
+<tr><td>ff02::2</td><td>IPv6 all-routers multicast — destination of RSs</td></tr>
+</tbody></table>
+</div>
+
+<h3>Numbers to memorise</h3>
+<div class="tw mono">
+<table><caption>If a question contains a number, it is probably one of these</caption>
+<thead><tr><th>Value</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td>48 bits / 12 hex digits</td><td>MAC address length</td></tr>
+<tr><td>24 bits</td><td>OUI, and the device identifier, within a MAC</td></tr>
+<tr><td>32 bits</td><td>IPv4 address length</td></tr>
+<tr><td>128 bits</td><td>IPv6 address length</td></tr>
+<tr><td>64 bits</td><td>IPv6 interface ID; typical LAN prefix is /64</td></tr>
+<tr><td>48</td><td>Typical IPv6 global routing prefix length</td></tr>
+<tr><td>64 – 1518 bytes</td><td>Valid Ethernet frame size range</td></tr>
+<tr><td>1600 / 9216 bytes</td><td>Baby giant / jumbo frame maximum</td></tr>
+<tr><td>1500 bytes</td><td>Default Ethernet MTU</td></tr>
+<tr><td>1460 bytes</td><td>Common IPv4 MSS (1500 − 20 − 20)</td></tr>
+<tr><td>20 bytes</td><td>IPv4 header; also minimum TCP header</td></tr>
+<tr><td>40 bytes</td><td>IPv6 header — fixed</td></tr>
+<tr><td>8 bytes / 64 bits</td><td>UDP header, four fields</td></tr>
+<tr><td>5 minutes</td><td>Default switch MAC address table age</td></tr>
+<tr><td>30 seconds</td><td>RIP update interval</td></tr>
+<tr><td>120</td><td>RIP administrative distance</td></tr>
+<tr><td>200 seconds</td><td>ICMPv6 Router Advertisement interval</td></tr>
+<tr><td>1 – 1005 / 1006 – 4096</td><td>Normal / extended VLAN range</td></tr>
+<tr><td>1002 – 1005</td><td>Reserved VLANs (Token Ring, FDDI)</td></tr>
+<tr><td>0–1023 / 1024–49151 / 49152–65535</td><td>Well-known / registered / private port ranges</td></tr>
+<tr><td>Type 8 / Type 0</td><td>ICMP echo / echo reply</td></tr>
+<tr><td>Type 3</td><td>ICMP destination unreachable</td></tr>
+</tbody></table>
+</div>
+
+<h3>Protocol and port cheat sheet</h3>
+<div class="tw mono">
+<table><caption>By port number</caption>
+<thead><tr><th>Port</th><th>Transport</th><th>Protocol</th><th>Job</th></tr></thead>
+<tbody>
+<tr><td>20</td><td>TCP</td><td>FTP data</td><td>The actual file transfer</td></tr>
+<tr><td>21</td><td>TCP</td><td>FTP control</td><td>Commands and replies</td></tr>
+<tr><td>22</td><td>TCP</td><td>SSH</td><td>Secure remote access</td></tr>
+<tr><td>23</td><td>TCP</td><td>Telnet</td><td>Insecure remote access</td></tr>
+<tr><td>25</td><td>TCP</td><td>SMTP</td><td><b>Send</b> mail</td></tr>
+<tr><td>37</td><td>UDP</td><td>Time</td><td>Relayed by ip helper-address</td></tr>
+<tr><td>49</td><td>UDP</td><td>TACACS</td><td>Relayed by ip helper-address</td></tr>
+<tr><td>53</td><td>UDP + TCP</td><td>DNS</td><td>Name resolution</td></tr>
+<tr><td>67</td><td>UDP</td><td>DHCP server</td><td>Address assignment</td></tr>
+<tr><td>68</td><td>UDP</td><td>DHCP client</td><td>Address request</td></tr>
+<tr><td>69</td><td>UDP</td><td>TFTP</td><td>Trivial file transfer</td></tr>
+<tr><td>80</td><td>TCP</td><td>HTTP</td><td>Web, insecure</td></tr>
+<tr><td>110</td><td>TCP</td><td>POP3</td><td><b>Receive</b> mail, deletes from server</td></tr>
+<tr><td>137 / 138</td><td>UDP</td><td>NetBIOS</td><td>Name service / datagram service</td></tr>
+<tr><td>143</td><td>TCP</td><td>IMAP</td><td><b>Receive</b> mail, keeps on server</td></tr>
+<tr><td>161</td><td>UDP</td><td>SNMP</td><td>Network management</td></tr>
+<tr><td>443</td><td>TCP</td><td>HTTPS</td><td>Web, secure</td></tr>
+<tr><td>1812</td><td>UDP</td><td>RADIUS</td><td>Cisco's registered-port example</td></tr>
+</tbody></table>
+</div>
+
+<h3>Command cheat sheet</h3>
+<div class="tw mono">
+<table><caption>Configuration, by task</caption>
+<thead><tr><th>Task</th><th>Command</th></tr></thead>
+<tbody>
+<tr><td>Set hostname</td><td>hostname <i>name</i></td></tr>
+<tr><td>Console password</td><td>line console 0 → password <i>pw</i> → login</td></tr>
+<tr><td>Encrypted privileged password</td><td>enable secret <i>pw</i></td></tr>
+<tr><td>Encrypt plain-text passwords</td><td>service password-encryption</td></tr>
+<tr><td>Login banner</td><td>banner motd "<i>text</i>"</td></tr>
+<tr><td>Save configuration</td><td>copy running-config startup-config (copy run start)</td></tr>
+<tr><td>Interface address</td><td>interface <i>id</i> → ip address <i>ip mask</i> → no shutdown</td></tr>
+<tr><td>Switch management IP</td><td>interface vlan 1 → ip address … → ip default-gateway <i>ip</i></td></tr>
+<tr><td>Create VLAN</td><td>vlan <i>id</i> → name <i>name</i></td></tr>
+<tr><td>Access port</td><td>switchport mode access → switchport access vlan <i>id</i></td></tr>
+<tr><td>Trunk port</td><td>switchport mode trunk → switchport trunk allowed vlan <i>list</i></td></tr>
+<tr><td>Router-on-a-stick</td><td>interface <i>id.sub</i> → encapsulation dot1Q <i>vlan</i> → ip address …</td></tr>
+<tr><td>Static route</td><td>ip route <i>network mask</i> {<i>next-hop</i> | <i>exit-interface</i>}</td></tr>
+<tr><td>Default route</td><td>ip route 0.0.0.0 0.0.0.0 <i>exit-interface</i></td></tr>
+<tr><td>RIPv2</td><td>router rip → version 2 → no auto-summary → network <i>addr</i></td></tr>
+<tr><td>Suppress RIP on a LAN</td><td>passive-interface <i>id</i></td></tr>
+<tr><td>Propagate default route</td><td>default-information originate</td></tr>
+<tr><td>DHCP exclusions</td><td>ip dhcp excluded-address <i>low</i> [<i>high</i>]</td></tr>
+<tr><td>DHCP pool</td><td>ip dhcp pool <i>name</i> → network … → default-router … → dns-server …</td></tr>
+<tr><td>DHCP relay</td><td>ip helper-address <i>server-ip</i> (on the client-facing interface)</td></tr>
+<tr><td>Router as DHCP client</td><td>ip address dhcp</td></tr>
+<tr><td>Static NAT</td><td>ip nat inside source static <i>local global</i></td></tr>
+<tr><td>Dynamic NAT</td><td>ip nat pool … → access-list … → ip nat inside source list <i>n</i> pool <i>name</i></td></tr>
+<tr><td>PAT on an interface</td><td>ip nat inside source list <i>n</i> interface <i>id</i> overload</td></tr>
+<tr><td>Mark NAT interfaces</td><td>ip nat inside / ip nat outside</td></tr>
+<tr><td>Auto-MDIX</td><td>mdix auto</td></tr>
+</tbody></table>
+</div>
+<div class="tw mono">
+<table><caption>Verification, by what you suspect</caption>
+<thead><tr><th>Suspect</th><th>Command</th></tr></thead>
+<tbody>
+<tr><td>Interface down or unaddressed</td><td>show ip interface brief</td></tr>
+<tr><td>Errors on an interface</td><td>show interfaces</td></tr>
+<tr><td>Missing route</td><td>show ip route / show ipv6 route</td></tr>
+<tr><td>Routing protocol misconfigured</td><td>show ip protocols</td></tr>
+<tr><td>Layer 2 address resolution</td><td>show ip arp / arp -a</td></tr>
+<tr><td>Switch not learning MACs</td><td>show mac address-table</td></tr>
+<tr><td>VLAN assignment</td><td>show vlan brief</td></tr>
+<tr><td>Trunk not forming</td><td>show interfaces trunk</td></tr>
+<tr><td>DHCP not leasing</td><td>show ip dhcp binding / show ip dhcp server statistics</td></tr>
+<tr><td>NAT not translating</td><td>show ip nat translations / show ip nat statistics</td></tr>
+<tr><td>Unsure what is configured</td><td>show running-config | section <i>keyword</i></td></tr>
+<tr><td>Neighbouring device identity</td><td>show cdp neighbors [detail]</td></tr>
+<tr><td>IOS version, memory, licences</td><td>show version</td></tr>
+</tbody></table>
+</div>
+
+<h3>Which layer does it live at?</h3>
+<div class="tw">
+<table><caption>Sort-by-layer drill</caption>
+<thead><tr><th>Layer</th><th>Protocols / devices / addresses</th></tr></thead>
+<tbody>
+<tr><td class="m">7–5 Application</td><td>HTTP, HTTPS, FTP, TFTP, SMTP, POP3, IMAP, DNS, DHCP, SNMP, SMB, Telnet, SSH</td></tr>
+<tr><td class="m">4 Transport</td><td>TCP, UDP · port numbers, sockets · segments and datagrams</td></tr>
+<tr><td class="m">3 Network</td><td>IPv4, IPv6, ICMP/ICMPv6, ND, RIP, OSPF, EIGRP, BGP, NAT · <b>routers</b>, Layer 3 switches · IP addresses · packets</td></tr>
+<tr><td class="m">2 Data Link</td><td>Ethernet (802.3), Wi-Fi (802.11), ARP, LLC/MAC sublayers, VLANs, trunking · <b>switches</b>, bridges, NICs · MAC addresses · frames</td></tr>
+<tr><td class="m">1 Physical</td><td>Cables, connectors, encoding, signalling · <b>hubs</b>, repeaters, media · bits</td></tr>
+</tbody></table>
+</div>
+<div class="box trap"><span class="tag">Two that trip people up</span><p><b>ARP</b> is usually placed at <b>Layer 2</b> in this course even though it deals in IP addresses — it resolves to a MAC and is carried in an Ethernet frame. <b>ICMP</b> is <b>Layer 3</b>, not Layer 4, even though ping feels like an application.</p></div>
+
+<h3>Final-week revision order</h3>
+<ol class="steps">
+<li><b>Drill the numbers</b> — the memorise table above, plus the subnet mask table. These are unconditional marks.</li>
+<li><b>Do subnetting and VLSM by hand</b>, four or five fresh problems, until the increment appears without thinking.</li>
+<li><b>Type the case study configuration from a blank device</b>, no notes. Then <code>show run</code> and compare.</li>
+<li><b>Re-read the "Classic trap" and "Exam focus" boxes</b> in every module — they are placed where marks are habitually lost.</li>
+<li><b>Answer every self-test out loud</b> before revealing the answer. Anything you hesitate on goes back to step 1.</li>
+</ol>
+</section>
+</main>
+</div>
+
+<div class="footer">
+  <span><b>ICNF102-SG</b> field reference</span>
+  <span>Drawn from the 2026 study guide, ITN v7 modules 3, 8, 9, 14, 15, 17, SRWE modules 7–9, and the Packet Tracer labs</span>
+  <span>Nelson Mandela University · School of Information Technology</span>
+</div>
+
+<script>
+(function(){
+  var themeBtn = document.getElementById('themebtn');
+  var THEME_KEY = 'icnf_sg_theme';
+  function applyTheme(t){
+    if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); }
+    else { document.documentElement.removeAttribute('data-theme'); }
+  }
+  function currentTheme(){
+    try{ return localStorage.getItem(THEME_KEY) || 'auto'; }catch(e){ return 'auto'; }
+  }
+  var theme = currentTheme();
+  applyTheme(theme);
+  themeBtn.addEventListener('click', function(){
+    var order = ['auto','light','dark'];
+    theme = order[(order.indexOf(theme)+1) % order.length];
+    applyTheme(theme);
+    try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
+    themeBtn.title = 'Theme: ' + theme;
+  });
+  themeBtn.title = 'Theme: ' + theme;
+})();
+(function(){
+  var toc = document.getElementById('toc');
+  var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
+  var btn = document.getElementById('menubtn');
+  var narrow = function(){ return window.matchMedia('(max-width:920px)').matches; };
+
+  function syncMenu(){
+    if(narrow()){ toc.hidden = true; btn.setAttribute('aria-expanded','false'); }
+    else { toc.hidden = false; }
+  }
+  syncMenu();
+  window.addEventListener('resize', syncMenu);
+
+  btn.addEventListener('click', function(){
+    var open = !toc.hidden;
+    toc.hidden = open;
+    btn.setAttribute('aria-expanded', String(!open));
+  });
+  links.forEach(function(a){
+    a.addEventListener('click', function(){ if(narrow()){ toc.hidden = true; btn.setAttribute('aria-expanded','false'); } });
+  });
+
+  // active section highlighting
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  var byId = {};
+  links.forEach(function(a){ byId[a.getAttribute('href').slice(1)] = a; });
+  function mark(id){
+    links.forEach(function(a){ a.classList.remove('on'); });
+    if(byId[id]) byId[id].classList.add('on');
+  }
+  if('IntersectionObserver' in window){
+    var seen = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ seen[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var best = null, bestV = 0;
+      sections.forEach(function(s){ var v = seen[s.id] || 0; if(v > bestV){ bestV = v; best = s.id; } });
+      if(best) mark(best);
+    }, {rootMargin:'-70px 0px -55% 0px', threshold:[0,.05,.2,.5,1]});
+    sections.forEach(function(s){ io.observe(s); });
+  }
+  mark('m1');
+
+  // keyword filter
+  var q = document.getElementById('q');
+  var blocks = [];
+  sections.forEach(function(s){
+    var kids = Array.prototype.slice.call(s.children).filter(function(el){ return el.tagName !== 'H2'; });
+    blocks.push({sec:s, kids:kids, text:(s.textContent||'').toLowerCase()});
+  });
+  function clearMarks(root){
+    root.querySelectorAll('mark[data-f]').forEach(function(m){
+      var t = document.createTextNode(m.textContent);
+      m.parentNode.replaceChild(t, m);
+    });
+    root.normalize();
+  }
+  var tmr;
+  q.addEventListener('input', function(){
+    clearTimeout(tmr);
+    tmr = setTimeout(function(){
+      var term = q.value.trim().toLowerCase();
+      blocks.forEach(function(b){ clearMarks(b.sec); });
+      if(term.length < 2){
+        blocks.forEach(function(b){
+          b.sec.classList.remove('dim');
+          b.kids.forEach(function(k){ k.classList.remove('dim'); });
+        });
+        return;
+      }
+      blocks.forEach(function(b){
+        var hit = b.text.indexOf(term) > -1;
+        b.sec.classList.toggle('dim', !hit);
+        if(hit){
+          b.kids.forEach(function(k){
+            var kt = (k.textContent||'').toLowerCase();
+            var keep = kt.indexOf(term) > -1 || k.classList.contains('lead');
+            k.classList.toggle('dim', !keep);
+          });
+        }
+      });
+    }, 160);
+  });
+  q.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ q.value = ''; q.dispatchEvent(new Event('input')); } });
+})();
+</script>
+
+</body>
+</html>

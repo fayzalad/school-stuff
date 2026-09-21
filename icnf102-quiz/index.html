@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Line Test</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+  :root{ color-scheme: light dark; }
+  html,body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <div class="logo"><span class="led" id="headLed" aria-hidden="true"></span><span class="plate">Line Test</span><b>ICNF102</b></div>
+    <div class="sp"></div>
+    <button class="iconbtn" id="themebtn" aria-label="Switch theme" title="Switch theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <button class="btn sm" id="homeBtn" hidden>All sets</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <div id="home">
+    <div class="hero">
+      <p class="kicker">200 QUESTIONS · 8 SETS OF 25 · SIGNAL RISES ACROSS THE BANK</p>
+      <h1>Run diagnostics on the whole module, twenty-five questions per test.</h1>
+      <p>Pick any set, in any order, whenever you like. Every question carries a full readout, so the quiz works as revision on its own — not just a score.</p>
+      <div class="overall">
+        <div class="stat"><span class="k">Sets done</span><span class="v" id="sDone">0/8</span></div>
+        <div class="stat"><span class="k">Best avg</span><span class="v" id="sAvg">—</span></div>
+        <div class="stat"><span class="k">Questions</span><span class="v" id="sSeen">0/200</span></div>
+      </div>
+    </div>
+
+    <div class="modewrap">
+      <span class="lbl">Mode</span>
+      <div class="seg" role="group" aria-label="Quiz mode">
+        <button id="mStudy" aria-pressed="true">Study</button>
+        <button id="mTest" aria-pressed="false">Test</button>
+      </div>
+      <p class="modenote" id="modeNote"></p>
+    </div>
+
+    <div class="setsH"><h2>Line card rack</h2><span id="setsHint"></span></div>
+    <div class="rack" id="sets"></div>
+
+    <div class="foot">
+      <span><b>Line Test</b> — bench companion to the ICNF102 field reference</span>
+      <span>Progress is saved in this browser only</span>
+    </div>
+  </div>
+
+  <!-- ============ QUIZ ============ -->
+  <div id="quiz" hidden>
+    <div class="qhead">
+      <div class="row">
+        <h2 id="qSetName">Set</h2>
+        <span class="cnt" id="qCount">1 / 25</span>
+      </div>
+      <div class="pbar"><i id="qBar" style="width:0%"></i></div>
+      <div class="dots" id="qDots" aria-hidden="true"></div>
+    </div>
+    <p class="qtopic" id="qTopic">Topic</p>
+    <p class="qtext" id="qText">Question</p>
+    <div class="opts" id="qOpts" role="radiogroup" aria-labelledby="qText"></div>
+    <div class="expl" id="qExpl" hidden><span class="v" id="qVerdict"></span><span class="log" id="qLog"></span><p id="qExplText"></p></div>
+    <div class="nav">
+      <button class="btn" id="qPrev">Back</button>
+      <div class="sp"></div>
+      <button class="btn" id="qQuit">Leave set</button>
+      <button class="btn pri" id="qNext" disabled>Check answer</button>
+    </div>
+  </div>
+
+  <!-- ============ RESULTS ============ -->
+  <div id="res" hidden>
+    <div class="res">
+      <div class="rtop">
+        <div class="vu-wrap">
+          <div class="vu" id="vuMeter" aria-hidden="true"></div>
+          <div class="vu-read"><b id="rPct">0%</b><span id="rOf">0 / 25</span></div>
+        </div>
+        <div class="txt">
+          <span class="band" id="rBand">Band</span>
+          <h2 id="rTitle">Set complete</h2>
+          <p id="rMsg">Message</p>
+        </div>
+      </div>
+
+      <div class="tbreak">
+        <h3>Signal by topic</h3>
+        <div id="rTopics"></div>
+      </div>
+
+      <div class="review">
+        <h3>Review all 25</h3>
+        <p class="sub" id="rSub">Incorrect answers are listed first. Open any question to see the full readout.</p>
+        <div id="rList"></div>
+        <div class="rfoot">
+          <button class="btn pri" id="rNextSet">Next set</button>
+          <button class="btn" id="rRetry">Retry this set</button>
+          <button class="btn" id="rHome">All sets</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="questions.js"></script>
+<script>
+(function(){
+  "use strict";
+  var BANK = window.QBANK || [];
+  var SETS = [
+    {n:"Signals and Structure", d:1, blurb:"Communication rules, OSI and TCP/IP models, encapsulation, physical media."},
+    {n:"Frames and Switches", d:1, blurb:"Wireless standards, data link sublayers, Ethernet framing, MAC addresses, LAN switching."},
+    {n:"Packets and Paths", d:2, blurb:"Network layer characteristics, IPv4 and IPv6 headers, host routing, ARP and Neighbor Discovery."},
+    {n:"Address Space", d:2, blurb:"Private and special addresses, classful and classless addressing, ICMP, first subnetting and VLSM."},
+    {n:"Hextets and Handshakes", d:3, blurb:"IPv6 representation, SLAAC, EUI-64, DAD, transport layer fundamentals and ports."},
+    {n:"Sessions and Services", d:3, blurb:"TCP mechanics, UDP behaviour, HTTP, email, DNS and the DHCP message flow."},
+    {n:"Console Work", d:4, blurb:"DHCP and NAT configuration, VLANs, trunking, inter-VLAN routing and RIPv2 commands."},
+    {n:"Under Pressure", d:4, blurb:"Troubleshooting scenarios, multi-step subnetting, case-study reasoning and security."}
+  ];
+  var DIFF = ["","Foundational","Applied","Advanced","Exam level"];
+  var SIZE = 25;
+
+  var LS = {
+    get:function(k,f){ try{ var v=localStorage.getItem(k); return v===null?f:JSON.parse(v); }catch(e){ return f; } },
+    set:function(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  };
+  var best = LS.get("pd_best_v1", {});
+  var mode = LS.get("pd_mode_v1", "study");
+
+  // stable per-question option shuffle so a question always looks the same
+  function rng(seed){
+    var a = (seed + 0x9E3779B9) | 0;
+    return function(){
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function order(i, len){
+    var idx = [], next = rng(i * 7919 + 13);
+    for(var k=0;k<len;k++) idx.push(k);
+    for(var j=len-1;j>0;j--){
+      var r = Math.floor(next() * (j+1));
+      var t = idx[j]; idx[j] = idx[r]; idx[r] = t;
+    }
+    return idx;
+  }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var home=$("home"), quiz=$("quiz"), res=$("res"), homeBtn=$("homeBtn");
+  var S = null; // active session
+
+  function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+  function fmt(s){ return esc(s).replace(/`([^`]+)`/g, "<code>$1</code>"); }
+  function cls(p){ return p>=80?"g":p>=60?"a":"r"; }
+
+  /* ---------- HOME ---------- */
+  function setMode(m){
+    mode = m; LS.set("pd_mode_v1", m);
+    $("mStudy").setAttribute("aria-pressed", String(m==="study"));
+    $("mTest").setAttribute("aria-pressed", String(m==="test"));
+    $("modeNote").textContent = m==="study"
+      ? "Study mode shows the explanation immediately after each answer — best for learning the material."
+      : "Test mode hides all feedback until the end of the set — best for checking what you actually know.";
+  }
+  $("mStudy").onclick = function(){ setMode("study"); };
+  $("mTest").onclick = function(){ setMode("test"); };
+
+  function ledClass(pct){ return pct===null ? "" : pct>=80?"g":pct>=50?"a":"r"; }
+  function meterColor(pct){ return pct>=80?"var(--good)":pct>=50?"var(--warn)":"var(--bad)"; }
+
+  function renderHome(){
+    var done=0, sum=0, seen=0, html="";
+    for(var i=0;i<SETS.length;i++){
+      var b = best[i];
+      if(b!==undefined){ done++; sum+=b; seen+=SIZE; }
+      var pct = b===undefined ? null : Math.round(b/SIZE*100);
+      var led = ledClass(pct);
+      var scoreHtml = pct===null
+        ? '<span class="score none">not run</span>'
+        : '<span class="score '+cls(pct)+'">'+b+'/'+SIZE+'</span>';
+      var meterHtml = pct===null ? '<div class="meter"></div>'
+        : '<div class="meter"><i style="width:'+pct+'%;background:'+meterColor(pct)+'"></i></div>';
+      var lo = i*SIZE+1, hi = (i+1)*SIZE;
+      var slotOpacity = (0.22 + SETS[i].d*0.18).toFixed(2);
+      html += '<button class="card" data-i="'+i+'">'
+        + '<span class="card-slot" style="opacity:'+slotOpacity+'"></span>'
+        + '<span class="card-led'+(led?" "+led:"")+'"></span>'
+        + '<span class="card-body">'
+        + '<span class="card-top"><span class="card-n">SET '+(i+1)+' · Q'+lo+'–'+hi+'</span>'
+        + '<span class="diff">'+DIFF[SETS[i].d]+'</span></span>'
+        + '<h3>'+esc(SETS[i].n)+'</h3>'
+        + '<span class="blurb">'+esc(SETS[i].blurb)+'</span>'
+        + '</span>'
+        + '<span class="readout">'+meterHtml+scoreHtml+'</span>'
+        + '</button>';
+    }
+    $("sets").innerHTML = html;
+    $("sDone").textContent = done+"/8";
+    $("sAvg").textContent = done ? Math.round(sum/done/SIZE*100)+"%" : "—";
+    $("sSeen").textContent = seen+"/200";
+    $("setsHint").textContent = done ? "Best score lit on each card you have run." : "Start anywhere — sets are independent.";
+    Array.prototype.forEach.call($("sets").querySelectorAll(".card"), function(el){
+      el.onclick = function(){ start(parseInt(el.dataset.i,10)); };
+    });
+  }
+
+  function show(which){
+    home.hidden = which!=="home"; quiz.hidden = which!=="quiz"; res.hidden = which!=="res";
+    homeBtn.hidden = which==="home";
+    window.scrollTo(0,0);
+  }
+  homeBtn.onclick = function(){
+    if(!quiz.hidden && S && S.answers.some(function(a){return a!==null;})){
+      if(!confirm("Leave this set? Your answers so far will be discarded.")) return;
+    }
+    S=null; renderHome(); show("home");
+  };
+
+  /* ---------- QUIZ ---------- */
+  function start(i){
+    var items = [];
+    for(var k=i*SIZE;k<(i+1)*SIZE;k++){
+      var q = BANK[k];
+      if(!q) continue;
+      var ord = order(k, q.o.length);
+      items.push({
+        gi:k, topic:q.t, text:q.q, expl:q.e,
+        opts: ord.map(function(x){ return q.o[x]; }),
+        ans: ord.indexOf(q.a)
+      });
+    }
+    S = {set:i, items:items, answers:items.map(function(){return null;}), checked:items.map(function(){return false;}), cur:0};
+    $("qSetName").textContent = "Set "+(i+1)+" · "+SETS[i].n;
+    show("quiz"); renderQ();
+  }
+
+  function renderQ(){
+    var it = S.items[S.cur], picked = S.answers[S.cur], isChecked = S.checked[S.cur];
+    $("qCount").textContent = (S.cur+1)+" / "+S.items.length;
+    $("qBar").style.width = ((S.cur)/S.items.length*100)+"%";
+    $("qTopic").textContent = it.topic;
+    $("qText").innerHTML = fmt(it.text);
+
+    var letters="ABCD", html="";
+    for(var i=0;i<it.opts.length;i++){
+      var extra="", tag="";
+      if(isChecked){
+        if(i===it.ans){ extra=" ok"; tag='<span class="tag">Correct</span>'; }
+        else if(i===picked){ extra=" no"; tag='<span class="tag">Your answer</span>'; }
+      }
+      html += '<button class="opt'+extra+'" data-i="'+i+'" role="radio" aria-checked="'
+        + (picked===i && !isChecked ? "true":"false") + '"' + (isChecked?" disabled":"") + '>'
+        + '<span class="k">'+letters[i]+'</span><span>'+fmt(it.opts[i])+'</span>'+tag+'</button>';
+    }
+    $("qOpts").innerHTML = html;
+    Array.prototype.forEach.call($("qOpts").querySelectorAll(".opt"), function(el){
+      el.onclick = function(){ pick(parseInt(el.dataset.i,10)); };
+    });
+
+    var ex = $("qExpl");
+    if(isChecked){
+      var right = picked===it.ans;
+      ex.hidden = false;
+      ex.className = "expl "+(right?"ok":"no");
+      $("qVerdict").textContent = right ? "Correct" : "Incorrect";
+      var qn = "Q"+(S.cur+1);
+      $("qLog").textContent = right
+        ? "reply from "+qn+": match=true  time="+(4+(S.cur%7))+"ms"
+        : "reply from "+qn+": match=false  expected="+letters[it.ans];
+      $("qExplText").innerHTML = fmt(it.expl);
+    } else { ex.hidden = true; }
+
+    $("qPrev").disabled = S.cur===0;
+    var last = S.cur===S.items.length-1;
+    var nb = $("qNext");
+    if(mode==="study" && !isChecked){ nb.textContent = "Check answer"; nb.disabled = picked===null; }
+    else { nb.textContent = last ? "Finish set" : "Next question"; nb.disabled = picked===null; }
+    renderDots();
+  }
+
+  function renderDots(){
+    var h="";
+    for(var i=0;i<S.items.length;i++){
+      var c="";
+      if(S.checked[i]) c = S.answers[i]===S.items[i].ans ? "g":"r";
+      else if(S.answers[i]!==null) c = "ans";
+      if(i===S.cur) c += " cur";
+      h += '<b class="'+c+'"></b>';
+    }
+    $("qDots").innerHTML = h;
+  }
+
+  function pick(i){
+    if(S.checked[S.cur]) return;
+    S.answers[S.cur] = i;
+    renderQ();
+  }
+
+  $("qPrev").onclick = function(){ if(S.cur>0){ S.cur--; renderQ(); } };
+  $("qQuit").onclick = function(){ homeBtn.onclick(); };
+  $("qNext").onclick = function(){
+    if(S.answers[S.cur]===null) return;
+    if(mode==="study" && !S.checked[S.cur]){ S.checked[S.cur] = true; renderQ(); return; }
+    S.checked[S.cur] = true;
+    if(S.cur < S.items.length-1){ S.cur++; renderQ(); }
+    else finish();
+  };
+
+  document.addEventListener("keydown", function(e){
+    if(quiz.hidden) return;
+    if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    var k = e.key.toUpperCase();
+    if("ABCD".indexOf(k)>-1 && k.length===1){ var i="ABCD".indexOf(k); if(i<S.items[S.cur].opts.length) pick(i); }
+    else if(e.key==="Enter"){ if(!$("qNext").disabled) $("qNext").click(); }
+    else if(e.key==="ArrowLeft"){ if(!$("qPrev").disabled) $("qPrev").click(); }
+  });
+
+  /* ---------- RESULTS ---------- */
+  function finish(){
+    var correct=0, byTopic={};
+    for(var i=0;i<S.items.length;i++){
+      var ok = S.answers[i]===S.items[i].ans;
+      if(ok) correct++;
+      var t = S.items[i].topic;
+      if(!byTopic[t]) byTopic[t] = {c:0,n:0};
+      byTopic[t].n++; if(ok) byTopic[t].c++;
+    }
+    var pct = Math.round(correct/S.items.length*100);
+    if(best[S.set]===undefined || correct>best[S.set]){ best[S.set]=correct; LS.set("pd_best_v1", best); }
+
+    $("rPct").textContent = pct+"%";
+    $("rOf").textContent = correct+" / "+S.items.length;
+    var barN = 14, lit = Math.round(pct/100*barN), vh="";
+    for(var vb=0; vb<barN; vb++){
+      var on = vb < lit;
+      var seg = vb/barN; // 0..1 across the meter, low->high
+      var onCls = seg < 0.55 ? "on-g" : seg < 0.8 ? "on-a" : "on-r";
+      var h = 14 + Math.round((vb/(barN-1)) * 50);
+      vh += '<i style="height:'+h+'%"'+(on?(' class="'+onCls+'"'):'')+'></i>';
+    }
+    $("vuMeter").innerHTML = vh;
+
+    var band, msg;
+    if(pct>=88){ band="Exam ready"; msg="Strong across the whole set. Move on to the next one, and come back to this set only if the weak topics below stay weak."; }
+    else if(pct>=76){ band="Solid"; msg="Comfortably above the pass line. Read the explanations for the ones you missed — they are usually a single detail, not a gap."; }
+    else if(pct>=60){ band="Passing"; msg="You have the shape of it but the detail is loose. Work through the topic breakdown below, then retry this set."; }
+    else if(pct>=40){ band="Shaky"; msg="Go back to the study guide modules for the topics below before retrying. Reading the explanations here counts as revision."; }
+    else { band="Start here"; msg="This set needs the study guide first. Read the matching modules, then retry — the explanations below are a good place to begin."; }
+    var bandEl = $("rBand");
+    bandEl.textContent = band;
+    bandEl.style.color = pct>=76 ? "var(--good)" : pct>=60 ? "var(--warn)" : "var(--bad)";
+    $("rTitle").textContent = "Set "+(S.set+1)+" · "+SETS[S.set].n;
+    $("rMsg").textContent = msg;
+
+    var names = Object.keys(byTopic).sort(function(a,b){
+      var pa=byTopic[a].c/byTopic[a].n, pb=byTopic[b].c/byTopic[b].n;
+      return pa-pb || b.localeCompare(a);
+    });
+    var th="";
+    names.forEach(function(t){
+      var o=byTopic[t], p=Math.round(o.c/o.n*100);
+      var col = p>=80?"var(--good)":p>=50?"var(--warn)":"var(--bad)";
+      th += '<div class="trow"><span class="tn">'+esc(t)+'</span>'
+          + '<span class="tb"><i style="width:'+p+'%;background:'+col+'"></i></span>'
+          + '<span class="tv">'+o.c+'/'+o.n+'</span></div>';
+    });
+    $("rTopics").innerHTML = th;
+
+    var idx = S.items.map(function(_,i){return i;}).sort(function(a,b){
+      var wa = S.answers[a]===S.items[a].ans ? 1:0, wb = S.answers[b]===S.items[b].ans ? 1:0;
+      return wa-wb || a-b;
+    });
+    var wrong = S.items.length-correct;
+    $("rSub").textContent = wrong
+      ? wrong+" to review, listed first. Open any question for the full explanation."
+      : "All correct. The explanations are still worth a read — open any question.";
+    var letters="ABCD", rh="";
+    idx.forEach(function(i){
+      var it=S.items[i], ok=S.answers[i]===it.ans, pk=S.answers[i];
+      rh += '<details class="rq '+(ok?"ok":"no")+'"'+(ok?"":" open")+'>'
+        + '<summary><span class="ix">'+(i+1)+'</span><span>'+fmt(it.text)+'</span></summary>'
+        + '<div class="bd">'
+        + '<p class="ln '+(ok?"y":"n")+'">Your answer: <b>'+letters[pk]+' — '+fmt(it.opts[pk])+'</b></p>'
+        + (ok?"":'<p class="ln y">Correct answer: <b>'+letters[it.ans]+' — '+fmt(it.opts[it.ans])+'</b></p>')
+        + '<p class="ex">'+fmt(it.expl)+'</p></div></details>';
+    });
+    $("rList").innerHTML = rh;
+
+    var nextI = S.set+1;
+    var nb = $("rNextSet");
+    if(nextI<SETS.length){ nb.hidden=false; nb.textContent = "Next set · "+SETS[nextI].n; nb.onclick=function(){ start(nextI); }; }
+    else { nb.hidden=true; }
+    show("res");
+  }
+
+  $("rRetry").onclick = function(){ start(S.set); };
+  $("rHome").onclick = function(){ S=null; renderHome(); show("home"); };
+
+  /* ---------- THEME ---------- */
+  var themeBtn = $("themebtn"), THEME_KEY = "lt_theme_v1";
+  function applyTheme(t){
+    if(t==="light"||t==="dark"){ document.documentElement.setAttribute("data-theme", t); }
+    else { document.documentElement.removeAttribute("data-theme"); }
+  }
+  var theme = LS.get(THEME_KEY, "auto");
+  applyTheme(theme);
+  themeBtn.title = "Theme: "+theme;
+  themeBtn.onclick = function(){
+    var order = ["auto","light","dark"];
+    theme = order[(order.indexOf(theme)+1) % order.length];
+    applyTheme(theme); LS.set(THEME_KEY, theme);
+    themeBtn.title = "Theme: "+theme;
+  };
+
+  setMode(mode);
+  renderHome();
+  show("home");
+})();
+</script>
+
+</body>
+</html>
