@@ -72,9 +72,11 @@
     <p class="qtopic" id="qTopic">Topic</p>
     <p class="qtext" id="qText">Question</p>
     <div class="opts" id="qOpts" role="radiogroup" aria-labelledby="qText"></div>
+    <div class="hint" id="qHint" hidden><span class="v">Hint</span><p id="qHintText"></p></div>
     <div class="expl" id="qExpl" hidden><span class="v" id="qVerdict"></span><span class="log" id="qLog"></span><p id="qExplText"></p></div>
     <div class="nav">
       <button class="btn" id="qPrev">Back</button>
+      <button class="btn warn" id="qHintBtn">Hint</button>
       <div class="sp"></div>
       <button class="btn" id="qQuit">Leave set</button>
       <button class="btn pri" id="qNext" disabled>Check answer</button>
@@ -239,12 +241,12 @@
       if(!q) continue;
       var ord = order(k, q.o.length);
       items.push({
-        gi:k, topic:q.t, text:q.q, expl:q.e,
+        gi:k, topic:q.t, text:q.q, expl:q.e, hint:q.h,
         opts: ord.map(function(x){ return q.o[x]; }),
         ans: ord.indexOf(q.a)
       });
     }
-    S = {set:i, items:items, answers:items.map(function(){return null;}), checked:items.map(function(){return false;}), cur:0};
+    S = {set:i, items:items, answers:items.map(function(){return null;}), checked:items.map(function(){return false;}), hinted:items.map(function(){return false;}), cur:0};
     $("qSetName").textContent = "Set "+(i+1)+" · "+SETS[i].n;
     show("quiz"); renderQ();
   }
@@ -271,6 +273,16 @@
     Array.prototype.forEach.call($("qOpts").querySelectorAll(".opt"), function(el){
       el.onclick = function(){ pick(parseInt(el.dataset.i,10)); };
     });
+
+    var hintBtn = $("qHintBtn"), hint = $("qHint");
+    if(isChecked){
+      hintBtn.hidden = true; hint.hidden = true;
+    } else {
+      hintBtn.hidden = false;
+      hintBtn.disabled = S.hinted[S.cur];
+      hint.hidden = !S.hinted[S.cur];
+      if(S.hinted[S.cur]) $("qHintText").innerHTML = fmt(it.hint);
+    }
 
     var ex = $("qExpl");
     if(isChecked){
@@ -311,6 +323,12 @@
     renderQ();
   }
 
+  $("qHintBtn").onclick = function(){
+    S.hinted[S.cur] = true;
+    $("qHint").hidden = false;
+    $("qHintText").innerHTML = fmt(S.items[S.cur].hint);
+    $("qHintBtn").disabled = true;
+  };
   $("qPrev").onclick = function(){ if(S.cur>0){ S.cur--; renderQ(); } };
   $("qQuit").onclick = function(){ homeBtn.onclick(); };
   $("qNext").onclick = function(){
