@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Subnet Bench</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="app.css">
+<style>
+  :root{ color-scheme: light dark; }
+  html,body{ margin:0; }
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <div class="logo"><span class="mark" aria-hidden="true">/n</span><span>Subnet Bench</span><b>ICNF102</b></div>
+    <div class="sp"></div>
+    <button class="iconbtn" id="themebtn" aria-label="Switch theme" title="Switch theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <a class="btn sm" href="../">All modules</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="kicker">Traditional subnetting · worked step by step</p>
+    <h1>Given a network and a number of subnets, work the whole problem by hand.</h1>
+    <p>Every step explains the rule before you apply it — this is built to teach the method, not just mark it. Generate a new problem any time; nothing is timed.</p>
+    <div class="stats">
+      <div class="stat"><span class="k">Solved</span><span class="v" id="stSolved">0</span></div>
+      <div class="stat"><span class="k">Checked</span><span class="v" id="stChecked">0</span></div>
+    </div>
+  </div>
+
+  <details class="cheat" id="cheat">
+    <summary>How traditional subnetting works — the short version</summary>
+    <div class="cheat-body">
+      <p>Every IPv4 address has a default class, and each class has a default (classful) mask. Traditional subnetting starts from that default mask and borrows bits from the host portion to create equal-sized subnets.</p>
+      <table>
+        <tr><th>Class</th><th>First octet</th><th>Default mask</th><th>Default prefix</th></tr>
+        <tr><td>A</td><td>1 – 126</td><td class="mono">255.0.0.0</td><td class="mono">/8</td></tr>
+        <tr><td>B</td><td>128 – 191</td><td class="mono">255.255.0.0</td><td class="mono">/16</td></tr>
+        <tr><td>C</td><td>192 – 223</td><td class="mono">255.255.255.0</td><td class="mono">/24</td></tr>
+      </table>
+      <p>The four things every problem asks for, in order:</p>
+      <div class="fm">1. Bits to borrow (n) — smallest n where 2^n &gt;= subnets needed
+2. New prefix = default prefix + n → convert to a dotted-decimal mask
+3. Usable hosts per subnet = 2^(32 − new prefix) − 2
+4. Each subnet's network address = previous network + block size,
+   where block size = 2^(32 − new prefix)</div>
+      <p>The full worked walkthrough with diagrams lives in sheet 10 of the <a href="../icnf102-study-guide/#m10">field reference guide</a> — come back here to drill it once you've read it.</p>
+    </div>
+  </details>
+
+  <div class="problem" id="problem">
+    <!-- rendered by JS -->
+  </div>
+
+  <div class="foot">
+    <span><b>Subnet Bench</b> — bench companion to the ICNF102 field reference</span>
+    <span>Progress is saved in this browser only</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- math ---------- */
+  function ipToInt(o){ return ((o[0]<<24)>>>0) + (o[1]<<16) + (o[2]<<8) + o[3]; }
+  function intToIp(n){ n = n >>> 0; return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.'); }
+  function prefixToMaskOctets(p){
+    var m=[0,0,0,0];
+    for(var i=0;i<4;i++){
+      var bits = Math.min(8, Math.max(0, p - i*8));
+      m[i] = bits===0 ? 0 : (256 - Math.pow(2,8-bits));
+    }
+    return m;
+  }
+  function prefixToMask(p){ return prefixToMaskOctets(p).join('.'); }
+  function bitsNeeded(req){ var n=0; while(Math.pow(2,n) < req) n++; return n; }
+  function parseIp(s){
+    if(typeof s !== "string") return null;
+    var t = s.trim();
+    if(!/^\d{1,3}(\.\d{1,3}){3}$/.test(t)) return null;
+    var parts = t.split('.').map(Number);
+    if(parts.some(function(x){ return x<0 || x>255 || isNaN(x); })) return null;
+    return parts.join('.');
+  }
+
+  var CLASSES = [
+    {name:"A", defaultPrefix:8,  bases:[[10,0,0,0]]},
+    {name:"B", defaultPrefix:16, bases:[[172,16,0,0],[172,20,0,0],[172,24,0,0],[172,30,0,0]]},
+    {name:"C", defaultPrefix:24, bases:[[192,168,1,0],[192,168,10,0],[192,168,20,0],[192,168,50,0],[192,168,100,0],[192,168,200,0]]}
+  ];
+  function genProblem(){
+    var roll = Math.random();
+    var cls = roll < 0.55 ? CLASSES[2] : roll < 0.85 ? CLASSES[1] : CLASSES[0];
+    var base = cls.bases[Math.floor(Math.random()*cls.bases.length)];
+    var hostBitsAvail = 32 - cls.defaultPrefix;
+    var maxN = Math.min(5, hostBitsAvail-2);
+    var n = 1 + Math.floor(Math.random()*maxN);
+    var lo = Math.pow(2,n-1)+1, hi = Math.pow(2,n);
+    var requiredSubnets = lo + Math.floor(Math.random()*(hi-lo+1));
+
+    var newPrefix = cls.defaultPrefix + n;
+    var hostBits = 32 - newPrefix;
+    var hostsPerSubnet = Math.pow(2,hostBits) - 2;
+    var totalSubnets = Math.pow(2,n);
+    var increment = Math.pow(2,hostBits);
+    var baseInt = ipToInt(base);
+    var subnets = [];
+    for(var i=0;i<totalSubnets;i++){
+      var netInt = (baseInt + i*increment) >>> 0;
+      var bcastInt = (netInt + increment - 1) >>> 0;
+      subnets.push({ network:intToIp(netInt), first:intToIp(netInt+1), last:intToIp(bcastInt-1), broadcast:intToIp(bcastInt) });
+    }
+    return {
+      class:cls.name, base:base.join('.'), defaultPrefix:cls.defaultPrefix,
+      requiredSubnets:requiredSubnets, bitsNeeded:n, newPrefix:newPrefix, newMask:prefixToMask(newPrefix),
+      hostsPerSubnet:hostsPerSubnet, totalSubnets:totalSubnets, increment:increment, subnets:subnets
+    };
+  }
+
+  /* ---------- storage ---------- */
+  var LS = {
+    get:function(k,f){ try{ var v=localStorage.getItem(k); return v===null?f:JSON.parse(v); }catch(e){ return f; } },
+    set:function(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  };
+  var SESSION_KEY = "sd_session_v1", STATS_KEY = "sd_stats_v1";
+  var stats = LS.get(STATS_KEY, {solved:0, checked:0});
+  function saveStats(){ LS.set(STATS_KEY, stats); }
+  function saveSession(){ LS.set(SESSION_KEY, STATE); }
+
+  function blankAnswers(){
+    return { n:"", newPrefix:"", newMask:"", hosts:"", total:"",
+      sub0:{network:"",first:"",last:"",broadcast:""},
+      sub1:{network:"",first:"",last:"",broadcast:""} };
+  }
+  var STATE = LS.get(SESSION_KEY, null);
+  if(!STATE || !STATE.problem){ STATE = { problem: genProblem(), answers: blankAnswers(), checked:false, countedSolved:false }; }
+
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+
+  /* ---------- rendering ---------- */
+  function fieldHtml(key, label, value, width, fb){
+    var cls = "field" + (width==="sm" ? " sm" : width==="ip" ? " ip" : "") + (fb ? (fb.ok ? " ok" : " no") : "");
+    return '<div class="'+cls+'">'
+      + '<label for="f_'+key+'">'+esc(label)+'</label>'
+      + '<input id="f_'+key+'" data-k="'+key+'" type="text" autocomplete="off" spellcheck="false" value="'+esc(value)+'"'+(STATE.checked?' disabled':'')+'>'
+      + '<span class="fb">'+(fb ? esc(fb.text) : "")+'</span>'
+      + '</div>';
+  }
+
+  function grade(){
+    var p = STATE.problem, a = STATE.answers, fb = {};
+    fb.n = { ok: parseInt(a.n,10) === p.bitsNeeded, text: parseInt(a.n,10)===p.bitsNeeded ? "correct" : ("should be "+p.bitsNeeded) };
+    fb.newPrefix = { ok: parseInt(a.newPrefix,10) === p.newPrefix, text: parseInt(a.newPrefix,10)===p.newPrefix ? "correct" : ("should be /"+p.newPrefix) };
+    fb.newMask = { ok: parseIp(a.newMask) === p.newMask, text: parseIp(a.newMask)===p.newMask ? "correct" : ("should be "+p.newMask) };
+    fb.hosts = { ok: parseInt(a.hosts,10) === p.hostsPerSubnet, text: parseInt(a.hosts,10)===p.hostsPerSubnet ? "correct" : ("should be "+p.hostsPerSubnet) };
+    fb.total = { ok: parseInt(a.total,10) === p.totalSubnets, text: parseInt(a.total,10)===p.totalSubnets ? "correct" : ("should be "+p.totalSubnets) };
+    ["sub0","sub1"].forEach(function(sk,i){
+      var target = p.subnets[i];
+      ["network","first","last","broadcast"].forEach(function(f){
+        var k = sk+"_"+f;
+        var got = parseIp(a[sk][f]);
+        fb[k] = { ok: got === target[f], text: got===target[f] ? "correct" : ("should be "+target[f]) };
+      });
+    });
+    return fb;
+  }
+
+  function render(){
+    var p = STATE.problem, a = STATE.answers;
+    var fb = STATE.checked ? grade() : null;
+    var allOk = fb ? Object.keys(fb).every(function(k){ return fb[k].ok; }) : false;
+
+    var ladderRows = "";
+    for(var k=1; k<p.bitsNeeded; k++){
+      ladderRows += "2^"+k+" = "+Math.pow(2,k)+"  (too few — need at least "+p.requiredSubnets+")\n";
+    }
+
+    var html = ''
+      + '<div class="problem-top"><span class="tag">Class '+p.class+' · default /'+p.defaultPrefix+'</span><span class="sp"></span>'
+      + '<button class="btn sm" id="newProblem">New problem</button></div>'
+      + '<h2>Given</h2>'
+      + '<p class="given">Network <b>'+p.base+'</b> — you need at least <b>'+p.requiredSubnets+'</b> subnets.</p>'
+
+      + '<div class="step"><div class="step-h"><span class="n">1</span><h3>How many bits do you need to borrow?</h3></div>'
+      + '<p class="explain">Subnetting borrows bits from the host portion. Each borrowed bit doubles the number of subnets you can make, so find the smallest n where 2<sup>n</sup> is at least the number of subnets you need.</p>'
+      + (ladderRows ? '<div class="ladder">'+esc(ladderRows).replace(/\n/g,'<br>')+'</div>' : '')
+      + '<div class="fields">' + fieldHtml("n","Bits to borrow (n)", a.n, "sm", fb && fb.n) + '</div></div>'
+
+      + '<div class="step"><div class="step-h"><span class="n">2</span><h3>New prefix and subnet mask</h3></div>'
+      + '<p class="explain">The new prefix length is the default prefix ('+ '/'+p.defaultPrefix +') plus the bits you just borrowed. Convert that prefix length into a dotted-decimal mask.</p>'
+      + '<div class="fields">'
+        + fieldHtml("newPrefix","New prefix (just the number)", a.newPrefix, "sm", fb && fb.newPrefix)
+        + fieldHtml("newMask","Subnet mask", a.newMask, "ip", fb && fb.newMask)
+      + '</div></div>'
+
+      + '<div class="step"><div class="step-h"><span class="n">3</span><h3>Hosts per subnet, and how many subnets this makes</h3></div>'
+      + '<p class="explain">Whatever bits are left after the new prefix belong to hosts. Usable hosts = 2<sup>host bits</sup> − 2 (the all-zeros network address and all-ones broadcast address are reserved and not usable). Borrowing n bits always creates exactly 2<sup>n</sup> subnets, whether or not you need all of them.</p>'
+      + '<div class="fields">'
+        + fieldHtml("hosts","Usable hosts / subnet", a.hosts, "sm", fb && fb.hosts)
+        + fieldHtml("total","Total subnets created", a.total, "sm", fb && fb.total)
+      + '</div></div>'
+
+      + '<div class="step"><div class="step-h"><span class="n">4</span><h3>Work out the first two subnets</h3></div>'
+      + '<p class="explain">The first subnet starts at the given network address. Every next subnet\'s network address is the previous one plus the block size (the increment) — the same number as "usable hosts + 2" from step 3. Within each subnet: first usable = network + 1, broadcast = the last address in the block, last usable = broadcast − 1.</p>'
+      + subrow(0, a.sub0, fb)
+      + subrow(1, a.sub1, fb)
+      + '</div>'
+
+      + '<div class="checkwrap"><button class="btn pri" id="checkBtn"'+(STATE.checked?' disabled':'')+'>Check my work</button>'
+      + (STATE.checked ? '<span class="score-line '+(allOk?"ok":"no")+'">'+(allOk ? "All correct." : "Some fields need another look — corrections shown above.")+'</span>' : '')
+      + '<button class="btn sm" id="revealBtn">'+(revealed?"Hide full table":"Reveal full table")+'</button></div>'
+      + (revealed ? tableHtml(p) : '');
+
+    $("problem").innerHTML = html;
+    wire();
+  }
+
+  function subrow(i, ans, fb){
+    var sk = "sub"+i;
+    return '<div class="subrow"><span class="rowlbl">#'+(i+1)+'</span>'
+      + fieldHtml(sk+"_network","Network", ans.network, "ip", fb && fb[sk+"_network"])
+      + fieldHtml(sk+"_first","First usable", ans.first, "ip", fb && fb[sk+"_first"])
+      + fieldHtml(sk+"_last","Last usable", ans.last, "ip", fb && fb[sk+"_last"])
+      + fieldHtml(sk+"_broadcast","Broadcast", ans.broadcast, "ip", fb && fb[sk+"_broadcast"])
+      + '</div>';
+  }
+
+  function tableHtml(p){
+    var rows = "";
+    p.subnets.forEach(function(s,i){
+      rows += '<tr><td>'+(i+1)+'</td><td>'+s.network+'</td><td>'+s.first+'</td><td>'+s.last+'</td><td>'+s.broadcast+'</td></tr>';
+    });
+    return '<div class="tablewrap"><table class="subtable"><tr><th>#</th><th>Network</th><th>First usable</th><th>Last usable</th><th>Broadcast</th></tr>'+rows+'</table></div>';
+  }
+
+  var revealed = false;
+
+  function wire(){
+    $("newProblem").onclick = function(){
+      STATE = { problem: genProblem(), answers: blankAnswers(), checked:false, countedSolved:false };
+      revealed = false;
+      saveSession();
+      render();
+    };
+    $("checkBtn").onclick = function(){
+      STATE.checked = true;
+      var fb = grade();
+      var allOk = Object.keys(fb).every(function(k){ return fb[k].ok; });
+      stats.checked++;
+      if(allOk && !STATE.countedSolved){ stats.solved++; STATE.countedSolved = true; }
+      saveStats(); saveSession();
+      renderStats();
+      render();
+    };
+    $("revealBtn").onclick = function(){ revealed = !revealed; render(); };
+    Array.prototype.forEach.call($("problem").querySelectorAll("input[data-k]"), function(el){
+      el.oninput = function(){
+        var k = el.dataset.k;
+        if(k.indexOf("sub0_")===0) STATE.answers.sub0[k.slice(5)] = el.value;
+        else if(k.indexOf("sub1_")===0) STATE.answers.sub1[k.slice(5)] = el.value;
+        else STATE.answers[k] = el.value;
+        saveSession();
+      };
+    });
+  }
+
+  function renderStats(){
+    $("stSolved").textContent = stats.solved;
+    $("stChecked").textContent = stats.checked;
+  }
+
+  /* ---------- theme ---------- */
+  var themeBtn = $("themebtn"), THEME_KEY = "sd_theme_v1";
+  function applyTheme(t){
+    if(t==="light"||t==="dark"){ document.documentElement.setAttribute("data-theme", t); }
+    else { document.documentElement.removeAttribute("data-theme"); }
+  }
+  var theme = LS.get(THEME_KEY, "auto");
+  applyTheme(theme);
+  themeBtn.title = "Theme: "+theme;
+  themeBtn.onclick = function(){
+    var order = ["auto","light","dark"];
+    theme = order[(order.indexOf(theme)+1) % order.length];
+    applyTheme(theme); LS.set(THEME_KEY, theme);
+    themeBtn.title = "Theme: "+theme;
+  };
+
+  renderStats();
+  render();
+})();
+</script>
+</body>
+</html>
