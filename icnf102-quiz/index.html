@@ -137,10 +137,14 @@
 
   var LS = {
     get:function(k,f){ try{ var v=localStorage.getItem(k); return v===null?f:JSON.parse(v); }catch(e){ return f; } },
-    set:function(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+    set:function(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} },
+    remove:function(k){ try{ localStorage.removeItem(k); }catch(e){} }
   };
   var best = LS.get("pd_best_v1", {});
   var mode = LS.get("pd_mode_v1", "study");
+  var SESSION_KEY = "lt_session_v1";
+  function saveSession(){ if(S) LS.set(SESSION_KEY, S); }
+  function clearSession(){ LS.remove(SESSION_KEY); }
 
   // stable per-question option shuffle so a question always looks the same
   function rng(seed){
@@ -230,7 +234,7 @@
     if(!quiz.hidden && S && S.answers.some(function(a){return a!==null;})){
       if(!confirm("Leave this set? Your answers so far will be discarded.")) return;
     }
-    S=null; renderHome(); show("home");
+    S=null; clearSession(); renderHome(); show("home");
   };
 
   /* ---------- QUIZ ---------- */
@@ -247,8 +251,18 @@
       });
     }
     S = {set:i, items:items, answers:items.map(function(){return null;}), checked:items.map(function(){return false;}), hinted:items.map(function(){return false;}), cur:0};
+    saveSession();
     $("qSetName").textContent = "Set "+(i+1)+" · "+SETS[i].n;
     show("quiz"); renderQ();
+  }
+
+  function resumeSession(){
+    var saved = LS.get(SESSION_KEY, null);
+    if(!saved || !saved.items || !saved.items.length) return false;
+    S = saved;
+    $("qSetName").textContent = "Set "+(S.set+1)+" · "+SETS[S.set].n;
+    show("quiz"); renderQ();
+    return true;
   }
 
   function renderQ(){
@@ -320,22 +334,24 @@
   function pick(i){
     if(S.checked[S.cur]) return;
     S.answers[S.cur] = i;
+    saveSession();
     renderQ();
   }
 
   $("qHintBtn").onclick = function(){
     S.hinted[S.cur] = true;
+    saveSession();
     $("qHint").hidden = false;
     $("qHintText").innerHTML = fmt(S.items[S.cur].hint);
     $("qHintBtn").disabled = true;
   };
-  $("qPrev").onclick = function(){ if(S.cur>0){ S.cur--; renderQ(); } };
+  $("qPrev").onclick = function(){ if(S.cur>0){ S.cur--; saveSession(); renderQ(); } };
   $("qQuit").onclick = function(){ homeBtn.onclick(); };
   $("qNext").onclick = function(){
     if(S.answers[S.cur]===null) return;
-    if(mode==="study" && !S.checked[S.cur]){ S.checked[S.cur] = true; renderQ(); return; }
+    if(mode==="study" && !S.checked[S.cur]){ S.checked[S.cur] = true; saveSession(); renderQ(); return; }
     S.checked[S.cur] = true;
-    if(S.cur < S.items.length-1){ S.cur++; renderQ(); }
+    if(S.cur < S.items.length-1){ S.cur++; saveSession(); renderQ(); }
     else finish();
   };
 
@@ -423,6 +439,7 @@
     var nb = $("rNextSet");
     if(nextI<SETS.length){ nb.hidden=false; nb.textContent = "Next set · "+SETS[nextI].n; nb.onclick=function(){ start(nextI); }; }
     else { nb.hidden=true; }
+    clearSession();
     show("res");
   }
 
@@ -446,8 +463,7 @@
   };
 
   setMode(mode);
-  renderHome();
-  show("home");
+  if(!resumeSession()){ renderHome(); show("home"); }
 })();
 </script>
 
