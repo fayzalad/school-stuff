@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STAV102 Test 2 Study Guide</title>
+<style>
+:root{
+  --bg:#fbfaf8; --panel:#ffffff; --ink:#1c1a17; --muted:#6a645c;
+  --line:#e4e0d9; --accent:#0f5b8c; --accent2:#b3860a; --ok:#1e7a4a; --warn:#a8371f;
+  --code:#f4f2ee;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px 90px;}
+
+/* ---------- header ---------- */
+header.top{background:linear-gradient(160deg,#0d4f79,#0f5b8c 45%,#14709f);color:#fff;
+  padding:38px 22px 30px;margin-bottom:0;}
+header.top .inner{max-width:1180px;margin:0 auto}
+header.top h1{margin:0 0 6px;font-size:2.15rem;letter-spacing:-.5px}
+header.top .sub{opacity:.9;font-size:1.02rem;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+  padding:7px 13px;border-radius:999px;font-size:.85rem;font-family:system-ui,sans-serif}
+.badge b{font-weight:700}
+
+/* ---------- layout ---------- */
+.layout{display:grid;grid-template-columns:250px 1fr;gap:34px;align-items:start;margin-top:30px}
+nav.toc{position:sticky;top:14px;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 14px;font-family:system-ui,sans-serif;font-size:.85rem;
+  max-height:calc(100vh - 30px);overflow:auto}
+nav.toc h4{margin:0 0 10px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+nav.toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 8px;border-radius:6px;line-height:1.35}
+nav.toc a:hover{background:#eef4f8;color:var(--accent)}
+nav.toc a.sub{padding-left:20px;font-size:.8rem;color:var(--muted)}
+nav.toc .grp{margin-bottom:10px}
+.layout>*{min-width:0}
+.plan .c{min-width:0}
+code,kbd{overflow-wrap:anywhere}
+@media(max-width:900px){.layout{grid-template-columns:1fr}nav.toc{position:static;max-height:none}}
+@media(max-width:560px){.wrap{padding:0 12px 60px}section{padding:18px 16px}header.top h1{font-size:1.6rem}}
+
+/* ---------- sections ---------- */
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:26px 30px;margin-bottom:26px;scroll-margin-top:16px}
+h2{font-size:1.6rem;margin:0 0 4px;color:var(--accent);letter-spacing:-.3px}
+h2 .unit{display:inline-block;background:var(--accent);color:#fff;font-family:system-ui,sans-serif;
+  font-size:.65rem;letter-spacing:.1em;padding:4px 9px;border-radius:5px;vertical-align:middle;
+  margin-right:10px;text-transform:uppercase}
+h3{font-size:1.18rem;margin:30px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+h4{font-size:1.02rem;margin:20px 0 6px;color:#38332c}
+p{margin:9px 0}
+ul,ol{margin:9px 0;padding-left:24px}
+li{margin:5px 0}
+.lede{color:var(--muted);font-size:1.02rem;margin-bottom:4px}
+
+/* ---------- components ---------- */
+.def{background:#f7f9fb;border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.def b:first-child{color:var(--accent)}
+.tip{background:#fbf7ec;border-left:4px solid var(--accent2);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warnbox{background:#fdf3f0;border-left:4px solid var(--warn);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.okbox{background:#f0f8f3;border-left:4px solid var(--ok);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.tag{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:4px;font-weight:700;display:inline-block;vertical-align:middle}
+.tag.given{background:#e2f0e8;color:#1e7a4a}
+.tag.learn{background:#fbe9e4;color:#a8371f}
+
+.fml{background:var(--code);border:1px solid var(--line);border-radius:9px;padding:14px 18px;
+  margin:14px 0;font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.06rem;text-align:center;overflow-x:auto}
+.fml .lbl{display:block;font-family:system-ui,sans-serif;font-size:.7rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:7px;text-align:left}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 3px}
+.frac .n{display:block;padding:0 6px 2px;border-bottom:1.4px solid var(--ink)}
+.frac .d{display:block;padding:2px 6px 0}
+.sq{border-top:1.4px solid var(--ink);padding:2px 5px 0;margin-left:-3px}
+
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.92rem;
+  font-family:system-ui,-apple-system,sans-serif}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:center}
+th{background:#eef2f6;font-weight:700;font-size:.85rem}
+td.l,th.l{text-align:left}
+tr.tot td{background:#f6f4f0;font-weight:700}
+.hl{background:#fff6d9!important}
+.tblwrap{overflow-x:auto}
+
+details.wex{border:1px solid var(--line);border-radius:10px;margin:16px 0;background:#fcfcfb;overflow:hidden}
+details.wex>summary{cursor:pointer;padding:12px 16px;background:#f2f5f8;font-weight:700;
+  font-family:system-ui,sans-serif;font-size:.92rem;list-style:none;display:flex;
+  justify-content:space-between;align-items:center;gap:10px}
+details.wex>summary::-webkit-details-marker{display:none}
+details.wex>summary::after{content:"show ▸";font-weight:600;font-size:.75rem;color:var(--accent);white-space:nowrap}
+details.wex[open]>summary::after{content:"hide ▾"}
+details.wex>summary:hover{background:#e8eef4}
+details.wex .body{padding:6px 18px 16px}
+details.wex.q>summary{background:#fbf7ec}
+details.wex.q>summary:hover{background:#f6efdd}
+
+.steps{counter-reset:st;padding-left:0;list-style:none}
+.steps>li{counter-increment:st;position:relative;padding-left:38px;margin:12px 0}
+.steps>li::before{content:counter(st);position:absolute;left:0;top:1px;width:25px;height:25px;
+  background:var(--accent);color:#fff;border-radius:50%;display:grid;place-items:center;
+  font:700 .8rem system-ui,sans-serif}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fcfcfb}
+.card h5{margin:0 0 6px;font-size:.95rem;font-family:system-ui,sans-serif}
+
+.mcq{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0;background:#fcfcfb}
+.mcq .qn{font-weight:700;font-family:system-ui,sans-serif;font-size:.8rem;color:var(--accent);
+  letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px}
+.opts{list-style:none;padding:0;margin:8px 0}
+.opts li{margin:4px 0;padding:6px 11px;border:1px solid var(--line);border-radius:7px;
+  cursor:pointer;font-family:system-ui,sans-serif;font-size:.9rem;background:#fff;transition:.12s}
+.opts li:hover{border-color:var(--accent);background:#f4f8fb}
+.opts li.right{background:#e6f5ec;border-color:var(--ok);font-weight:600}
+.opts li.wrong{background:#fbeae6;border-color:var(--warn);text-decoration:line-through;opacity:.75}
+.expl{display:none;margin-top:10px;padding:10px 13px;background:#f3f6f9;border-radius:7px;font-size:.92rem}
+.expl.on{display:block}
+
+.plan{display:grid;grid-template-columns:96px 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.plan .d{background:var(--accent);color:#fff;padding:14px 12px;font-family:system-ui,sans-serif;
+  border-bottom:1px solid rgba(255,255,255,.2)}
+.plan .d b{display:block;font-size:1.02rem}
+.plan .d span{font-size:.72rem;opacity:.85}
+.plan .c{padding:13px 16px;border-bottom:1px solid var(--line);font-size:.94rem}
+.plan>div:nth-last-child(-n+2){border-bottom:none}
+
+kbd,code{background:var(--code);border:1px solid var(--line);border-radius:4px;padding:1px 6px;
+  font:.88em ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.calcstep{font-family:"Cambria Math",Cambria,Georgia,serif;background:var(--code);padding:9px 14px;
+  border-radius:7px;margin:9px 0;overflow-x:auto}
+.ans{color:var(--ok);font-weight:700}
+.chk{font-family:system-ui,sans-serif;font-size:.86rem}
+.chk label{display:flex;gap:9px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.chk input{margin-top:4px;width:15px;height:15px;flex:none;accent-color:var(--accent)}
+hr.soft{border:none;border-top:1px solid var(--line);margin:26px 0}
+.ascii{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px 18px;
+  font:.86rem/1.45 ui-monospace,Menlo,Consolas,monospace;white-space:pre;overflow-x:auto;margin:14px 0}
+footer{text-align:center;color:var(--muted);font-size:.85rem;font-family:system-ui,sans-serif;padding:30px 0}
+
+@media print{
+  @page{size:A4;margin:14mm 12mm 16mm}
+  html,body{width:auto}
+  body{font-size:9.6pt;line-height:1.42}
+  .wrap{max-width:100%!important;width:100%!important;padding:0!important;margin:0!important}
+  header.top{background:#0f5b8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;
+    padding:16px 0 14px!important;margin:0 0 10px!important}
+  header.top .inner{max-width:100%!important;padding:0!important}
+  header.top h1{font-size:17pt}
+  nav.toc{display:none!important}
+  .layout{display:block!important}
+  main{display:block;width:100%}
+  section{border:none!important;padding:0 0 6px!important;margin:0 0 10px!important;border-radius:0;background:none}
+  details.wex{border:1px solid #ddd;background:none;break-inside:avoid}
+  details.wex>summary::after,details.wex[open]>summary::after{content:none!important;display:none!important}
+  details.wex>summary{background:#eef2f6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:7px 10px;font-size:9.4pt}
+  details.wex .body{padding:4px 10px 9px}
+  h2{font-size:14pt}h3{font-size:11.6pt;margin:14px 0 5px}h4{font-size:10.2pt;margin:11px 0 4px}
+  h2,h3,h4{break-after:avoid-page}
+  table{font-size:8.1pt;table-layout:auto;width:100%}
+  th,td{padding:3px 4px;word-wrap:break-word}
+  .tblwrap{overflow:visible}
+  .ascii{font-size:6.6pt;line-height:1.28;padding:7px 9px;white-space:pre;overflow:hidden}
+  .calcstep{font-size:9pt;padding:6px 8px;white-space:normal;overflow-wrap:anywhere}
+  .fml{font-size:9.6pt;padding:8px 10px}
+  .grid2,.grid3{display:block}
+  .grid2>*,.grid3>*{margin-bottom:8px}
+  .card,.def,.tip,.warnbox,.okbox,.note{break-inside:avoid}
+  .mcq{break-inside:avoid;padding:9px 11px}
+  .expl{display:block!important}
+  .opts li{padding:3px 7px;font-size:8.6pt}
+  .plan{grid-template-columns:74px 1fr}
+  .plan .d{padding:8px;background:#0f5b8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .plan .c{padding:8px 10px;font-size:8.8pt}
+  .badges{gap:5px}.badge{font-size:7.2pt;padding:4px 8px;background:rgba(255,255,255,.18)!important;-webkit-print-color-adjust:exact}
+  .chk label{padding:2px 0;font-size:8.8pt}
+  footer{font-size:8pt}
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="inner">
+<a href="../" style="display:inline-block;margin-bottom:10px;color:inherit;opacity:.85;font:500 .82rem system-ui,sans-serif;text-decoration:none">&larr; All modules</a>
+<h1>STAV102 — Semester Test 2 Study Guide</h1>
+<p class="sub">Unit 5 Probability Distributions → Unit 8 Hypothesis Testing · built from the notes, example packs, unit solutions and every lecture/example video</p>
+<div class="badges">
+<span class="badge"><b>Test:</b> Saturday 10 October 2026</span>
+<span class="badge"><b>Scope:</b> Units 5, 6, 7, 8</span>
+<span class="badge"><b>Expect:</b> Part 1 long Qs + Part 2 MCQ</span>
+<span class="badge"><b>Answers:</b> 3 decimals</span>
+</div>
+</div></header>
+<div class="wrap">
+<div class="layout">
+<nav class="toc">
+<div class="grp"><h4>Start here</h4>
+<a href="#how">How to use this guide</a>
+<a href="#format">What the test looks like</a>
+<a href="#plan">7-day plan</a>
+<a href="#formula">Formula sheet: given vs learn</a>
+</div>
+<div class="grp"><h4>Unit 5</h4>
+<a href="#u5">Probability distributions</a>
+<a class="sub" href="#u5-disc">Discrete, E(X), V(X)</a>
+<a class="sub" href="#u5-bin">Binomial</a>
+<a class="sub" href="#u5-poi">Poisson</a>
+<a class="sub" href="#u5-norm">Normal</a>
+<a class="sub" href="#u5-inv">Inverse normal</a>
+</div>
+<div class="grp"><h4>Unit 6</h4>
+<a href="#u6">Sampling distributions</a>
+<a class="sub" href="#u6-clt">Central Limit Theorem</a>
+<a class="sub" href="#u6-prop">Sample proportion</a>
+</div>
+<div class="grp"><h4>Unit 7</h4>
+<a href="#u7">Confidence intervals</a>
+<a class="sub" href="#u7-mu">CI for μ (z / t)</a>
+<a class="sub" href="#u7-n">Sample size</a>
+<a class="sub" href="#u7-p">CI for p</a>
+<a class="sub" href="#u7-var">CI for σ²</a>
+<a class="sub" href="#u7-sum">Summary table</a>
+</div>
+<div class="grp"><h4>Unit 8</h4>
+<a href="#u8">Hypothesis testing</a>
+<a class="sub" href="#u8-six">The six steps</a>
+<a class="sub" href="#u8-which">Which test? (decision tree)</a>
+<a class="sub" href="#u8-mu">Mean</a>
+<a class="sub" href="#u8-p">Proportion</a>
+<a class="sub" href="#u8-var">Variance</a>
+<a class="sub" href="#u8-two">Two populations</a>
+<a class="sub" href="#u8-tables">Reading t &amp; χ² tables</a>
+</div>
+<div class="grp"><h4>Finish</h4>
+<a href="#videos">What the lecture videos add</a>
+<a href="#errata">Errors in the notes &amp; memos</a>
+<a href="#traps">Top exam traps</a>
+<a href="#calc">Calculator skills</a>
+<a href="#check">Final checklist</a>
+</div>
+</nav>
+<main>
+
+<section id="how">
+<h2>How to use this guide</h2>
+<p>This guide covers <b>only Units 5–8</b> (the Test 2 scope announced on 30 September). Each unit section has the theory in the order of the notes, the formulas (marked <span class="tag given">given</span> if they're on the formula sheet), and collapsible worked examples taken from the notes, the example packs, the unit solutions and the lecture videos. Grey "show ▸" boxes hide the working so you can try first.</p>
+<p>Three companion pages:</p>
+<div class="grid3">
+<div class="card"><h5><a href="../stav102-quiz/">MCQ Drill →</a></h5>68 multiple-choice questions with instant marking and explanations. Has a 20-question "test sim" mode and a "only the ones I got wrong" mode.</div>
+<div class="card"><h5><a href="../stav102-mock-papers/">Mock Papers →</a></h5>Two full mock tests in the real layout (Part 1 long questions [30] + Part 2 MCQ [20]) with mark-by-mark memos.</div>
+<div class="card"><h5><a href="../stav102-cheat-sheet/">Cheat Sheet →</a></h5>One page: the "which formula?" decisions, critical values and conclusion templates. Read it the night before and the morning of the test.</div>
+</div>
+<div class="tip"><b>The single biggest difference between a pass and a distinction on this test</b> is choosing the right tool: binomial vs Poisson, σ vs σ/√n, z vs t, one-tailed vs two-tailed, paired vs independent. The arithmetic is easy once the choice is right. Every unit below ends in a "which one?" table — those are the parts to know cold.</div>
+</section>
+
+<section id="format">
+<h2>What the test looks like</h2>
+<p>Based on the 2025 and 2019 Semester Test 1 papers (same department, same examiners — Dr Mangisa, Ms Alexander, Mr Ngcobo, Dr Kepe):</p>
+<div class="tblwrap"><table>
+<tr><th class="l">Part</th><th class="l">What</th><th>Marks</th><th class="l">How to answer</th></tr>
+<tr><td class="l">Part 1</td><td class="l">3–4 long questions, each split into (i), (ii), (iii)…</td><td>≈ 30</td><td class="l">On the question paper. Show formula → substitution → answer. Method marks are given.</td></tr>
+<tr><td class="l">Part 2</td><td class="l">20 multiple-choice, options a)–e), e) is usually "None of the above"</td><td>20</td><td class="l">On the bubble sheet, pencil. Questions come in scenario blocks ("For questions 5 to 7 consider…").</td></tr>
+</table></div>
+<ul>
+<li><b>Time:</b> 90 minutes for 50 marks in 2025 (80 min / 45 marks in 2019).</li>
+<li><b>Round final answers to 3 decimal places.</b> Keep more decimals in the working. (The lecturer: "I always use three decimals… one decimal is just too lazy.")</li>
+<li>Scientific/financial calculator only. The <b>formula sheet and tables are provided</b> — the November 2026 version (pages 20–25 of the formula sheet &amp; tables PDF on Moodle) contains every formula and table for Units 5–8.</li>
+<li>What Part 1 is likely to contain (one per unit is the safe bet): a discrete/binomial/Poisson question, a normal + sampling-distribution question, a confidence interval question, and at least one full six-step hypothesis test.</li>
+</ul>
+<div class="warnbox"><b>Bring and know your tables.</b> You'll use four of them: the standard normal table (P(Z ≤ z)), the small "Standard Normal Critical Values" table (1.282 / 1.645 / 1.960 / 2.054 / 2.326 / 2.576), the t table, and the χ² table. Practise finding values in the actual sheet, not just in this guide.</div>
+</section>
+
+<section id="plan">
+<h2>7-day plan (Sat 3 Oct → Sat 10 Oct)</h2>
+<div class="plan">
+<div class="d"><b>Sat 3</b><span>today</span></div><div class="c">Read <a href="#u5">Unit 5</a> discrete + binomial + Poisson. Do Unit 5 Q2–Q7 from the notes (memos: <code>STAV102_Unit5_Solutions.pdf</code>). MCQ drill: Unit 5.</div>
+<div class="d"><b>Sun 4</b><span></span></div><div class="c">Normal distribution and the 7 "possibilities"; inverse normal. Watch <i>Of possibilities A/B</i> and <i>An example Inverse Normal</i> if unsure. Unit 5 Q8–Q11 + normal example sheet.</div>
+<div class="d"><b>Mon 5</b><span></span></div><div class="c"><a href="#u6">Unit 6</a> sampling distributions (σ vs σ/√n, p̂). Unit 6 Q1–Q3 + sampling example sheet. MCQ drill: Unit 6.</div>
+<div class="d"><b>Tue 6</b><span></span></div><div class="c"><a href="#u7">Unit 7</a> confidence intervals: z vs t, proportion, variance, sample size. Unit 7 Q1–Q6. MCQ drill: Unit 7.</div>
+<div class="d"><b>Wed 7</b><span></span></div><div class="c"><a href="#u8">Unit 8</a> single-population tests (mean, proportion, variance). Example Pack 1–4 written out in six steps. Notes exercises Unit 8 Q1–Q4.</div>
+<div class="d"><b>Thu 8</b><span></span></div><div class="c">Unit 8 two-population tests (z, pooled t, paired). Example Pack 5–7, Unit 8 Q5–Q7. <b>Mock Test A</b> under timed conditions in the evening.</div>
+<div class="d"><b>Fri 9</b><span></span></div><div class="c"><b>Mock Test B</b>, timed. Redo everything you got wrong (MCQ drill → "only ones I got wrong"). Read the <a href="#traps">traps</a> and the cheat sheet. Early night.</div>
+<div class="d"><b>Sat 10</b><span>test</span></div><div class="c">Cheat sheet over breakfast. Pencil, eraser, calculator (fresh battery), student card.</div>
+</div>
+</section>
+
+<section id="formula">
+<h2>Formula sheet: what's given vs what you must learn</h2>
+<div class="grid2">
+<div class="card"><h5><span class="tag given">given</span> on the sheet</h5>
+E(X), V(X); binomial P(X = x), np, np(1−p); Poisson P(X = x), E = V = λ; Z = (X − μ)/σ and the two symmetry rules; σ<sub>x̄</sub> = σ/√n; Z for x̄; p̂ = X/n, σ<sub>p̂</sub>, Z for p̂; all five CI formulas; both sample-size formulas; every test statistic (z, t, z for p, χ², two-sample z, pooled t with s<sub>p</sub>, paired t with d̄ and s<sub>d</sub>); all four tables.</div>
+<div class="card"><h5><span class="tag learn">learn</span> — not on the sheet</h5>
+<ul style="margin:0;padding-left:18px">
+<li>Properties of binomial and Poisson experiments (list-3 questions).</li>
+<li>Laws of E and V (V(cX) = c²V(X), etc.).</li>
+<li>Normal properties + empirical rule 68–95–99.7.</li>
+<li>CLT statement and n ≥ 30; np &gt; 5 and n(1−p) &gt; 5.</li>
+<li><b>When</b> to use z vs t vs χ²; paired vs independent.</li>
+<li>Hypothesis wording → &gt;, &lt;, ≠; H₀ always "=".</li>
+<li>Type I / Type II error definitions.</li>
+<li><b>The rejection rules</b> (which tail, α vs α/2).</li>
+<li>The six steps and the conclusion sentence.</li>
+<li>CI interpretation sentence; round sample size UP.</li>
+</ul></div>
+</div>
+</section>
+
+<!-- ===================== UNIT 5 ===================== -->
+<section id="u5">
+<h2><span class="unit">Unit 5</span>Probability Distributions</h2>
+<p class="lede">Lectures 10–13 · Notes pp. 61–85 · Example videos: <i>Example Poisson</i>, <i>Example Normal</i>, <i>An example Inverse Normal</i>, <i>Of possibilities A &amp; B</i></p>
+
+<h3 id="u5-rv">5.1 Random variables</h3>
+<div class="def"><b>Random variable (X)</b> — a rule that assigns a <i>number</i> to every outcome of a random experiment. Capital letter = the variable (X); lower-case = a value it takes (x).</div>
+<div class="grid2">
+<div class="card"><h5>Discrete</h5>Countable values (0, 1, 2, …). Each value gets its own probability. <br><i>e.g. number of heads, number of red lights, number of defects.</i></div>
+<div class="card"><h5>Continuous</h5>Any value in a range. P(X = x) = 0 — probabilities only for <b>intervals</b> (areas under a curve). <br><i>e.g. height, time, mass, income.</i></div>
+</div>
+
+<h3 id="u5-disc">5.2–5.3 Discrete distributions, E(X) and V(X)</h3>
+<p>A <b>discrete probability distribution</b> is a table, formula or graph listing every value x with its probability p(x). Two rules must hold:</p>
+<div class="fml"><span class="lbl">Valid distribution</span>0 ≤ p(x) ≤ 1 &nbsp;&nbsp;and&nbsp;&nbsp; Σ p(x) = 1</div>
+<div class="tip"><b>Classic test move:</b> one probability in the table is missing (k or "???"). Find it from Σp(x) = 1 <i>first</i>, then answer the question.</div>
+<div class="grid2">
+<div class="fml"><span class="lbl">Expected value (mean) — given</span>E(X) = μ = Σ x·p(x)</div>
+<div class="fml"><span class="lbl">Variance — given</span>V(X) = σ² = Σ x²·p(x) − μ²</div>
+</div>
+<p>Standard deviation σ = √V(X). Lay the work out as a table — it earns method marks and stops arithmetic slips:</p>
+<div class="tblwrap"><table>
+<tr><th>x</th><th>0</th><th>1</th><th>2</th><th>3</th><th>Total</th></tr>
+<tr><td>p(x)</td><td>0.13</td><td>0.54</td><td>0.29</td><td>0.04</td><td>1</td></tr>
+<tr><td>x·p(x)</td><td>0</td><td>0.54</td><td>0.58</td><td>0.12</td><td class="hl"><b>μ = 1.24</b></td></tr>
+<tr><td>x²·p(x)</td><td>0</td><td>0.54</td><td>1.16</td><td>0.36</td><td class="hl"><b>2.06</b></td></tr>
+</table></div>
+<div class="calcstep">σ² = 2.06 − 1.24² = 2.06 − 1.5376 = <span class="ans">0.5224</span> &nbsp;&nbsp; σ = √0.5224 = <span class="ans">0.723</span></div>
+
+<h4>Reading probabilities off a table — the wording matters</h4>
+<div class="tblwrap"><table>
+<tr><th class="l">Words</th><th>Symbol</th><th class="l">Which values (X = 0,1,2,…)</th></tr>
+<tr><td class="l">more than 3 / exceeds 3</td><td>X &gt; 3</td><td class="l">4, 5, 6, …</td></tr>
+<tr><td class="l">at least 3 / 3 or more / no fewer than 3</td><td>X ≥ 3</td><td class="l">3, 4, 5, …</td></tr>
+<tr><td class="l">fewer than 3 / less than 3</td><td>X &lt; 3</td><td class="l">0, 1, 2</td></tr>
+<tr><td class="l">at most 3 / no more than 3 / 3 or fewer</td><td>X ≤ 3</td><td class="l">0, 1, 2, 3</td></tr>
+<tr><td class="l">at least one</td><td>X ≥ 1</td><td class="l">= 1 − P(X = 0) &nbsp;← always use the complement</td></tr>
+</table></div>
+<div class="warnbox"><b>Discrete only:</b> X &lt; 4 and X ≤ 3 are the same thing, but X &lt; 4 and X ≤ 4 are <i>not</i>. For a continuous variable (normal) &lt; and ≤ give the same answer.</div>
+
+<h4>Laws of expectation and variance (MCQ favourites)</h4>
+<div class="grid2">
+<div class="card"><h5>Expected value</h5>E(c) = c<br>E(cX) = c·E(X)<br>E(X + Y) = E(X) + E(Y)<br>E(X − Y) = E(X) − E(Y)<br>E(aX + b) = a·E(X) + b</div>
+<div class="card"><h5>Variance</h5>V(c) = 0<br>V(cX) = <b>c²</b>·V(X)<br>V(X + c) = V(X) <i>(shifting doesn't change spread)</i><br>V(X ± Y) = V(X) <b>+</b> V(Y) if independent</div>
+</div>
+<div class="warnbox"><b>Trap:</b> the notes print V(X − Y) = V(X) − V(Y). That is a typo — variances always <b>add</b>, even for a difference: V(X − Y) = V(X) + V(Y) when X and Y are independent. Variance can never be negative.</div>
+<details class="wex"><summary>Worked example (example sheet): portfolio of two investments</summary><div class="body">
+<p>Equal amounts in two investments: X₁ has mean 15%, sd 25%; X₂ has mean 27%, sd 40%. Portfolio return R = 0.5X₁ + 0.5X₂.</p>
+<div class="calcstep">E(R) = 0.5(15) + 0.5(27) = <span class="ans">21%</span></div>
+<div class="calcstep">V(R) = 0.5²(25²) + 0.5²(40²) = 156.25 + 400 = 556.25 &nbsp;⇒&nbsp; SD = √556.25 = <span class="ans">23.585%</span> (independent returns)</div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 5 Q3): expected gain on an R10 000 investment</summary><div class="body">
+<p>Worthless (gain −10 000) with prob 0.05; unchanged (gain 0) with prob 0.65; doubles (gain +10 000) with prob 0.3.</p>
+<div class="calcstep">E(X) = (−10 000)(0.05) + 0(0.65) + 10 000(0.3) = <span class="ans">R2 500</span></div>
+<p>Note: define X as the <b>gain</b>, not the final value — read what is asked.</p>
+</div></details>
+
+<h3 id="u5-bin">5.4 Binomial distribution</h3>
+<div class="def"><b>Binomial experiment — properties (learn these; "list three properties" is a common 3-mark question)</b>
+<ol style="margin:6px 0 0">
+<li><b>Fixed number of trials</b>, n.</li>
+<li>Each trial has only <b>two outcomes</b>: success or failure.</li>
+<li>The probability of success, p, is <b>constant</b> from trial to trial (q = 1 − p).</li>
+<li>The trials are <b>independent</b>.</li>
+</ol>X = number of successes in n trials, x = 0, 1, …, n. Write X ~ BI(n, p).</div>
+<div class="fml"><span class="lbl">Binomial — given on the formula sheet</span>P(X = x) = <sub>n</sub>C<sub>x</sub> · p<sup>x</sup> · (1 − p)<sup>n − x</sup> &nbsp;&nbsp;&nbsp; E(X) = np &nbsp;&nbsp;&nbsp; V(X) = np(1 − p)</div>
+<div class="tip"><b>How to spot it:</b> "n people/items/trials", "x% of …", "each independently", "probability p of …". There is a <b>maximum</b> (you can't have more successes than n). <br><b>Calculator:</b> <kbd>nCr</kbd> is usually <kbd>SHIFT</kbd> + <kbd>÷</kbd> on a Casio fx-82/991.</div>
+<details class="wex" open><summary>Worked example (notes): 15% withdraw, n = 25</summary><div class="body">
+<p>X = number of students who withdraw, X ~ BI(25, 0.15).</p>
+<div class="calcstep">(a) P(X = 0) = ₂₅C₀(0.15)⁰(0.85)²⁵ = <span class="ans">0.0172</span></div>
+<div class="calcstep">(b) P(X ≤ 2) = P(0) + P(1) + P(2) = 0.0172 + 0.0759 + 0.1607 = <span class="ans">0.2537</span></div>
+<div class="calcstep">(c) P(X = 5) = ₂₅C₅(0.15)⁵(0.85)²⁰ = <span class="ans">0.1564</span></div>
+<div class="calcstep">(d) P(X &gt; 3) = 1 − P(X ≤ 3) = 1 − [P(0)+P(1)+P(2)+P(3)] = 1 − 0.4711 = <span class="ans">0.5289</span></div>
+<div class="calcstep">(e) P(X ≥ 4) = 1 − P(X ≤ 3) = <span class="ans">0.5289</span> &nbsp;(same event as (d))</div>
+<div class="calcstep">E(X) = 25(0.15) = 3.75 &nbsp;&nbsp; V(X) = 25(0.15)(0.85) = 3.1875 &nbsp;&nbsp; σ = 1.785</div>
+<div class="warnbox">The printed notes give 0.2538 for (d) and (e) — a copy-paste error. The correct value is 0.5289 (0.15 withdrawal rate, mean 3.75, so "more than 3" must be around one half).</div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 5 Q4(iv)): working backwards from the mean</summary><div class="body">
+<p>Y ~ binomial with p = 0.35 and mean 1.4. Then np = 1.4 ⇒ n = 1.4 / 0.35 = <b>4</b>.</p>
+<div class="calcstep">P(Y ≤ 2) = ₄C₀(0.35)⁰(0.65)⁴ + ₄C₁(0.35)(0.65)³ + ₄C₂(0.35)²(0.65)² = <span class="ans">0.874</span></div>
+<div class="calcstep">P(Y = 0) = 0.65⁴ = <span class="ans">0.179</span> &nbsp;&nbsp; P(Y &gt; 3) = P(Y = 4) = 0.35⁴ = <span class="ans">0.015</span></div>
+<div class="calcstep">P(4 &lt; Y &lt; 7) = <span class="ans">0</span> — Y can't exceed n = 4. (A deliberate trick.)</div>
+</div></details>
+<details class="wex"><summary>Worked example (example sheet): is 3 under-filled out of 20 "normal"?</summary><div class="body">
+<p>5% of containers are under-filled. X ~ BI(20, 0.05): E(X) = 1, V(X) = 0.95.</p>
+<div class="calcstep">P(X ≥ 3) = 1 − [P(0) + P(1) + P(2)] = 1 − (0.3585 + 0.3774 + 0.1887) = <span class="ans">0.0755</span></div>
+<p>Only about a 7.5% chance of seeing 3 or more if the process really is at 5%. That's unusual but not extremely rare. A reasonable answer: the supervisor's claim is <i>doubtful</i>, because 3 is three times the expected 1. Marks go for the probability <i>and</i> a sentence that uses it.</p>
+</div></details>
+
+<h3 id="u5-poi">5.5 Poisson distribution</h3>
+<div class="def"><b>Poisson experiment — properties</b>
+<ol style="margin:6px 0 0">
+<li>Counts the number of (rare) events in a fixed <b>interval</b> of time, distance, area or volume.</li>
+<li>The number of events in one interval is <b>independent</b> of the number in any other (non-overlapping) interval.</li>
+<li>The probability of an event is the <b>same for intervals of equal size</b>, and <b>proportional to the size</b> of the interval.</li>
+<li>The probability of two or more events in a very small interval is ≈ 0 (rare events).</li>
+</ol>X = number of events per interval, x = 0, 1, 2, … (no upper limit). Write X ~ Poisson(λ).</div>
+<div class="fml"><span class="lbl">Poisson — given</span>P(X = x) = <span class="frac"><span class="n">e<sup>−λ</sup> λ<sup>x</sup></span><span class="d">x!</span></span> &nbsp;&nbsp;&nbsp; E(X) = V(X) = λ</div>
+<div class="tip"><b>How to spot it:</b> "on average", "per hour / per day / per metre", "rate of", and <b>no n</b>. Binomial has n and p; Poisson has only λ.</div>
+<div class="warnbox"><b>The #1 Poisson mistake — rescale λ to the interval asked about.</b> If the rate is 1.2 per day and the question asks about a week, use λ = 1.2 × 7 = 8.4. If the rate is 1.8 per hour and the question asks about 30 minutes, use λ = 0.9. Define a new variable (Y) for the new interval.</div>
+<details class="wex" open><summary>Worked example (notes): accidents, λ = 1.2 per day</summary><div class="body">
+<div class="calcstep">P(X = 2) = e<sup>−1.2</sup>(1.2)² / 2! = <span class="ans">0.2169</span></div>
+<div class="calcstep">P(X &gt; 1) = 1 − [P(0) + P(1)] = 1 − [0.3012 + 0.3614] = <span class="ans">0.3374</span></div>
+<div class="calcstep">Week: Y ~ Poisson(8.4) ⇒ P(Y = 2) = e<sup>−8.4</sup>(8.4)²/2! = <span class="ans">0.0079</span></div>
+</div></details>
+<details class="wex"><summary>Worked example (example sheet): emergency room, 1.8 patients per hour</summary><div class="body">
+<div class="calcstep">30 minute nap: λ = 0.9 ⇒ P(no patients) = e<sup>−0.9</sup> = <span class="ans">0.4066</span></div>
+<div class="calcstep">12 hour shift: λ = 21.6 ⇒ P(more than 10) = 1 − P(X ≤ 10) = <span class="ans">0.9955</span></div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 5 Q4(ii)): λ = 3.2</summary><div class="body">
+<div class="calcstep">P(X ≤ 3) = 0.0408 + 0.1304 + 0.2087 + 0.2226 = <span class="ans">0.603</span></div>
+<div class="calcstep">P(X &gt; 2) = 1 − (0.0408 + 0.1304 + 0.2087) = <span class="ans">0.620</span></div>
+<div class="calcstep">P(X = 3) = <span class="ans">0.223</span> &nbsp;&nbsp; P(2 ≤ X ≤ 6) = P(2)+…+P(6) = <span class="ans">0.784</span></div>
+</div></details>
+<div class="tblwrap"><table>
+<tr><th class="l"></th><th>Binomial</th><th>Poisson</th></tr>
+<tr><td class="l">Counts</td><td>successes in n trials</td><td>events in an interval</td></tr>
+<tr><td class="l">Parameters</td><td>n and p</td><td>λ only</td></tr>
+<tr><td class="l">Possible values</td><td>0, 1, …, n</td><td>0, 1, 2, … (no maximum)</td></tr>
+<tr><td class="l">Mean / variance</td><td>np / np(1−p) (variance &lt; mean)</td><td>λ / λ (variance = mean)</td></tr>
+</table></div>
+
+<h3 id="u5-norm">5.6–5.7 Continuous distributions and the normal distribution</h3>
+<div class="def"><b>Probability density function f(x):</b> f(x) ≥ 0 and the total area under the curve = 1. f(x) is <i>not</i> a probability, and P(X = x) = 0.</div>
+<p><b>Properties of the normal distribution</b> X ~ N(μ, σ²):</p>
+<ul>
+<li>Bell-shaped and <b>symmetric about μ</b> (mean = median = mode).</li>
+<li>Completely defined by its two parameters μ and σ².</li>
+<li>Tails approach the horizontal axis but never touch it.</li>
+<li><b>Empirical rule:</b> ≈ 68% within μ ± σ, ≈ 95% within μ ± 2σ, ≈ 99.7% within μ ± 3σ.</li>
+</ul>
+<div class="warnbox"><b>Notation trap:</b> N(μ, σ²) uses the <b>variance</b>. N(12, 25) means σ = 5, not 25. N(850, 10 000) means σ = 100. Always take the square root.</div>
+<div class="fml"><span class="lbl">Standardise — given</span>Z = <span class="frac"><span class="n">X − μ</span><span class="d">σ</span></span> ~ N(0, 1) &nbsp;&nbsp;&nbsp; P(Z &lt; −z) = P(Z &gt; z) &nbsp;&nbsp;&nbsp; P(Z &gt; z) = 1 − P(Z ≤ z)</div>
+<p>The table gives <b>P(Z ≤ z)</b> — area to the <b>left</b> — for positive z only. Round z to <b>2 decimals</b> before you look it up. Everything else is built from the "possibilities" the lecturer walks through:</p>
+<div class="tblwrap"><table>
+<tr><th>#</th><th class="l">You want</th><th class="l">Rewrite as</th><th class="l">Example</th></tr>
+<tr><td>1</td><td class="l">P(Z &lt; z), z positive</td><td class="l">read straight from table</td><td class="l">P(Z &lt; 2.34) = 0.9904</td></tr>
+<tr><td>2</td><td class="l">P(Z &gt; z)</td><td class="l">1 − P(Z &lt; z)</td><td class="l">P(Z &gt; 1.25) = 1 − 0.8944 = 0.1056</td></tr>
+<tr><td>3</td><td class="l">P(Z &lt; −z)</td><td class="l">P(Z &gt; z) = 1 − P(Z &lt; z)</td><td class="l">P(Z &lt; −1.29) = 1 − 0.9015 = 0.0985</td></tr>
+<tr><td>4</td><td class="l">P(Z &gt; −z)</td><td class="l">P(Z &lt; z)</td><td class="l">P(Z &gt; −0.4) = 0.6554</td></tr>
+<tr><td>5</td><td class="l">P(a &lt; Z &lt; b)</td><td class="l">P(Z &lt; b) − P(Z &lt; a)</td><td class="l">P(0.5 &lt; Z &lt; 1.5) = 0.9332 − 0.6915 = 0.2417</td></tr>
+<tr><td>6</td><td class="l">P(−a &lt; Z &lt; b)</td><td class="l">P(Z &lt; b) + P(Z &lt; a) − 1</td><td class="l">P(−1 &lt; Z &lt; 2) = 0.9772 + 0.8413 − 1 = 0.8185</td></tr>
+<tr><td>7</td><td class="l">P(−a &lt; Z &lt; −b)</td><td class="l">P(b &lt; Z &lt; a) = P(Z &lt; a) − P(Z &lt; b)</td><td class="l">P(−2 &lt; Z &lt; −1) = 0.9772 − 0.8413 = 0.1359</td></tr>
+</table></div>
+<div class="tip"><b>Always draw the bell curve and shade the area.</b> It takes five seconds and catches nearly every "1 minus" error. If your answer is a probability bigger than 1 or negative, you've subtracted the wrong way round.</div>
+
+<h4 id="u5-inv">Inverse normal — given a probability, find x</h4>
+<ol class="steps">
+<li>Turn the statement into "P(Z &lt; z) = <i>something</i>" (area to the <b>left</b>).</li>
+<li>If the area to the left is <b>less than 0.5</b>, z is <b>negative</b>: look up 1 − area, then put a minus sign on z.</li>
+<li>Find the probability closest to it <b>inside</b> the table, read off z.</li>
+<li>Convert back: <b>x = μ + zσ</b>.</li>
+</ol>
+<details class="wex" open><summary>Worked example (notes): Smart Gadgets, prices ~ N(20, 3²)</summary><div class="body">
+<div class="calcstep">(a) P(X &lt; 15) = P(Z &lt; (15 − 20)/3) = P(Z &lt; −1.67) = 1 − 0.9525 = <span class="ans">0.0475</span></div>
+<div class="calcstep">(b) P(18 &lt; X &lt; 24) = P(−0.67 &lt; Z &lt; 1.33) = 0.9082 − (1 − 0.7486) = <span class="ans">0.6568</span></div>
+<div class="calcstep">(c) Price below which 10% buy: P(Z &lt; z) = 0.10 ⇒ P(Z &lt; −z) … table: 0.8997 at z = 1.28 ⇒ z = −1.28 <br>x = μ + zσ = 20 + (−1.28)(3) = <span class="ans">R16.16</span></div>
+<div class="warnbox">The notes contain two typos here: "15 − 25" in (a) should be 15 − 20, and the final line says R16.66 — the correct answer is R16.16.</div>
+</div></details>
+<details class="wex"><summary>Worked example (example sheet): Y ~ N(12, 12.25)</summary><div class="body">
+<p>σ = √12.25 = 3.5.</p>
+<div class="calcstep">P(Y &gt; 10) = P(Z &gt; −0.57) = P(Z &lt; 0.57) = <span class="ans">0.7157</span></div>
+<div class="calcstep">P(Y &lt; 8) = P(Z &lt; −1.14) = 1 − 0.8729 = <span class="ans">0.1271</span></div>
+<div class="calcstep">P(10 &lt; Y &lt; 15) = P(−0.57 &lt; Z &lt; 0.86) = 0.8051 − (1 − 0.7157) = <span class="ans">0.5208</span></div>
+<div class="calcstep">P(Y &lt; k) = 0.3 ⇒ z = −0.52 ⇒ k = 12 + (−0.52)(3.5) = <span class="ans">10.18</span></div>
+</div></details>
+<details class="wex"><summary>Worked example (example sheet): rainfall ~ N(850, 10 000)</summary><div class="body">
+<p>σ = 100.</p>
+<div class="calcstep">P(X &gt; 1000) = P(Z &gt; 1.5) = 1 − 0.9332 = <span class="ans">0.0668</span></div>
+<div class="calcstep">10th percentile: z = −1.28 ⇒ k = 850 − 1.28(100) = <span class="ans">722 mm</span></div>
+</div></details>
+</section>
+
+<!-- ===================== UNIT 6 ===================== -->
+<section id="u6">
+<h2><span class="unit">Unit 6</span>Sampling Distributions</h2>
+<p class="lede">Lecture 14 · Notes pp. 86–94 · Sampling distributions example sheet (worked in the <i>Exercises 1</i> and <i>Exercises 2</i> videos)</p>
+
+<h3 id="u6-idea">6.1–6.3 The idea</h3>
+<div class="def"><b>Sampling distribution</b> — the distribution of a <i>statistic</i> (x̄, p̂, s², …) over all possible samples of the same size n from the same population. Different samples give different x̄'s; the sampling distribution describes how they vary.</div>
+<div class="grid2">
+<div class="card"><h5>Parameter vs statistic</h5><b>Parameter</b> describes the population (μ, σ, p). <b>Statistic</b> describes a sample (x̄, s, p̂) and is used to estimate the parameter.</div>
+<div class="card"><h5>Sampling error</h5>The difference between a statistic and the parameter it estimates, e.g. x̄ − μ. It happens because we only see a sample. <b>Larger samples → smaller sampling error.</b></div>
+</div>
+<p>The die example in the notes: population μ = 3.5, σ² = 2.92. All 36 samples of size 2 give a sampling distribution of x̄ with mean 3.5 (= μ) and variance 2.92/2 = 1.46. Standard error = √1.46 = 1.208.</p>
+
+<h3 id="u6-clt">6.4 The Central Limit Theorem</h3>
+<div class="def"><b>Central Limit Theorem.</b> If x̄ is the mean of a random sample of size n from <i>any</i> population with mean μ and variance σ², then the sampling distribution of X̄ is <b>approximately normal for sufficiently large n</b> (usually n ≥ 30), with
+<div class="fml" style="background:#fff">μ<sub>x̄</sub> = μ &nbsp;&nbsp;&nbsp;&nbsp; σ²<sub>x̄</sub> = <span class="frac"><span class="n">σ²</span><span class="d">n</span></span> &nbsp;&nbsp;&nbsp;&nbsp; σ<sub>x̄</sub> = <span class="frac"><span class="n">σ</span><span class="d">√n</span></span> &nbsp;(the <b>standard error</b>)</div></div>
+<div class="tblwrap"><table>
+<tr><th class="l">Population is…</th><th class="l">Then X̄ is…</th></tr>
+<tr><td class="l">Normal</td><td class="l">exactly normal for <b>any</b> n</td></tr>
+<tr><td class="l">Not normal (or unknown)</td><td class="l">approximately normal if n is large (n ≥ 30) — that's the CLT</td></tr>
+</table></div>
+<div class="fml"><span class="lbl">Standardising a sample mean — given</span>Z = <span class="frac"><span class="n">X̄ − μ</span><span class="d">σ / √n</span></span></div>
+<div class="warnbox"><b>The question that decides everything: one value or an average?</b><br>"A randomly selected customer / bottle / student" → use σ.<br>"The <b>average / mean</b> of a sample of 25" → use σ/√n.<br>Exams love asking both in the same question, (i) then (ii).</div>
+<p>As n increases: the mean of X̄ stays at μ, the spread σ/√n <b>shrinks</b>, and the shape becomes more bell-shaped.</p>
+<details class="wex" open><summary>Worked example (notes): toy prices ~ N(20, 3²), sample of 25</summary><div class="body">
+<p>σ<sub>x̄</sub> = 3/√25 = 0.6</p>
+<div class="calcstep">(a) P(X̄ &lt; 18) = P(Z &lt; (18 − 20)/0.6) = P(Z &lt; −3.33) = 1 − 0.9996 = <span class="ans">0.0004</span></div>
+<div class="calcstep">(b) P(19 &lt; X̄ &lt; 22) = P(−1.67 &lt; Z &lt; 3.33) = 0.9996 − (1 − 0.9525) = <span class="ans">0.9521</span></div>
+<p>(The notes' line "P(X̄ &lt; 15)" is a typo for 18.)</p>
+</div></details>
+<details class="wex"><summary>Worked example (example sheet): exam marks ~ N(68, 12²)</summary><div class="body">
+<div class="calcstep">One student: P(X &gt; 80) = P(Z &gt; 1) = 1 − 0.8413 = <span class="ans">0.1587</span></div>
+<div class="calcstep">Class of 50: σ<sub>x̄</sub> = 12/√50 = 1.697 ⇒ P(X̄ &lt; 65) = P(Z &lt; −1.77) = 1 − 0.9616 = <span class="ans">0.0384</span></div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 6 Q2 &amp; Q3)</summary><div class="body">
+<p><b>Sprinters</b> ~ N(10.7, 0.3²). One sprinter under 9.58 s: z = −3.73 ⇒ P ≈ <span class="ans">0</span> (0.0001). Twelve sprinters, mean over 10.75 s: z = (10.75 − 10.7)/(0.3/√12) = 0.58 ⇒ 1 − 0.7190 = <span class="ans">0.2810</span>.</p>
+<p><b>Test marks</b> ~ N(58, 9²), n = 36: X̄ ~ N(58, 9²/36) = N(58, 2.25) (σ<sub>x̄</sub> = 1.5). P(X̄ &lt; 58) = <span class="ans">0.5</span>. P(X̄ &gt; 60) = P(Z &gt; 1.33) = <span class="ans">0.0918</span>.</p>
+<div class="warnbox">The official memo writes X̄ ~ N(58, 1.778). That's wrong: 9²/36 = 81/36 = 2.25. (1.778 isn't 9/36 or 81/36 — ignore it.) The probability answers in the memo are right because it uses 9/6 = 1.5 in the working.</div>
+</div></details>
+
+<h3 id="u6-prop">6.5 Sampling distribution of the sample proportion p̂</h3>
+<p>p̂ = X/n where X ~ BI(n, p). If <b>np &gt; 5 and n(1 − p) &gt; 5</b>, the normal approximation works:</p>
+<div class="fml"><span class="lbl">Given</span>p̂ ~ N( p , <span class="frac"><span class="n">p(1 − p)</span><span class="d">n</span></span> ) &nbsp;&nbsp;&nbsp; σ<sub>p̂</sub> = √[p(1−p)/n] &nbsp;&nbsp;&nbsp; Z = <span class="frac"><span class="n">p̂ − p</span><span class="d">√[p(1−p)/n]</span></span></div>
+<div class="tip">Convert counts to proportions first: "no more than 90 of 150" ⇒ p̂ ≤ 90/150 = 0.6. Use the population p (the claim) in the standard error, not p̂.</div>
+<details class="wex" open><summary>Worked example (notes): 70% pass, n = 150</summary><div class="body">
+<p>σ<sub>p̂</sub> = √(0.7 × 0.3 / 150) = 0.0374</p>
+<div class="calcstep">(a) P(p̂ &gt; 0.75) = P(Z &gt; 1.34) = 1 − 0.9099 = <span class="ans">0.0901</span></div>
+<div class="calcstep">(b) P(p̂ ≤ 0.6) = P(Z ≤ −2.67) = 1 − 0.9962 = <span class="ans">0.0038</span></div>
+</div></details>
+<details class="wex"><summary>Worked example (example sheet): "35% market share" — 150 of 500 prefer the brand</summary><div class="body">
+<p>p̂ = 150/500 = 0.30. If the claim were true, σ<sub>p̂</sub> = √(0.35 × 0.65/500) = 0.0213.</p>
+<div class="calcstep">P(p̂ ≤ 0.30) = P(Z ≤ −2.34) = 1 − 0.9904 = <span class="ans">0.0096</span></div>
+<p>Less than a 1% chance of a sample this low if the true share were 35% — so the claim looks <b>unrealistic</b>. This is the same method the official Unit 6 memo uses for Q1(ii) (find the probability of a result at least as extreme as the one observed; if it's tiny, the claim is doubtful).</p>
+<div class="warnbox"><b>Heads-up — the <i>Exercises 2</i> video does this question differently.</b> The lecturer computes P(p̂ &gt; 0.3) = P(Z &gt; −2.34) = 0.9904 and concludes the claim "does seem realistic". Same z-value, opposite tail, opposite conclusion. The memo's approach (P(p̂ ≤ 0.3) = 0.0096 ⇒ unlikely) is the statistically sound one: under a true 35% share, a p̂ of 0.30 or lower almost never happens. In the test, show the z-value and the probability clearly — the method marks are the same either way — and if you can, ask your tutor which conclusion they expect before Saturday.</div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 6 Q1): 80% have internet, n = 200</summary><div class="body">
+<p>σ<sub>p̂</sub> = √(0.8 × 0.2/200) = 0.0283 (the memo writes the <i>variance</i> 0.0008).</p>
+<div class="calcstep">P(p̂ &gt; 0.9) = P(Z &gt; 3.54) = <span class="ans">0.0002</span></div>
+<div class="calcstep">"No more than 120 of 200" ⇒ P(p̂ ≤ 0.6) = P(Z ≤ −7.07) ≈ <span class="ans">0</span> ⇒ highly unlikely.</div>
+</div></details>
+</section>
+
+<!-- ===================== UNIT 7 ===================== -->
+<section id="u7">
+<h2><span class="unit">Unit 7</span>Estimation: Confidence Intervals</h2>
+<p class="lede">Notes pp. 95–107 · Videos: <i>Recording #43–#47</i> are the Unit 7 lectures</p>
+
+<h3 id="u7-intro">7.1 Point vs interval estimates</h3>
+<div class="grid2">
+<div class="card"><h5>Point estimate</h5>A single number: x̄ estimates μ, p̂ estimates p, s² estimates σ².</div>
+<div class="card"><h5>Interval estimate (CI)</h5>A range that contains the parameter with a stated <b>confidence level 1 − α</b>. α = significance level. Common: 90%, 95%, 99%.</div>
+</div>
+<p><b>More confidence ⇒ wider interval.</b> A 99% CI is wider than a 95% CI from the same data.</p>
+
+<h3 id="u7-mu">7.2 CI for the population mean μ</h3>
+<div class="tblwrap"><table>
+<tr><th class="l">Situation</th><th class="l">Use</th><th class="l">Interval</th></tr>
+<tr><td class="l">σ <b>known</b> (population normal, or n large)</td><td class="l">z</td><td class="l">x̄ ± z<sub>1−α/2</sub> · σ/√n</td></tr>
+<tr><td class="l">σ unknown, <b>n large</b> (n ≥ 30)</td><td class="l">z with s</td><td class="l">x̄ ± z<sub>1−α/2</sub> · s/√n</td></tr>
+<tr><td class="l">σ unknown, <b>n small</b>, population normal</td><td class="l">t, df = n − 1</td><td class="l">x̄ ± t<sub>n−1; 1−α/2</sub> · s/√n</td></tr>
+</table></div>
+<div class="okbox"><b>The lecturer's order of checks (Recording #45 — "take a screenshot of this"):</b>
+<ol style="margin:4px 0 0">
+<li><b>Is n ≥ 30?</b> Yes ⇒ normal (z). Use σ if it's given, otherwise s.</li>
+<li><b>n &lt; 30, σ known, population normal?</b> ⇒ z with σ.</li>
+<li><b>n &lt; 30, σ unknown, population normal?</b> ⇒ t with n − 1 df and s.</li>
+</ol>"Even if you are not told, we can assume the sample is from a normal population."<br>
+<b>If the question doesn't state a confidence level, assume 95%</b> (said in Recordings #44 and #47).</div>
+<div class="tip"><b>Know-or-estimate test:</b> "the <b>population</b> standard deviation is…", "known standard deviation", "from past studies σ = …" ⇒ σ known ⇒ z. "A sample … had a standard deviation of …" ⇒ that's s ⇒ t if n &lt; 30.<br>If <b>both</b> are given (Unit 7 Q1: known σ = 5.3%, sample s = 5.5%), use σ and z.</div>
+<div class="tblwrap"><table>
+<tr><th>Confidence 1 − α</th><th>α</th><th>α/2</th><th>z<sub>1−α/2</sub> (two-sided, for CIs)</th><th>z<sub>1−α</sub> (one-tailed tests)</th></tr>
+<tr><td>90%</td><td>0.10</td><td>0.05</td><td><b>1.645</b></td><td>1.282</td></tr>
+<tr><td>95%</td><td>0.05</td><td>0.025</td><td><b>1.960</b></td><td>1.645</td></tr>
+<tr><td>98%</td><td>0.02</td><td>0.01</td><td><b>2.326</b></td><td>2.054</td></tr>
+<tr><td>99%</td><td>0.01</td><td>0.005</td><td><b>2.576</b></td><td>2.326</td></tr>
+</table></div>
+<p style="font-size:.9rem;color:var(--muted)">These are the values printed on the formula sheet's "Standard Normal Critical Values" table. The notes round them to 1.64, 1.96, 2.33, 2.57 — either is accepted. (The notes' Table 7 has the 98% row wrong; trust the formula sheet.)</p>
+
+<details class="wex" open><summary>Worked example (notes): pulse rate, σ = 5 known, n = 30, x̄ = 104, 99%</summary><div class="body">
+<div class="calcstep">x̄ ± z<sub>0.995</sub>·σ/√n = 104 ± 2.576 × 5/√30 = 104 ± 2.352 ⇒ <span class="ans">(101.648 ; 106.352)</span></div>
+<p>The lecturer uses 2.57 and gets (101.654 ; 106.346) — fine too. <b>Interpretation (always write it):</b> "We are 99% confident that the true mean pulse rate lies between 101.648 and 106.352 beats per minute."</p>
+</div></details>
+<details class="wex"><summary>Worked example (notes): shavers, n = 20, x̄ = 452, s = 9, 95%</summary><div class="body">
+<p>σ unknown, n &lt; 30 ⇒ t with df = 19. Table: row 19, column 0.975 ⇒ t = 2.093.</p>
+<div class="calcstep">452 ± 2.093 × 9/√20 = 452 ± 4.212 ⇒ <span class="ans">(447.788 ; 456.212)</span> minutes</div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 7 Q2): brake discs — and why the second interval is narrower</summary><div class="body">
+<div class="calcstep">n = 16: 103 000 ± t<sub>15;0.995</sub>(8500/4) = 103 000 ± 2.947(2125) ⇒ <span class="ans">[96 737.625 ; 109 262.375]</span></div>
+<div class="calcstep">n = 29: 101 500 ± t<sub>28;0.995</sub>(8500/√29) = 101 500 ± 2.763(1578.4) ⇒ <span class="ans">[97 138.852 ; 105 861.148]</span></div>
+<p>Widths: 12 524.75 vs 8 722.296. The second is narrower because the <b>larger sample</b> gives a smaller standard error <i>and</i> a smaller t-value (more df).</p>
+<div class="warnbox">The official memo prints the first interval as [93 737.625 ; …]. 103 000 − 2.947 × 2125 = 96 737.625, so 93 737 is a typo and the width is 12 524.75, not 15 524.75. The conclusion is unchanged.</div>
+</div></details>
+
+<h4>Width of a confidence interval</h4>
+<div class="fml"><span class="lbl">Margin of error e and width</span>e = z<sub>1−α/2</sub> · σ/√n &nbsp;&nbsp;&nbsp;&nbsp; width = 2e &nbsp;&nbsp;&nbsp; centre = x̄</div>
+<div class="tblwrap"><table>
+<tr><th class="l">Change</th><th>Effect on width</th></tr>
+<tr><td class="l">Increase n</td><td>narrower ↓</td></tr>
+<tr><td class="l">Increase confidence level (95% → 99%)</td><td>wider ↑</td></tr>
+<tr><td class="l">Larger σ (more variable data)</td><td>wider ↑</td></tr>
+<tr><td class="l">Quadruple n</td><td>width halves (√4 = 2)</td></tr>
+</table></div>
+<div class="tip"><b>Reverse trick (MCQ):</b> given a CI (a ; b), the point estimate is the midpoint (a + b)/2 and the margin of error is (b − a)/2.</div>
+
+<h3 id="u7-n">Sample size</h3>
+<div class="grid2">
+<div class="fml"><span class="lbl">For a mean — given</span>n = ( z<sub>1−α/2</sub> · σ / e )²</div>
+<div class="fml"><span class="lbl">For a proportion — given</span>n = ( z<sub>1−α/2</sub> / e )² · p(1 − p)</div>
+</div>
+<div class="warnbox"><b>Always round UP</b> to the next whole number (133.749 → 134; 1067.11 → 1068), even if the decimal is small. Rounding down would give an error bigger than allowed.<br><b>If the question gives the interval <i>length/width</i>,</b> e = width ÷ 2 (Unit 7 Q4(7): length 5000 kg ⇒ e = 2500).<br><b>For a proportion with no prior estimate</b>, use p = 0.5 (gives the largest, safest n).</div>
+<details class="wex"><summary>Worked examples: lumber (notes) and water loss (Unit 7 Q6)</summary><div class="body">
+<div class="calcstep">Lumber: σ = 180, e = 40, 99%: the lecturer uses z = 2.57 ⇒ n = (2.57 × 180 / 40)² = 133.749 ⇒ <span class="ans">134</span> (with the formula-sheet 2.576 you get 134.37 ⇒ 135 — either is marked right if your working shows the z you used; just always round up)</div>
+<div class="calcstep">Water: σ = 7500, e = 300, 95%: n = (1.96 × 7500 / 300)² = <span class="ans">2401</span></div>
+<div class="calcstep">Brand survey: e = 0.03, 95%, p = 0.5: n = 0.25(1.96/0.03)² = 1067.11 ⇒ <span class="ans">1068</span></div>
+</div></details>
+
+<h3 id="u7-p">7.3 CI for a proportion p</h3>
+<div class="fml"><span class="lbl">Given</span>p̂ ± z<sub>1−α/2</sub> √[ p̂(1 − p̂) / n ] &nbsp;&nbsp;&nbsp; (needs np̂ &gt; 5 and n(1 − p̂) &gt; 5)</div>
+<details class="wex" open><summary>Worked example (notes): toothpaste, 231 of 300 dentists, 90%</summary><div class="body">
+<div class="calcstep">p̂ = 231/300 = 0.77 (point estimate). 0.77 ± 1.645 √(0.77 × 0.23/300) = 0.77 ± 0.040 ⇒ <span class="ans">(0.730 ; 0.810)</span></div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 7 Q3): Mr Mayer, 82 of 150, 95%</summary><div class="body">
+<div class="calcstep">p̂ = 82/150 = 0.547. 0.547 ± <b>1.96</b> √(0.547 × 0.453 / 150) = 0.547 ± 0.080 ⇒ <span class="ans">(0.467 ; 0.626)</span></div>
+<p>The interval contains values below 0.5, so we <b>cannot be 95% confident he still has a majority</b> — he should be concerned.</p>
+<div class="warnbox">The official memo uses 1.64 (the 90% value) for this 95% interval and gets [0.480 ; 0.613], then says he should <i>not</i> be concerned. Both are wrong: with the correct 1.96 the interval still dips below 50%, and an interval that includes values under 0.5 means a majority is <b>not</b> assured. If you see this question, use 1.96.</div>
+</div></details>
+
+<h3 id="u7-var">7.4 CI for a variance σ² (and standard deviation σ)</h3>
+<div class="fml"><span class="lbl">Given — population must be normal</span>( <span class="frac"><span class="n">(n − 1)s²</span><span class="d">χ²<sub>n−1; 1−α/2</sub></span></span> ; <span class="frac"><span class="n">(n − 1)s²</span><span class="d">χ²<sub>n−1; α/2</sub></span></span> )</div>
+<div class="warnbox"><b>The bigger χ² value goes under the LOWER limit.</b> Dividing by the large value gives the small number. If your "lower" limit is bigger than your "upper", you've swapped them.<br>Use <b>s²</b>, not s. For a CI for σ, take the square root of both limits.</div>
+<p><b>Reading the χ² table:</b> row = df = n − 1; columns are the area to the left (0.005 … 0.995). For 95%: columns 0.025 and 0.975. For 90%: 0.05 and 0.95. For 99%: 0.005 and 0.995.</p>
+<details class="wex" open><summary>Worked example (notes): steel bolts, n = 60, s = 3.89, 95%</summary><div class="body">
+<p>df = 59 isn't in the table — the notes use the df = 60 row: χ²<sub>0.975</sub> ≈ 83.30, χ²<sub>0.025</sub> ≈ 40.48.</p>
+<div class="calcstep">(59 × 3.89² / 83.30 ; 59 × 3.89² / 40.48) = <span class="ans">(10.718 ; 22.055)</span> mm²</div>
+<div class="calcstep">CI for σ: (√10.718 ; √22.055) = <span class="ans">(3.274 ; 4.696)</span> mm — all below 4.8, so the process is under control.</div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 7 Q5): goals, n = 16, s = 0.8, 90%</summary><div class="body">
+<div class="calcstep">(15 × 0.64 / 25.00 ; 15 × 0.64 / 7.26) = (9.6/25 ; 9.6/7.26) = <span class="ans">(0.384 ; 1.322)</span></div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 7 Q4): cement, n = 9, x̄ = 50 000, s = 6 500</summary><div class="body">
+<div class="calcstep">99% CI for μ: 50 000 ± t<sub>8;0.995</sub>(6500/3) = 50 000 ± 3.355(2166.67) ⇒ <span class="ans">[42 730.833 ; 57 269.167]</span></div>
+<div class="calcstep">90% CI for σ²: (8 × 6500² / 15.51 ; 8 × 6500² / 2.73) = <span class="ans">(21 792 392.0 ; 123 809 523.8)</span> kg²</div>
+<div class="calcstep">98% CI no longer than 5000 kg ⇒ e = 2500: n = (2.326 × 6500 / 2500)² = 36.57 ⇒ <span class="ans">37</span></div>
+</div></details>
+
+<h3 id="u7-sum">7.5 Summary — which interval?</h3>
+<div class="tblwrap"><table>
+<tr><th>Parameter</th><th class="l">Conditions</th><th>Distribution</th><th class="l">(1 − α) CI</th></tr>
+<tr><td>μ</td><td class="l">σ known (normal pop. or n large)</td><td>Z</td><td class="l">x̄ ± z<sub>1−α/2</sub> σ/√n</td></tr>
+<tr><td>μ</td><td class="l">σ unknown, n large</td><td>Z</td><td class="l">x̄ ± z<sub>1−α/2</sub> s/√n</td></tr>
+<tr><td>μ</td><td class="l">σ unknown, n small, normal pop.</td><td>t (n − 1)</td><td class="l">x̄ ± t<sub>n−1;1−α/2</sub> s/√n</td></tr>
+<tr><td>p</td><td class="l">np̂ &gt; 5, n(1 − p̂) &gt; 5</td><td>Z</td><td class="l">p̂ ± z<sub>1−α/2</sub>√[p̂(1−p̂)/n]</td></tr>
+<tr><td>σ²</td><td class="l">normal pop.</td><td>χ² (n − 1)</td><td class="l">((n−1)s²/χ²<sub>1−α/2</sub> ; (n−1)s²/χ²<sub>α/2</sub>)</td></tr>
+</table></div>
+</section>
+
+<!-- ===================== UNIT 8 ===================== -->
+<section id="u8">
+<h2><span class="unit">Unit 8</span>Hypothesis Testing</h2>
+<p class="lede">Lectures 17–20 · Notes pp. 108–132 · Example Pack (Examples 1–7) · Videos: <i>Ex1–Ex3 Ht</i>, <i>Ex 7A / 7B</i></p>
+
+<h3 id="u8-basics">8.1 The language</h3>
+<div class="def"><b>Hypothesis</b> — a claim about a <b>population parameter</b> (μ, p, σ², μ₁ − μ₂). Never about x̄ or p̂.<br>
+<b>H₀ (null)</b> — status quo / no change / no difference. <b>Always contains "="</b>.<br>
+<b>H₁ (alternative)</b> — what the researcher is trying to show. Contains &gt;, &lt; or ≠.<br>
+Conclusions are only ever "<b>Reject H₀</b>" or "<b>Do not reject H₀</b>" — never "accept H₀".</div>
+<div class="tblwrap"><table>
+<tr><th></th><th>Reject H₀</th><th>Do not reject H₀</th></tr>
+<tr><th>H₀ true</th><td class="hl"><b>Type I error</b> — probability α</td><td>Correct decision</td></tr>
+<tr><th>H₀ false</th><td>Correct decision</td><td class="hl"><b>Type II error</b> — probability β</td></tr>
+</table></div>
+<div class="grid2">
+<div class="card"><h5>Type I (α)</h5>Rejecting a <b>true</b> H₀. Court analogy: convicting an <b>innocent</b> person. Considered the worse error, so we fix α small (1%, 5%, 10%). α = <b>significance level</b> = size of the test.</div>
+<div class="card"><h5>Type II (β)</h5>Not rejecting a <b>false</b> H₀ — letting a guilty person go free. Power of a test = 1 − β. Calculating β is beyond this course.</div>
+</div>
+<div class="tip"><b>If no significance level is given, use α = 0.05</b> (stated in the notes).</div>
+
+<h3 id="u8-tails">Stating the hypotheses — translate the words</h3>
+<div class="tblwrap"><table>
+<tr><th>Right-tailed &nbsp;H₁: &gt;</th><th>Left-tailed &nbsp;H₁: &lt;</th><th>Two-tailed &nbsp;H₁: ≠</th></tr>
+<tr><td>greater than, more than, above, higher, longer, bigger, increased, exceeds, improved (if bigger = better)</td><td>less than, below, lower, shorter, smaller, decreased, reduced, faster (time)</td><td>different from, changed, not equal to, not the same as, "is there a difference"</td></tr>
+<tr><td>"is at least" → H₀ claim, test H₁: &lt;</td><td>"is at most" → H₀ claim, test H₁: &gt;</td><td>"equal to", "the same as"</td></tr>
+</table></div>
+<div class="warnbox"><b>Traps that lose the hypothesis mark:</b>
+<ul style="margin:4px 0 0">
+<li>Writing x̄ or p̂ in the hypotheses (H₁: x̄ &gt; 30 000 is wrong — use μ).</li>
+<li>Using the sample value instead of the claimed value (H₁: μ &gt; 28 when the claim is 25 — μ₀ is always the <i>claimed/historical</i> value).</li>
+<li>Variance vs standard deviation: "standard deviation greater than 200 g" ⇒ H₁: σ² &gt; 200² = 40 000 (or σ &gt; 200). Keep them consistent with the test statistic.</li>
+<li>"Faster reaction time" means a <b>smaller</b> time ⇒ H₁: μ<sub>new</sub> &lt; μ<sub>old</sub>.</li>
+</ul></div>
+
+<h3 id="u8-six">The six steps — "this is six marks" (Lecture 17)</h3>
+<ol class="steps">
+<li><b>State the hypotheses</b> H₀ and H₁ (in symbols, with the right parameter). <i>Lecturer's tip: work out H₁ first from the question's wording, then H₀ is the "=" version.</i></li>
+<li><b>State the significance level</b> α.</li>
+<li><b>Calculate the test statistic</b> (formula, substitution, answer to 3 dp).</li>
+<li><b>Find the critical value</b> (with its subscript, e.g. t<sub>24; 0.995</sub> = 2.797). Drawing the curve with the rejection region shaded makes step 5 obvious.</li>
+<li><b>Decision</b> — state the rejection rule, compare, "reject H₀" / "do not reject H₀".</li>
+<li><b>Conclusion in words</b> — "At the 5% level of significance, there is sufficient / insufficient evidence to conclude that <i>[H₁ in the context of the question]</i>."</li>
+</ol>
+<div class="tblwrap"><table>
+<tr><th>Test</th><th>Reject H₀ if (z test)</th><th>Reject H₀ if (t test)</th></tr>
+<tr><td>Right-tailed (H₁: &gt;)</td><td>z<sub>ts</sub> &gt; z<sub>1−α</sub></td><td>t<sub>ts</sub> &gt; t<sub>df; 1−α</sub></td></tr>
+<tr><td>Left-tailed (H₁: &lt;)</td><td>z<sub>ts</sub> &lt; −z<sub>1−α</sub></td><td>t<sub>ts</sub> &lt; −t<sub>df; 1−α</sub></td></tr>
+<tr><td>Two-tailed (H₁: ≠)</td><td>|z<sub>ts</sub>| &gt; z<sub>1−α/2</sub></td><td>|t<sub>ts</sub>| &gt; t<sub>df; 1−α/2</sub></td></tr>
+</table></div>
+<div class="tip"><b>Conclusion template</b> — memorise it word for word:<br>
+<i>Reject:</i> "At a 5% level of significance, there is <b>sufficient</b> evidence to conclude that the average delivery time is less than 20 days."<br>
+<i>Do not reject:</i> "At a 5% level of significance, there is <b>insufficient</b> evidence to conclude that the average delivery time is less than 20 days."<br>
+The conclusion always restates <b>H₁</b> in words — never "H₀ is true".</div>
+
+<h3 id="u8-which">Which test? — the decision tree</h3>
+<div class="ascii">What is the claim about?
+│
+├── ONE population
+│   ├── a MEAN μ
+│   │   ├── σ known (population normal)  ............  z = (x̄ − μ₀) / (σ/√n)
+│   │   ├── n ≥ 30 (σ unknown → use s)  .............  z = (x̄ − μ₀) / (s/√n)
+│   │   └── n &lt; 30, σ unknown, normal  ..............  t = (x̄ − μ₀) / (s/√n),   df = n − 1
+│   ├── a PROPORTION p  ("x% of", "y out of n")  ....  z = (p̂ − p₀) / √[p₀(1−p₀)/n]
+│   └── a VARIANCE σ² / STANDARD DEVIATION σ  ......  χ² = (n − 1)s² / σ₀²,   df = n − 1
+│
+└── TWO populations (compare two means)
+    ├── SAME subjects measured twice (before/after, paired)
+    │       ................ paired t = d̄ / (s_d/√n),   df = n − 1   (d = difference per pair)
+    ├── two INDEPENDENT groups, both n ≥ 30
+    │       ................ z = (x̄₁ − x̄₂) / √(s₁²/n₁ + s₂²/n₂)
+    └── two INDEPENDENT groups, small, normal, EQUAL variances
+            ................ t = (x̄₁ − x̄₂) / (s_p √(1/n₁ + 1/n₂)),   df = n₁ + n₂ − 2</div>
+<div class="tip"><b>Paired or independent?</b> Ask: "Is each number in group 1 linked to one specific number in group 2?" Same cards before/after the driver, same patients before/after the clip ⇒ <b>paired</b>. Two different sets of retailers, two different students, two different groups of cricketers ⇒ <b>independent</b>.</div>
+
+<h3 id="u8-mu">8.2.1 Test for a single mean μ</h3>
+<details class="wex" open><summary>Worked example (notes): petrol, n = 40, x̄ = R200, σ = R45, α = 0.10, "more than R180"</summary><div class="body">
+<div class="calcstep">1. H₀: μ = 180 &nbsp;&nbsp; H₁: μ &gt; 180 &nbsp;&nbsp;&nbsp; 2. α = 0.10</div>
+<div class="calcstep">3. z<sub>ts</sub> = (200 − 180)/(45/√40) = 20/7.115 = <span class="ans">2.811</span></div>
+<div class="calcstep">4. z<sub>crit</sub> = z<sub>0.90</sub> = 1.282 &nbsp;&nbsp; 5. 2.811 &gt; 1.282 ⇒ <b>reject H₀</b></div>
+<div class="calcstep">6. At a 10% level of significance there is sufficient evidence to conclude that motorists spend on average more than R180 on petrol per week.</div>
+</div></details>
+<details class="wex"><summary>Worked example (Example Pack 1): associate professors' age, n = 35, x̄ = 44, s = 5.2, α = 0.05</summary><div class="body">
+<p>n ≥ 30 so the z test is used with s in place of σ.</p>
+<div class="calcstep">H₀: μ = 42 &nbsp; H₁: μ &gt; 42 &nbsp;&nbsp; z<sub>ts</sub> = (44 − 42)/(5.2/√35) = 2/0.879 = <span class="ans">2.275</span></div>
+<div class="calcstep">z<sub>crit</sub> = z<sub>0.95</sub> = 1.645. 2.275 &gt; 1.645 ⇒ <b>reject H₀</b>. Sufficient evidence at 5% that the average age is more than 42.</div>
+</div></details>
+<details class="wex"><summary>Worked example (Example Pack 2): blood pressure, n = 25, x̄ = 125, s = 15, α = 0.01, "different from 130"</summary><div class="body">
+<div class="calcstep">H₀: μ = 130 &nbsp; H₁: μ ≠ 130 &nbsp;&nbsp; t<sub>ts</sub> = (125 − 130)/(15/5) = <span class="ans">−1.667</span></div>
+<div class="calcstep">Two-tailed, df = 24: t<sub>24; 0.995</sub> = <b>2.797</b>. |−1.667| &lt; 2.797 ⇒ <b>do not reject H₀</b>.</div>
+<p>Insufficient evidence at 1% that the mean systolic blood pressure differs from 130 mm Hg.</p>
+<div class="warnbox">The notes use t<sub>24;0.99</sub> = 2.492 here. For a <b>two-tailed</b> test at α = 0.01 you need 1 − α/2 = 0.995 ⇒ 2.797. The decision is the same either way, but in your test use the 0.995 column. Watch the lecture video — this is exactly the "α/2 for two-tailed" rule.</div>
+</div></details>
+
+<h3 id="u8-p">8.2.2 Test for a proportion p</h3>
+<div class="fml"><span class="lbl">Given — note it uses p₀ (the claim), not p̂, under the root</span>z<sub>ts</sub> = <span class="frac"><span class="n">p̂ − p₀</span><span class="d">√[ p₀(1 − p₀) / n ]</span></span></div>
+<details class="wex" open><summary>Worked example (Example Pack 3): 90% claim, 85 of 100, α = 0.05, "significant difference"</summary><div class="body">
+<div class="calcstep">H₀: p = 0.9 &nbsp; H₁: p ≠ 0.9 &nbsp;&nbsp; p̂ = 0.85 &nbsp;&nbsp; z<sub>ts</sub> = (0.85 − 0.9)/√(0.9 × 0.1/100) = −0.05/0.03 = <span class="ans">−1.667</span></div>
+<div class="calcstep">z<sub>0.975</sub> = 1.96. |−1.667| &lt; 1.96 ⇒ <b>do not reject H₀</b>. Insufficient evidence of a difference from the directors' claim.</div>
+</div></details>
+
+<h3 id="u8-var">8.2.3 Test for a variance σ²</h3>
+<div class="fml"><span class="lbl">Given</span>χ²<sub>ts</sub> = <span class="frac"><span class="n">(n − 1)s²</span><span class="d">σ₀²</span></span> &nbsp;&nbsp; df = n − 1</div>
+<div class="tblwrap"><table>
+<tr><th>H₁</th><th>Reject H₀ if</th></tr>
+<tr><td>σ² &gt; σ₀²</td><td>χ²<sub>ts</sub> &gt; χ²<sub>n−1; 1−α</sub></td></tr>
+<tr><td>σ² &lt; σ₀²</td><td>χ²<sub>ts</sub> &lt; χ²<sub>n−1; α</sub></td></tr>
+<tr><td>σ² ≠ σ₀²</td><td>χ²<sub>ts</sub> &lt; χ²<sub>n−1; α/2</sub> &nbsp;or&nbsp; χ²<sub>ts</sub> &gt; χ²<sub>n−1; 1−α/2</sub></td></tr>
+</table></div>
+<details class="wex" open><summary>Worked example (notes): sugar packs, n = 30, s² = 22, σ₀² = 20, α = 0.05</summary><div class="body">
+<div class="calcstep">H₀: σ² = 20 &nbsp; H₁: σ² &gt; 20 &nbsp;&nbsp; χ²<sub>ts</sub> = 29 × 22/20 = <span class="ans">31.9</span></div>
+<div class="calcstep">χ²<sub>29; 0.95</sub> = 42.56. 31.9 &lt; 42.56 ⇒ <b>do not reject H₀</b>. Insufficient evidence that the process must be restarted.</div>
+<div class="warnbox">Example Pack 4 words this as "sample <b>standard deviation</b> is 22 kg". Then s² = 484 and χ² = 29 × 484/20 = 701.8 ⇒ reject. Read carefully whether you're given s or s² — the video shows which version the lecturer works.</div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 8 Q4): standard deviation greater than 200 g, n = 30, s = 250 g</summary><div class="body">
+<div class="calcstep">H₀: σ² = 200² &nbsp; H₁: σ² &gt; 200² &nbsp;&nbsp; χ²<sub>ts</sub> = 29 × 250²/200² = <span class="ans">45.313</span></div>
+<div class="calcstep">χ²<sub>29; 0.95</sub> = 42.56 (α = 0.05 by default). 45.313 &gt; 42.56 ⇒ <b>reject H₀</b> ⇒ the process must be restarted.</div>
+</div></details>
+
+<h3 id="u8-two">8.3 Two-population tests</h3>
+<h4>Independent samples, large (z)</h4>
+<details class="wex" open><summary>Worked example (Example Pack 5): shoe styles A vs B, α = 0.05, "A less than B"</summary><div class="body">
+<div class="calcstep">H₀: μ<sub>A</sub> = μ<sub>B</sub> &nbsp; H₁: μ<sub>A</sub> &lt; μ<sub>B</sub></div>
+<div class="calcstep">z<sub>ts</sub> = (146 − 160)/√(12²/32 + 15²/30) = −14/3.465 = <span class="ans">−4.041</span></div>
+<div class="calcstep">Left-tailed: reject if z<sub>ts</sub> &lt; −1.645. −4.041 &lt; −1.645 ⇒ <b>reject H₀</b>. Style A's mean price is less than style B's.</div>
+</div></details>
+<h4>Independent samples, small, equal variances (pooled t)</h4>
+<div class="fml"><span class="lbl">Given</span>s<sub>p</sub> = √[ ((n₁ − 1)s₁² + (n₂ − 1)s₂²) / (n₁ + n₂ − 2) ] &nbsp;&nbsp;&nbsp; t<sub>ts</sub> = <span class="frac"><span class="n">x̄₁ − x̄₂</span><span class="d">s<sub>p</sub>√(1/n₁ + 1/n₂)</span></span> &nbsp;&nbsp; df = n₁ + n₂ − 2</div>
+<details class="wex" open><summary>Worked example (notes): Momentum vs Cadiz shares, α = 0.10, "significant difference"</summary><div class="body">
+<div class="calcstep">s<sub>p</sub> = √[(14 × 7000² + 11 × 4000²)/25] = <span class="ans">5871.967</span></div>
+<div class="calcstep">t<sub>ts</sub> = (20 000 − 13 000)/(5871.967 √(1/15 + 1/12)) = <span class="ans">3.078</span></div>
+<div class="calcstep">Two-tailed, df = 25: t<sub>25; 0.95</sub> = 1.708. 3.078 &gt; 1.708 ⇒ <b>reject H₀</b>: the mean growths differ.</div>
+<p style="font-size:.9rem">(The notes print "15 + 13 − 2" in the denominator — a typo for 15 + 12 − 2 = 25 — and get s<sub>p</sub> = 5863.84, t = 3.082. Correct arithmetic gives 5871.967 and 3.078; same decision.)</p>
+</div></details>
+<details class="wex"><summary>Worked example (Example Pack 6 / Unit 8 Q5): Sipho vs Leo travel times, α = 0.05</summary><div class="body">
+<p>Sipho: 12, 16, 20, 12, 13 ⇒ x̄₁ = 14.6, s₁ = 3.435. Leo: 22, 16, 8, 6, 28 ⇒ x̄₂ = 16, s₂ = 9.274.</p>
+<div class="calcstep">s<sub>p</sub> = √[(4 × 11.8 + 4 × 86)/8] = √48.9 = <span class="ans">6.993</span></div>
+<div class="calcstep">t<sub>ts</sub> = (14.6 − 16)/(6.993 √(2/5)) = <span class="ans">−0.317</span></div>
+<div class="calcstep">Two-tailed, df = 8: t<sub>8; 0.975</sub> = 2.306. |−0.317| &lt; 2.306 ⇒ <b>do not reject H₀</b>. No evidence their average times differ.</div>
+<p><b>Calculator:</b> put each list into STAT mode (1-VAR) to get x̄ and s (the "sx" value, which divides by n − 1). Don't use σx.</p>
+</div></details>
+<h4>Paired (dependent) samples</h4>
+<div class="fml"><span class="lbl">Given</span>d̄ = <span class="frac"><span class="n">Σdᵢ</span><span class="d">n</span></span> &nbsp;&nbsp; s<sub>d</sub> = √[ (Σdᵢ² − (Σdᵢ)²/n) / (n − 1) ] &nbsp;&nbsp; t<sub>ts</sub> = <span class="frac"><span class="n">d̄</span><span class="d">s<sub>d</sub>/√n</span></span> &nbsp;&nbsp; df = n − 1</div>
+<details class="wex" open><summary>Worked example (Example Pack 7 — the Ex 7A/7B videos): graphics driver, α = 0.01</summary><div class="body">
+<div class="calcstep">H₀: μ<sub>after</sub> = μ<sub>before</sub> &nbsp; H₁: μ<sub>after</sub> &gt; μ<sub>before</sub></div>
+<div class="calcstep">d = after − before = 2, 3, 8, 5, 1, 1 &nbsp;⇒ Σd = 20, Σd² = 104 &nbsp;⇒ d̄ = 3.333, s<sub>d</sub> = 2.733</div>
+<div class="calcstep">t<sub>ts</sub> = 3.333/(2.733/√6) = <span class="ans">2.987</span></div>
+<div class="calcstep">t<sub>5; 0.99</sub> = 3.365. 2.987 &lt; 3.365 ⇒ <b>do not reject H₀</b>. Insufficient evidence at 1% that the driver increased the average frame rate.</div>
+<div class="okbox"><b>Lecturer's rule (Ex 7A video):</b> calculate the differences <b>in the same order as your hypothesis</b>. H₁ says "after &gt; before", so d = after − before and the test is right-tailed. If you did before − after, d̄ would be negative and the test would have to be left-tailed instead.</div>
+</div></details>
+<details class="wex"><summary>Worked example (Unit 8 Q7.2): blood pressure before/after a movie clip, α = 0.01</summary><div class="body">
+<p>d = after − before: 9, 5, −1, 5, −4, 9, 12, 7, −3, 8, 8, 15 ⇒ d̄ = 5.833, s<sub>d</sub> = 5.844, n = 12.</p>
+<div class="calcstep">H₁: μ<sub>after</sub> &gt; μ<sub>before</sub> &nbsp;&nbsp; t<sub>ts</sub> = 5.833/(5.844/√12) = <span class="ans">3.458</span></div>
+<div class="calcstep">t<sub>11; 0.99</sub> = 2.718. 3.458 &gt; 2.718 ⇒ <b>reject H₀</b>: the clip significantly raised systolic blood pressure.</div>
+</div></details>
+
+<h3 id="u8-tables">Reading the t and χ² tables</h3>
+<div class="grid2">
+<div class="card"><h5>t table</h5>Row = df. Column = <b>lower-tail probability</b>: 1 − α for one-tailed, 1 − α/2 for two-tailed (and CIs). <br>e.g. two-tailed α = 0.05, n = 20 ⇒ row 19, column 0.975 ⇒ 2.093.<br>df not in the table (e.g. 43)? Use the nearest smaller df (40) — it's the cautious choice.<br>The last row (∞) equals the z values.</div>
+<div class="card"><h5>χ² table</h5>Row = df = n − 1. Columns are lower-tail areas: small columns (0.005–0.10) on the left, large (0.90–0.995) on the right.<br>Right-tailed test α = 0.05 ⇒ column 0.95. Left-tailed ⇒ column 0.05. Two-tailed ⇒ both 0.025 and 0.975.</div>
+</div>
+</section>
+
+<section id="videos">
+<h2>What the lecture videos add</h2>
+<p class="lede">All 27 lecture and example videos in the folder were transcribed and checked against the notes. Most of what's said is already in the notes and in the unit sections above; this section collects what the lecturer <b>emphasises</b> or does <b>differently</b> from the printed notes — the things likely to show up in how the test is marked.</p>
+
+<div class="warnbox" style="font-size:1.02rem"><b>The most useful sentence in all 27 videos (Lecture 17):</b> "There's six steps … whenever you're doing a hypothesis test you have to follow these six steps. Because this is six marks. If you write a test out of 50, six marks is 12 percent." Each hypothesis test you write out properly is worth about six marks, roughly one per step, and they're easy marks if the steps are all there.</div>
+<h3>The lecturer's habits — copy these in the test</h3>
+<div class="okbox"><ol style="margin:0">
+<li><b>Define the random variable in words, then state its distribution with parameters</b> — every single example: "X = the number of students who arrive for consultation in an 8-hour period; X ~ Poisson(4)". For the normal: "X ~ N(12, 4) — if you're given σ, put σ² in the brackets."</li>
+<li><b>Draw the curve and shade the area</b> for every normal probability and every rejection region. "Use a graph rather than memorising the possibilities."</li>
+<li><b>Round z to 2 decimals</b> "because the table is to 2 decimals", and pick the closest table probability for inverse problems (0.7995 vs 0.8023 for 0.8).</li>
+<li><b>Final answers to 3 decimals</b> — "One decimal is just too lazy." Keep 4 decimals in probabilities along the way.</li>
+<li>On the line where you standardise, <b>X becomes Z immediately</b>: P(X &lt; 10) = P(Z &lt; (10 − 12)/2). He corrects himself on camera when he forgets.</li>
+<li><b>Hypothesis tests: write H₁ first</b>, straight from the question's wording, then H₀ is the "=" version.</li>
+<li><b>Check the probability is between 0 and 1</b> and sanity-check it against the picture (an area right of a positive z must be under 0.5).</li>
+<li>"List what you're given" (n = 20, x̄ = 452, s = 9) before choosing a formula.</li>
+</ol></div>
+
+<h3>Rules he states that aren't obvious in the notes</h3>
+<div class="tblwrap"><table>
+<tr><th class="l">Rule</th><th class="l">Where</th></tr>
+<tr><td class="l"><b>No confidence level given ⇒ assume 95%.</b> (The notes say the same for α = 0.05 in hypothesis tests.)</td><td class="l">Recordings #44, #47</td></tr>
+<tr><td class="l">Order of checks for a CI for μ: n ≥ 30 ⇒ z; n &lt; 30 with σ known (normal pop.) ⇒ z; n &lt; 30, σ unknown ⇒ t. "Even if you are not told, you can assume the population is normal."</td><td class="l">Recording #45</td></tr>
+<tr><td class="l">"If you're given the variance, don't square it; if you're given the standard deviation, square it — this is where people get confused."</td><td class="l">Recording #47</td></tr>
+<tr><td class="l">Even if not asked for the point estimate p̂, you must compute it because the CI needs it. Percentages: convert to a proportion, do the CI, convert back.</td><td class="l">Recording #46</td></tr>
+<tr><td class="l">Proportion tests only for large samples (n ≥ 30).</td><td class="l">Lecture 18</td></tr>
+<tr><td class="l">χ² two-tailed test has <b>two</b> critical values (not symmetric, so no absolute value): χ²<sub>α/2</sub> on the left and χ²<sub>1−α/2</sub> on the right.</td><td class="l">Lecture 18</td></tr>
+<tr><td class="l">Paired test: "because we're dealing with differences it becomes one sample", so df = n − 1. The order of subtraction must match H₁.</td><td class="l">Lecture 20, Ex 7A/7B</td></tr>
+<tr><td class="l">Two-tailed critical values use 1 − α/2 (he computes α/2 = 0.005 ⇒ 0.995 ⇒ t<sub>24;0.995</sub> = 2.797).</td><td class="l">Ex2 Ht</td></tr>
+<tr><td class="l">z critical values come from the small "Standard Normal Critical Values" table on the formula sheet (1.645, 1.96, …), not from the big table.</td><td class="l">Ex1, Ex3 Ht</td></tr>
+<tr><td class="l">Binomial: he lists <b>five</b> properties (adds "X counts the successes, x = 0 … n"). Poisson: no upper limit, so "more than" questions <b>must</b> use the complement.</td><td class="l">Lectures 11, 12</td></tr>
+<tr><td class="l">Poisson for a new interval: "I cannot use X — X is per day. Define a <b>new</b> random variable Y with the new mean."</td><td class="l">Lecture 12, Example Poisson</td></tr>
+<tr><td class="l">"The question always gives you the alternative hypothesis." Only the Type I error is examined in depth; Type II is beyond the scope. α is 1%, 5% or 10%, default 5%.</td><td class="l">Lecture 17</td></tr>
+<tr><td class="l"><b>"Type I and Type II errors — go back and read the notes. This is easy stuff and easy marks in the quizzes and the tests."</b></td><td class="l">Lecture 18</td></tr>
+<tr><td class="l">Normal: μ is the <b>location</b> parameter, σ the <b>shape</b> (spread) parameter. "The density formula is there for interest's sake — I will not expect you to use it." For z beyond 3.49, P(Z &lt; z) ≈ 1.</td><td class="l">Lecture 13</td></tr>
+<tr><td class="l">The CLT is "probably the most important result in statistics": x̄ is approximately normal for <i>any</i> population (binomial, Poisson, …) once n ≥ 30.</td><td class="l">Lecture 14</td></tr>
+</table></div>
+<div class="warnbox">The lecturer says "we <b>accept</b> H₀" out loud when explaining (Ex 7B, Ex2, Ex3 Ht). In writing, the notes and his own conclusion sentences say "do not reject H₀" and "insufficient evidence to conclude…". Write it that way.</div>
+
+<h3>Extra worked examples that are only in the videos</h3>
+<details class="wex"><summary>Example Poisson — students arriving for consultation, 4 per 8-hour period</summary><div class="body">
+<p>X = number of students arriving in an 8-hour period, X ~ Poisson(4).</p>
+<div class="calcstep">(a) P(X ≥ 1) = 1 − P(X = 0) = 1 − e<sup>−4</sup> = 1 − 0.0183 = <span class="ans">0.982</span></div>
+<div class="calcstep">(b) P(X &lt; 3) = P(0) + P(1) + P(2) = 0.0183 + 0.0733 + 0.1465 = <span class="ans">0.238</span></div>
+<div class="calcstep">(c) 2-hour absence: Y ~ Poisson(4/4 = 1). P(Y = 0) = e<sup>−1</sup> = <span class="ans">0.368</span>. E(Y) = V(Y) = 1, σ = 1.</div>
+</div></details>
+<details class="wex"><summary>Example_2 — binomial, 85% get full marks, 7 scripts</summary><div class="body">
+<p>Check the properties first (7 trials, independent students, p = 0.85 constant). X = number of students with full marks, X ~ BI(7, 0.85).</p>
+<div class="calcstep">P(X &gt; 5) = P(6) + P(7) = ₇C₆(0.85)⁶(0.15) + (0.85)⁷ = 0.3960 + 0.3206 = <span class="ans">0.717</span> (stop at 7 — X can't exceed n)</div>
+<div class="calcstep">E(X) = np = 7 × 0.85 = <span class="ans">5.95</span></div>
+</div></details>
+<details class="wex"><summary>Example Normal — call resolution time ~ N(12, 2²)</summary><div class="body">
+<div class="calcstep">P(X &lt; 10) = P(Z &lt; −1) = 1 − 0.8413 = <span class="ans">0.1587</span></div>
+<div class="calcstep">P(X &gt; 20) = P(Z &gt; 4) ≈ 1 − 1 = <span class="ans">≈ 0</span> (the table stops at 3.49, where it's already 0.9998)</div>
+<div class="calcstep">P(7 &lt; X &lt; 11) = P(−2.5 &lt; Z &lt; −0.5) = P(Z ≤ 2.5) − P(Z ≤ 0.5) = 0.9938 − 0.6915 = <span class="ans">0.302</span></div>
+<p style="font-size:.9rem">On the video's final frame P(Z ≤ 2.5) is written as 0.9930. The table says 0.9938.</p>
+</div></details>
+<details class="wex"><summary>An example Inverse Normal — heights ~ N(178, 25), shortest 20%</summary><div class="body">
+<div class="calcstep">P(Z &lt; −z) = 0.2 ⇒ P(Z &gt; z) = 0.2 ⇒ P(Z &lt; z) = 0.8 ⇒ closest 0.7995 ⇒ z = 0.84 ⇒ z = <b>−0.84</b> (left of 0)</div>
+<div class="calcstep">x = μ + zσ = 178 + (−0.84)(5) = <span class="ans">173.8 cm</span></div>
+</div></details>
+<details class="wex"><summary>Of possibilities A &amp; B — the seven table cases with a = 1.25, b = 3.12</summary><div class="body">
+<div class="calcstep">P(Z &lt; 1.25) = 0.8944 · P(Z &gt; 1.25) = 0.1056 · P(Z &lt; −1.25) = 0.1056 · P(Z &gt; −1.25) = 0.8944</div>
+<div class="calcstep">P(1.25 &lt; Z &lt; 3.12) = 0.9991 − 0.8944 = 0.1047 &nbsp;·&nbsp; P(−1.25 &lt; Z &lt; 3.12) = 0.9991 − 1 + 0.8944 = 0.8935 &nbsp;·&nbsp; P(−3.12 &lt; Z &lt; −1.25) = 0.9991 − 0.8944 = 0.1047</div>
+<p style="font-size:.9rem">(In video A the lecturer types 0.991 instead of 0.9991 into the calculator and gets 0.0966 for possibility 5 — the correct value is 0.1047.)</p>
+</div></details>
+<details class="wex"><summary>Lecture 14 — gym members ~ N(80, 8²), sample of 9</summary><div class="body">
+<p>"The <b>average</b> weight" ⇒ X̄ ~ N(80, 8²/9), σ<sub>x̄</sub> = 8/3.</p>
+<div class="calcstep">P(75 &lt; X̄ &lt; 100) = P(−1.88 &lt; Z &lt; 7.5) = P(Z &lt; 7.5) − P(Z &lt; −1.88) ≈ 1 − (1 − 0.9699) = <span class="ans">0.970</span></div>
+</div></details>
+
+<h3>Where the videos and the printed material disagree</h3>
+<div class="tblwrap"><table>
+<tr><th class="l">Topic</th><th class="l">Video says</th><th class="l">Printed material / correct</th></tr>
+<tr><td class="l">"Is the 35% market-share claim realistic?" (150 of 500)</td><td class="l"><i>Exercises 2</i>: P(p̂ &gt; 0.3) = 0.9904 ⇒ "claim seems realistic"</td><td class="l">Unit 6 memo method: P(p̂ ≤ 0.3) = 0.0096 ⇒ unlikely ⇒ claim doubtful (statistically correct). See the Unit 6 box.</td></tr>
+<tr><td class="l">Two-tailed BP test critical value</td><td class="l">t<sub>24;0.995</sub> = 2.797 ✔</td><td class="l">Notes print 2.492 ✘</td></tr>
+<tr><td class="l">BI(25, 0.15): P(X &gt; 3), P(X ≥ 4)</td><td class="l">"check you get 0.2538" ✘</td><td class="l">0.5289</td></tr>
+<tr><td class="l">Poisson(1.2): P(X &gt; 1)</td><td class="l">"check you get 0.3614" ✘ (that's P(X = 1))</td><td class="l">0.3374 (notes) ✔</td></tr>
+</table></div>
+</section>
+
+<section id="errata">
+<h2>Errors in the notes, memos and videos</h2>
+<p class="lede">Found while checking every worked example. If your answer disagrees with the printed one in these places, yours is probably right.</p>
+<div class="tblwrap"><table>
+<tr><th class="l">Where</th><th class="l">Printed</th><th class="l">Correct</th></tr>
+<tr><td class="l">Notes 5.3 laws of variance</td><td class="l">V(X − Y) = V(X) − V(Y)</td><td class="l">V(X − Y) = V(X) <b>+</b> V(Y) (independent)</td></tr>
+<tr><td class="l">Notes 5.4 example (d), (e) — BI(25, 0.15)</td><td class="l">P(X &gt; 3) = 0.2538</td><td class="l"><b>0.5289</b></td></tr>
+<tr><td class="l">Notes 5.7 Smart Gadgets (a)</td><td class="l">"15 − 25"</td><td class="l">15 − 20 (answer 0.0475 is right)</td></tr>
+<tr><td class="l">Notes 5.7 Smart Gadgets (c)</td><td class="l">R16.66</td><td class="l"><b>R16.16</b></td></tr>
+<tr><td class="l">Notes 6.4 Smart Shop (a)</td><td class="l">P(X̄ &lt; 15)</td><td class="l">P(X̄ &lt; 18) (answer 0.0004 is right)</td></tr>
+<tr><td class="l">Notes 7.2 Table 7 (98% row)</td><td class="l">1.96 / 2.33</td><td class="l">z<sub>0.98</sub> = 2.054, z<sub>0.99</sub> = 2.326 (use the formula sheet)</td></tr>
+<tr><td class="l">Notes 8.2.1.3 blood pressure (two-tailed, α = 1%)</td><td class="l">t<sub>24;0.99</sub> = 2.492</td><td class="l"><b>t<sub>24;0.995</sub> = 2.797</b> — and that's what the lecturer uses in the Ex2 Ht video</td></tr>
+<tr><td class="l">Notes 8.3.2 Momentum/Cadiz</td><td class="l">"15 + 13 − 2", s<sub>p</sub> = 5863.84, t = 3.082</td><td class="l">df 25, s<sub>p</sub> = 5871.967, t = 3.078</td></tr>
+<tr><td class="l">Unit 5 memo Q8(ii)</td><td class="l">0.9938 − 0.9932</td><td class="l">0.9938 − 0.9332 = 0.0606</td></tr>
+<tr><td class="l">Unit 6 memo Q3(i)</td><td class="l">X̄ ~ N(58, 1.778)</td><td class="l">X̄ ~ N(58, 2.25)</td></tr>
+<tr><td class="l">Unit 7 memo Q2(i)</td><td class="l">[93 737.625 ; …], width 15 524.75</td><td class="l">[96 737.625 ; 109 262.375], width 12 524.75</td></tr>
+<tr><td class="l">Unit 7 memo Q3 (95% CI, Mr Mayer)</td><td class="l">z = 1.64 ⇒ [0.480 ; 0.613], "not concerned"</td><td class="l">z = 1.96 ⇒ (0.467 ; 0.626); includes values below 0.5 ⇒ he <b>should</b> be concerned</td></tr>
+<tr><td class="l">Unit 7 memo Q4 (cement 99% CI)</td><td class="l">upper limit 57 279.167</td><td class="l">57 269.167</td></tr>
+<tr><td class="l"><i>Example Normal</i> video, part 3</td><td class="l">P(Z ≤ 2.5) written as 0.9930</td><td class="l">0.9938 ⇒ P(7 &lt; X &lt; 11) = <b>0.302</b></td></tr>
+<tr><td class="l">Example Pack 4 vs notes</td><td class="l">"sample standard deviation 22" vs "sample variance 22"</td><td class="l">Different questions: s = 22 ⇒ χ² = 701.8 (reject); s² = 22 ⇒ χ² = 31.9 (don't reject)</td></tr>
+</table></div>
+</section>
+
+<section id="traps">
+<h2>Top exam traps for Units 5–8</h2>
+<ol>
+<li><b>N(μ, σ²) gives the variance.</b> N(12, 25) ⇒ σ = 5.</li>
+<li><b>Poisson λ not rescaled</b> to the interval in the question (per hour → per 30 min).</li>
+<li><b>"At least" vs "more than"</b> for discrete variables: X ≥ 3 includes 3, X &gt; 3 does not.</li>
+<li><b>Forgetting the complement</b> — "at least one", "more than 2" are 1 − (small sum).</li>
+<li><b>Binomial with impossible values</b>: P(Y &gt; n) = 0 (the Unit 5 Q4 trick).</li>
+<li><b>σ vs σ/√n</b>: one item vs the average of a sample.</li>
+<li><b>Negative z for inverse normal</b>: "lowest 10%", "shortest 20%", "below which" ⇒ z negative.</li>
+<li><b>Rounding z</b> to 2 dp before the table — and pick the <i>closest</i> table probability for inverse problems.</li>
+<li><b>z vs t</b>: σ known or n ≥ 30 ⇒ z. σ unknown and n &lt; 30 ⇒ t with n − 1 df.</li>
+<li><b>Two-tailed uses α/2</b> for the critical value: 95% ⇒ 1.96, not 1.645.</li>
+<li><b>Proportion test uses p₀</b> in the standard error; proportion CI uses p̂.</li>
+<li><b>χ² CI limits swapped</b> — the larger χ² goes under the lower limit.</li>
+<li><b>Using s instead of s²</b> in χ² formulas; for "standard deviation must not exceed 200" square both.</li>
+<li><b>Sample size rounded down</b> — always up. Width given ⇒ halve it.</li>
+<li><b>Hypotheses with x̄ or with the sample value</b> — always μ (or p, σ²) and the claimed value.</li>
+<li><b>Paired vs independent</b> — "the same … before and after" is paired.</li>
+<li><b>Order of differences</b> in a paired test must match H₁.</li>
+<li><b>Conclusion that just says "reject H₀"</b> — step 6 needs the sentence in the context of the question.</li>
+<li><b>"Accept H₀"</b> — write "do not reject H₀" (the lecturer says "accept" out loud, but the notes say the conclusions are only "reject" or "do not reject").</li>
+<li><b>Too few decimals</b> — final answers to 3 dp; keep 4 in intermediate probabilities.</li>
+</ol>
+</section>
+
+<section id="calc">
+<h2>Calculator skills that save minutes</h2>
+<div class="grid2">
+<div class="card"><h5>nCr and factorials</h5>₂₅C₅: type <kbd>25</kbd> <kbd>SHIFT</kbd> <kbd>÷</kbd> (nCr) <kbd>5</kbd> <kbd>=</kbd>. Factorial: <kbd>SHIFT</kbd> <kbd>x⁻¹</kbd> (x!). e<sup>x</sup>: <kbd>SHIFT</kbd> <kbd>ln</kbd>.<br>Type the whole binomial term in one go: <code>25C5 × 0.15^5 × 0.85^20</code>.</div>
+<div class="card"><h5>Mean and s from raw data</h5><kbd>MODE</kbd>/<kbd>MENU</kbd> → STAT → 1-VAR. Enter the list, <kbd>AC</kbd>, then <kbd>SHIFT</kbd> <kbd>1</kbd> → Var → x̄ and <b>sx</b> (sample sd, divides by n − 1). Do <b>not</b> use σx.<br>Paired test: enter the differences as the list.</div>
+<div class="card"><h5>Store intermediate values</h5>After computing σ/√n, press <kbd>SHIFT</kbd> <kbd>RCL</kbd> <kbd>A</kbd> to store it; use <kbd>ALPHA</kbd> <kbd>A</kbd> later. Avoids rounding errors in t and z statistics.</div>
+<div class="card"><h5>Check your E(X) and V(X)</h5>STAT mode with a FREQ column: put x in one column and p(x) in the frequency column — x̄ gives E(X) and σx gives √V(X) (here σx is correct because the "frequencies" sum to 1).</div>
+</div>
+</section>
+
+<section id="check">
+<h2>Final checklist — can you, without notes…</h2>
+<div class="chk">
+<label><input type="checkbox"> find a missing probability k and compute E(X), V(X), σ from a table?</label>
+<label><input type="checkbox"> list three properties each of binomial and Poisson experiments?</label>
+<label><input type="checkbox"> decide binomial vs Poisson from the wording, and rescale λ?</label>
+<label><input type="checkbox"> compute P(X ≥ 1), P(X &lt; 3), P(X &gt; 2) using complements?</label>
+<label><input type="checkbox"> standardise and use the table for all 7 normal "possibilities"?</label>
+<label><input type="checkbox"> do an inverse-normal question with a negative z?</label>
+<label><input type="checkbox"> state the CLT and when x̄ is normal?</label>
+<label><input type="checkbox"> compute P(x̄ &gt; a) and P(p̂ &lt; b)?</label>
+<label><input type="checkbox"> choose z vs t for a CI and read the t table (df, 1 − α/2)?</label>
+<label><input type="checkbox"> build a CI for p and for σ² / σ, and interpret it in a sentence?</label>
+<label><input type="checkbox"> compute a sample size and round up correctly?</label>
+<label><input type="checkbox"> translate wording into H₀ / H₁ and say which tail?</label>
+<label><input type="checkbox"> define Type I and Type II errors?</label>
+<label><input type="checkbox"> pick the right test from the decision tree?</label>
+<label><input type="checkbox"> write all six steps for a mean, proportion, variance, two-sample z, pooled t and paired t test?</label>
+<label><input type="checkbox"> write the conclusion sentence in context?</label>
+<label><input type="checkbox"> score 40/50 on a mock paper under 90 minutes?</label>
+</div>
+</section>
+</main>
+</div>
+<footer>STAV102 Test 2 Study Guide · Units 5–8 · prepared 3 October 2026 for the test on Saturday 10 October 2026 · built from the course notes, unit solutions, example packs and the lecture/example videos (transcribed and checked)</footer>
+</div>
+<script>
+document.querySelectorAll('.mcq').forEach(function(box){
+  var correct = parseInt(box.getAttribute('data-ans'), 10);
+  var opts = box.querySelectorAll('.opts li');
+  var expl = box.querySelector('.expl');
+  opts.forEach(function(li, i){
+    li.addEventListener('click', function(){
+      if (box.dataset.done === '1') return;
+      box.dataset.done = '1';
+      opts.forEach(function(o, j){
+        if (j === correct) o.classList.add('right');
+        else if (j === i) o.classList.add('wrong');
+      });
+      if (expl) expl.classList.add('on');
+    });
+  });
+});
+var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+function markActive(){
+  var y = window.scrollY + 120, best = -1;
+  targets.forEach(function(t, i){ if (t && t.offsetTop <= y) best = i; });
+  links.forEach(function(a, i){ a.style.background = (i === best) ? '#eef4f8' : ''; a.style.color = (i === best) ? '#0f5b8c' : ''; });
+}
+window.addEventListener('scroll', markActive); markActive();
+window.addEventListener('beforeprint', function(){ document.querySelectorAll('details').forEach(function(d){ d.open = true; }); });
+</script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STAV102 Test 2 Mock Papers</title>
+<style>
+:root{
+  --bg:#fbfaf8; --panel:#ffffff; --ink:#1c1a17; --muted:#6a645c;
+  --line:#e4e0d9; --accent:#0f5b8c; --accent2:#b3860a; --ok:#1e7a4a; --warn:#a8371f;
+  --code:#f4f2ee;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px 90px;}
+
+/* ---------- header ---------- */
+header.top{background:linear-gradient(160deg,#0d4f79,#0f5b8c 45%,#14709f);color:#fff;
+  padding:38px 22px 30px;margin-bottom:0;}
+header.top .inner{max-width:1180px;margin:0 auto}
+header.top h1{margin:0 0 6px;font-size:2.15rem;letter-spacing:-.5px}
+header.top .sub{opacity:.9;font-size:1.02rem;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+  padding:7px 13px;border-radius:999px;font-size:.85rem;font-family:system-ui,sans-serif}
+.badge b{font-weight:700}
+
+/* ---------- layout ---------- */
+.layout{display:grid;grid-template-columns:250px 1fr;gap:34px;align-items:start;margin-top:30px}
+nav.toc{position:sticky;top:14px;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 14px;font-family:system-ui,sans-serif;font-size:.85rem;
+  max-height:calc(100vh - 30px);overflow:auto}
+nav.toc h4{margin:0 0 10px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+nav.toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 8px;border-radius:6px;line-height:1.35}
+nav.toc a:hover{background:#eef4f8;color:var(--accent)}
+nav.toc a.sub{padding-left:20px;font-size:.8rem;color:var(--muted)}
+nav.toc .grp{margin-bottom:10px}
+.layout>*{min-width:0}
+.plan .c{min-width:0}
+code,kbd{overflow-wrap:anywhere}
+@media(max-width:900px){.layout{grid-template-columns:1fr}nav.toc{position:static;max-height:none}}
+@media(max-width:560px){.wrap{padding:0 12px 60px}section{padding:18px 16px}header.top h1{font-size:1.6rem}}
+
+/* ---------- sections ---------- */
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:26px 30px;margin-bottom:26px;scroll-margin-top:16px}
+h2{font-size:1.6rem;margin:0 0 4px;color:var(--accent);letter-spacing:-.3px}
+h2 .unit{display:inline-block;background:var(--accent);color:#fff;font-family:system-ui,sans-serif;
+  font-size:.65rem;letter-spacing:.1em;padding:4px 9px;border-radius:5px;vertical-align:middle;
+  margin-right:10px;text-transform:uppercase}
+h3{font-size:1.18rem;margin:30px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+h4{font-size:1.02rem;margin:20px 0 6px;color:#38332c}
+p{margin:9px 0}
+ul,ol{margin:9px 0;padding-left:24px}
+li{margin:5px 0}
+.lede{color:var(--muted);font-size:1.02rem;margin-bottom:4px}
+
+/* ---------- components ---------- */
+.def{background:#f7f9fb;border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.def b:first-child{color:var(--accent)}
+.tip{background:#fbf7ec;border-left:4px solid var(--accent2);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warnbox{background:#fdf3f0;border-left:4px solid var(--warn);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.okbox{background:#f0f8f3;border-left:4px solid var(--ok);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.tag{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:4px;font-weight:700;display:inline-block;vertical-align:middle}
+.tag.given{background:#e2f0e8;color:#1e7a4a}
+.tag.learn{background:#fbe9e4;color:#a8371f}
+
+.fml{background:var(--code);border:1px solid var(--line);border-radius:9px;padding:14px 18px;
+  margin:14px 0;font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.06rem;text-align:center;overflow-x:auto}
+.fml .lbl{display:block;font-family:system-ui,sans-serif;font-size:.7rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:7px;text-align:left}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 3px}
+.frac .n{display:block;padding:0 6px 2px;border-bottom:1.4px solid var(--ink)}
+.frac .d{display:block;padding:2px 6px 0}
+.sq{border-top:1.4px solid var(--ink);padding:2px 5px 0;margin-left:-3px}
+
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.92rem;
+  font-family:system-ui,-apple-system,sans-serif}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:center}
+th{background:#eef2f6;font-weight:700;font-size:.85rem}
+td.l,th.l{text-align:left}
+tr.tot td{background:#f6f4f0;font-weight:700}
+.hl{background:#fff6d9!important}
+.tblwrap{overflow-x:auto}
+
+details.wex{border:1px solid var(--line);border-radius:10px;margin:16px 0;background:#fcfcfb;overflow:hidden}
+details.wex>summary{cursor:pointer;padding:12px 16px;background:#f2f5f8;font-weight:700;
+  font-family:system-ui,sans-serif;font-size:.92rem;list-style:none;display:flex;
+  justify-content:space-between;align-items:center;gap:10px}
+details.wex>summary::-webkit-details-marker{display:none}
+details.wex>summary::after{content:"show ▸";font-weight:600;font-size:.75rem;color:var(--accent);white-space:nowrap}
+details.wex[open]>summary::after{content:"hide ▾"}
+details.wex>summary:hover{background:#e8eef4}
+details.wex .body{padding:6px 18px 16px}
+details.wex.q>summary{background:#fbf7ec}
+details.wex.q>summary:hover{background:#f6efdd}
+
+.steps{counter-reset:st;padding-left:0;list-style:none}
+.steps>li{counter-increment:st;position:relative;padding-left:38px;margin:12px 0}
+.steps>li::before{content:counter(st);position:absolute;left:0;top:1px;width:25px;height:25px;
+  background:var(--accent);color:#fff;border-radius:50%;display:grid;place-items:center;
+  font:700 .8rem system-ui,sans-serif}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fcfcfb}
+.card h5{margin:0 0 6px;font-size:.95rem;font-family:system-ui,sans-serif}
+
+.mcq{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0;background:#fcfcfb}
+.mcq .qn{font-weight:700;font-family:system-ui,sans-serif;font-size:.8rem;color:var(--accent);
+  letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px}
+.opts{list-style:none;padding:0;margin:8px 0}
+.opts li{margin:4px 0;padding:6px 11px;border:1px solid var(--line);border-radius:7px;
+  cursor:pointer;font-family:system-ui,sans-serif;font-size:.9rem;background:#fff;transition:.12s}
+.opts li:hover{border-color:var(--accent);background:#f4f8fb}
+.opts li.right{background:#e6f5ec;border-color:var(--ok);font-weight:600}
+.opts li.wrong{background:#fbeae6;border-color:var(--warn);text-decoration:line-through;opacity:.75}
+.expl{display:none;margin-top:10px;padding:10px 13px;background:#f3f6f9;border-radius:7px;font-size:.92rem}
+.expl.on{display:block}
+
+.plan{display:grid;grid-template-columns:96px 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.plan .d{background:var(--accent);color:#fff;padding:14px 12px;font-family:system-ui,sans-serif;
+  border-bottom:1px solid rgba(255,255,255,.2)}
+.plan .d b{display:block;font-size:1.02rem}
+.plan .d span{font-size:.72rem;opacity:.85}
+.plan .c{padding:13px 16px;border-bottom:1px solid var(--line);font-size:.94rem}
+.plan>div:nth-last-child(-n+2){border-bottom:none}
+
+kbd,code{background:var(--code);border:1px solid var(--line);border-radius:4px;padding:1px 6px;
+  font:.88em ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.calcstep{font-family:"Cambria Math",Cambria,Georgia,serif;background:var(--code);padding:9px 14px;
+  border-radius:7px;margin:9px 0;overflow-x:auto}
+.ans{color:var(--ok);font-weight:700}
+.chk{font-family:system-ui,sans-serif;font-size:.86rem}
+.chk label{display:flex;gap:9px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.chk input{margin-top:4px;width:15px;height:15px;flex:none;accent-color:var(--accent)}
+hr.soft{border:none;border-top:1px solid var(--line);margin:26px 0}
+.ascii{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px 18px;
+  font:.86rem/1.45 ui-monospace,Menlo,Consolas,monospace;white-space:pre;overflow-x:auto;margin:14px 0}
+footer{text-align:center;color:var(--muted);font-size:.85rem;font-family:system-ui,sans-serif;padding:30px 0}
+
+@media print{
+  @page{size:A4;margin:14mm 12mm 16mm}
+  html,body{width:auto}
+  body{font-size:9.6pt;line-height:1.42}
+  .wrap{max-width:100%!important;width:100%!important;padding:0!important;margin:0!important}
+  header.top{background:#0f5b8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;
+    padding:16px 0 14px!important;margin:0 0 10px!important}
+  header.top .inner{max-width:100%!important;padding:0!important}
+  header.top h1{font-size:17pt}
+  nav.toc{display:none!important}
+  .layout{display:block!important}
+  main{display:block;width:100%}
+  section{border:none!important;padding:0 0 6px!important;margin:0 0 10px!important;border-radius:0;background:none}
+  details.wex{border:1px solid #ddd;background:none;break-inside:avoid}
+  details.wex>summary::after,details.wex[open]>summary::after{content:none!important;display:none!important}
+  details.wex>summary{background:#eef2f6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:7px 10px;font-size:9.4pt}
+  details.wex .body{padding:4px 10px 9px}
+  h2{font-size:14pt}h3{font-size:11.6pt;margin:14px 0 5px}h4{font-size:10.2pt;margin:11px 0 4px}
+  h2,h3,h4{break-after:avoid-page}
+  table{font-size:8.1pt;table-layout:auto;width:100%}
+  th,td{padding:3px 4px;word-wrap:break-word}
+  .tblwrap{overflow:visible}
+  .ascii{font-size:6.6pt;line-height:1.28;padding:7px 9px;white-space:pre;overflow:hidden}
+  .calcstep{font-size:9pt;padding:6px 8px;white-space:normal;overflow-wrap:anywhere}
+  .fml{font-size:9.6pt;padding:8px 10px}
+  .grid2,.grid3{display:block}
+  .grid2>*,.grid3>*{margin-bottom:8px}
+  .card,.def,.tip,.warnbox,.okbox,.note{break-inside:avoid}
+  .mcq{break-inside:avoid;padding:9px 11px}
+  .expl{display:block!important}
+  .opts li{padding:3px 7px;font-size:8.6pt}
+  .plan{grid-template-columns:74px 1fr}
+  .plan .d{padding:8px;background:#0f5b8c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .plan .c{padding:8px 10px;font-size:8.8pt}
+  .badges{gap:5px}.badge{font-size:7.2pt;padding:4px 8px;background:rgba(255,255,255,.18)!important;-webkit-print-color-adjust:exact}
+  .chk label{padding:2px 0;font-size:8.8pt}
+  footer{font-size:8pt}
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="inner">
+<a href="../" style="display:inline-block;margin-bottom:10px;color:inherit;opacity:.85;font:500 .82rem system-ui,sans-serif;text-decoration:none">&larr; All modules</a>
+<h1>STAV102 — Semester Test 2 Mock Papers</h1>
+<p class="sub">Two full practice tests in the real layout · Units 5–8 · memos hidden until you open them</p>
+<div class="badges">
+<span class="badge"><b>Test:</b> Sat 10 Oct 2026</span>
+<span class="badge"><b>Format:</b> Part 1 long Qs [30] + Part 2 MCQ [20]</span>
+<span class="badge"><b>Time:</b> 90 min</span>
+<span class="badge"><b>Round:</b> final answers to 3 decimals</span>
+</div>
+</div></header>
+<div class="wrap">
+<div class="layout">
+<nav class="toc">
+<div class="grp"><h4>How to use</h4><a href="#how">Rules &amp; timing</a></div>
+<div class="grp"><h4>Mock Test A</h4><a href="#a1">Part 1 — long questions</a><a href="#a2">Part 2 — MCQ</a></div>
+<div class="grp"><h4>Mock Test B</h4><a href="#b1">Part 1 — long questions</a><a href="#b2">Part 2 — MCQ</a></div>
+<div class="grp"><h4>After</h4><a href="#mark">Marking &amp; what to revise</a></div>
+</nav>
+<main>
+
+<section id="how">
+<h2>How to use these papers</h2>
+<ol class="steps">
+<li><b>Sit each paper in one go, timed: 90 minutes.</b> Calculator, the formula sheet and tables only (the November 2026 formula sheet &amp; tables PDF from Moodle — pages 20–25 cover everything for Test 2). No notes.</li>
+<li>Write Part 1 on paper exactly as you would in the test: define the random variable, write the formula, substitute, answer to 3 dp. For hypothesis tests write all six steps.</li>
+<li>Do Part 2 by noting your letters (a–e) on paper first. Then click through here to check them.</li>
+<li>Mark Part 1 against the memo using the [mark] allocations. Method marks count — give yourself the marks for correct set-up even if the arithmetic slipped.</li>
+</ol>
+<div class="tip"><b>Timing guide:</b> about 1.8 minutes per mark. Part 1 (30 marks) ≈ 55 minutes; Part 2 (20 MCQs) ≈ 30 minutes; 5 minutes to check. If an MCQ takes more than 2 minutes, skip it and come back.</div>
+<div class="okbox"><b>Hypothesis-test marking:</b> the lecturer says the six steps are "six marks" — roughly one per step. The mocks give 8 marks per test so the working can be marked in finer detail (2 for the hypotheses, 2 for the test statistic); on the real paper expect ≈ 1 mark per step.</div>
+<div class="warnbox">These mocks follow the real Test 1 layout (Part 1 long questions [30], Part 2 MCQ [20], 90 min, 3 decimals). The real Test 2 may weight units differently — Unit 8 (hypothesis testing) has the most lecture time, so expect at least one full six-step test in Part 1.</div>
+</section>
+
+<!-- =================== MOCK A =================== -->
+<section id="a1">
+<h2><span class="unit">Mock A</span>Part 1 — Long Questions [30]</h2>
+
+<h3>Question 1 [7]</h3>
+<p>The number of insurance claims, X, that a small broker receives per day has the following probability distribution:</p>
+<div class="tblwrap"><table><tr><th>x</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+<tr><th>P(X = x)</th><td>0.10</td><td>0.25</td><td>k</td><td>0.20</td><td>0.05</td></tr></table></div>
+<p>(i) Determine the value of k. <b>[1]</b><br>(ii) Determine P(1 &lt; X ≤ 3). <b>[1]</b><br>(iii) Calculate the expected number of claims per day. <b>[2]</b><br>(iv) Calculate the standard deviation of the number of claims per day. <b>[3]</b></p>
+<details class="wex"><summary>Memo — Question 1</summary><div class="body">
+<div class="calcstep">(i) 0.10 + 0.25 + k + 0.20 + 0.05 = 1 ⇒ <span class="ans">k = 0.40</span> ✓</div>
+<div class="calcstep">(ii) P(1 &lt; X ≤ 3) = P(2) + P(3) = 0.40 + 0.20 = <span class="ans">0.600</span> ✓</div>
+<div class="calcstep">(iii) E(X) = 0(0.10) + 1(0.25) + 2(0.40) + 3(0.20) + 4(0.05) ✓ = <span class="ans">1.850</span> ✓</div>
+<div class="calcstep">(iv) E(X²) = 0 + 0.25 + 1.60 + 1.80 + 0.80 = 4.45 ✓ &nbsp; V(X) = 4.45 − 1.85² = 1.0275 ✓ &nbsp; σ = √1.0275 = <span class="ans">1.014</span> ✓</div>
+</div></details>
+
+<h3>Question 2 [7]</h3>
+<p>A clothing retailer finds that 20% of customers who enter the store make a purchase. Customers make their decisions independently. Twelve customers enter the store.</p>
+<p>(i) Define the random variable and state its distribution, with parameters. <b>[2]</b><br>(ii) What is the probability that exactly three customers make a purchase? <b>[2]</b><br>(iii) What is the probability that at least two customers make a purchase? <b>[3]</b></p>
+<details class="wex"><summary>Memo — Question 2</summary><div class="body">
+<div class="calcstep">(i) X = the number of customers (out of 12) who make a purchase ✓. &nbsp; X ~ BI(12, 0.2) ✓</div>
+<div class="calcstep">(ii) P(X = 3) = ₁₂C₃(0.2)³(0.8)⁹ ✓ = 220 × 0.008 × 0.134218 = <span class="ans">0.236</span> ✓</div>
+<div class="calcstep">(iii) P(X ≥ 2) = 1 − [P(X = 0) + P(X = 1)] ✓ = 1 − [0.0687 + 0.2062] ✓ = <span class="ans">0.725</span> ✓</div>
+</div></details>
+
+<h3>Question 3 [8]</h3>
+<p>The volume of cooldrink in 500 ml bottles filled by a machine is normally distributed with mean 500 ml and variance 144 ml².</p>
+<p>(i) What proportion of bottles contain less than 485 ml? <b>[2]</b><br>(ii) What is the probability that a bottle contains between 490 ml and 520 ml? <b>[2]</b><br>(iii) Above what volume are the fullest 5% of bottles? <b>[2]</b><br>(iv) A quality inspector takes a random sample of 16 bottles. What is the probability that the sample mean volume exceeds 505 ml? <b>[2]</b></p>
+<details class="wex"><summary>Memo — Question 3</summary><div class="body">
+<p>X ~ N(500, 144) ⇒ σ = 12.</p>
+<div class="calcstep">(i) P(X &lt; 485) = P(Z &lt; (485 − 500)/12) = P(Z &lt; −1.25) ✓ = 1 − 0.8944 = <span class="ans">0.106</span> ✓</div>
+<div class="calcstep">(ii) P(490 &lt; X &lt; 520) = P(−0.83 &lt; Z &lt; 1.67) ✓ = 0.9525 − (1 − 0.7967) = <span class="ans">0.749</span> ✓</div>
+<div class="calcstep">(iii) P(X &gt; k) = 0.05 ⇒ P(Z &lt; z) = 0.95 ⇒ z = 1.645 ✓ ⇒ k = 500 + 1.645(12) = <span class="ans">519.740 ml</span> ✓ <span style="font-size:.85rem">(z = 1.64 ⇒ 519.680, also accepted)</span></div>
+<div class="calcstep">(iv) X̄ ~ N(500, 144/16) ⇒ σ<sub>x̄</sub> = 12/4 = 3. P(X̄ &gt; 505) = P(Z &gt; 1.67) ✓ = 1 − 0.9525 = <span class="ans">0.048</span> ✓</div>
+</div></details>
+
+<h3>Question 4 [8]</h3>
+<p>A company compares two training programmes. Ten employees who completed Programme A had a mean productivity score of 52.3 with a standard deviation of 4.1. Twelve employees who completed Programme B had a mean score of 47.6 with a standard deviation of 5.0. Assume the scores are normally distributed with equal population variances. Test at the 5% level of significance whether Programme A produces a higher mean score than Programme B.</p>
+<details class="wex"><summary>Memo — Question 4</summary><div class="body">
+<div class="calcstep">1. H₀: μ<sub>A</sub> = μ<sub>B</sub> &nbsp;&nbsp; H₁: μ<sub>A</sub> &gt; μ<sub>B</sub> ✓✓</div>
+<div class="calcstep">2. α = 0.05 ✓</div>
+<div class="calcstep">3. s<sub>p</sub> = √[(9 × 4.1² + 11 × 5.0²)/20] = √21.3145 = 4.617 ✓ <br>&nbsp;&nbsp;&nbsp; t<sub>ts</sub> = (52.3 − 47.6)/(4.617 √(1/10 + 1/12)) = 4.7/1.977 = <span class="ans">2.378</span> ✓</div>
+<div class="calcstep">4. t<sub>crit</sub> = t<sub>20; 0.95</sub> = 1.725 ✓</div>
+<div class="calcstep">5. Reject H₀ if t<sub>ts</sub> &gt; 1.725. Since 2.378 &gt; 1.725, reject H₀ ✓</div>
+<div class="calcstep">6. At the 5% level of significance there is sufficient evidence to conclude that Programme A produces a higher mean productivity score than Programme B ✓</div>
+<div class="tip">Why pooled t: two <b>independent</b> groups, both small (10 and 12), normal, equal variances stated. df = 10 + 12 − 2 = 20.</div>
+</div></details>
+</section>
+
+<section id="a2">
+<h2><span class="unit">Mock A</span>Part 2 — Multiple Choice [20]</h2>
+<p class="lede">Click an option to check it. Questions 1–2 share a scenario, as do 17–18 and 19–20.</p>
+<p><i>For questions 1 and 2:</i> a call centre receives complaints at an average rate of 4.5 per hour, following a Poisson distribution.</p>
+<div class="mcq" data-ans="1"><div class="qn">Question 1</div>The probability of exactly 3 complaints in an hour is:
+<ul class="opts"><li>a) 0.333</li><li>b) 0.169</li><li>c) 0.174</li><li>d) 0.011</li><li>e) None of the above</li></ul>
+<div class="expl">P(X = 3) = e<sup>−4.5</sup>(4.5)³/3! = 0.1687.</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 2</div>The probability of at least 2 complaints in a 30-minute period is:
+<ul class="opts"><li>a) 0.939</li><li>b) 0.343</li><li>c) 0.657</li><li>d) 0.237</li><li>e) None of the above</li></ul>
+<div class="expl">Rescale: λ = 4.5/2 = 2.25. P(Y ≥ 2) = 1 − [P(0) + P(1)] = 1 − (0.1054 + 0.2371) = 0.6575. (a) is what you get with λ = 4.5.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 3</div>2% of items from a production line are defective. X is the number of defective items in a box of 50. X follows a:
+<ul class="opts"><li>a) Binomial distribution</li><li>b) Poisson distribution</li><li>c) Normal distribution</li><li>d) t-distribution</li><li>e) None of the above</li></ul>
+<div class="expl">Fixed n = 50 trials, two outcomes, constant p = 0.02, independent ⇒ binomial.</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 4</div>X ~ N(60, 25). According to the empirical rule, approximately 95% of values lie between:
+<ul class="opts"><li>a) 35 and 85</li><li>b) 55 and 65</li><li>c) 10 and 110</li><li>d) 50 and 70</li><li>e) None of the above</li></ul>
+<div class="expl">σ = √25 = 5. μ ± 2σ = 60 ± 10 ⇒ (50 ; 70).</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 5</div>P(Z &lt; 1.73) equals:
+<ul class="opts"><li>a) 0.0418</li><li>b) 0.9582</li><li>c) 0.4582</li><li>d) 0.9591</li><li>e) None of the above</li></ul>
+<div class="expl">Read directly: row 1.7, column 0.03 ⇒ 0.9582.</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 6</div>P(−1.5 &lt; Z &lt; 0.5) equals:
+<ul class="opts"><li>a) 0.2417</li><li>b) 0.3753</li><li>c) 0.6247</li><li>d) 1.6247</li><li>e) None of the above</li></ul>
+<div class="expl">P(Z &lt; 0.5) − P(Z &lt; −1.5) = 0.6915 − (1 − 0.9332) = 0.6247.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 7</div>For a continuous random variable X, which statement is true?
+<ul class="opts"><li>a) P(X &lt; 5) = P(X ≤ 5)</li><li>b) P(X = 5) = f(5)</li><li>c) f(x) can be greater than 1 only if X is discrete</li><li>d) The probabilities of all outcomes sum to more than 1</li><li>e) None of the above</li></ul>
+<div class="expl">P(X = 5) = 0 for a continuous variable, so including or excluding the endpoint changes nothing.</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 8</div>The Central Limit Theorem is usually considered to apply when:
+<ul class="opts"><li>a) n ≤ 5</li><li>b) n ≥ 10</li><li>c) σ is known</li><li>d) n ≥ 30</li><li>e) None of the above</li></ul>
+<div class="expl">For a non-normal population, x̄ is approximately normal for sufficiently large n, usually n ≥ 30.</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 9</div>A population has mean 80 and standard deviation 20. For samples of size 100, the standard error of the mean is:
+<ul class="opts"><li>a) 0.2</li><li>b) 2</li><li>c) 4</li><li>d) 20</li><li>e) None of the above</li></ul>
+<div class="expl">σ/√n = 20/√100 = 2.</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 10</div>For the population in Question 9 (n = 100), P(x̄ &lt; 77) is:
+<ul class="opts"><li>a) 0.4404</li><li>b) 0.9332</li><li>c) 0.0668</li><li>d) 0.4332</li><li>e) None of the above</li></ul>
+<div class="expl">z = (77 − 80)/2 = −1.5. P(Z &lt; −1.5) = 1 − 0.9332 = 0.0668. (a) forgets the √n.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 11</div>A sample of 20 delivery times (normal population) has x̄ = 38.4 min and s = 6.2 min. A 95% confidence interval for μ is:
+<ul class="opts"><li>a) (35.498 ; 41.302)</li><li>b) (35.683 ; 41.117)</li><li>c) (36.003 ; 40.797)</li><li>d) (25.423 ; 51.377)</li><li>e) None of the above</li></ul>
+<div class="expl">σ unknown, n &lt; 30 ⇒ t<sub>19; 0.975</sub> = 2.093. 38.4 ± 2.093 × 6.2/√20 = 38.4 ± 2.902. (b) wrongly uses 1.96; (c) uses t<sub>19;0.95</sub>.</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 12</div>The critical value used for a 98% confidence interval for μ with σ unknown and n = 10 is:
+<ul class="opts"><li>a) 2.326</li><li>b) 2.262</li><li>c) 2.764</li><li>d) 2.821</li><li>e) None of the above</li></ul>
+<div class="expl">df = 9, column 1 − α/2 = 1 − 0.01 = 0.99 ⇒ t<sub>9; 0.99</sub> = 2.821.</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 13</div>In a survey, 132 of 400 shoppers used a mobile app. A 90% confidence interval for the population proportion is:
+<ul class="opts"><li>a) (0.284 ; 0.376)</li><li>b) (0.291 ; 0.369)</li><li>c) (0.306 ; 0.354)</li><li>d) (0.269 ; 0.391)</li><li>e) None of the above</li></ul>
+<div class="expl">p̂ = 0.33. 0.33 ± 1.645√(0.33 × 0.67/400) = 0.33 ± 0.039. (a) uses 1.96.</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 14</div>Using p̂ = 0.33 from Question 13, how many shoppers are needed to estimate p to within 0.03 with 95% confidence?
+<ul class="opts"><li>a) 665</li><li>b) 943</li><li>c) 944</li><li>d) 1068</li><li>e) None of the above</li></ul>
+<div class="expl">n = 0.33 × 0.67 × (1.96/0.03)² = 943.75 ⇒ round UP to 944. (1068 is the p = 0.5 answer.)</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 15</div>A Type II error is committed when:
+<ul class="opts"><li>a) H₀ is rejected when it is true</li><li>b) H₀ is not rejected when it is false</li><li>c) H₁ is rejected when it is false</li><li>d) the significance level is too small</li><li>e) None of the above</li></ul>
+<div class="expl">Type II = failing to reject a false H₀ (probability β).</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 16</div>A manager claims that a new process has <b>reduced</b> the mean assembly time from 14 minutes. The hypotheses are:
+<ul class="opts"><li>a) H₀: μ = 14; H₁: μ &lt; 14</li><li>b) H₀: μ = 14; H₁: μ &gt; 14</li><li>c) H₀: μ = 14; H₁: μ ≠ 14</li><li>d) H₀: x̄ = 14; H₁: x̄ &lt; 14</li><li>e) None of the above</li></ul>
+<div class="expl">"Reduced" ⇒ left-tailed, about μ (not x̄).</div></div>
+<p><i>For questions 17 and 18:</i> a political party claims 60% support. In a random sample of 200 voters, 108 support the party. Test whether support differs from 60% at α = 0.05.</p>
+<div class="mcq" data-ans="2"><div class="qn">Question 17</div>The test statistic is:
+<ul class="opts"><li>a) −1.703</li><li>b) −0.060</li><li>c) −1.732</li><li>d) 1.732</li><li>e) None of the above</li></ul>
+<div class="expl">p̂ = 108/200 = 0.54. z = (0.54 − 0.60)/√(0.6 × 0.4/200) = −0.06/0.03464 = −1.732. (a) wrongly uses p̂ under the root.</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 18</div>The correct decision is:
+<ul class="opts"><li>a) Reject H₀, since −1.732 &lt; −1.645</li><li>b) Reject H₀, since |−1.732| &gt; 1.645</li><li>c) Do not reject H₀, since −1.732 &lt; 1.96</li><li>d) Do not reject H₀, since |−1.732| &lt; 1.96</li><li>e) None of the above</li></ul>
+<div class="expl">"Differs" ⇒ two-tailed ⇒ z<sub>0.975</sub> = 1.96. Compare the absolute value: 1.732 &lt; 1.96 ⇒ do not reject. (a)/(b) use the one-tailed value — a very common slip.</div></div>
+<p><i>For questions 19 and 20:</i> the standard deviation of fill weights must not exceed 3 g. A sample of 25 packets (normal population) gives s = 4 g. Test at α = 0.05 whether the variance exceeds the limit.</p>
+<div class="mcq" data-ans="1"><div class="qn">Question 19</div>The test statistic is:
+<ul class="opts"><li>a) 32.000</li><li>b) 42.667</li><li>c) 44.444</li><li>d) 18.000</li><li>e) None of the above</li></ul>
+<div class="expl">χ² = (n − 1)s²/σ₀² = 24 × 16/9 = 42.667. (a) forgets to square both; (c) uses n instead of n − 1.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 20</div>The critical value and decision are:
+<ul class="opts"><li>a) 36.42; reject H₀</li><li>b) 39.36; reject H₀</li><li>c) 13.85; do not reject H₀</li><li>d) 36.42; do not reject H₀</li><li>e) None of the above</li></ul>
+<div class="expl">Right-tailed, df = 24, column 0.95 ⇒ 36.42. 42.667 &gt; 36.42 ⇒ reject H₀: the variance exceeds the limit.</div></div>
+</section>
+
+<!-- =================== MOCK B =================== -->
+<section id="b1">
+<h2><span class="unit">Mock B</span>Part 1 — Long Questions [30]</h2>
+
+<h3>Question 1 [7]</h3>
+<p>Flaws in a roll of fabric occur randomly at an average rate of 2.4 flaws per 10 metres.</p>
+<p>(i) State two properties of a Poisson experiment that this situation satisfies. <b>[2]</b><br>(ii) What is the probability that a 10-metre length has no flaws? <b>[1]</b><br>(iii) What is the probability that a 10-metre length has at least three flaws? <b>[2]</b><br>(iv) What is the probability that a 25-metre length has exactly five flaws? <b>[2]</b></p>
+<details class="wex"><summary>Memo — Question 1</summary><div class="body">
+<p>(i) Any two ✓✓: flaws are counted in an interval (length of fabric); the number of flaws in one length is independent of the number in another non-overlapping length; the probability of a flaw is the same for equal lengths and proportional to the length; two flaws at exactly the same point is practically impossible (rare events).</p>
+<div class="calcstep">X ~ Poisson(2.4). (ii) P(X = 0) = e<sup>−2.4</sup> = <span class="ans">0.091</span> ✓</div>
+<div class="calcstep">(iii) P(X ≥ 3) = 1 − [P(0) + P(1) + P(2)] = 1 − (0.0907 + 0.2177 + 0.2613) ✓ = <span class="ans">0.430</span> ✓</div>
+<div class="calcstep">(iv) Y ~ Poisson(2.4 × 2.5 = 6) ✓. P(Y = 5) = e<sup>−6</sup>6⁵/5! = <span class="ans">0.161</span> ✓</div>
+</div></details>
+
+<h3>Question 2 [8]</h3>
+<p>Marks in a large first-year module are normally distributed with mean 62 and standard deviation 9.</p>
+<p>(i) What percentage of students score above 75? <b>[2]</b><br>(ii) What is the probability that a randomly chosen student scores between 55 and 70? <b>[2]</b><br>(iii) The top 20% of students are invited to a tutoring programme. What is the minimum mark needed? <b>[2]</b><br>(iv) For a random sample of 36 students, what is the probability that their mean mark is below 60? <b>[2]</b></p>
+<details class="wex"><summary>Memo — Question 2</summary><div class="body">
+<div class="calcstep">(i) P(X &gt; 75) = P(Z &gt; 1.44) ✓ = 1 − 0.9251 = 0.0749 ⇒ <span class="ans">7.49%</span> ✓</div>
+<div class="calcstep">(ii) P(55 &lt; X &lt; 70) = P(−0.78 &lt; Z &lt; 0.89) ✓ = 0.8133 − (1 − 0.7823) = <span class="ans">0.596</span> ✓</div>
+<div class="calcstep">(iii) P(X &gt; k) = 0.20 ⇒ P(Z &lt; z) = 0.80 ⇒ z = 0.84 ✓ ⇒ k = 62 + 0.84(9) = <span class="ans">69.56</span> ✓</div>
+<div class="calcstep">(iv) σ<sub>x̄</sub> = 9/√36 = 1.5. P(X̄ &lt; 60) = P(Z &lt; −1.33) ✓ = 1 − 0.9082 = <span class="ans">0.092</span> ✓</div>
+</div></details>
+
+<h3>Question 3 [7]</h3>
+<p>The time (in minutes) that customers wait at a bank is normally distributed.</p>
+<p>(i) From long experience the population standard deviation is 2.5 minutes. A sample of 40 customers had a mean waiting time of 18.6 minutes. Construct a 98% confidence interval for the mean waiting time. <b>[2]</b><br>(ii) A separate sample of 15 customers had a standard deviation of 3.2 minutes. Construct a 95% confidence interval for the population <b>standard deviation</b> of waiting times. <b>[3]</b><br>(iii) How many customers must be sampled to estimate the mean waiting time to within 0.5 minutes with 95% confidence (σ = 2.5)? <b>[2]</b></p>
+<details class="wex"><summary>Memo — Question 3</summary><div class="body">
+<div class="calcstep">(i) σ known ⇒ z. 18.6 ± z<sub>0.99</sub>(2.5/√40) = 18.6 ± 2.326(0.3953) ✓ ⇒ <span class="ans">(17.681 ; 19.519)</span> ✓</div>
+<div class="calcstep">(ii) df = 14: χ²<sub>14; 0.975</sub> = 26.12, χ²<sub>14; 0.025</sub> = 5.63 ✓ <br>CI for σ²: (14 × 3.2²/26.12 ; 14 × 3.2²/5.63) = (5.489 ; 25.464) ✓ <br>CI for σ: (√5.489 ; √25.464) = <span class="ans">(2.343 ; 5.046)</span> minutes ✓</div>
+<div class="calcstep">(iii) n = (1.96 × 2.5/0.5)² = 96.04 ✓ ⇒ <span class="ans">97 customers</span> ✓ (round up)</div>
+</div></details>
+
+<h3>Question 4 [8]</h3>
+<p>A call centre trains its agents on a new system and records the average call-handling time (minutes) of eight agents before and after the training:</p>
+<div class="tblwrap"><table><tr><th>Agent</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+<tr><th>Before</th><td>82</td><td>75</td><td>90</td><td>68</td><td>77</td><td>85</td><td>71</td><td>80</td></tr>
+<tr><th>After</th><td>78</td><td>74</td><td>84</td><td>69</td><td>72</td><td>80</td><td>70</td><td>75</td></tr></table></div>
+<p>Assuming the differences are normally distributed, test at the 5% level of significance whether the training <b>reduced</b> the mean call-handling time.</p>
+<details class="wex"><summary>Memo — Question 4</summary><div class="body">
+<div class="calcstep">1. H₀: μ<sub>before</sub> = μ<sub>after</sub> &nbsp;&nbsp; H₁: μ<sub>before</sub> &gt; μ<sub>after</sub> ✓✓ &nbsp;(paired — same agents)</div>
+<div class="calcstep">2. α = 0.05 ✓</div>
+<div class="calcstep">3. d = before − after: 4, 1, 6, −1, 5, 5, 1, 5 &nbsp; (Σd = 26, Σd² = 130) <br>&nbsp;&nbsp;&nbsp; d̄ = 3.25, s<sub>d</sub> = √[(130 − 26²/8)/7] = 2.550 ✓ <br>&nbsp;&nbsp;&nbsp; t<sub>ts</sub> = 3.25/(2.550/√8) = <span class="ans">3.606</span> ✓</div>
+<div class="calcstep">4. t<sub>crit</sub> = t<sub>7; 0.95</sub> = 1.895 ✓</div>
+<div class="calcstep">5. Reject H₀ if t<sub>ts</sub> &gt; 1.895. Since 3.606 &gt; 1.895, reject H₀ ✓</div>
+<div class="calcstep">6. At the 5% level of significance there is sufficient evidence to conclude that the training reduced the mean call-handling time ✓</div>
+<div class="tip">Equivalent: d = after − before (values −4, −1, …), H₁: μ<sub>after</sub> &lt; μ<sub>before</sub>, t = −3.606 &lt; −1.895 ⇒ reject. Either is right as long as the <b>order of the differences matches the order in H₁</b> (the lecturer stresses this in the Ex 7A/7B videos).</div>
+</div></details>
+</section>
+
+<section id="b2">
+<h2><span class="unit">Mock B</span>Part 2 — Multiple Choice [20]</h2>
+<div class="mcq" data-ans="2"><div class="qn">Question 1</div>Which situation is best modelled by a binomial distribution?
+<ul class="opts"><li>a) The number of emails received per hour</li><li>b) The time a customer waits in a queue</li><li>c) The number of heads in 10 tosses of a coin</li><li>d) The number of potholes per kilometre of road</li><li>e) None of the above</li></ul>
+<div class="expl">Fixed n = 10, two outcomes, p = 0.5, independent. (a) and (d) are Poisson; (b) is continuous.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 2</div>X ~ BI(15, 0.2). P(X = 0) is:
+<ul class="opts"><li>a) 0.035</li><li>b) 0.000</li><li>c) 0.200</li><li>d) 0.132</li><li>e) None of the above</li></ul>
+<div class="expl">0.8¹⁵ = 0.0352.</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 3</div>For X ~ BI(15, 0.2), the mean and standard deviation are:
+<ul class="opts"><li>a) 3 and 2.4</li><li>b) 3 and 3</li><li>c) 0.2 and 0.16</li><li>d) 3 and 1.549</li><li>e) None of the above</li></ul>
+<div class="expl">np = 3; σ = √(np(1 − p)) = √2.4 = 1.549.</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 4</div>x = 0, 1, 2, 3, 4 with p(x) = 0.30, 0.25, 0.20, 0.15, 0.10. P(X ≥ 2) is:
+<ul class="opts"><li>a) 0.25</li><li>b) 0.45</li><li>c) 0.55</li><li>d) 0.75</li><li>e) None of the above</li></ul>
+<div class="expl">P(2) + P(3) + P(4) = 0.20 + 0.15 + 0.10 = 0.45 (or 1 − 0.30 − 0.25).</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 5</div>E(X) = 5 and V(X) = 2. Then E(3X − 2) and V(3X − 2) are:
+<ul class="opts"><li>a) 13 and 4</li><li>b) 15 and 6</li><li>c) 13 and 18</li><li>d) 13 and 16</li><li>e) None of the above</li></ul>
+<div class="expl">E = 3(5) − 2 = 13. V = 3²(2) = 18 (the −2 disappears).</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 6</div>Customers arrive at 0.5 per minute (Poisson). The probability that no customer arrives in a 4-minute period is:
+<ul class="opts"><li>a) 0.607</li><li>b) 0.135</li><li>c) 0.018</li><li>d) 0.500</li><li>e) None of the above</li></ul>
+<div class="expl">λ = 0.5 × 4 = 2 ⇒ P(0) = e<sup>−2</sup> = 0.1353. (a) uses λ = 0.5.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 7</div>X ~ N(30, 16). P(26 &lt; X &lt; 34) is:
+<ul class="opts"><li>a) 0.6826</li><li>b) 0.9544</li><li>c) 0.8413</li><li>d) 0.1974</li><li>e) None of the above</li></ul>
+<div class="expl">σ = 4 ⇒ P(−1 &lt; Z &lt; 1) = 0.8413 − 0.1587 = 0.6826. (b) is what you get if you take σ = 2 instead of √16 = 4 — always square-root the variance.</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 8</div>The value z such that P(Z &gt; z) = 0.10 is:
+<ul class="opts"><li>a) −1.28</li><li>b) 0.13</li><li>c) 1.645</li><li>d) 1.28</li><li>e) None of the above</li></ul>
+<div class="expl">P(Z &lt; z) = 0.90 ⇒ closest 0.8997 ⇒ z = 1.28.</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 9</div>A machine fills bags with mass ~ N(250 g, 4² g²). The proportion of bags heavier than 258 g is:
+<ul class="opts"><li>a) 0.9772</li><li>b) 0.4772</li><li>c) 0.0228</li><li>d) 0.0013</li><li>e) None of the above</li></ul>
+<div class="expl">z = (258 − 250)/4 = 2 ⇒ 1 − 0.9772 = 0.0228.</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 10</div>For the machine in Question 9, four bags are sampled. P(x̄ &gt; 253) is:
+<ul class="opts"><li>a) 0.2266</li><li>b) 0.0668</li><li>c) 0.9332</li><li>d) 0.0228</li><li>e) None of the above</li></ul>
+<div class="expl">σ<sub>x̄</sub> = 4/√4 = 2 ⇒ z = 1.5 ⇒ 1 − 0.9332 = 0.0668. (a) uses σ = 4 (one bag).</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 11</div>25% of a town's households have solar panels. In a sample of 300 households, P(p̂ &lt; 0.20) is:
+<ul class="opts"><li>a) 0.9772</li><li>b) 0.4772</li><li>c) 0.1587</li><li>d) 0.0228</li><li>e) None of the above</li></ul>
+<div class="expl">σ<sub>p̂</sub> = √(0.25 × 0.75/300) = 0.025. z = (0.20 − 0.25)/0.025 = −2 ⇒ 0.0228.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 12</div>Holding everything else constant, increasing the confidence level from 90% to 99% will:
+<ul class="opts"><li>a) widen the interval</li><li>b) narrow the interval</li><li>c) leave the width unchanged</li><li>d) shift the centre of the interval</li><li>e) None of the above</li></ul>
+<div class="expl">A larger critical value (1.645 → 2.576) means a larger margin of error. The centre stays at x̄.</div></div>
+<div class="mcq" data-ans="1"><div class="qn">Question 13</div>n = 9, x̄ = 12, s = 3 (normal population). A 90% CI for μ is:
+<ul class="opts"><li>a) (10.355 ; 13.645)</li><li>b) (10.140 ; 13.860)</li><li>c) (10.040 ; 13.960)</li><li>d) (9.694 ; 14.306)</li><li>e) None of the above</li></ul>
+<div class="expl">t<sub>8; 0.95</sub> = 1.860. 12 ± 1.860 × 3/3 = 12 ± 1.86. (a) uses z = 1.645; (d) uses t<sub>8;0.975</sub> (95%).</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 14</div>The t-distribution compared with the standard normal distribution:
+<ul class="opts"><li>a) is skewed to the right</li><li>b) has thinner tails</li><li>c) has heavier tails, and approaches the normal as df increases</li><li>d) can take only positive values</li><li>e) None of the above</li></ul>
+<div class="expl">Symmetric about 0, heavier tails; with df = ∞ it is the standard normal. (d) describes χ².</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 15</div>To estimate μ to within 5 units with 99% confidence when σ = 20, the minimum sample size is:
+<ul class="opts"><li>a) 62</li><li>b) 87</li><li>c) 106</li><li>d) 107</li><li>e) None of the above</li></ul>
+<div class="expl">n = (2.576 × 20/5)² = 106.17 ⇒ 107. (62 uses 1.96; 106 rounds down.)</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 16</div>An analyst wants to know whether two independent machines produce bolts with <b>different</b> mean lengths. H₁ is:
+<ul class="opts"><li>a) μ₁ ≠ μ₂</li><li>b) μ₁ &gt; μ₂</li><li>c) μ₁ &lt; μ₂</li><li>d) x̄₁ ≠ x̄₂</li><li>e) None of the above</li></ul>
+<div class="expl">"Different" ⇒ two-tailed, in terms of population means.</div></div>
+<p><i>For questions 17 and 18:</i> H₀: μ = 500 vs H₁: μ ≠ 500. σ = 20, n = 64, x̄ = 495, α = 0.05.</p>
+<div class="mcq" data-ans="1"><div class="qn">Question 17</div>The test statistic is:
+<ul class="opts"><li>a) −0.250</li><li>b) −2.000</li><li>c) −16.000</li><li>d) 2.000</li><li>e) None of the above</li></ul>
+<div class="expl">z = (495 − 500)/(20/8) = −5/2.5 = −2.</div></div>
+<div class="mcq" data-ans="2"><div class="qn">Question 18</div>The decision is:
+<ul class="opts"><li>a) Do not reject H₀ since −2 &lt; 1.96</li><li>b) Do not reject H₀ since |−2| &lt; 2.576</li><li>c) Reject H₀ since |−2| &gt; 1.96</li><li>d) Reject H₀ since −2 &lt; −1.645</li><li>e) None of the above</li></ul>
+<div class="expl">Two-tailed at 5% ⇒ ±1.96. |−2| = 2 &gt; 1.96 ⇒ reject H₀.</div></div>
+<div class="mcq" data-ans="3"><div class="qn">Question 19</div>A paired t test is carried out on 10 matched pairs. The degrees of freedom are:
+<ul class="opts"><li>a) 20</li><li>b) 18</li><li>c) 10</li><li>d) 9</li><li>e) None of the above</li></ul>
+<div class="expl">The pairs collapse into one sample of 10 differences ⇒ df = n − 1 = 9.</div></div>
+<div class="mcq" data-ans="0"><div class="qn">Question 20</div>Two independent samples of 10 each (normal, equal variances): x̄₁ = 24, s₁ = 4; x̄₂ = 21, s₂ = 5. The pooled t test statistic is:
+<ul class="opts"><li>a) 1.482</li><li>b) 0.663</li><li>c) 3.000</li><li>d) 1.500</li><li>e) None of the above</li></ul>
+<div class="expl">s<sub>p</sub> = √[(9 × 16 + 9 × 25)/18] = √20.5 = 4.528. t = 3/(4.528 √(1/10 + 1/10)) = 3/2.025 = 1.482.</div></div>
+</section>
+
+<section id="mark">
+<h2>Marking and what to revise</h2>
+<div class="tblwrap"><table>
+<tr><th class="l">Score (/50)</th><th class="l">What it means</th></tr>
+<tr><td class="l">40+</td><td class="l">Test-ready. Spend the remaining days on the MCQ drill's "only ones I got wrong" mode and keep your six-step write-ups sharp.</td></tr>
+<tr><td class="l">30–39</td><td class="l">Solid. Find which unit lost the most marks and redo that unit's worked examples in the study guide.</td></tr>
+<tr><td class="l">under 30</td><td class="l">Go back to the study guide's "which test / which interval" tables. Most lost marks at this level come from picking the wrong formula, not the arithmetic.</td></tr>
+</table></div>
+<div class="tip"><b>Where marks were lost, by type:</b>
+<ul style="margin:4px 0 0">
+<li>Wrong λ for a different interval → Unit 5 Poisson box.</li>
+<li>σ vs σ/√n mix-ups → Unit 6 "one value or an average?" box.</li>
+<li>Wrong t/z/χ² column → "Reading the t and χ² tables" in Unit 8.</li>
+<li>Lost hypothesis/conclusion marks → the six steps and the conclusion template.</li>
+</ul></div>
+</section>
+</main>
+</div>
+<footer>STAV102 Test 2 mock papers · written for Sat 10 Oct 2026 · all memo values recomputed (z to 2 dp, table look-ups, final answers to 3 dp)</footer>
+</div>
+<script>
+document.querySelectorAll('.mcq').forEach(function(box){
+  var correct = parseInt(box.getAttribute('data-ans'), 10);
+  var opts = box.querySelectorAll('.opts li');
+  var expl = box.querySelector('.expl');
+  opts.forEach(function(li, i){
+    li.addEventListener('click', function(){
+      if (box.dataset.done === '1') return;
+      box.dataset.done = '1';
+      opts.forEach(function(o, j){
+        if (j === correct) o.classList.add('right');
+        else if (j === i) o.classList.add('wrong');
+      });
+      if (expl) expl.classList.add('on');
+    });
+  });
+});
+var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+function markActive(){
+  var y = window.scrollY + 120, best = -1;
+  targets.forEach(function(t, i){ if (t && t.offsetTop <= y) best = i; });
+  links.forEach(function(a, i){ a.style.background = (i === best) ? '#eef4f8' : ''; a.style.color = (i === best) ? '#0f5b8c' : ''; });
+}
+window.addEventListener('scroll', markActive); markActive();
+window.addEventListener('beforeprint', function(){ document.querySelectorAll('details').forEach(function(d){ d.open = true; }); });
+</script>
+</body>
+</html>

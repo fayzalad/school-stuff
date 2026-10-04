@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STAV102 Test 2 Cheat Sheet</title>
+<style>
+:root{--ink:#1c1a17;--muted:#6a645c;--line:#d9d4cc;--accent:#0f5b8c;--warn:#a8371f;--ok:#1e7a4a;--bg:#fbfaf8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:1100px;margin:0 auto;padding:16px}
+h1{font:700 1.35rem Georgia,serif;margin:0 0 2px;color:var(--accent)}
+.sub{color:var(--muted);font-size:.85rem;margin:0 0 12px}
+.cols{columns:3 300px;column-gap:14px}
+.box{break-inside:avoid;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin:0 0 12px}
+.box h2{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 5px}
+.box p,.box li{margin:2px 0}
+.box ul{margin:2px 0;padding-left:16px}
+table{border-collapse:collapse;width:100%;font-size:.8rem;margin:3px 0}
+th,td{border:1px solid var(--line);padding:2px 5px;text-align:center}
+th{background:#eef2f6}
+td.l{text-align:left}
+.w{color:var(--warn);font-weight:600}
+.k{font-family:"Cambria Math",Cambria,Georgia,serif}
+@media print{a[href="../"]{display:none}@page{size:A4 landscape;margin:7mm}body{font-size:7.6pt;line-height:1.3;background:#fff}.page{padding:0;max-width:none}h1{font-size:12pt}.sub{margin-bottom:5px}.cols{columns:4;column-gap:8px}.box{padding:4px 6px;margin-bottom:5px}table{font-size:7pt}th,td{padding:1px 3px}}
+</style>
+</head>
+<body>
+<div class="page">
+<a href="../" style="display:inline-block;color:#0f5b8c;margin-bottom:10px;color:inherit;opacity:.85;font:500 .82rem system-ui,sans-serif;text-decoration:none">&larr; All modules</a>
+<h1>STAV102 Test 2 — one-page cheat sheet</h1>
+<p class="sub">Units 5–8 · Sat 10 Oct 2026 · formulas are on the formula sheet; this is the stuff that is NOT: when to use what.</p>
+<div class="cols">
+
+<div class="box"><h2>Which discrete distribution?</h2>
+<table><tr><th></th><th>Binomial BI(n,p)</th><th>Poisson(λ)</th></tr>
+<tr><td class="l">Clue</td><td>n trials, % / p, success/failure</td><td>"average rate per …", no n</td></tr>
+<tr><td class="l">Values</td><td>0 … n</td><td>0, 1, 2, … ∞</td></tr>
+<tr><td class="l">Mean/Var</td><td>np / np(1−p)</td><td>λ / λ</td></tr></table>
+<p class="w">Poisson: rescale λ to the interval asked (1.2/day → 8.4/week).</p>
+<p>"At least one" = 1 − P(0). "More than 3" = 1 − P(X ≤ 3).</p></div>
+
+<div class="box"><h2>Discrete table</h2>
+<p>Missing k: Σp = 1. &nbsp; E(X) = Σx·p &nbsp; V(X) = Σx²p − μ²</p>
+<p>V(aX + b) = a²V(X). V(X ± Y) = V(X) + V(Y) (independent). Variances always add.</p></div>
+
+<div class="box"><h2>Binomial properties (list 3)</h2>
+<ul><li>fixed number of trials n</li><li>two outcomes (success/failure)</li><li>p constant every trial</li><li>trials independent</li></ul></div>
+
+<div class="box"><h2>Poisson properties (list 3)</h2>
+<ul><li>counts events in an interval (time/space)</li><li>independent across non-overlapping intervals</li><li>P(event) same for equal intervals, ∝ interval size</li><li>2+ events in a tiny interval ≈ impossible</li></ul></div>
+
+<div class="box"><h2>Normal</h2>
+<p>N(μ, <b>σ²</b>) — <span class="w">square-root the variance!</span></p>
+<p>z = (x − μ)/σ, round to 2 dp. Table = area to the LEFT.</p>
+<p>P(Z &gt; z) = 1 − P(Z &lt; z)<br>P(Z &lt; −z) = 1 − P(Z &lt; z)<br>P(Z &gt; −z) = P(Z &lt; z)</p>
+<p>P(−a &lt; Z &lt; b) = P(Z &lt; b) + P(Z &lt; a) − 1</p>
+<p><b>Inverse:</b> make it "P(Z &lt; z) = area"; if area &lt; 0.5, z is negative. x = μ + zσ.</p>
+<p>Empirical rule: 68 / 95 / 99.7% within 1 / 2 / 3 σ.</p></div>
+
+<div class="box"><h2>One value or an average?</h2>
+<p>"a randomly selected …" → σ</p>
+<p>"the mean of a sample of n …" → σ/√n (standard error)</p>
+<p>CLT: x̄ ≈ normal if n ≥ 30 (exact if population normal).</p>
+<p>p̂ ~ N(p, p(1−p)/n) if np &gt; 5 and n(1−p) &gt; 5. Use the claimed p in the SE.</p></div>
+
+<div class="box"><h2>Critical values</h2>
+<table><tr><th>1−α</th><th>z<sub>1−α/2</sub><br>(CI, 2-tail)</th><th>z<sub>1−α</sub><br>(1-tail)</th></tr>
+<tr><td>90%</td><td>1.645</td><td>1.282</td></tr>
+<tr><td>95%</td><td>1.960</td><td>1.645</td></tr>
+<tr><td>98%</td><td>2.326</td><td>2.054</td></tr>
+<tr><td>99%</td><td>2.576</td><td>2.326</td></tr></table>
+<p><b>t table:</b> row df, column 1−α (one-tail) or 1−α/2 (two-tail / CI).</p>
+<p><b>χ² table:</b> row df = n−1. CI 95% → columns 0.975 &amp; 0.025.</p></div>
+
+<div class="box"><h2>Confidence intervals</h2>
+<table>
+<tr><td class="l">μ, σ known</td><td>x̄ ± z·σ/√n</td></tr>
+<tr><td class="l">μ, σ unknown, n ≥ 30</td><td>x̄ ± z·s/√n</td></tr>
+<tr><td class="l">μ, σ unknown, n &lt; 30</td><td>x̄ ± t<sub>n−1</sub>·s/√n</td></tr>
+<tr><td class="l">p</td><td>p̂ ± z√(p̂(1−p̂)/n)</td></tr>
+<tr><td class="l">σ²</td><td>((n−1)s²/χ²<sub>1−α/2</sub> ; (n−1)s²/χ²<sub>α/2</sub>)</td></tr></table>
+<p>Big χ² → lower limit. For σ: square-root both limits.</p>
+<p>"We are 95% confident that the true mean … lies between … and …"</p>
+<p>Wider when: confidence ↑, σ ↑, n ↓.</p></div>
+
+<div class="box"><h2>Sample size</h2>
+<p>n = (zσ/e)² · n = p(1−p)(z/e)² · <span class="w">always round UP</span></p>
+<p>Given a width/length → e = width/2. No p estimate → p = 0.5.</p></div>
+
+<div class="box"><h2>Hypotheses</h2>
+<p>About parameters (μ, p, σ²) — never x̄ or p̂. H₀ has "=". Write H₁ first.</p>
+<table><tr><th>&gt;</th><th>&lt;</th><th>≠</th></tr>
+<tr><td>more, above, increased, exceeds, longer</td><td>less, below, reduced, faster (time), shorter</td><td>different, changed, not equal</td></tr></table>
+<p>No α given → α = 0.05.</p>
+<p>Type I: reject a TRUE H₀ (α). Type II: don't reject a FALSE H₀ (β).</p></div>
+
+<div class="box"><h2>Which test?</h2>
+<table>
+<tr><td class="l">mean, σ known or n ≥ 30</td><td>z</td></tr>
+<tr><td class="l">mean, σ unknown, n &lt; 30</td><td>t, df n−1</td></tr>
+<tr><td class="l">proportion</td><td>z, p₀ in SE</td></tr>
+<tr><td class="l">variance / sd</td><td>χ², df n−1</td></tr>
+<tr><td class="l">2 independent, both ≥ 30</td><td>z</td></tr>
+<tr><td class="l">2 independent, small, equal var</td><td>pooled t, df n₁+n₂−2</td></tr>
+<tr><td class="l">same subjects before/after</td><td>paired t, df n−1</td></tr></table>
+<p>Paired: d in the same order as H₁ (after − before for "after &gt; before").</p></div>
+
+<div class="box"><h2>Six steps + rejection rule</h2>
+<p>1 H₀/H₁ · 2 α · 3 test statistic · 4 critical value · 5 decision · 6 conclusion</p>
+<table><tr><td>&gt;</td><td>reject if TS &gt; crit<sub>1−α</sub></td></tr>
+<tr><td>&lt;</td><td>reject if TS &lt; −crit<sub>1−α</sub></td></tr>
+<tr><td>≠</td><td>reject if |TS| &gt; crit<sub>1−α/2</sub></td></tr></table>
+<p><b>Conclusion:</b> "At a 5% level of significance, there is <u>sufficient</u> / <u>insufficient</u> evidence to conclude that [H₁ in words]."</p>
+<p>Say "do not reject H₀", never "accept H₀" in writing.</p></div>
+
+</div>
+</div>
+</body>
+</html>
