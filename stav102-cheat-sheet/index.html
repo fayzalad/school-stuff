@@ -23,11 +23,58 @@ td.l{text-align:left}
 .w{color:var(--warn);font-weight:600}
 .k{font-family:"Cambria Math",Cambria,Georgia,serif}
 @media print{a[href="../"]{display:none}@page{size:A4 landscape;margin:7mm}body{font-size:7.6pt;line-height:1.3;background:#fff}.page{padding:0;max-width:none}h1{font-size:12pt}.sub{margin-bottom:5px}.cols{columns:4;column-gap:8px}.box{padding:4px 6px;margin-bottom:5px}table{font-size:7pt}th,td{padding:1px 3px}}
+
+.themebtn{position:fixed;top:12px;right:12px;z-index:60;width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.18);background:rgba(255,255,255,.92);color:#1c1a17;cursor:pointer;
+  display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15);font:600 10px system-ui,sans-serif}
+.themebtn:hover{transform:scale(1.06)}
+.themebtn svg{display:block}
+@media print{.themebtn{display:none!important}}
+
+/* ---------- dark theme (screen only; print stays light) ---------- */
+@media screen and (prefers-color-scheme:dark){
+:root:not([data-theme="light"]){--ink:#e6e2da;--muted:#a8a194;--line:#3a4048;--accent:#7db8e0;--warn:#f08f76;--ok:#62c98f;--bg:#14171b;color-scheme:dark}
+:root:not([data-theme="light"]) .box{background:#1c2026}
+:root:not([data-theme="light"]) th{background:#262d35}
+:root:not([data-theme="light"]) a{color:#8cc4ec}
+
+:root:not([data-theme="light"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+}
+@media screen{
+:root[data-theme="dark"]{--ink:#e6e2da;--muted:#a8a194;--line:#3a4048;--accent:#7db8e0;--warn:#f08f76;--ok:#62c98f;--bg:#14171b;color-scheme:dark}
+:root[data-theme="dark"] .box{background:#1c2026}
+:root[data-theme="dark"] th{background:#262d35}
+:root[data-theme="dark"] a{color:#8cc4ec}
+
+:root[data-theme="dark"] .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+}
 </style>
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
 </head>
 <body>
+<button class="themebtn" id="themebtn" type="button" aria-label="Switch theme" title="Theme: auto"></button>
+<script>
+(function(){
+  var KEY="school_stuff_theme", order=["auto","light","dark"], btn=document.getElementById("themebtn");
+  var icons={
+    auto:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>',
+    light:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    dark:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
+  };
+  var t="auto"; try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){
+    if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t);
+    else document.documentElement.removeAttribute("data-theme");
+    btn.innerHTML=icons[t]; btn.title="Theme: "+t+" (click to change)"; btn.setAttribute("aria-label","Theme: "+t+". Click to change");
+  }
+  apply();
+  btn.addEventListener("click",function(){ t=order[(order.indexOf(t)+1)%order.length]; apply(); try{localStorage.setItem(KEY,t);}catch(e){} });
+})();
+</script>
 <div class="page">
-<a href="../" style="display:inline-block;color:#0f5b8c;margin-bottom:10px;color:inherit;opacity:.85;font:500 .82rem system-ui,sans-serif;text-decoration:none">&larr; All modules</a>
+<a href="../" style="display:inline-block;margin-bottom:10px;color:var(--accent);opacity:.85;font:500 .82rem system-ui,sans-serif;text-decoration:none">&larr; All modules</a>
 <h1>STAV102 Test 2 — one-page cheat sheet</h1>
 <p class="sub">Units 5–8 · Sat 10 Oct 2026 · formulas are on the formula sheet; this is the stuff that is NOT: when to use what.</p>
 <div class="cols">
