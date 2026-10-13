@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IAUT202 — Likely Question 1 (50 questions)</title>
+<style>
+:root{--bg:#f6f4ef;--panel:#fff;--ink:#1c1a17;--muted:#6b655b;--line:#e0dbd0;--accent:#5B4B8A;--onaccent:#fff;
+  --ok:#1f7a4a;--okbg:#e4f3ea;--bad:#a4452c;--badbg:#fbeae5;--note:#f1efe9}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(160deg,#241c47,#33285f 45%,#43367a);color:#fff;padding:22px 60px 22px 16px}
+header .in{max-width:820px;margin:0 auto}
+header a.back{color:#d9d1f0;text-decoration:none;font-size:.85rem;opacity:.9}
+header h1{font-size:1.5rem;margin:8px 0 6px;line-height:1.25}
+header p{margin:0;color:#e4def5;font-size:.95rem}
+.wrap{max-width:820px;margin:0 auto;padding:12px 16px 40px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+button.active{border-color:var(--accent);color:var(--accent);font-weight:600}
+button.primary{background:var(--accent);color:var(--onaccent);border-color:var(--accent)}
+label{font-size:.95rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+.topic{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.q{font-size:1.05rem;margin:6px 0 12px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:10px 12px}
+.opt.correct{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);color:var(--bad);border-color:var(--bad)}
+.exp{margin-top:10px;padding:10px 12px;border-left:3px solid var(--accent);background:var(--note);border-radius:0 8px 8px 0}
+.stat{font-size:.95rem}
+.muted{color:var(--muted)}
+[hidden]{display:none!important}
+.themebtn{position:fixed;top:12px;right:12px;z-index:60;width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.92);color:#1c1a17;cursor:pointer;
+  display:grid;place-items:center;padding:0}
+.themebtn:hover{transform:scale(1.06)}
+.themebtn svg{display:block}
+@media print{.themebtn,.controls,button,select{display:none!important}.card{break-inside:avoid}}
+@media screen and (prefers-color-scheme:dark){
+:root:not([data-theme="light"]){--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#B3A6DB;--onaccent:#14171b;
+  --ok:#8fd4a9;--okbg:#1f3a2a;--bad:#f0a89a;--badbg:#4a2a24;--note:#242830}
+:root:not([data-theme="light"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+}
+:root[data-theme="dark"]{--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#B3A6DB;--onaccent:#14171b;
+  --ok:#8fd4a9;--okbg:#1f3a2a;--bad:#f0a89a;--badbg:#4a2a24;--note:#242830}
+:root[data-theme="dark"] .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+</style>
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+</head>
+<body>
+<button class="themebtn" id="themebtn" type="button" aria-label="Switch theme" title="Theme: auto"></button>
+<script>
+(function(){
+  var KEY="school_stuff_theme", order=["auto","light","dark"], btn=document.getElementById("themebtn");
+  var icons={
+    auto:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>',
+    light:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    dark:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
+  };
+  var t="auto"; try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){
+    if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t);
+    else document.documentElement.removeAttribute("data-theme");
+    btn.innerHTML=icons[t]; btn.title="Theme: "+t+" (click to change)"; btn.setAttribute("aria-label","Theme: "+t+". Click to change");
+  }
+  apply();
+  btn.addEventListener("click",function(){ t=order[(order.indexOf(t)+1)%order.length]; apply(); try{localStorage.setItem(KEY,t);}catch(e){} });
+})();
+</script>
+<header><div class="in"><a class="back" href="../">&larr; All modules</a><h1>IAUT202 — Likely Question 1 (50 questions)</h1><p>50 questions on the Question 1 topics most likely to come up, written in the style of the past Q1 questions: open and closed loop, logic and sequence control, event and time driven changes, the five levels of automation, safety monitoring, PLC vs PC, ladder logic, counters, interlocks and polling, gates and truth tables, actuators, and sensor terms. Every answer is explained.</p></div></header>
+<div class="wrap">
+<div class="row controls">
+  <button id="mode-quiz" type="button" class="active">Quiz mode</button>
+  <button id="mode-mem" type="button">Memorise mode (answers shown)</button>
+</div>
+<div class="row controls">
+  <label>Topic <select id="topic"></select></label>
+  <label id="count-wrap">Questions <select id="count"><option value="10">10</option><option value="25">25</option><option value="50" selected>All 50</option></select></label>
+  <label id="shuffle-wrap"><input type="checkbox" id="shuffle" checked> Shuffle</label>
+  <label id="cover-wrap" hidden><input type="checkbox" id="cover"> Cover the answers (tap a card to reveal)</label>
+  <button id="start" type="button" class="primary">Start</button>
+</div>
+
+<div id="quiz" hidden>
+  <div class="stat"><span id="progress"></span> &middot; Score: <span id="score">0</span></div>
+  <div class="card" id="qcard"></div>
+  <div class="row"><button id="next" type="button" class="primary" hidden>Next</button></div>
+</div>
+<div id="result" hidden></div>
+<div id="memorise" hidden></div>
+
+<p class="muted" style="margin-top:32px">Hysteresis: your lecture slides never define it, but its questions are included because it can come up. The answers use the standard definition: the output for the same input depends on whether the input is rising or falling. Everything else follows the lecture slides, the cram sheet and the study guide. Topics: open vs closed loop, logic vs sequence control, levels of automation, safety and advanced functions, PLCs, ladder, counters and interlocks, gates and truth tables, actuators and sensors.</p>
+</div>
+
+<script>
+var QS = [
+["Open vs closed loop", "A closed-loop control system is one that:", ["Can only switch outputs on and off", "Never uses a controller", "Has no sensor and runs for a fixed time", "Uses feedback to compare the output with the set-point"], 3, "Closed-loop systems feed the measured output back and compare it with the set-point. The difference (the error) drives the controller."],
+["Open vs closed loop", "An open-loop control system is one that:", ["Has no feedback, so its output cannot be regulated", "Corrects its own output errors", "Always includes a thermostat", "Compares its output with the set-point"], 0, "An open-loop system has no feedback. The controller acts and nothing checks the result."],
+["Open vs closed loop", "Which of these is an example of a closed-loop system?", ["An oven with a thermostat", "A toaster running on a timer", "A fan on a fixed timer", "A traffic light on a fixed timer"], 0, "The thermostat measures the temperature and feeds it back, so the oven is closed-loop."],
+["Open vs closed loop", "Which of these is an example of an open-loop system?", ["A heater that stops when the room is warm enough", "A cruise control that measures speed", "A toaster that runs for a set time and never checks the toast", "An oven with a thermostat"], 2, "The toaster never checks how brown the toast is, so it has no feedback."],
+["Open vs closed loop", "Which one is NOT a condition for using open-loop control?", ["The actuating function is very reliable", "Opposing reaction forces are small enough to have no effect", "The actions performed are simple", "The output has to be checked continuously"], 3, "The three conditions are simple actions, a very reliable actuating function, and small opposing forces. Needing to check the output means you need feedback."],
+["Open vs closed loop", "If the conditions for open-loop control do not all hold, the system should be:", ["Left without any control", "Open-loop with a bigger actuator", "Closed-loop", "Switched to a timer only"], 2, "The lectures state that if the conditions do not apply, a closed-loop control system should be used."],
+["Open vs closed loop", "When is open-loop control a reasonable choice?", ["When feedback is available and needed", "When the system must compensate for disturbances", "When the actions are simple, the actuating function is very reliable and opposing forces are small", "When the output must be regulated exactly"], 2, "Open-loop is defensible only when all three conditions hold. It cannot compensate for disturbances."],
+["Open vs closed loop", "In a closed-loop system, the sensor:", ["Measures the actual output and feeds it back for comparison", "Supplies the power", "Sets the desired value", "Drives the process"], 0, "The sensor provides the feedback signal. The comparison with the set-point gives the error."],
+["Logic vs sequence control", "Logic control is a switching system whose output:", ["Depends on internal timers", "Depends exclusively on the values of the inputs, with no memory", "Always repeats in a cycle", "Always uses feedback"], 1, "Logic control has no memory and no operating characteristics that depend on time."],
+["Logic vs sequence control", "Sequence control:", ["Is the same as logic control", "Depends only on the present inputs", "Uses internal timing devices to decide when to change outputs, and is usually open-loop and cyclical", "Always uses feedback"], 2, "Sequence control uses timers to initiate output changes. Its outputs are usually open loop, in a repeated cycle."],
+["Logic vs sequence control", "The two common sequencing devices are:", ["Relay and fuse", "Timer and counter", "Gate and truth table", "Sensor and actuator"], 1, "A timer switches an output on or off at preset times. A counter counts electrical pulses and stores the count."],
+["Logic vs sequence control", "A lamp that is on only when S1 is pressed and S2 is not pressed is an example of:", ["Feedforward control", "Sequence control", "Logic control", "Adaptive control"], 2, "The output depends only on the present switch states, so it is logic control."],
+["Logic vs sequence control", "A traffic light that changes at fixed times is an example of:", ["Sequence control", "Feedforward control", "Logic control", "Closed-loop control"], 0, "It uses timing to change outputs in a repeating cycle."],
+["Logic vs sequence control", "Which is an example of an event-driven change?", ["A washing machine agitating for a set time", "Heat treating for a fixed time", "The shop clock sounds the shift bell", "A part is sensed by a limit switch in a fixture"], 3, "A limit switch sensing a part is an event that triggers the response."],
+["Logic vs sequence control", "Which is an example of a time-driven change?", ["A limit switch senses a part", "A hopper low-level switch opens a valve", "Counting parts past an optical sensor", "The shop clock sounds a bell at the start of a shift"], 3, "The bell sounds because of the time, not because something happened in the process."],
+["Logic vs sequence control", "What is the difference between an event-driven and a time-driven change?", ["Event-driven responds to something that happened; time-driven happens at a set time or after a time lapse", "Event-driven uses a clock; time-driven uses a sensor", "They are the same thing", "Time-driven changes are always analogue"], 0, "Ask: did something happen (event), or did a clock or duration cause it (time)?"],
+["Levels of automation", "Sensors, motors and valves belong to which level of automation?", ["Level 1: sensor/actuator", "Level 2: field (machine)", "Level 3: control (cell)", "Level 5: production management"], 0, "Level 1 is the sensor/actuator level: sensors, motors and valves."],
+["Levels of automation", "Drives, machines and HMI belong to which level?", ["Level 1: sensor/actuator", "Level 4: area management", "Level 3: control (cell)", "Level 2: field (machine)"], 3, "Level 2 is the field (machine) level: drives, machines and HMI."],
+["Levels of automation", "PLCs and work cells belong to which level?", ["Level 5: production management", "Level 2: field (machine)", "Level 3: control (cell)", "Level 1: sensor/actuator"], 2, "Level 3 is the control (cell) level, where PLCs and work cells live."],
+["Levels of automation", "An MES (manufacturing execution system) belongs to which level?", ["Level 3: control (cell)", "Level 4: area management", "Level 2: field (machine)", "Level 5: production management"], 1, "Level 4 is area management, where the MES lives."],
+["Levels of automation", "ERP and MIS belong to which level?", ["Level 2: field (machine)", "Level 3: control (cell)", "Level 5: production management", "Level 4: area management"], 2, "Level 5 is production management: ERP and MIS."],
+["Levels of automation", "Which lists the five levels from lowest to highest?", ["Sensor/actuator, field, control, area management, production management", "Field, sensor/actuator, control, production management, area management", "Control, field, sensor/actuator, area management, production management", "Sensor/actuator, control, field, production management, area management"], 0, "Level 1 is sensor/actuator, then field, control (cell), area management, and production management at Level 5."],
+["Safety and advanced functions", "What is the purpose of safety monitoring in a manufacturing system?", ["To protect people and equipment by detecting hazards and responding to them", "To schedule production runs", "To measure output quality only", "To record sales figures"], 0, "Safety monitoring detects hazardous conditions and responds, for example by stopping the system, sounding an alarm or slowing down."],
+["Safety and advanced functions", "Which is NOT a typical response of a safety monitoring system?", ["Increase the system speed", "Stop the system", "Reduce the system speed", "Sound an alarm warning"], 0, "The three responses are stop, alarm warning and speed reduction."],
+["Safety and advanced functions", "Which device is used for safety monitoring?", ["A hopper", "A light curtain", "A spreadsheet", "A counter"], 1, "Safety systems use limit switches, heat/smoke detectors, light curtains, LIDAR and vision systems."],
+["Safety and advanced functions", "The three functions of maintenance diagnostics are:", ["Polling, interlocks and interrupts", "Status monitoring, failure diagnostics and repair procedure", "Sensing, comparing and stopping", "Identification, decision and modification"], 1, "Status monitoring watches the sensors, failure diagnostics compares current and earlier values, and the repair procedure recommends the repair steps."],
+["Safety and advanced functions", "An error with a transferable cause, such as a material change or equipment drift, is called:", ["An aberration", "A random error", "A calibration error", "A systematic error"], 3, "Random errors come from regular operation, systematic errors have a transferable cause, and aberrations come from human error or equipment failure."],
+["Safety and advanced functions", "Which is an error recovery strategy listed in the lectures?", ["Ignore the error", "Stop the process and call for assistance", "Increase the line speed", "Disable the sensors"], 1, "The strategies are: adjust at the end of the cycle, adjust during the cycle, stop the process to correct, and stop the process and call for assistance."],
+["PLCs, ladder, counters, interlocks", "Which statement correctly contrasts a PLC with a personal computer?", ["A PLC is used for manufacturing and processing, with switches and dials in and relays and motors out; a PC is for personal computing", "A PLC runs Windows; a PC does not", "They are used for the same tasks", "A PLC has a keyboard and screen as standard"], 0, "A PLC has no operating system like Windows. You write a program on a computer and upload it to the PLC."],
+["PLCs, ladder, counters, interlocks", "Which is an advantage of ladder logic?", ["It is familiar to shop personnel and analogous to the relay circuits it replaced", "It needs no program", "It replaces the PLC", "It is faster than every other language"], 0, "The lectures give: familiar to shop personnel, analogous to electrical circuits, and the principal technique for programming PLCs."],
+["PLCs, ladder, counters, interlocks", "What is a counter in PLC programming, and how might it be used?", ["It switches an output at a preset clock time", "It counts electrical pulses and stores the count, for example counting parts past a sensor", "It stores electrical energy", "It converts analogue signals to digital"], 1, "A counter counts pulses and stores the count. For example, it can count parts passing an optical sensor and trigger an action at a set number."],
+["PLCs, ladder, counters, interlocks", "An interlock is:", ["A safety mechanism that allows or disallows a process to continue if strict rules are not met", "A type of sensor", "A pause in a program for a higher-priority task", "A way of sampling data at discrete times"], 0, "Individual components affect each other by allowing or disallowing a process."],
+["PLCs, ladder, counters, interlocks", "Why would industry use an interlock?", ["To count parts", "To reduce power use", "To make a machine run faster", "To stop a process from running when conditions are unsafe, such as a machine starting with its door open"], 3, "Interlocks are safety mechanisms, for example a two-hand press control or a door switch that cuts the heaters."],
+["PLCs, ladder, counters, interlocks", "Polling in computer process control is:", ["A safety door", "Pausing a program for a higher-priority one", "Periodically sampling data from a signal at discrete times", "Handling an exception"], 2, "Polling, also called sampling or scanning, periodically samples a continuous signal at discrete times."],
+["PLCs, ladder, counters, interlocks", "How does an interrupt differ from an interlock?", ["They are the same", "An interrupt allows or forbids a process; an interlock pauses the program", "An interrupt pauses the program so a higher-priority program can run; an interlock allows or forbids a process", "An interlock samples data at discrete times"], 2, "An interrupt acts on the program. An interlock acts on the process."],
+["PLCs, ladder, counters, interlocks", "Which is an advantage of a PLC over a relay control panel?", ["It is less reliable", "It can be reprogrammed and takes less floor space", "It has more moving parts", "It cannot connect to computers"], 1, "PLC advantages include easier programming than wiring a panel, reprogramming, less floor space, greater reliability and computer connection."],
+["Gates and truth tables", "What is the purpose of a truth table in designing digital logic?", ["It lists every combination of inputs and the resulting output so a design can be checked", "It draws the wiring", "It lists the components", "It shows the timing of a cycle"], 0, "A truth table shows the output for every input combination. It is how you design and verify logic."],
+["Gates and truth tables", "How many rows does a truth table for 3 inputs have?", ["6", "8", "9", "3"], 1, "The number of rows is 2ⁿ. For 3 inputs, 2³ = 8."],
+["Gates and truth tables", "What does a NAND gate output when both inputs are 1?", ["Undefined", "1", "The same as an OR gate", "0"], 3, "NAND is AND followed by NOT. 1 AND 1 = 1, and NOT 1 = 0."],
+["Gates and truth tables", "For which inputs (A, B) do a NAND gate and an XOR gate give different outputs?", ["0, 1", "1, 1", "1, 0", "0, 0"], 3, "For 0,0 NAND gives 1 and XOR gives 0. For 0,1 and 1,0 both give 1. For 1,1 both give 0."],
+["Gates and truth tables", "An XOR gate outputs 1 when:", ["Either input is 1, including both", "Both inputs are 0", "The two inputs differ", "Both inputs are 1"], 2, "XOR is the exclusive OR: it outputs 1 only when the inputs are different."],
+["Gates and truth tables", "A NOR gate outputs 1 when:", ["Every input is 0", "Any input is 1", "The inputs differ", "Both inputs are 1"], 0, "NOR is OR followed by NOT, so it outputs 1 only when every input is 0."],
+["Gates and truth tables", "In ladder logic, contacts in series and contacts in parallel represent:", ["NAND and NOR respectively", "XOR and XNOR respectively", "AND and OR respectively", "OR and AND respectively"], 2, "Series contacts must all conduct (AND). Parallel branches need only one to conduct (OR)."],
+["Actuators and sensors", "An actuator is:", ["A device that measures a physical quantity", "A device that converts a form of energy into a force to create linear or rotary motion", "A device that stores programs", "A device that counts pulses"], 1, "Actuators carry out the controller's commands. Electrical, pneumatic and hydraulic actuators are the main types."],
+["Actuators and sensors", "Which set lists three mechanical ways to convert rotary motion into linear motion?", ["Flip-flop, counter, timer", "Leadscrew, pulley and timing belt, rack and pinion", "Sensor, actuator, controller", "Transformer, fuse, relay"], 1, "Leadscrews or ball-screws, pulleys with timing belts, and rack and pinion all convert rotary to linear motion."],
+["Actuators and sensors", "In a leadscrew, the displacement for one revolution equals the:", ["Belt length", "Pulley diameter", "Pitch of the thread", "Motor speed"], 2, "A leadscrew has a helical thread of a certain pitch. One revolution moves the system linearly by one pitch."],
+["Actuators and sensors", "In the ideal transfer function S = C + m·s, what does C represent?", ["The time constant", "The sensitivity", "The output when the stimulus is zero (the offset)", "The slope"], 2, "C is the offset: the output at zero stimulus. m is the slope, or sensitivity."],
+["Actuators and sensors", "Static characteristics of a sensor are:", ["Only the rise time", "The values given at steady state, after the sensor has settled", "The behaviour between the input change and settling", "Only the response to a ramp input"], 1, "Static characteristics describe steady-state values. Dynamic characteristics describe the behaviour between the input changing and the output settling."],
+["Actuators and sensors", "What is hysteresis in a sensor?", ["The sensor output is perfectly linear", "The output for a given input depends on whether the input is rising or falling", "The sensor gives no output below a threshold", "The sensor reading drifts slowly over time"], 1, "Hysteresis is a standard sensor term, but your lecture slides do not define it. This answer is the standard definition."],
+["Actuators and sensors", "Why does hysteresis matter in automated inspection?", ["It improves accuracy", "It removes noise", "It makes the sensor faster", "A part near the limit may be accepted or rejected depending on the direction the reading approached, giving inconsistent results"], 3, "Near a threshold, a rising reading may be accepted while a falling reading is rejected, so identical parts get different decisions."]
+];
+
+var LETTERS = ['A', 'B', 'C', 'D'];
+var $ = function (id) { return document.getElementById(id); };
+var mode = 'quiz', list = [], idx = 0, score = 0, missed = [], answered = false;
+
+(function setupTopics() {
+  var seen = {}, sel = $('topic');
+  var all = document.createElement('option'); all.value = ''; all.textContent = 'All topics'; sel.appendChild(all);
+  QS.forEach(function (q) {
+    if (!seen[q[0]]) { seen[q[0]] = 1; var o = document.createElement('option'); o.value = q[0]; o.textContent = q[0]; sel.appendChild(o); }
+  });
+})();
+
+function shuffled(a) {
+  var b = a.slice();
+  for (var i = b.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
+  return b;
+}
+
+function shuffleOptions(q) {
+  var order = shuffled([0, 1, 2, 3]);
+  return [q[0], q[1], order.map(function (i) { return q[2][i]; }), order.indexOf(q[3]), q[4]];
+}
+
+function pool() {
+  var topic = $('topic').value;
+  return QS.filter(function (q) { return !topic || q[0] === topic; });
+}
+
+function setMode(m) {
+  mode = m;
+  $('mode-quiz').className = m === 'quiz' ? 'active' : '';
+  $('mode-mem').className = m === 'mem' ? 'active' : '';
+  $('count-wrap').hidden = m !== 'quiz';
+  $('cover-wrap').hidden = m !== 'mem';
+  $('start').textContent = m === 'quiz' ? 'Start' : 'Show questions';
+  $('quiz').hidden = true; $('result').hidden = true; $('memorise').hidden = true;
+}
+
+$('mode-quiz').addEventListener('click', function () { setMode('quiz'); });
+$('mode-mem').addEventListener('click', function () { setMode('mem'); });
+$('start').addEventListener('click', function () { if (mode === 'quiz') startQuiz(); else showMemorise(); });
+$('next').addEventListener('click', function () { idx++; showQuestion(); });
+
+function startQuiz() {
+  var p = pool();
+  if ($('shuffle').checked) p = shuffled(p);
+  list = p.slice(0, parseInt($('count').value, 10));
+  if ($('shuffle').checked) list = list.map(shuffleOptions);
+  idx = 0; score = 0; missed = [];
+  $('result').hidden = true; $('memorise').hidden = true; $('quiz').hidden = false;
+  showQuestion();
+}
+
+function showQuestion() {
+  if (idx >= list.length) { finish(); return; }
+  answered = false;
+  var q = list[idx], card = $('qcard');
+  card.textContent = '';
+  $('progress').textContent = 'Question ' + (idx + 1) + ' of ' + list.length;
+  $('score').textContent = score;
+  $('next').hidden = true;
+  var t = document.createElement('div'); t.className = 'topic'; t.textContent = q[0]; card.appendChild(t);
+  var qq = document.createElement('div'); qq.className = 'q'; qq.textContent = q[1]; card.appendChild(qq);
+  q[2].forEach(function (text, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'opt';
+    b.textContent = LETTERS[i] + '. ' + text;
+    b.addEventListener('click', function () { answer(i); });
+    card.appendChild(b);
+  });
+}
+
+function answer(i) {
+  if (answered) return;
+  answered = true;
+  var q = list[idx], opts = $('qcard').querySelectorAll('.opt');
+  opts[q[3]].className = 'opt correct';
+  if (i === q[3]) { score++; } else { opts[i].className = 'opt wrong'; missed.push(q); }
+  var e = document.createElement('div'); e.className = 'exp'; e.textContent = q[4];
+  $('qcard').appendChild(e);
+  $('score').textContent = score;
+  $('next').textContent = idx === list.length - 1 ? 'See results' : 'Next';
+  $('next').hidden = false;
+}
+
+function finish() {
+  $('quiz').hidden = true;
+  var r = $('result'); r.textContent = ''; r.hidden = false;
+  var h = document.createElement('div'); h.className = 'card';
+  var s = document.createElement('div'); s.className = 'q';
+  s.textContent = 'You scored ' + score + ' out of ' + list.length + ' (' + Math.round(100 * score / list.length) + '%).';
+  h.appendChild(s);
+  var again = document.createElement('button'); again.type = 'button'; again.className = 'primary'; again.textContent = 'Try again';
+  again.addEventListener('click', startQuiz); h.appendChild(again);
+  r.appendChild(h);
+  if (missed.length) {
+    var m = document.createElement('div'); m.className = 'topic'; m.textContent = 'Questions you missed:'; r.appendChild(m);
+    missed.forEach(function (q) { r.appendChild(memCard(q, false)); });
+  }
+}
+
+function memCard(q, cover) {
+  var card = document.createElement('div'); card.className = 'card';
+  var t = document.createElement('div'); t.className = 'topic'; t.textContent = q[0]; card.appendChild(t);
+  var qq = document.createElement('div'); qq.className = 'q'; qq.textContent = q[1]; card.appendChild(qq);
+  var opts = [];
+  q[2].forEach(function (text, i) {
+    var d = document.createElement('div'); d.className = 'opt'; d.style.cursor = 'default';
+    d.textContent = LETTERS[i] + '. ' + text; opts.push(d); card.appendChild(d);
+  });
+  var e = document.createElement('div'); e.className = 'exp'; e.textContent = q[4]; card.appendChild(e);
+  function reveal(on) {
+    opts[q[3]].className = on ? 'opt correct' : 'opt';
+    e.hidden = !on;
+  }
+  reveal(!cover);
+  if (cover) { card.style.cursor = 'pointer'; var shown = false; card.addEventListener('click', function () { shown = !shown; reveal(shown); }); }
+  return card;
+}
+
+function showMemorise() {
+  $('quiz').hidden = true; $('result').hidden = true;
+  var m = $('memorise'); m.textContent = ''; m.hidden = false;
+  var p = pool(), cover = $('cover').checked;
+  var n = document.createElement('div'); n.className = 'topic'; n.textContent = p.length + ' questions, in order. The correct answer is highlighted' + (cover ? ' after you tap a card.' : '.'); m.appendChild(n);
+  p.forEach(function (q) { m.appendChild(memCard(q, cover)); });
+}
+
+
+setMode('quiz');
+</script>
+</body>
+</html>
