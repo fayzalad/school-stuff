@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IAUT202 — Question 1 theory quiz</title>
+<style>
+:root{--bg:#f6f4ef;--panel:#fff;--ink:#1c1a17;--muted:#6b655b;--line:#e0dbd0;--accent:#5B4B8A;--onaccent:#fff;
+  --ok:#1f7a4a;--okbg:#e4f3ea;--bad:#a4452c;--badbg:#fbeae5;--note:#f1efe9}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(160deg,#241c47,#33285f 45%,#43367a);color:#fff;padding:22px 60px 22px 16px}
+header .in{max-width:820px;margin:0 auto}
+header a.back{color:#d9d1f0;text-decoration:none;font-size:.85rem;opacity:.9}
+header h1{font-size:1.5rem;margin:8px 0 6px;line-height:1.25}
+header p{margin:0;color:#e4def5;font-size:.95rem}
+.wrap{max-width:820px;margin:0 auto;padding:12px 16px 40px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+button.active{border-color:var(--accent);color:var(--accent);font-weight:600}
+button.primary{background:var(--accent);color:var(--onaccent);border-color:var(--accent)}
+label{font-size:.95rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+.topic{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.q{font-size:1.05rem;margin:6px 0 12px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:10px 12px}
+.opt.correct{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);color:var(--bad);border-color:var(--bad)}
+.exp{margin-top:10px;padding:10px 12px;border-left:3px solid var(--accent);background:var(--note);border-radius:0 8px 8px 0}
+.stat{font-size:.95rem}
+.muted{color:var(--muted)}
+[hidden]{display:none!important}
+.themebtn{position:fixed;top:12px;right:12px;z-index:60;width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.92);color:#1c1a17;cursor:pointer;
+  display:grid;place-items:center;padding:0}
+.themebtn:hover{transform:scale(1.06)}
+.themebtn svg{display:block}
+@media print{.themebtn,.controls,button,select{display:none!important}.card{break-inside:avoid}}
+@media screen and (prefers-color-scheme:dark){
+:root:not([data-theme="light"]){--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#B3A6DB;--onaccent:#14171b;
+  --ok:#8fd4a9;--okbg:#1f3a2a;--bad:#f0a89a;--badbg:#4a2a24;--note:#242830}
+:root:not([data-theme="light"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+}
+:root[data-theme="dark"]{--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#B3A6DB;--onaccent:#14171b;
+  --ok:#8fd4a9;--okbg:#1f3a2a;--bad:#f0a89a;--badbg:#4a2a24;--note:#242830}
+:root[data-theme="dark"] .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+</style>
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+</head>
+<body>
+<button class="themebtn" id="themebtn" type="button" aria-label="Switch theme" title="Theme: auto"></button>
+<script>
+(function(){
+  var KEY="school_stuff_theme", order=["auto","light","dark"], btn=document.getElementById("themebtn");
+  var icons={
+    auto:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>',
+    light:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    dark:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
+  };
+  var t="auto"; try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){
+    if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t);
+    else document.documentElement.removeAttribute("data-theme");
+    btn.innerHTML=icons[t]; btn.title="Theme: "+t+" (click to change)"; btn.setAttribute("aria-label","Theme: "+t+". Click to change");
+  }
+  apply();
+  btn.addEventListener("click",function(){ t=order[(order.indexOf(t)+1)%order.length]; apply(); try{localStorage.setItem(KEY,t);}catch(e){} });
+})();
+</script>
+<header><div class="in"><a class="back" href="../">&larr; All modules</a><h1>IAUT202 — Question 1 theory quiz</h1><p>100 easy multiple-choice questions on the short-answer theory topics: control systems, safety and diagnostics, levels of automation, sensors, switches and actuators, logic gates, PLCs and ladder logic, and ADC basics. Every answer is explained. Quiz mode scores you; memorise mode shows the answers up front.</p></div></header>
+<div class="wrap">
+<div class="row controls">
+  <button id="mode-quiz" type="button" class="active">Quiz mode</button>
+  <button id="mode-mem" type="button">Memorise mode (answers shown)</button>
+</div>
+<div class="row controls">
+  <label>Topic <select id="topic"></select></label>
+  <label id="count-wrap">Questions <select id="count">
+    <option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100" selected>All (up to 100)</option>
+  </select></label>
+  <label id="shuffle-wrap"><input type="checkbox" id="shuffle" checked> Shuffle</label>
+  <label id="cover-wrap" hidden><input type="checkbox" id="cover"> Cover the answers (tap a card to reveal)</label>
+  <button id="start" type="button" class="primary">Start</button>
+</div>
+
+<div id="quiz" hidden>
+  <div class="stat"><span id="progress"></span> &middot; Score: <span id="score">0</span></div>
+  <div class="card" id="qcard"></div>
+  <div class="row"><button id="next" type="button" class="primary" hidden>Next</button></div>
+</div>
+<div id="result" hidden></div>
+<div id="memorise" hidden></div>
+
+<p class="muted" style="margin-top:32px">Hysteresis is not covered in the lecture slides, so its two questions use the standard definition. Everything else follows the lecture slides, the cram sheet and the study guide.</p>
+</div>
+
+<script>
+var QS = [
+["Control systems","What is the key feature of a closed-loop control system?",["It has no sensors","It only runs for a fixed time","It has feedback that compares the output with the set-point","It cannot be reprogrammed"],2,"A closed-loop system feeds the measured output back and compares it with the set-point. The difference (the error) drives the controller."],
+["Control systems","What is the key feature of an open-loop control system?",["It compares the output with the set-point","It has no feedback, so the output cannot be regulated","It always uses a PLC","It measures the output with a sensor"],1,"An open-loop system has no feedback. The controller acts and nothing checks the result, so the output cannot be regulated."],
+["Control systems","A household toaster that only runs on a timer is an example of:",["Closed-loop control","Adaptive control","Feedforward control","Open-loop control"],3,"The toaster never checks how brown the toast is. There is no feedback, so it is open-loop."],
+["Control systems","An oven that uses a thermostat to hold its temperature is an example of:",["Open-loop control","Closed-loop control","A logic gate","Sequence control only"],1,"The thermostat measures the temperature and feeds it back, so the system is closed-loop."],
+["Control systems","Which one is NOT a condition for using open-loop control?",["The actions performed are simple","The actuating function is very reliable","The output must be checked continuously by a sensor","Opposing reaction forces are too small to affect the actuation"],2,"Open-loop is only acceptable when the actions are simple, the actuating function is very reliable, and opposing forces are small. Needing a sensor to check the output means you need closed-loop."],
+["Control systems","In a closed-loop system, the error is:",["The supply voltage of the controller","The difference between the set-point and the measured output","The number of sensors in the loop","The time the system takes to start"],1,"The error is the difference between the set-point and the measured output. The controller acts to reduce it."],
+["Control systems","Which of these is one of the three basic elements of an automated system?",["Program of instructions","Warehouse stock","Marketing plan","Maintenance schedule"],0,"The three basic elements are power, a program of instructions, and a control system."],
+["Control systems","Automation is best defined as:",["Using only computers to run a factory","Replacing all workers with robots","Making machines run faster","Technology by which a process or procedure is accomplished without human assistance"],3,"This is the lecture definition: a process is accomplished without human assistance."],
+
+["Advanced functions","What is the purpose of safety monitoring in a manufacturing system?",["To schedule production runs","To protect people and equipment by detecting hazards","To record sales figures","To calculate the production rate"],1,"Safety monitoring detects hazardous conditions and responds, for example by stopping the system, sounding an alarm or slowing down."],
+["Advanced functions","Which is NOT a typical response of a safety monitoring system?",["Stop the system","Sound an alarm warning","Increase the system speed","Reduce the system speed"],2,"The three responses are stop the system, alarm warning and speed reduction. Increasing the speed would make the hazard worse."],
+["Advanced functions","Which device is used for safety monitoring?",["Light curtain","Spreadsheet","Hopper","Counter"],0,"Safety systems use limit switches, heat/smoke detectors, light curtains, LIDAR and vision systems."],
+["Advanced functions","What is the main goal of maintenance diagnostics?",["To increase the speed of the line","To provide information for diagnosing current failures and predicting future ones","To reduce the number of operators","To stop the machine permanently"],1,"Maintenance diagnostics gives information to diagnose current failures and data to predict future failures."],
+["Advanced functions","Which is the first function of maintenance diagnostics?",["Repair procedure","Failure diagnostics","Status monitoring","Error recovery"],2,"Status monitoring comes first (it monitors sensors and system parameters). Then failure diagnostics, then the repair procedure."],
+["Advanced functions","In failure diagnostics, a fault is identified by:",["Counting the parts produced","Ignoring sensor values","Restarting the system","Comparing current values with preceding monitored values"],3,"When a fault occurs, the current values are compared with the earlier monitored values so the fault can be identified correctly."],
+["Advanced functions","Which type of error occurs from the regular operation of a process?",["Random error","Systematic error","Aberration","Calibration error"],0,"Random errors come from regular operation. Systematic errors have a transferable cause, and aberrations come from human error or equipment failure."],
+["Advanced functions","A systematic error results from:",["Normal variation in regular operation","A transferable cause such as a material change or equipment drift","Human error only","A power failure only"],1,"Systematic errors have a transferable cause, such as a change in material or drift in the equipment."],
+["Advanced functions","An aberration occurs from:",["Regular operation","Equipment drift","Human error or equipment failure","A material change"],2,"Aberrations come from human error or equipment failure."],
+["Advanced functions","Which of these is an error recovery strategy listed in the lectures?",["Increase the line speed","Disable the sensors","Stop the process and call for assistance","Ignore the error"],2,"The strategies are: adjust at the end of the cycle, adjust during the cycle, stop the process to correct, and stop the process and call for assistance."],
+
+["Levels of automation","Which is Level 1 of the five levels of automation?",["Sensor/actuator (sensors, motors, valves)","Field (machine)","Control (cell)","Production management"],0,"Level 1 is the sensor/actuator level: sensors, motors and valves."],
+["Levels of automation","Drives, machines and HMI belong to which level?",["Level 1","Level 2: field (machine)","Level 3","Level 5"],1,"Level 2 is the field (machine) level: drives, machines and HMI."],
+["Levels of automation","PLCs and work cells belong to which level?",["Level 4: area management","Level 5","Level 3: control (cell)","Level 1"],2,"Level 3 is the control (cell) level, where PLCs and work cells live."],
+["Levels of automation","MES (manufacturing execution system) sits at which level?",["Level 2","Level 3","Level 5","Level 4: area management"],3,"Level 4 is area management, where the MES lives."],
+["Levels of automation","ERP and MIS belong to which level?",["Level 3","Level 4","Level 5: production management","Level 2"],2,"Level 5 is production management: ERP and MIS."],
+["Levels of automation","Which is the highest of the five levels?",["Level 1: sensor/actuator","Level 5: production management","Level 3: control","Level 2: field"],1,"The levels run from 1 (sensor/actuator) up to 5 (production management)."],
+
+["Process vs discrete","The process industry performs operations on:",["Quantities of individual parts","Amounts of material, such as chemicals, oil or food","Only cars","Only electronics"],1,"Process industries work on amounts of material. Discrete industries work on quantities of parts."],
+["Process vs discrete","Which is an example of the discrete industry?",["Oil refining","Chemical production","Food processing","Car manufacturing"],3,"Cars and electronics are discrete: quantities of parts. Chemicals, oil and food are process industries."],
+["Process vs discrete","A continuous variable is also called:",["Analogue: an uninterrupted signal during operation","Binary","A flag","A stored value"],0,"A continuous (analogue) variable is an uninterrupted signal during an operation."],
+["Process vs discrete","The most common discrete variable is:",["Decimal","Analogue voltage","Continuous","Binary (1s and 0s)"],3,"A discrete variable takes values periodically from a range. The most common is binary."],
+["Process vs discrete","Regulatory control:",["Anticipates a disturbance before it enters the process","Maintains a value or a tolerance band, reacting after a deviation","Is open-loop","Alters its own algorithm"],1,"Regulatory control keeps the process at a value or within a tolerance band. It reacts after the deviation has happened."],
+["Process vs discrete","Feedforward control differs from feedback control because it:",["Waits for the output to deviate before correcting","Is the same as regulatory control","Anticipates and compensates for a disturbance before it feeds into the process","Has no controller"],2,"Feedforward anticipates the disturbance and compensates before it affects the process."],
+["Process vs discrete","Steady-state optimisation is open-loop, so it:",["Cannot compensate for disturbances","Uses feedback to alter its algorithm","Is closed-loop","Reacts after a deviation"],0,"Because it is open-loop, steady-state optimisation cannot compensate for disturbances. Adaptive control fixes this by adding feedback."],
+["Process vs discrete","Adaptive control is:",["Never changing its algorithm","A self-correcting form of optimal control that includes feedback","An open-loop technique","Only used for discrete parts"],1,"Adaptive control combines feedback control and optimal control. Its functions are identification, decision and modification."],
+
+["Discrete control","Discrete process control operates on parameters and variables that:",["Change continuously","Change at discrete moments in time and are usually binary","Are only analogue","Change only by a clock"],1,"Discrete control works on variables that change at discrete moments, usually binary (0 or 1, on or off)."],
+["Discrete control","Which is an example of an event-driven change?",["A bell sounding at the start of a shift","A washing machine agitating for a set time","A part sensed by a limit switch in a fixture","Heat treating for a set length of time"],2,"Event-driven changes respond to something that happened, such as a part being sensed by a limit switch."],
+["Discrete control","Which is an example of a time-driven change?",["A part sensed by a limit switch","The shop clock sounding the shift bell","A hopper low-level switch opening a valve","Counting parts past an optical sensor"],1,"Time-driven changes happen at a point in time or after a time lapse, like the shop clock bell."],
+["Discrete control","What is the difference between an event-driven and a time-driven change?",["Event-driven uses a clock; time-driven uses a sensor","They are the same thing","Time-driven changes are always analogue","Event-driven changes respond to an event; time-driven changes happen at a set time or after a time lapse"],3,"Ask: did something happen (event), or did a clock or duration cause it (time)?"],
+["Discrete control","Logic control is a switching system whose output:",["Uses internal timers","Has memory","Is determined exclusively by the present values of the inputs","Is always cyclical"],2,"Logic control has no memory and no time dependence. The output depends only on the inputs."],
+["Discrete control","Sequence control:",["Uses internal timing devices to decide when to change outputs, usually open-loop and cyclical","Has no timing","Is purely combinational","Always uses feedback"],0,"Sequence control uses internal timers to initiate output changes. It is usually open-loop and cyclical."],
+["Discrete control","The two common sequencing devices are:",["Gates and truth tables","Timer and counter","Relay and contactor","Sensor and actuator"],1,"A timer switches outputs at preset times. A counter counts electrical pulses and stores the count."],
+["Discrete control","Logic control and sequence control are both called:",["Only logic control","Only sequence control","Switching systems","Continuous control"],2,"Both switch outputs on and off in response to events or time."],
+["Discrete control","A two-button safety press that cycles only while both buttons are held is an example of:",["Sequence control","Logic control","Adaptive control","Feedforward control"],1,"The output depends only on the present inputs (both buttons held), so it is logic control."],
+
+["Computer control","Polling in computer process control is:",["Pausing a program for a higher priority one","Periodically sampling data at discrete times","A safety mechanism between components","Handling an event outside normal operation"],1,"Polling (data sampling or scanning) periodically samples data from a continuous signal at discrete times."],
+["Computer control","An interlock is:",["A mechanism that allows or disallows a process to continue if strict rules are not met","A program pause","Data sampling","A type of sensor"],0,"An interlock is a safety mechanism where components affect each other by allowing or disallowing a process. Industry uses them to prevent unsafe operation, for example a door interlock."],
+["Computer control","An interrupt:",["Samples a signal","Is a permission mechanism","Pauses the current program so a higher-priority program can run","Is a type of memory"],2,"An interrupt pauses the current program so a high-priority program, such as a safety routine, can run in real time."],
+["Computer control","How do an interrupt and an interlock differ?",["An interrupt acts on the process; an interlock acts on the program","An interrupt acts on the program; an interlock acts on the process","They are the same","Both only act on the program"],1,"An interrupt reorders the program. An interlock forbids a process from continuing."],
+["Computer control","Which of these is an example of an exception in process control?",["Normal operation","A shortage of raw materials","The program scan","A binary output"],1,"Exceptions include product quality problems, a variable outside range, shortage of raw materials, hazardous conditions and controller malfunction."],
+["Computer control","Exception handling is:",["A type of sensor","A type of memory","A form of data holding","A form of error detection and recovery"],3,"Exception handling deals with events outside normal operation. It is a form of error detection and recovery."],
+["Computer control","A real-time controller:",["Never responds to interrupts","Only works with analogue signals","Responds to a stimulus in a short period of time","Has no program"],2,"A real-time controller must respond to a stimulus within a short period."],
+
+["Sensors","A sensor is a:",["Transducer that converts a physical stimulus into a more useful form so it can be measured","Type of switch only","Motor","Type of memory"],0,"A sensor is a transducer that converts a physical stimulus from one form into a more useful form."],
+["Sensors","A transducer:",["Stores data","Converts a physical quantity to an electrical signal, or one electrical signal to another","Produces only light","Is a type of memory"],1,"Transducers usually convert physical quantities to electrical signals, or one electrical signal to another, such as voltage or current."],
+["Sensors","An active sensor:",["Requires an external power supply","Produces a voltage from a stimulus without external power, such as a thermocouple","Is always digital","Is always a switch"],1,"An active sensor produces a voltage without external power. A thermocouple is the standard example."],
+["Sensors","A passive sensor:",["Produces its own voltage without power","Is always a thermocouple","Never needs a power supply","Requires an external power supply to work, such as a thermistor or strain gauge"],3,"Passive sensors need an external power supply for correct operation."],
+["Sensors","A sensor measures from −20 °C to 100 °C. What is its span?",["80 °C","100 °C","−20 °C","120 °C"],3,"Span is the upper limit minus the lower limit: 100 − (−20) = 120 °C. Range is the pair of limits."],
+["Sensors","Accuracy of a sensor is:",["How quickly it responds","The delay before its output starts","How close its reading is to the true value","How long the sensor lasts"],2,"Accuracy is how close a reading is to the true value. It is often quoted as a ± figure."],
+["Sensors","Non-linearity error is:",["The delay before it responds","The drift over a long time","The supply voltage","How far the real input/output curve departs from a straight line"],3,"We usually assume a straight-line transfer function. Non-linearity error measures how far the real curve departs from it."],
+["Sensors","Repeatability is:",["Being exactly accurate","Giving the same reading when the same input is applied again under the same conditions","The smallest detectable change","The range of the sensor"],1,"A sensor can be repeatable but inaccurate (consistently wrong)."],
+["Sensors","Dead band is:",["The delay before the output starts","The maximum input value","The range of input values that produce no change in output","The settling time"],2,"Dead band is the range of inputs that produce no output change. Dead time is the delay before the output starts to respond."],
+["Sensors","What is hysteresis in a sensor?",["The sensor output is perfectly linear","The sensor drifts slowly over time","The sensor has no output at all","The output for the same input differs depending on whether the input is rising or falling"],3,"Hysteresis means the output depends on the direction the input came from. (This one is not in the lecture slides, so it uses the standard definition.)"],
+["Sensors","Why does hysteresis matter in automated inspection?",["It makes the sensor faster","It can give different readings for the same part depending on the direction of approach, causing inconsistent accept/reject decisions","It improves accuracy","It removes noise"],1,"Near a threshold, the sensor may accept a part when the reading is rising but reject it when falling. That makes inspection results inconsistent."],
+["Sensors","A transfer function is:",["The relationship between the input stimulus and the signal the sensor produces","The speed of the sensor","The cost of the sensor","The sensor's power supply"],0,"Transfer function S = f(s): output signal as a function of the input stimulus. The ideal form is S = C + m·s."],
+["Sensors","In the ideal transfer function S = C + m·s, what is C?",["The slope","The time constant","The output when the stimulus is zero (the offset)","The sensitivity"],2,"C is the offset: the output at zero stimulus. m is the slope (sensitivity)."],
+["Sensors","Static characteristics of a sensor are:",["The behaviour between the input change and settling","The rise time","Only the response to a ramp input","The values given at steady state, after the sensor has settled"],3,"Static characteristics are the steady-state values after the sensor has settled."],
+["Sensors","Dynamic characteristics of a sensor describe:",["The behaviour between the moment the input changes and the output settling to steady state","Only the values at rest","The offset only","The span"],0,"Dynamic characteristics are stated for inputs such as ramp, step or sinusoidal. They include response time, time constant, rise time and settling time."],
+["Sensors","The time constant of a sensor is the time to reach:",["50% of the final value","90% of the final value","63.2% of the final value","100% of the final value"],2,"The time constant is the time to reach 63.2% of the final steady-state value."],
+["Sensors","Rise time is:",["The time to reach exactly 100%","The time to reach 63.2%","The time the sensor lasts","The time to rise between two fractions of the final value, commonly 10% to 90%"],3,"Rise time is measured between two specified fractions of the final value, commonly 10% to 90%."],
+
+["Switches & actuators","In a mechanical switch, the number of poles is:",["The number of individual contacts per throw","The number of separate circuits completed by the same switching action","The number of buttons","The voltage rating"],1,"Poles are the separate circuits completed by the same switching action."],
+["Switches & actuators","In a mechanical switch, the number of throws is:",["The number of individual contacts for each pole","The number of circuits","The supply voltage","The bounce time"],0,"Throws are the number of individual contacts for each pole (SPST, SPDT, DPDT)."],
+["Switches & actuators","What is switch bounce?",["The contacts rebound, so a microprocessor may see two or more separate switch actions","The switch fails to close","The switch has no contacts","The switch overheats"],0,"When contacts close (or open), they rebound. A microprocessor may read this as several switch actions."],
+["Switches & actuators","A hardware solution to switch bounce is:",["A resistor","A flip-flop with a clock set longer than the bounce time","A larger switch","A relay"],1,"The hardware fix is a flip-flop. The clock must be longer than the bounce time. A software fix delays and re-reads."],
+["Switches & actuators","What is an actuator?",["A device that measures temperature","A device that stores programs","A device that converts a form of energy into a force to create linear or rotary motion","A device that counts pulses"],2,"An actuator carries out the controller's commands. Electrical, pneumatic and hydraulic actuators are the main types."],
+["Switches & actuators","The three main types of actuator are:",["Analogue, digital, binary","Active, passive, static","Input, output, memory","Electrical, pneumatic, hydraulic"],3,"Actuators convert energy into force producing linear or rotary motion: electrical, pneumatic or hydraulic."],
+["Switches & actuators","A pneumatic actuator is driven by:",["Hydraulic oil","Electricity only","Compressed air or vacuum","Steam"],2,"Pneumatic actuators use compressed air or vacuum to drive rotary or linear motion."],
+["Switches & actuators","Which set lists three mechanical ways to convert rotary motion into linear motion?",["Transformer, fuse, relay","Flip-flop, counter, timer","Leadscrew, pulley and timing belt, rack and pinion","Sensor, actuator, controller"],2,"Leadscrews/ball-screws, pulleys with timing belts, and rack and pinion all convert rotary to linear motion."],
+["Switches & actuators","In a leadscrew, the displacement for one revolution equals the:",["Pulley diameter","Pitch of the thread","Motor speed","Belt length"],1,"A leadscrew has a helical thread of a certain pitch. One revolution moves the system linearly by one pitch."],
+
+["Logic gates","What is a truth table?",["A list of components for a circuit","A table listing every combination of inputs and the resulting output, used to design and check logic circuits","A wiring diagram","A timing chart"],1,"A truth table shows the output for every input combination. It is how you design and verify digital logic."],
+["Logic gates","An AND gate outputs 1 when:",["Either input is 1","The inputs differ","All inputs are 1","All inputs are 0"],2,"AND needs all inputs to be 1."],
+["Logic gates","An OR gate outputs 1 when:",["All inputs are 1","The inputs differ","All inputs are 0","At least one input is 1"],3,"OR outputs 1 if at least one input is 1."],
+["Logic gates","A NOT gate:",["Inverts its input (0 becomes 1, 1 becomes 0)","Passes the input unchanged","Always outputs 1","Always outputs 0"],0,"A NOT gate inverts its input."],
+["Logic gates","What does a NAND gate output when both inputs are 1?",["1","0","Undefined","The same as OR"],1,"NAND is AND followed by NOT. 1 AND 1 = 1, and NOT 1 = 0."],
+["Logic gates","A NOR gate outputs 1 when:",["Any input is 1","Both inputs are 1","Every input is 0","The inputs differ"],2,"NOR is OR followed by NOT, so it outputs 1 only when every input is 0."],
+["Logic gates","An XOR gate outputs 1 when:",["Both inputs are 1","Both inputs are 0","Either input is 1, including both","The two inputs differ"],3,"XOR is the 'exclusive OR': it outputs 1 only when the inputs differ."],
+["Logic gates","For which inputs (A, B) do a NAND gate and an XOR gate give different outputs?",["0, 0","0, 1","1, 0","1, 1"],0,"For 0,0 NAND gives 1 and XOR gives 0. For 0,1 and 1,0 both give 1. For 1,1 both give 0."],
+["Logic gates","How many rows does a truth table for 3 inputs have?",["3","6","8","9"],2,"The number of rows is 2ⁿ. For 3 inputs, 2³ = 8."],
+
+["PLC & ladder","A PLC is:",["A type of laptop","A sensor with memory","An electromechanical relay panel","A programmable industrial computer used to automate manufacturing and process tasks"],3,"A PLC is a programmable industrial computer for repetitive tasks in manufacturing and process industries."],
+["PLC & ladder","How is a PLC different from a personal computer?",["A PLC runs Windows; a PC does not","A PLC is for manufacturing and processing, with switches and dials in and relays and motors out; a PC is for personal computing, with a keyboard and mouse in and screens out","They are identical in use","A PLC has a keyboard and a screen as standard"],1,"A PLC has no operating system like Windows. You write a program on a computer and upload it to the PLC."],
+["PLC & ladder","Which is NOT one of the five components of a PLC?",["Processor","Memory unit","Power supply","Printer"],3,"The five components are the processor, I/O module, memory unit, power supply and programming device."],
+["PLC & ladder","What is the order of the PLC operating cycle?",["Output scan, program scan, input scan","Input scan, program scan, output scan","Program scan, input scan, output scan","Input scan, output scan, program scan"],1,"The PLC reads inputs, runs the program using the stored values, then updates the outputs."],
+["PLC & ladder","A typical PLC scan time is:",["1 to 25 seconds","1 to 25 microseconds","1 to 25 ms","1 to 25 minutes"],2,"The three scans take between 1 and 25 milliseconds."],
+["PLC & ladder","Which is an advantage of a PLC?",["Programming a PLC is easier than wiring a relay control panel","PLCs take more floor space","They cannot be reprogrammed","They cannot connect to computers"],0,"PLCs are easier to program than wiring a relay panel, can be reprogrammed, take less floor space and can connect to computer systems."],
+["PLC & ladder","A normally open (N/O) contact is:",["Closed at rest, opens when pressed","Open at rest, closes when pressed","Always closed","Always open"],1,"N/O is open at rest, so no current flows. Pressing the button closes it."],
+["PLC & ladder","Why are emergency stops normally closed (N/C)?",["E-stops are N/O because they are cheaper","E-stops are N/O so a pressed button closes the circuit","E-stops are N/C only to save power","So a cut wire or loose terminal stops the machine just like pressing it (fail-safe)"],3,"An N/C E-stop carries current normally. If the wire fails, the machine stops, which is the safe failure."],
+["PLC & ladder","Which is a disadvantage of relays?",["Fast switching speed","Silent operation","Mechanical wear and contact burn","No moving parts"],2,"Relays are slow, noisy, wear mechanically and suffer contact burn."],
+["PLC & ladder","What is a ladder logic diagram?",["A circuit drawn only as a flow chart","A list of gates and their truth tables","A timing chart","A diagram with logic elements on horizontal rungs connected between two vertical rails"],3,"Ladder logic shows contacts, relays, timers, counters and more on rungs between two rails."],
+["PLC & ladder","Which is an advantage of ladder logic?",["It needs no program","It replaces the PLC","It is familiar to shop personnel and analogous to the relay circuits it replaced","It only works for analogue signals"],2,"Ladder logic is familiar to shop personnel, analogous to relay circuits, and the principal way to program PLCs."],
+["PLC & ladder","What is a counter in PLC programming?",["A device that stores electrical energy","A device that counts electrical pulses and stores the count, for example counting parts past a sensor","A device that switches at set clock times only","A device that amplifies signals"],1,"A counter counts pulses and stores the count. For example, counting parts moving past an optical sensor to trigger an action."],
+
+["ADC & numbers","A 12 V full-scale ADC uses successive approximation. The first trial voltage is:",["12 V","6 V","3 V","1.5 V"],1,"The first trial voltage is half the full-scale range: 12 ÷ 2 = 6 V. Each next trial is half the previous."],
+["ADC & numbers","How many quantisation levels does a 6-bit ADC have?",["12","32","64","6"],2,"Nq = 2ⁿ, so 2⁶ = 64."],
+["ADC & numbers","What is the largest number that can be stored in 8 bits?",["256","255","128","127"],1,"The largest value is 2ⁿ − 1 = 2⁸ − 1 = 255 (11111111)."],
+["ADC & numbers","In analogue-to-digital conversion, which step is where information is lost?",["Sampling","Quantisation","Encoding","Amplification"],1,"Quantisation rounds a continuous amplitude to one of a fixed set of levels, so information is lost."],
+["ADC & numbers","What is the correct order of the steps inside an ADC?",["Quantisation, sampling, encoding","Sampling, quantisation, encoding","Encoding, sampling, quantisation","Sampling, encoding, quantisation"],1,"The signal is sampled (discrete in time), quantised (discrete in amplitude), then encoded as binary."]
+];
+
+var LETTERS = ['A', 'B', 'C', 'D'];
+var $ = function (id) { return document.getElementById(id); };
+var mode = 'quiz', list = [], idx = 0, score = 0, missed = [], answered = false;
+
+(function setupTopics() {
+  var seen = {}, sel = $('topic');
+  var all = document.createElement('option'); all.value = ''; all.textContent = 'All topics'; sel.appendChild(all);
+  QS.forEach(function (q) {
+    if (!seen[q[0]]) { seen[q[0]] = 1; var o = document.createElement('option'); o.value = q[0]; o.textContent = q[0]; sel.appendChild(o); }
+  });
+})();
+
+function shuffled(a) {
+  var b = a.slice();
+  for (var i = b.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
+  return b;
+}
+
+function shuffleOptions(q) {
+  var order = shuffled([0, 1, 2, 3]);
+  return [q[0], q[1], order.map(function (i) { return q[2][i]; }), order.indexOf(q[3]), q[4]];
+}
+
+function pool() {
+  var topic = $('topic').value;
+  return QS.filter(function (q) { return !topic || q[0] === topic; });
+}
+
+function setMode(m) {
+  mode = m;
+  $('mode-quiz').className = m === 'quiz' ? 'active' : '';
+  $('mode-mem').className = m === 'mem' ? 'active' : '';
+  $('count-wrap').hidden = m !== 'quiz';
+  $('cover-wrap').hidden = m !== 'mem';
+  $('start').textContent = m === 'quiz' ? 'Start' : 'Show questions';
+  $('quiz').hidden = true; $('result').hidden = true; $('memorise').hidden = true;
+}
+
+$('mode-quiz').addEventListener('click', function () { setMode('quiz'); });
+$('mode-mem').addEventListener('click', function () { setMode('mem'); });
+$('start').addEventListener('click', function () { if (mode === 'quiz') startQuiz(); else showMemorise(); });
+$('next').addEventListener('click', function () { idx++; showQuestion(); });
+
+function startQuiz() {
+  var p = pool();
+  if ($('shuffle').checked) p = shuffled(p);
+  list = p.slice(0, parseInt($('count').value, 10));
+  if ($('shuffle').checked) list = list.map(shuffleOptions);
+  idx = 0; score = 0; missed = [];
+  $('result').hidden = true; $('memorise').hidden = true; $('quiz').hidden = false;
+  showQuestion();
+}
+
+function showQuestion() {
+  if (idx >= list.length) { finish(); return; }
+  answered = false;
+  var q = list[idx], card = $('qcard');
+  card.textContent = '';
+  $('progress').textContent = 'Question ' + (idx + 1) + ' of ' + list.length;
+  $('score').textContent = score;
+  $('next').hidden = true;
+  var t = document.createElement('div'); t.className = 'topic'; t.textContent = q[0]; card.appendChild(t);
+  var qq = document.createElement('div'); qq.className = 'q'; qq.textContent = q[1]; card.appendChild(qq);
+  q[2].forEach(function (text, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'opt';
+    b.textContent = LETTERS[i] + '. ' + text;
+    b.addEventListener('click', function () { answer(i); });
+    card.appendChild(b);
+  });
+}
+
+function answer(i) {
+  if (answered) return;
+  answered = true;
+  var q = list[idx], opts = $('qcard').querySelectorAll('.opt');
+  opts[q[3]].className = 'opt correct';
+  if (i === q[3]) { score++; } else { opts[i].className = 'opt wrong'; missed.push(q); }
+  var e = document.createElement('div'); e.className = 'exp'; e.textContent = q[4];
+  $('qcard').appendChild(e);
+  $('score').textContent = score;
+  $('next').textContent = idx === list.length - 1 ? 'See results' : 'Next';
+  $('next').hidden = false;
+}
+
+function finish() {
+  $('quiz').hidden = true;
+  var r = $('result'); r.textContent = ''; r.hidden = false;
+  var h = document.createElement('div'); h.className = 'card';
+  var s = document.createElement('div'); s.className = 'q';
+  s.textContent = 'You scored ' + score + ' out of ' + list.length + ' (' + Math.round(100 * score / list.length) + '%).';
+  h.appendChild(s);
+  var again = document.createElement('button'); again.type = 'button'; again.className = 'primary'; again.textContent = 'Try again';
+  again.addEventListener('click', startQuiz); h.appendChild(again);
+  r.appendChild(h);
+  if (missed.length) {
+    var m = document.createElement('div'); m.className = 'topic'; m.textContent = 'Questions you missed:'; r.appendChild(m);
+    missed.forEach(function (q) { r.appendChild(memCard(q, false)); });
+  }
+}
+
+function memCard(q, cover) {
+  var card = document.createElement('div'); card.className = 'card';
+  var t = document.createElement('div'); t.className = 'topic'; t.textContent = q[0]; card.appendChild(t);
+  var qq = document.createElement('div'); qq.className = 'q'; qq.textContent = q[1]; card.appendChild(qq);
+  var opts = [];
+  q[2].forEach(function (text, i) {
+    var d = document.createElement('div'); d.className = 'opt'; d.style.cursor = 'default';
+    d.textContent = LETTERS[i] + '. ' + text; opts.push(d); card.appendChild(d);
+  });
+  var e = document.createElement('div'); e.className = 'exp'; e.textContent = q[4]; card.appendChild(e);
+  function reveal(on) {
+    opts[q[3]].className = on ? 'opt correct' : 'opt';
+    e.hidden = !on;
+  }
+  reveal(!cover);
+  if (cover) { card.style.cursor = 'pointer'; var shown = false; card.addEventListener('click', function () { shown = !shown; reveal(shown); }); }
+  return card;
+}
+
+function showMemorise() {
+  $('quiz').hidden = true; $('result').hidden = true;
+  var m = $('memorise'); m.textContent = ''; m.hidden = false;
+  var p = pool(), cover = $('cover').checked;
+  var n = document.createElement('div'); n.className = 'topic'; n.textContent = p.length + ' questions, in order. The correct answer is highlighted' + (cover ? ' after you tap a card.' : '.'); m.appendChild(n);
+  p.forEach(function (q) { m.appendChild(memCard(q, cover)); });
+}
+
+
+setMode('quiz');
+</script>
+</body>
+</html>
