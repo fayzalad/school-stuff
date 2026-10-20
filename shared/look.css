@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Work+Sans:wght@400;500;600;700&display=swap");
+
+/* School Stuff "look": the Figma redesign applied to every study page.
+   Loaded LAST on each page. It does not change content or behaviour; it re-maps each page's own
+   colour variables onto one warm "paper" palette, adds the module-coloured hero card, and restyles
+   shared components (cards, answer options, buttons, tables, theme button).
+   <html data-mod="icnf|wrav|stav|iaut"> picks the module accent; <html data-kind="guide"> turns on
+   the serif reading text. Everything is screen-only (printing keeps each page's own light styles)
+   and written with CSS nesting under html[lang]:root so it beats the pages' own dark-mode rules. */
+
+@media screen {
+  /* ---------- core tokens (light) ---------- */
+  :root {
+    --k-paper: #F2EDE3; --k-surface: #FBF8F1; --k-surface2: #E9E2D3;
+    --k-ink: #211C15; --k-ink2: #645B4C; --k-line: #D7CEBB; --k-line2: #B8AC92;
+    --k-ok: #1D7046; --k-okbg: #E2F2E8; --k-bad: #A23B28; --k-badbg: #F8E5DF;
+    --k-gold: #8C6400; --k-goldbg: #F5EBCF;
+    --k-shadow: 0 10px 34px rgb(50 39 20 / 8%);
+    --k-hero-dark: #15100B; --k-hero-mix: 42%;
+    --k-accent-l: #0F5B8C; --k-accent-d: #7DB8E0; --k-accent: var(--k-accent-l);
+    color-scheme: light;
+  }
+  :root[data-mod="icnf"] { --k-accent-l: #9C4A2E; --k-accent-d: #E0916E; }
+  :root[data-mod="wrav"] { --k-accent-l: #3C6E63; --k-accent-d: #7FC2B2; }
+  :root[data-mod="stav"] { --k-accent-l: #0F5B8C; --k-accent-d: #7DB8E0; }
+  :root[data-mod="iaut"] { --k-accent-l: #5B4B8A; --k-accent-d: #B3A6DB; }
+
+  /* ---------- core tokens (dark: auto follows the system, or forced) ---------- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="paper"]) {
+      --k-paper: #171410; --k-surface: #201C16; --k-surface2: #2A241B;
+      --k-ink: #EEE7DA; --k-ink2: #B9B09E; --k-line: #3D3528; --k-line2: #5A4F3B;
+      --k-ok: #72D09A; --k-okbg: #183725; --k-bad: #F19379; --k-badbg: #3D211B;
+      --k-gold: #E1B64D; --k-goldbg: #2F2815;
+      --k-shadow: 0 10px 34px rgb(0 0 0 / 28%);
+      --k-hero-dark: #0B0805; --k-hero-mix: 52%;
+      --k-accent: var(--k-accent-d);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --k-paper: #171410; --k-surface: #201C16; --k-surface2: #2A241B;
+    --k-ink: #EEE7DA; --k-ink2: #B9B09E; --k-line: #3D3528; --k-line2: #5A4F3B;
+    --k-ok: #72D09A; --k-okbg: #183725; --k-bad: #F19379; --k-badbg: #3D211B;
+    --k-gold: #E1B64D; --k-goldbg: #2F2815;
+    --k-shadow: 0 10px 34px rgb(0 0 0 / 28%);
+    --k-hero-dark: #0B0805; --k-hero-mix: 52%;
+    --k-accent: var(--k-accent-d);
+    color-scheme: dark;
+  }
+
+  /* ---------- paper: warm sepia, softer contrast, for long reading (never follows the system) ---------- */
+  :root[data-theme="paper"] {
+    --k-paper: #F0E4C8; --k-surface: #F8EFD9; --k-surface2: #E7D8B5;
+    --k-ink: #3A2D1E; --k-ink2: #6B5A42; --k-line: #D6C59F; --k-line2: #B9A474;
+    --k-ok: #2E6A3E; --k-okbg: #DFEAC8; --k-bad: #983A21; --k-badbg: #F1DAC2;
+    --k-gold: #86570A; --k-goldbg: #EFDFAE;
+    --k-shadow: 0 10px 30px rgb(95 70 20 / 10%);
+    --k-hero-dark: #2A1C0E; --k-hero-mix: 38%;
+    --k-accent: var(--k-accent-l);
+    color-scheme: light;
+  }
+  :root[data-theme="paper"] body { line-height: 1.72; }
+
+  /* ---------- everything below sits under html[lang]:root (specificity beats the pages' dark rules) ---------- */
+  html[lang]:root {
+    /* map the shared palette onto every page family's variable names */
+    --bg: var(--k-paper); --panel: var(--k-surface); --ink: var(--k-ink); --muted: var(--k-ink2); --line: var(--k-line);
+    --accent: var(--k-accent); --accent2: var(--k-gold); --ok: var(--k-ok); --warn: var(--k-bad); --bad: var(--k-bad);
+    --okbg: var(--k-okbg); --badbg: var(--k-badbg); --warnbg: var(--k-badbg); --tipbg: var(--k-goldbg);
+    --code: var(--k-surface2); --th: var(--k-surface2); --note: var(--k-surface2); --expl: var(--k-surface2);
+    --tint: color-mix(in srgb, var(--k-accent) 11%, var(--k-surface));
+    --def: color-mix(in srgb, var(--k-accent) 6%, var(--k-surface));
+    --card: var(--k-surface); --sum: var(--k-surface2);
+    --sumh: color-mix(in srgb, var(--k-accent) 14%, var(--k-surface2));
+    --qsum: var(--k-goldbg); --qsumh: color-mix(in srgb, var(--k-gold) 22%, var(--k-goldbg));
+    --opt: var(--k-paper); --opth: color-mix(in srgb, var(--k-accent) 9%, var(--k-paper));
+    --right: var(--k-okbg); --wrong: var(--k-badbg);
+    --hl: color-mix(in srgb, var(--k-gold) 26%, transparent);
+    --h4: var(--k-ink); --link: var(--k-accent); --unit: var(--k-accent-l); --stepdot: var(--k-accent-l);
+    --onaccent: var(--k-paper);
+    --hdr: linear-gradient(145deg, color-mix(in srgb, var(--k-accent-l), var(--k-hero-dark) var(--k-hero-mix)), var(--k-accent-l));
+    /* WRAV102 names */
+    --ground: var(--k-paper); --surface: var(--k-surface); --surface2: var(--k-surface2);
+    --accent-soft: var(--tint); --good: var(--k-ok); --good-soft: var(--k-okbg); --bad-soft: var(--k-badbg);
+    --shadow: var(--k-shadow);
+    --serif: "Newsreader", Georgia, serif; --ui: "Work Sans", system-ui, sans-serif; --mono: "DM Mono", ui-monospace, monospace;
+
+    body { background: var(--k-paper); color: var(--k-ink); font-family: "Work Sans", system-ui, sans-serif; }
+    &[data-kind="guide"] body { font-family: "Newsreader", Georgia, serif; }
+    h1, h2, h3 { font-family: "Newsreader", Georgia, serif; font-weight: 500; }
+    a { text-underline-offset: 3px; }
+    :focus-visible { outline: 3px solid color-mix(in srgb, var(--k-accent), white 25%); outline-offset: 3px; }
+
+    /* ----- hero card (replaces the full-width coloured header) ----- */
+    header.top, body > header:not(.top), .wrap > header {
+      position: relative; overflow: hidden; color: #fff; background: var(--hdr);
+      border-radius: 20px; margin: 20px auto 0; width: calc(100% - 32px); max-width: 1240px;
+      padding: clamp(28px, 5vw, 56px);
+    }
+    .wrap > header { width: 100%; border-bottom: 0; margin-top: 8px; padding: clamp(26px, 4vw, 44px); }
+    header.top::after, body > header:not(.top)::after, .wrap > header::after {
+      content: ""; position: absolute; width: 440px; height: 440px; border: 1px solid rgb(255 255 255 / 20%);
+      border-radius: 50%; right: -120px; top: -230px; pointer-events: none;
+      box-shadow: 0 0 0 70px rgb(255 255 255 / 4%), 0 0 0 140px rgb(255 255 255 / 3%);
+    }
+    header .in, header.top .inner { max-width: none; padding-inline: 0; margin: 0; position: relative; z-index: 1; }
+    header.top h1, body > header:not(.top) h1, .wrap > header h1 {
+      font-family: "Newsreader", Georgia, serif; font-weight: 500; letter-spacing: -.02em; line-height: 1.04;
+      font-size: clamp(2.3rem, 5.2vw, 4.4rem); margin: 10px 0 12px; color: #fff; text-wrap: balance;
+    }
+    header.top .sub, header.top p, body > header:not(.top) p, .wrap > header .sub {
+      color: rgb(255 255 255 / 86%); opacity: 1; font-size: 1.04rem; max-width: 72ch; line-height: 1.55;
+    }
+    header a.back, .wrap > header .eyebrow {
+      color: rgb(255 255 255 / 82%); opacity: 1; font-family: "DM Mono", ui-monospace, monospace; font-size: .76rem;
+      letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
+    }
+    header a.back:hover { color: #fff; text-decoration: underline; }
+    .badges { gap: 8px; margin-top: 20px; }
+    .badge {
+      background: transparent; border: 1px solid rgb(255 255 255 / 45%); color: #fff; padding: 5px 11px;
+      font: 500 .72rem "DM Mono", ui-monospace, monospace; letter-spacing: .05em; border-radius: 99px;
+    }
+    .badge b { font-weight: 600; }
+    button.badge:hover, button.badge[aria-pressed="true"] { background: rgb(255 255 255 / 20%); }
+    .toggle { background: rgb(255 255 255 / 14%); border: 1px solid rgb(255 255 255 / 35%); border-radius: 10px; color: #fff; }
+
+    /* ----- page width / spacing ----- */
+    .wrap { padding-top: 28px; }
+    @media (min-width: 1100px) { .wrap { max-width: 1240px; } }
+    .layout { margin-top: 36px; gap: 48px; }
+
+    /* ----- cards, sections, boxes ----- */
+    section, .card, .bar, .q:has(ol, .opts), .box, details.wex {
+      background: var(--k-surface); border-color: var(--k-line); box-shadow: none;
+    }
+    section { border-radius: 20px; box-shadow: var(--k-shadow); }
+    .card, .bar, .q:has(ol, .opts), details.wex { border-radius: 16px; }
+    .box { border-radius: 13px; }
+    .def, .tip, .warnbox, .okbox { border-radius: 0 13px 13px 0; }
+    h2 { color: var(--k-accent); }
+    .unit { background: var(--k-accent-l); color: #fff; }
+    nav.toc { background: var(--k-surface); border-radius: 16px; border-color: var(--k-line); }
+    nav.toc a.on, nav.toc a:hover { background: var(--tint); color: var(--k-accent); }
+    nav.toc h4, nav.toc .grp, nav.topics a { font-family: "DM Mono", ui-monospace, monospace; }
+    nav.topics a { background: var(--k-surface); border-color: var(--k-line); color: var(--k-accent); }
+    nav.topics { background: var(--k-paper); }
+
+    /* ----- tables ----- */
+    th { background: var(--k-surface2); font: 500 .72rem "DM Mono", ui-monospace, monospace; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--k-ink2); }
+    th, td { border-color: var(--k-line); }
+    kbd, code { font-family: "DM Mono", ui-monospace, monospace; }
+
+    /* ----- buttons, selects, inputs ----- */
+    button, select, input[type="text"], input[type="number"], input:not([type]), textarea, .btn {
+      border-color: var(--k-line2); border-radius: 10px; font-family: "Work Sans", system-ui, sans-serif;
+    }
+    select, input[type="text"], input[type="number"], input:not([type]), textarea { background: var(--k-surface); color: var(--k-ink); }
+    button, .btn, select { background-color: var(--k-surface); color: var(--k-ink); }
+    button.primary, button.pri, .btn.pri {
+      background: var(--k-ink); color: var(--k-paper); border-color: var(--k-ink); font-weight: 600;
+    }
+    button.active, .tab[aria-selected="true"] { border-color: var(--k-accent); color: var(--k-accent); font-weight: 600; }
+    .tab[aria-selected="true"] { background: var(--k-accent-l); color: #fff; border-color: var(--k-accent-l); }
+    button:hover:not(:disabled), .btn:hover:not(:disabled) { border-color: var(--k-accent); }
+    button.primary:hover:not(:disabled), button.pri:hover:not(:disabled), .btn.pri:hover:not(:disabled) { background: var(--k-ink); }
+
+    /* ----- answer options ----- */
+    .opt, .q li, .opts li, .options label, .answer {
+      background: var(--k-paper); border: 1px solid var(--k-line); border-radius: 13px; min-height: 52px;
+    }
+    .opt:hover:not(:disabled), .q li:hover, .opts li:hover { border-color: var(--k-accent); background: var(--opth); }
+    .opt.correct, .q li.right, body:not(.hide) .opts li.right, .q.done li.right:hover { background: var(--k-okbg); border-color: var(--k-ok); color: var(--k-ok); }
+    .opt.wrong, .q li.wrong, .q.done li.wrong:hover { background: var(--k-badbg); border-color: var(--k-bad); color: var(--k-bad); }
+    .exp, .ex, .why, .expl { border-radius: 0 13px 13px 0; }
+    .ex, .why { background: var(--k-surface2); border-left-color: var(--k-accent); }
+    .q .meta .u { background: var(--k-surface2); color: var(--k-ink2); }
+    .end { background: var(--k-okbg); border-color: var(--k-ok); border-radius: 16px; }
+    .bar button.pri { background: var(--k-ink); color: var(--k-paper); border-color: var(--k-ink); }
+    .bar select, .bar button { background: var(--k-surface); color: var(--k-ink); border-color: var(--k-line2); }
+    .toggle { cursor: pointer; }
+
+    /* ----- progress / score ----- */
+    .prog { background: var(--k-surface2); }
+    .prog div { background: var(--k-accent); }
+    .score span { color: var(--k-accent); }
+
+    /* ----- theme button ----- */
+    .themebtn {
+      width: 44px; height: 44px; background: var(--k-surface); color: var(--k-ink2); border: 1px solid var(--k-line2);
+      box-shadow: 0 4px 14px rgb(0 0 0 / 14%);
+    }
+    .themebtn:hover { color: var(--k-ink); transform: none; border-color: var(--k-accent); }
+
+    /* ----- WRAV102 bits that hard-code fonts/colours ----- */
+    .eyebrow, .tab, .setname, .btn, .qnum, .exp b, .back, .setmeta, .tab .score { font-family: "DM Mono", ui-monospace, monospace; }
+    .setname, .qtext { font-family: "Newsreader", Georgia, serif; }
+    .qtext { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+    nav:not(.toc):not(.topics) { background: var(--k-paper); }
+    .topbar .back { color: var(--k-ink2); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; }
+    .wrap > header .eyebrow { color: rgb(255 255 255 / 82%); }
+    .wrap > header .sub { color: rgb(255 255 255 / 86%); }
+
+    /* ----- STAV cheat sheet (dense one-pager): palette + type only ----- */
+    .page h1 { font-family: "Newsreader", Georgia, serif; font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.4rem); color: var(--k-ink); letter-spacing: -.02em; }
+    .box h2 { font-family: "DM Mono", ui-monospace, monospace; font-weight: 500; }
+    .box { background: var(--k-surface); }
+  }
+}
