@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Subnetting Long Questions — ICNF102</title>
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Red+Hat+Mono:wght@400;500;600&family=Kalam:wght@400;700&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#FBF8F1; --sheet:#FFFEFA; --sheet2:#F5F1E6; --ink:#1E1B16; --ink2:#55503F; --ink3:#8A8470;
+  --rule:#E4DCC6; --rule2:#CFC4A6; --margin:#E8A9A0;
+  --pen:#C0321F; --pensoft:#FBE7E2; --ok:#1F7A45; --oksoft:#E3F2E7; --blue:#264E8F; --bluesoft:#E7EEF8;
+  --code:#F1ECDF;
+  --f-text:"Literata",Georgia,serif; --f-mono:"Red Hat Mono",ui-monospace,Consolas,monospace; --f-pen:"Kalam",cursive;
+}
+@media screen{
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --paper:#15140F; --sheet:#1C1A14; --sheet2:#24211A; --ink:#ECE6D6; --ink2:#BEB6A0; --ink3:#857E6A;
+      --rule:#333024; --rule2:#45402F; --margin:#6B2E26;
+      --pen:#F07A62; --pensoft:#3A1E18; --ok:#6CCB8E; --oksoft:#16281C; --blue:#8FB2EA; --bluesoft:#1A2333; --code:#26231B;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#15140F; --sheet:#1C1A14; --sheet2:#24211A; --ink:#ECE6D6; --ink2:#BEB6A0; --ink3:#857E6A;
+    --rule:#333024; --rule2:#45402F; --margin:#6B2E26;
+    --pen:#F07A62; --pensoft:#3A1E18; --ok:#6CCB8E; --oksoft:#16281C; --blue:#8FB2EA; --bluesoft:#1A2333; --code:#26231B;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+code{font-family:var(--f-mono);font-size:.86em;background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+code b{color:var(--pen)}
+button{font:inherit;cursor:pointer}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:var(--sheet);border-bottom:1px solid var(--rule2)}
+.bar-in{max-width:1380px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px}
+.bar a.home{color:var(--ink2);text-decoration:none;font-family:var(--f-mono);font-size:13px}
+.bar a.home:hover{color:var(--pen)}
+.bar .title{font-weight:700;font-size:16px}
+.bar .sp{flex:1}
+.score{font-family:var(--f-pen);font-size:22px;color:var(--pen);white-space:nowrap}
+.themebtn{border:1px solid var(--rule2);background:var(--sheet2);color:var(--ink2);border-radius:999px;
+  padding:6px 12px;font-family:var(--f-mono);font-size:12.5px;min-height:36px}
+.themebtn:hover{color:var(--ink)}
+
+/* layout */
+.wrap{max-width:1380px;margin:0 auto;padding:22px 20px 80px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:34px;align-items:start}
+nav.side{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto;background:var(--sheet);border:1px solid var(--rule);
+  border-radius:12px;padding:16px}
+nav.side h4{margin:0 0 8px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:500}
+.setbtns{display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+.setbtn{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;border:1px solid transparent;background:none;
+  color:var(--ink);padding:7px 9px;border-radius:7px;font-size:14.5px;min-height:38px}
+.setbtn:hover{background:var(--sheet2)}
+.setbtn[aria-pressed="true"]{background:var(--pensoft);border-color:var(--margin);color:var(--ink)}
+.setbtn small{font-family:var(--f-mono);font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.qgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.qgrid a{display:grid;place-items:center;height:38px;border:1px solid var(--rule2);border-radius:7px;text-decoration:none;
+  color:var(--ink2);font-family:var(--f-mono);font-size:13px;background:var(--sheet)}
+.qgrid a.done{background:var(--oksoft);border-color:var(--ok);color:var(--ok)}
+.qgrid a.part{background:var(--pensoft);border-color:var(--pen);color:var(--pen)}
+.side .reset{margin-top:14px;width:100%;border:1px solid var(--rule2);background:none;color:var(--ink3);border-radius:7px;padding:8px;font-size:13px}
+
+main{min-width:0;max-width:980px}
+.intro h1{font-size:clamp(28px,3.6vw,40px);line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.intro p{color:var(--ink2);margin:0 0 10px;max-width:70ch}
+.howto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 26px}
+.howto div{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font-size:15px;color:var(--ink2)}
+.howto b{display:block;color:var(--ink);font-size:15.5px;margin-bottom:2px}
+.sethead{font-family:var(--f-mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--pen);
+  margin:30px 0 10px;padding-bottom:6px;border-bottom:1px dashed var(--rule2)}
+.sethead span{color:var(--ink3);text-transform:none;letter-spacing:0}
+
+/* question = exam sheet with a red margin rule */
+.q{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:4px;margin:0 0 22px;
+  padding:22px 26px 20px 74px;box-shadow:0 1px 0 var(--rule)}
+.q::before{content:"";position:absolute;left:54px;top:0;bottom:0;width:2px;background:var(--margin)}
+.qnum{position:absolute;left:12px;top:20px;width:34px;text-align:center;font-weight:700;font-size:20px}
+.qmarks{float:right;margin:0 0 6px 14px;font-family:var(--f-mono);font-size:14px;color:var(--ink2)}
+.qtext{margin:0 0 6px}
+.qnote{font-size:14px;color:var(--blue);margin:2px 0 8px}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 18px;margin:16px 0 14px}
+.field label{display:block;font-family:var(--f-mono);font-size:12.5px;color:var(--ink2);margin-bottom:3px}
+.field .row{display:flex;align-items:center;gap:8px}
+.field input{flex:1;min-width:0;font-family:var(--f-mono);font-size:16px;color:var(--ink);background:transparent;border:0;
+  border-bottom:1.5px solid var(--rule2);padding:6px 2px;outline:none;border-radius:0}
+.field input:focus{border-bottom-color:var(--blue)}
+.tick{font-family:var(--f-pen);font-size:24px;line-height:1;width:24px;text-align:center}
+.field.ok .tick{color:var(--ok)} .field.no .tick{color:var(--pen)}
+.field.no input{color:var(--pen);text-decoration:line-through;text-decoration-color:var(--pen)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--rule2);background:var(--sheet2);color:var(--ink);border-radius:7px;padding:8px 14px;font-size:15px;min-height:42px}
+.btn:hover{border-color:var(--ink3)}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+.btn.pen{color:var(--pen);border-color:var(--margin);background:var(--pensoft)}
+.result{font-family:var(--f-pen);font-size:24px;color:var(--pen);margin-left:auto}
+.result.full{color:var(--ok)}
+
+/* memo = red pen */
+.memo{margin-top:16px;border-top:1px dashed var(--margin);padding-top:12px}
+.memo h5{margin:0 0 6px;font-family:var(--f-pen);font-weight:700;font-size:22px;color:var(--pen)}
+.memo ol{margin:0;padding-left:22px}
+.memo li{margin:6px 0;padding-left:4px}
+.memo li::marker{font-family:var(--f-pen);color:var(--pen);font-weight:700}
+.tbl{overflow-x:auto;margin:12px 0 0}
+table{border-collapse:collapse;font-family:var(--f-mono);font-size:14px;min-width:100%}
+th,td{border:1px solid var(--rule2);padding:6px 9px;text-align:left;white-space:nowrap}
+th{background:var(--sheet2);font-weight:600}
+td:nth-child(2){color:var(--pen);font-weight:600}
+.empty{color:var(--ink3);font-style:italic}
+
+/* desktop: bigger base size */
+@media (min-width:1280px){ body{font-size:18.5px} .q{padding:26px 32px 22px 80px} .q::before{left:58px} .qnum{left:14px} }
+/* tablet/phone: navigator moves to a strip at the top */
+@media (max-width:980px){
+  .wrap{grid-template-columns:1fr;gap:14px;padding-top:12px}
+  nav.side{position:static;max-height:none;padding:12px}
+  .setbtns{flex-direction:row;overflow-x:auto;margin-bottom:10px;padding-bottom:4px}
+  .setbtn{flex:none;white-space:nowrap}
+  .qgrid{display:flex;overflow-x:auto;gap:6px;padding-bottom:4px}
+  .qgrid a{flex:0 0 42px;height:40px}
+  .side .reset{margin-top:8px;padding:6px}
+  .howto{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  body{font-size:16.5px}
+  .bar-in{padding:8px 12px;gap:8px}
+  .bar .title{display:none}
+  .wrap{padding:10px 12px 60px}
+  .q{padding:18px 14px 16px 44px}
+  .q::before{left:32px}
+  .qnum{left:2px;width:28px;font-size:17px}
+  .fields{grid-template-columns:1fr}
+  .btn{flex:1 1 auto}
+  .result{margin-left:0;width:100%}
+}
+@media print{
+  .bar,nav.side,.btns,.howto{display:none!important}
+  .wrap{display:block;padding:0}
+  .q{break-inside:avoid;box-shadow:none}
+  .memo{display:block!important}
+}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="home" href="../">&larr; All modules</a>
+  <span class="title">ICNF102 &middot; Subnetting long questions</span>
+  <span class="sp"></span>
+  <span class="score" id="score" title="Marks from questions you've checked"></span>
+  <button class="themebtn" id="themebtn" type="button">Theme: auto</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="side" aria-label="Questions">
+    <h4>Question sets</h4>
+    <div class="setbtns" id="sets"></div>
+    <h4>Jump to</h4>
+    <div class="qgrid" id="qgrid"></div>
+    <button class="reset" id="resetAll" type="button">Clear all my answers</button>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <h1>Subnetting long questions</h1>
+      <p>Twenty questions written like the long questions in the practice papers, from the exact past-paper question up to VLSM.
+        Work each one on paper first, type your answers in to have them marked, then open the memo to see the working one step at a time.</p>
+    </div>
+    <div class="howto">
+      <div><b>1. Work it on paper</b>Write every step: binary mask, bits borrowed, new mask, increment, hosts.</div>
+      <div><b>2. Type and check</b>Masks can be typed as 255.255.255.192 or /26. Ticks and crosses come back in red pen.</div>
+      <div><b>3. Read the memo</b>Reveal the next step to get unstuck without seeing the whole answer. Your work is saved in this browser.</div>
+    </div>
+    <div id="list"></div>
+  </main>
+</div>
+
+<script src="questions.js"></script>
+<script>
+(function(){
+  "use strict";
+  var Q = window.SUBQ || [];
+  var SETS = {
+    A:{n:"Set A — The past-paper question", d:"Bits borrowed, new mask, hosts per subnet (5 marks each)"},
+    B:{n:"Set B — Full traditional subnetting", d:"Given a number of subnets: every value plus the subnet table"},
+    C:{n:"Set C — Given hosts per subnet", d:"Your lecturer's method from “Subnetting Made Easy”"},
+    D:{n:"Set D — Does it fit?", d:"Subnet count and host count together"},
+    E:{n:"Set E — VLSM", d:"Different-sized subnets, largest first"}
+  };
+  var KEY = "icnf_subexam_v1";
+  var st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e) {} }
+  function S(id){ return st[id] || (st[id] = {v:{}, checked:false, step:0}); }
+  var filter = "all";
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ var d=document.createElement("div"); d.textContent=String(s); return d.innerHTML; }
+
+  /* ---- answer normalisers ---- */
+  function prefixToMask(p){ var m=[]; for(var i=0;i<4;i++){ var b=Math.max(0,Math.min(8,p-8*i)); m.push(b?256-Math.pow(2,8-b):0);} return m.join("."); }
+  function normIp(s){ s=String(s).trim(); if(!/^\d{1,3}(\.\d{1,3}){3}$/.test(s)) return null;
+    var p=s.split(".").map(Number); return p.some(function(x){return x>255;}) ? null : p.join("."); }
+  function norm(kind, raw){
+    var s = String(raw||"").trim().toLowerCase().replace(/\s+/g,"");
+    if(!s) return null;
+    if(kind==="int"){ s=s.replace(/,/g,""); return /^\d+$/.test(s) ? String(parseInt(s,10)) : null; }
+    if(kind==="prefix"){ s=s.replace(/^\//,""); return /^\d+$/.test(s) ? String(parseInt(s,10)) : null; }
+    if(kind==="mask"){ var m=s.match(/^\/?(\d{1,2})$/); if(m) return prefixToMask(+m[1]); return normIp(s); }
+    if(kind==="ip") return normIp(s);
+    if(kind==="cidr"){ var c=s.split("/"); if(c.length!==2) return null; var a=normIp(c[0]); return a ? a+"/"+parseInt(c[1],10) : null; }
+    if(kind==="yn"){ if(/^(y|yes)$/.test(s)) return "yes"; if(/^(n|no)$/.test(s)) return "no"; return null; }
+    return s;
+  }
+  function isRight(f, raw){ var a = norm(f.k, raw); return a !== null && a === norm(f.k, f.a); }
+  function marksFor(q){ var s=S(q.id), got=0; q.fields.forEach(function(f,i){ if(isRight(f, s.v[i])) got+=f.m; }); return got; }
+
+  /* ---- render ---- */
+  function renderSets(){
+    var h = '<button class="setbtn" data-s="all" aria-pressed="'+(filter==="all")+'">All 20 questions <small>'+Q.length+'</small></button>';
+    Object.keys(SETS).forEach(function(k){
+      var n = Q.filter(function(q){return q.set===k;}).length;
+      h += '<button class="setbtn" data-s="'+k+'" aria-pressed="'+(filter===k)+'">'+esc(SETS[k].n.split(" — ")[0]+": "+SETS[k].n.split(" — ")[1])+' <small>'+n+'</small></button>';
+    });
+    $("sets").innerHTML = h;
+    Array.prototype.forEach.call(document.querySelectorAll(".setbtn"), function(b){
+      b.onclick = function(){ filter = b.dataset.s; renderSets(); renderList(); window.scrollTo({top:0}); };
+    });
+  }
+  function renderGrid(){
+    var h="", tot=0, got=0;
+    Q.forEach(function(q){
+      var s=S(q.id), cls="";
+      if(s.checked){ var g=marksFor(q); tot+=q.marks; got+=g; cls = g===q.marks ? "done" : "part"; }
+      h += '<a href="#q'+q.id+'" class="'+cls+'" title="Question '+q.id+'">'+q.id+'</a>';
+    });
+    $("qgrid").innerHTML = h;
+    $("score").textContent = tot ? got+" / "+tot : "";
+  }
+  function qHtml(q){
+    var s=S(q.id), h='<article class="q" id="q'+q.id+'">';
+    h += '<div class="qnum">'+q.id+'</div><div class="qmarks">['+q.marks+' marks]</div>';
+    h += '<p class="qtext">'+q.text+'</p>';
+    if(q.note) h += '<p class="qnote">'+q.note+'</p>';
+    if(q.lab) h += '<p class="qnote">'+q.lab+'</p>';
+    h += '<div class="fields">';
+    q.fields.forEach(function(f,i){
+      var cls = s.checked && s.v[i] ? (isRight(f, s.v[i]) ? " ok" : " no") : "";
+      var mark = cls===" ok" ? "✓" : cls===" no" ? "✗" : "";
+      h += '<div class="field'+cls+'"><label for="f'+q.id+'_'+i+'">'+esc(f.l)+' <span style="opacity:.7">('+f.m+')</span></label>'
+         + '<div class="row"><input id="f'+q.id+'_'+i+'" data-q="'+q.id+'" data-i="'+i+'" autocomplete="off" spellcheck="false" inputmode="'+(f.k==="int"||f.k==="prefix"?"numeric":"text")+'" value="'+esc(s.v[i]||"")+'">'
+         + '<span class="tick">'+mark+'</span></div></div>';
+    });
+    h += '</div><div class="btns">'
+       + '<button class="btn pri" data-act="check" data-q="'+q.id+'">Check my answers</button>'
+       + '<button class="btn pen" data-act="step" data-q="'+q.id+'"'+(s.step>=q.steps.length?' disabled':'')+'>Show next step</button>'
+       + '<button class="btn" data-act="all" data-q="'+q.id+'">'+(s.step>=q.steps.length?'Hide memo':'Show full memo')+'</button>'
+       + '<button class="btn" data-act="clear" data-q="'+q.id+'">Clear</button>';
+    if(s.checked){ var g=marksFor(q); h += '<span class="result'+(g===q.marks?' full':'')+'">'+g+' / '+q.marks+'</span>'; }
+    h += '</div>';
+    var shown = Math.min(s.step, q.steps.length);
+    h += '<div class="memo"'+(shown?'':' hidden')+'><h5>Memo</h5><ol>';
+    for(var k=0;k<shown;k++) h += '<li>'+q.steps[k]+'</li>';
+    h += '</ol>';
+    if(q.table && shown>=q.steps.length){
+      h += '<div class="tbl"><table><thead><tr>'+q.table.head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>';
+      q.table.rows.forEach(function(r){ h += '<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join('')+'</tr>'; });
+      h += '</tbody></table></div>';
+    }
+    h += '</div></article>';
+    return h;
+  }
+  function renderList(){
+    var h="", last="";
+    Q.forEach(function(q){
+      if(filter!=="all" && q.set!==filter) return;
+      if(q.set!==last){ last=q.set; h += '<div class="sethead">'+esc(SETS[q.set].n)+' <span>· '+esc(SETS[q.set].d)+'</span></div>'; }
+      h += qHtml(q);
+    });
+    $("list").innerHTML = h;
+    renderGrid();
+  }
+  function rerender(id){
+    var q = Q.filter(function(x){return x.id===id;})[0], el = $("q"+id);
+    var tmp = document.createElement("div"); tmp.innerHTML = qHtml(q); el.replaceWith(tmp.firstChild); renderGrid();
+  }
+  document.addEventListener("input", function(e){
+    var t=e.target; if(!t.dataset || !t.dataset.q) return;
+    var s=S(+t.dataset.q); s.v[t.dataset.i]=t.value; save();
+  });
+  document.addEventListener("click", function(e){
+    var b=e.target.closest("[data-act]"); if(!b) return;
+    var id=+b.dataset.q, q=Q.filter(function(x){return x.id===id;})[0], s=S(id);
+    if(b.dataset.act==="check") s.checked=true;
+    if(b.dataset.act==="step") s.step=Math.min(s.step+1, q.steps.length);
+    if(b.dataset.act==="all") s.step = s.step>=q.steps.length ? 0 : q.steps.length;
+    if(b.dataset.act==="clear"){ st[id]={v:{},checked:false,step:0}; }
+    save(); rerender(id);
+    if(b.dataset.act==="step"){ var li=document.querySelectorAll("#q"+id+" .memo li"); if(li.length) li[li.length-1].scrollIntoView({block:"nearest",behavior:"smooth"}); }
+  });
+  $("resetAll").onclick = function(){ if(confirm("Clear every answer and memo on this page?")){ st={}; save(); renderList(); } };
+
+  /* ---- theme: auto -> light -> dark, shared key across the site ---- */
+  var TK="school_stuff_theme", order=["auto","light","dark"], tb=$("themebtn"), theme="auto";
+  try{ theme=localStorage.getItem(TK)||"auto"; }catch(e){}
+  function applyTheme(){ if(theme==="auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme",theme); tb.textContent="Theme: "+theme; }
+  tb.onclick=function(){ theme=order[(order.indexOf(theme)+1)%3]; try{localStorage.setItem(TK,theme);}catch(e){} applyTheme(); };
+  applyTheme();
+
+  renderSets(); renderList();
+})();
+</script>
+</body>
+</html>
