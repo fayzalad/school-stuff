@@ -1,0 +1,43 @@
+/* Polish layer for the plain quiz pages (IAUT202 x2, STAV102 MCQ drill and explained MCQs).
+   Linked after each page's own <style>, so it only refines: bigger tap targets, a wider
+   reading column and larger text on desktop, tidy controls on a phone.
+   Screen only (printing is unchanged). Uses each page's own colour variables, so both themes work. */
+@media screen{
+  body{line-height:1.6}
+  header{padding-block:26px 24px}
+  header h1{font-size:clamp(1.5rem,3.2vw,2.1rem);letter-spacing:-.01em}
+  header p{max-width:70ch;line-height:1.55}
+  header a.back{display:inline-flex;align-items:center;min-height:32px;font-size:.9rem}
+
+  button,select,.toggle{min-height:44px}
+  label:has(input,select){display:inline-flex;align-items:center;gap:8px;min-height:44px}
+  input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* .q is a card on the STAV pages (it holds the options) but plain question text on IAUT202 */
+  .card,.q:has(ol,.opts){box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  .opt,.q li,.opts li{min-height:44px}
+  .opt:hover,.opts li:hover{border-color:var(--accent)}
+  nav.topics a{display:inline-flex;align-items:center;min-height:36px;padding-inline:12px}
+  .themebtn{width:44px;height:44px}
+}
+
+@media screen and (min-width:900px){
+  header{padding-inline:0}
+  header .in,.wrap{max-width:960px;padding-inline:24px}
+}
+
+@media screen and (min-width:1200px){
+  body{font-size:18px}
+  header .in,.wrap{max-width:1040px}
+  .card,.q:has(ol,.opts){padding:22px 26px}
+  .opt,.q li,.opts li{padding:12px 16px}
+}
+
+@media screen and (max-width:560px){
+  .row label:has(select){display:flex;flex-direction:column;align-items:stretch;gap:4px;flex:1 1 100%;min-height:0}
+  .row select,.bar select{width:100%}
+  .bar{gap:6px 10px}
+  .bar label{flex:1 1 100%;margin:0}
+  .bar select{flex:1 1 100%}  .row button.primary{flex:1 1 100%}
+}

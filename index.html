@@ -4,90 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>School Stuff</title>
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
 <style>
 :root{
   color-scheme: light dark;
   --paper:#F1ECE1; --surf:#FAF7EF; --surf2:#EAE3D2;
-  --ink:#211B12; --ink2:#5B5240; --ink3:#8B826C;
+  --ink:#211B12; --ink2:#5B5240; --ink3:#766D58;
   --line:#D8CFB8; --line2:#C2B896;
-  --code:#E9E1CB;
   --f-disp:"Newsreader",Georgia,serif;
   --f-ui:"Work Sans","Helvetica Neue",Arial,sans-serif;
   --f-mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gut:clamp(16px,4vw,48px);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --paper:#171410; --surf:#1D1912; --surf2:#252017;
-    --ink:#EDE7D8; --ink2:#B8AF9B; --ink3:#847C68;
+    --ink:#EDE7D8; --ink2:#B8AF9B; --ink3:#9A917B;
     --line:#3A3325; --line2:#4A4130;
-    --code:#221D14;
   }
 }
 :root[data-theme="dark"]{
   --paper:#171410; --surf:#1D1912; --surf2:#252017;
-  --ink:#EDE7D8; --ink2:#B8AF9B; --ink3:#847C68;
+  --ink:#EDE7D8; --ink2:#B8AF9B; --ink3:#9A917B;
   --line:#3A3325; --line2:#4A4130;
-  --code:#221D14;
 }
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 html,body{margin:0}
-img{max-width:100%}
 [hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:16px;line-height:1.55;
   -webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--f-disp);font-weight:500;letter-spacing:-.005em;margin:0;text-wrap:balance}
-code{font-family:var(--f-mono)}
+h1,h2,h3{font-family:var(--f-disp);font-weight:500;letter-spacing:-.01em;margin:0;text-wrap:balance}
 
-.top{display:flex;align-items:center;gap:12px;max-width:760px;margin:0 auto;padding:22px 20px 0}
-.top .mark{width:26px;height:26px;flex:none;border:1.5px solid var(--ink);border-radius:50%;display:grid;
-  place-items:center;font-family:var(--f-mono);font-size:11px}
-.top .kicker{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.top,.wrap{max-width:1240px;margin:0 auto;padding-inline:var(--gut)}
+.top{display:flex;align-items:center;gap:12px;padding-top:22px}
+.top .mark{width:30px;height:30px;flex:none;border:1.5px solid var(--ink);border-radius:50%;display:grid;
+  place-items:center;font-family:var(--f-mono);font-size:12px}
+.top .kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
 .top .sp{flex:1}
-.themebtn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:var(--surf);
-  color:var(--ink2);cursor:pointer;display:grid;place-items:center;flex:none}
+.themebtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:var(--surf);
+  color:var(--ink2);cursor:pointer;display:grid;place-items:center;flex:none;padding:0}
 .themebtn:hover{background:var(--surf2);color:var(--ink)}
+.themebtn:focus-visible,.jump a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
-.wrap{max-width:760px;margin:0 auto;padding:18px 20px 60px}
+.wrap{padding-block:12px 72px}
 
-.hero{padding-block:22px 30px;border-bottom:1px solid var(--line)}
-.hero h1{font-size:clamp(30px,6vw,42px)}
-.hero p{margin:12px 0 0;color:var(--ink2);font-size:16.5px;max-width:56ch}
+.hero{padding-block:28px 26px}
+.hero h1{font-size:clamp(34px,6vw,64px);line-height:1.05}
+.hero p{margin:14px 0 0;color:var(--ink2);font-size:clamp(16.5px,1.6vw,19px);max-width:60ch}
+.stats{margin-top:16px;font-family:var(--f-mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink3)}
 
-.shelf{padding-block:28px}
-.subject{border:1px solid var(--line2);border-radius:10px;background:var(--surf);margin-bottom:18px;overflow:hidden}
-.subject-head{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid var(--line)}
-.spine{width:7px;align-self:stretch;border-radius:4px;flex:none;min-height:34px}
+.jump{display:flex;flex-wrap:wrap;gap:8px;padding-block:0 26px;border-bottom:1px solid var(--line)}
+.jump a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 14px;border:1px solid var(--line2);
+  border-radius:99px;background:var(--surf);color:var(--ink);text-decoration:none;font-family:var(--f-mono);
+  font-size:12.5px;letter-spacing:.04em}
+.jump a:hover{background:var(--surf2)}
+.jump i{width:9px;height:9px;border-radius:50%;background:var(--tint);flex:none}
+
+.shelf{columns:520px 2;column-gap:22px;padding-block:28px 8px}
+.subject{--tint:var(--t-l);border:1px solid var(--line2);border-radius:12px;background:var(--surf);overflow:hidden;
+  scroll-margin-top:16px;break-inside:avoid;margin-bottom:22px}
+.subject-head{display:flex;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.spine{width:7px;align-self:stretch;border-radius:4px;flex:none;min-height:38px;background:var(--tint)}
 .subject-id{display:flex;flex-direction:column;gap:2px;min-width:0}
-.subject-code{font-family:var(--f-mono);font-size:11px;letter-spacing:.07em;color:var(--tint);font-weight:500}
-.subject-name{font-size:19px;font-weight:500}
-.subject-count{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.subject-code{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.07em;color:var(--tint);font-weight:500}
+.subject-name{font-size:clamp(19px,2vw,23px);font-weight:500;font-family:var(--f-disp);line-height:1.25}
+.subject-count{margin-left:auto;font-family:var(--f-mono);font-size:12.5px;color:var(--ink3);white-space:nowrap}
 
 .pages{display:flex;flex-direction:column}
-.page{display:flex;align-items:center;gap:14px;padding:14px 18px;text-decoration:none;color:var(--ink);
+.page{display:flex;align-items:center;gap:14px;padding:16px 20px;min-height:56px;text-decoration:none;color:var(--ink);
   border-top:1px solid var(--line);transition:background .12s}
 .page:first-child{border-top:0}
 .page:hover{background:var(--surf2)}
 .page:focus-visible{outline:2px solid var(--tint);outline-offset:-2px}
-.page-tag{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
-  padding:3px 7px;border-radius:99px;border:1px solid var(--tint);color:var(--tint);flex:none;font-weight:500}
-.page-body{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
-.page-label{font-weight:600;font-size:15.5px;font-family:var(--f-ui);display:block}
-.page-desc{font-size:13.5px;color:var(--ink2);line-height:1.4;display:block}
-.page-go{font-family:var(--f-mono);font-size:16px;color:var(--ink3);flex:none}
+.page-body{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
+.page-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.page-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 8px;border-radius:99px;border:1px solid var(--tint);color:var(--tint);flex:none;font-weight:500}
+.page-label{font-weight:600;font-size:16.5px}
+.page-desc{font-size:14.5px;color:var(--ink2);line-height:1.5}
+.page-go{font-family:var(--f-mono);font-size:18px;color:var(--ink3);flex:none}
 .page:hover .page-go{color:var(--tint)}
 
-.note{border-top:1px solid var(--line);padding-top:24px;margin-top:8px}
-.note p{color:var(--ink3);font-size:13.5px;margin:0 0 6px;font-family:var(--f-mono)}
+.note{padding-top:6px}
+.note p{color:var(--ink3);font-size:13.5px;margin:0;font-family:var(--f-mono)}
 
-@media (max-width:520px){
-  .subject-head{padding:14px 14px}
-  .page{padding:12px 14px;gap:11px}
-  .subject-name{font-size:17.5px}
-  .page-label{font-size:15px}
-  .page-tag{display:none}
+@media (min-width:1200px){
+  body{font-size:18px}
+  .page-label{font-size:17.5px}
+  .page-desc{font-size:15.5px}
 }
+@media (max-width:520px){
+  .subject-head{padding:14px}
+  .page{padding:14px;gap:10px}
+  .subject{margin-bottom:16px}
+  .subject-count{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.page{transition:none}}
 </style>
 </head>
 <body>
@@ -96,16 +113,17 @@ code{font-family:var(--f-mono)}
   <span class="mark" aria-hidden="true">S</span>
   <span class="kicker">School Stuff</span>
   <div class="sp"></div>
-  <button class="themebtn" id="themebtn" aria-label="Switch theme" title="Switch theme">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-  </button>
+  <button class="themebtn" id="themebtn" type="button" aria-label="Switch theme" title="Switch theme"></button>
 </header>
 
 <div class="wrap">
   <div class="hero">
     <h1>Pick a module.</h1>
     <p>Study guides and quizzes for each course, kept in one shelf. Every module gets its own page — open one below.</p>
+    <div class="stats" id="stats"></div>
   </div>
+
+  <nav class="jump" id="jump" aria-label="Jump to a module"></nav>
 
   <div class="shelf" id="shelf" role="list"></div>
 
@@ -182,62 +200,62 @@ code{font-family:var(--f-mono)}
 
   function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
 
-  var isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  function currentIsDark(){
-    var t = document.documentElement.getAttribute("data-theme");
-    if(t === "dark") return true;
-    if(t === "light") return false;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  }
+  // Each module sets both tints; the CSS picks one, so a theme change needs no re-render.
+  var tintCss = MODULES.map(function(m,i){
+    return '#mod'+i+'{--t-l:'+m.tint+';--t-d:'+m.tintDark+'}';
+  }).join("")
+    + '@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .subject,:root:not([data-theme="light"]) .jump a{--tint:var(--t-d)}}'
+    + ':root[data-theme="dark"] .subject,:root[data-theme="dark"] .jump a{--tint:var(--t-d)}'
+    + '.jump a{--tint:var(--t-l)}';
+  var st = document.createElement("style"); st.textContent = tintCss; document.head.appendChild(st);
 
-  function render(){
-    var dark = currentIsDark();
-    var html = "";
-    MODULES.forEach(function(mod){
-      var tint = dark ? mod.tintDark : mod.tint;
-      html += '<div class="subject" role="listitem" style="--tint:'+tint+'">'
-        + '<div class="subject-head">'
-        + '<span class="spine" style="background:'+tint+'"></span>'
-        + '<span class="subject-id"><span class="subject-code">'+esc(mod.code)+'</span>'
-        + '<span class="subject-name">'+esc(mod.name)+'</span></span>'
-        + '<span class="subject-count">'+mod.sites.length+' page'+(mod.sites.length===1?'':'s')+'</span>'
-        + '</div><div class="pages">';
-      mod.sites.forEach(function(s){
-        html += '<a class="page" href="'+esc(s.href)+'">'
-          + '<span class="page-tag">'+esc(s.tag)+'</span>'
-          + '<span class="page-body"><span class="page-label">'+esc(s.label)+'</span>'
-          + '<span class="page-desc">'+esc(s.desc)+'</span></span>'
-          + '<span class="page-go" aria-hidden="true">→</span>'
-          + '</a>';
-      });
-      html += '</div></div>';
+  var shelf = "", jump = "", total = 0;
+  MODULES.forEach(function(mod,i){
+    total += mod.sites.length;
+    jump += '<a href="#mod'+i+'" id="jump'+i+'" style="--t-l:'+mod.tint+';--t-d:'+mod.tintDark+'"><i></i>'+esc(mod.code)+'</a>';
+    shelf += '<section class="subject" role="listitem" id="mod'+i+'">'
+      + '<div class="subject-head">'
+      + '<span class="spine"></span>'
+      + '<span class="subject-id"><span class="subject-code">'+esc(mod.code)+'</span>'
+      + '<h2 class="subject-name">'+esc(mod.name)+'</h2></span>'
+      + '<span class="subject-count">'+mod.sites.length+' page'+(mod.sites.length===1?'':'s')+'</span>'
+      + '</div><div class="pages">';
+    mod.sites.forEach(function(s){
+      shelf += '<a class="page" href="'+esc(s.href)+'">'
+        + '<span class="page-body"><span class="page-top"><span class="page-tag">'+esc(s.tag)+'</span>'
+        + '<span class="page-label">'+esc(s.label)+'</span></span>'
+        + '<span class="page-desc">'+esc(s.desc)+'</span></span>'
+        + '<span class="page-go" aria-hidden="true">→</span>'
+        + '</a>';
     });
-    document.getElementById("shelf").innerHTML = html;
-  }
+    shelf += '</div></section>';
+  });
+  document.getElementById("shelf").innerHTML = shelf;
+  document.getElementById("jump").innerHTML = jump;
+  document.getElementById("stats").textContent = MODULES.length + " modules · " + total + " pages";
 
   var themeBtn = document.getElementById("themebtn");
-  var THEME_KEY = "school_stuff_theme";
-  function applyTheme(t){
-    if(t==="light"||t==="dark"){ document.documentElement.setAttribute("data-theme", t); }
-    else { document.documentElement.removeAttribute("data-theme"); }
-    render();
-  }
+  var THEME_KEY = "school_stuff_theme", order = ["auto","light","dark"];
+  var icons = {
+    auto:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>',
+    light:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    dark:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
+  };
   var theme = "auto";
   try{ theme = localStorage.getItem(THEME_KEY) || "auto"; }catch(e){}
-  applyTheme(theme);
-  themeBtn.title = "Theme: " + theme;
-  themeBtn.onclick = function(){
-    var order = ["auto","light","dark"];
-    theme = order[(order.indexOf(theme)+1) % order.length];
-    applyTheme(theme);
-    try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
-    themeBtn.title = "Theme: " + theme;
-  };
-  if(window.matchMedia){
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){
-      if(theme === "auto") render();
-    });
+  function applyTheme(){
+    if(theme==="light"||theme==="dark"){ document.documentElement.setAttribute("data-theme", theme); }
+    else { document.documentElement.removeAttribute("data-theme"); }
+    themeBtn.innerHTML = icons[theme];
+    themeBtn.title = "Theme: " + theme + " (click to change)";
+    themeBtn.setAttribute("aria-label", "Theme: " + theme + ". Click to change");
   }
+  applyTheme();
+  themeBtn.onclick = function(){
+    theme = order[(order.indexOf(theme)+1) % order.length];
+    applyTheme();
+    try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
+  };
 })();
 </script>
 </body>
