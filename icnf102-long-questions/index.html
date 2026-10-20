@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Long Questions Practice — ICNF102</title>
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+<link rel="stylesheet" href="../icnf102-shared/theme.css">
+<style>
+/* page pieces on top of ../icnf102-shared/theme.css (STAV look) */
+nav.toc .setbtns{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}
+.setbtn{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;border:0;background:none;
+  color:var(--ink);padding:6px 8px;border-radius:6px;font:.85rem/1.35 var(--ui);cursor:pointer;min-height:34px}
+.setbtn:hover{background:var(--tint);color:var(--accent)}
+.setbtn[aria-pressed="true"]{background:var(--tint);color:var(--accent);font-weight:600}
+.setbtn small{color:var(--muted);font-size:.75rem}
+.qgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.qgrid a{display:grid;place-items:center;height:32px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--ink);font:600 .76rem var(--ui);background:var(--opt)}
+.qgrid a:hover{border-color:var(--accent);color:var(--accent)}
+.qgrid a.done{background:var(--right);border-color:var(--ok);color:var(--ok)}
+.qgrid a.part{background:var(--wrong);border-color:var(--warn);color:var(--warn)}
+nav.toc .reset{margin-top:12px;width:100%;border:1px solid var(--line);background:none;color:var(--muted);border-radius:6px;padding:7px;font:.8rem var(--ui);cursor:pointer}
+
+.howto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:14px 0 4px}
+.sethead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:30px 0 12px}
+.sethead b{font-size:1.35rem;color:var(--accent)}
+.sethead span{font:.88rem var(--ui);color:var(--muted)}
+
+article.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:22px;scroll-margin-top:16px}
+.qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.qhead .tag{background:var(--tint);color:var(--accent)}
+.qhead .tag.notin{background:var(--warnbg);color:var(--warn)}
+.qmarks{margin-left:auto;font:700 .85rem var(--ui);color:var(--muted)}
+.qtext{margin:0 0 6px;font-size:1.04rem}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px 18px;margin:16px 0}
+.field label{display:block;font:600 .78rem var(--ui);color:var(--muted);margin-bottom:4px}
+.field .row{display:flex;align-items:center;gap:8px}
+.field input{flex:1;min-width:0;font:1rem var(--mono);padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--opt);color:var(--ink)}
+.field input:focus,.answerbox:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--tint)}
+.field.ok input{border-color:var(--ok);background:var(--right)}
+.field.no input{border-color:var(--warn);background:var(--wrong)}
+.tick{width:20px;text-align:center;font:700 1.1rem var(--ui)}
+.field.ok .tick{color:var(--ok)} .field.no .tick{color:var(--warn)}
+.answerbox{display:block;width:100%;min-height:120px;margin:14px 0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+  background:var(--opt);color:var(--ink);font:.98rem/1.55 var(--serif);resize:vertical}
+.btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn.memo-btn{border-color:var(--accent2);color:var(--accent2)}
+.result{margin-left:auto;font:700 1.05rem var(--ui);color:var(--warn)}
+.result.full{color:var(--ok)}
+.memo{margin-top:16px;padding:12px 16px 14px;border-left:4px solid var(--ok);background:var(--okbg);border-radius:0 8px 8px 0}
+.memo h5{margin:10px 0 4px;font:700 .72rem var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ok)}
+.memo h5:first-child{margin-top:0}
+.memo ol{margin:0}
+.memo .tblwrap{margin-top:10px}
+.memo table{margin:0;background:var(--panel)}
+.memo .ascii{background:var(--panel);font-size:.82rem}
+.points{list-style:none;padding:0;margin:4px 0 0}
+.points li{margin:4px 0}
+.points label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:6px 8px;border-radius:6px;font:.93rem/1.45 var(--ui)}
+.points label:hover{background:var(--panel)}
+.points input{margin-top:3px;width:17px;height:17px;flex:none;accent-color:var(--ok)}
+.points .pm{margin-left:auto;color:var(--muted);font-size:.78rem;white-space:nowrap}
+.selfnote{font:.82rem var(--ui);color:var(--muted);margin:2px 0 6px}
+
+@media (min-width:1300px){ .wrap,header.top .inner{max-width:1280px} }
+@media (max-width:900px){
+  nav.toc .setbtns{flex-direction:row;overflow-x:auto;padding-bottom:4px}
+  .setbtn{flex:none;white-space:nowrap;border:1px solid var(--line)}
+  .qgrid{display:flex;overflow-x:auto;padding-bottom:4px}
+  .qgrid a{flex:0 0 40px;height:38px}
+  .howto{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  article.q{padding:18px 16px}
+  .fields{grid-template-columns:1fr}
+  .btns .btn{flex:1 1 auto}
+  .result{margin-left:0;width:100%}
+}
+@media print{ .btns,.howto,.answerbox{display:none!important} .memo{display:block!important} article.q{break-inside:avoid} }
+</style>
+</head>
+<body>
+<button class="themebtn" id="themebtn" type="button" aria-label="Switch theme"></button>
+<header class="top"><div class="inner">
+<a class="back" href="../">&larr; All modules</a>
+<h1>ICNF102 &mdash; Long Questions Practice</h1>
+<p class="sub">Every other long-question type from the practice papers: conversions, IPv6 and EUI-64, the TCP handshake, encapsulation, ping and traceroute scenarios, SLAAC and DHCPv6, configuration scenarios and switch security. Subnetting has its own page.</p>
+<div class="badges">
+<span class="badge"><b>Your marks:</b> <span id="score">none yet</span></span>
+<span class="badge"><b>Calculations</b> marked automatically</span>
+<span class="badge"><b>Explanations</b> marked by you against a memo</span>
+<a class="badge" href="../icnf102-subnet-exam/" style="text-decoration:none">Subnetting questions &rarr;</a>
+</div>
+</div></header>
+
+<div class="wrap"><div class="layout">
+  <nav class="toc" aria-label="Questions">
+    <h4>Question sets</h4>
+    <div class="setbtns" id="sets"></div>
+    <h4>Jump to</h4>
+    <div class="qgrid" id="qgrid"></div>
+    <button class="reset" id="resetAll" type="button">Clear all my answers</button>
+  </nav>
+  <main>
+    <section>
+      <h2>How to use this page</h2>
+      <div class="howto">
+        <div class="card"><h5>1. Answer first</h5>Do the calculation or write your explanation in the box before you look at anything.</div>
+        <div class="card"><h5>2. Mark it</h5>Calculations: press <b>Check my answers</b>. Explanations: open the memo and tick each point you made &mdash; one point is one mark.</div>
+        <div class="card"><h5>3. Learn the gaps</h5>The memo shows a model answer and, for calculations, the working step by step. Everything is saved in this browser.</div>
+      </div>
+      <div class="warnbox" style="margin-bottom:0"><b>Set H</b> (switch security and STP) was asked in a practice paper but isn't in your slides. Do it last.</div>
+    </section>
+    <div id="list"></div>
+  </main>
+</div></div>
+
+<script src="questions.js"></script>
+<script>
+(function(){
+  "use strict";
+  var Q = window.LQ || [];
+  var SETS = {
+    A:{n:"Set A — Binary and hex conversions", d:"Positional values, IP addresses in binary"},
+    B:{n:"Set B — IPv6 notation and EUI-64", d:"Compress, expand, build an interface ID"},
+    C:{n:"Set C — TCP, UDP and the handshake", d:"Sequence numbers, window size, reliability"},
+    D:{n:"Set D — Encapsulation and models", d:"PDUs, layers, communication rules"},
+    E:{n:"Set E — ICMP, ping and traceroute", d:"Troubleshooting scenarios and how traceroute works"},
+    F:{n:"Set F — IPv6 processes", d:"SLAAC, DHCPv6, address types, Neighbor Discovery"},
+    G:{n:"Set G — Configuration scenarios", d:"Router-on-a-stick, DHCP, NAT, RIPv2, device security"},
+    H:{n:"Set H — Switch security and STP", d:"Not in your slides, but asked in a practice paper"}
+  };
+  var KEY = "icnf_longq_v1", st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e) {} }
+  function S(id){ return st[id] || (st[id] = {v:{}, txt:"", checked:false, step:0, open:false, ticks:{}}); }
+  var filter = "all", $ = function(id){ return document.getElementById(id); };
+  function esc(s){ var d=document.createElement("div"); d.textContent=String(s); return d.innerHTML; }
+  function byId(id){ return Q.filter(function(x){return x.id===id;})[0]; }
+
+  /* ---- answer normalisers ---- */
+  function normIp(s){ if(!/^\d{1,3}(\.\d{1,3}){3}$/.test(s)) return null; var p=s.split(".").map(Number); return p.some(function(x){return x>255;})?null:p.join("."); }
+  function bits(s){ return /^[01]{1,8}$/.test(s) ? ("00000000"+s).slice(-8) : null; }
+  function v6expand(s){
+    if(!/^[0-9a-f:]+$/.test(s) || (s.match(/::/g)||[]).length>1) return null;
+    var parts; if(s.indexOf("::")>-1){ var a=s.split("::"), l=a[0]?a[0].split(":"):[], r=a[1]?a[1].split(":"):[];
+      if(l.length+r.length>7) return null; parts=l.concat(Array(8-l.length-r.length).fill("0"), r); }
+    else parts=s.split(":");
+    if(parts.length!==8 || parts.some(function(h){return !/^[0-9a-f]{1,4}$/.test(h);})) return null;
+    return parts.map(function(h){return ("0000"+h).slice(-4);}).join(":");
+  }
+  function norm(kind, raw){
+    var s = String(raw||"").trim().toLowerCase();
+    if(!s) return null;
+    if(kind==="word") return s.replace(/\s+/g," ");
+    s = s.replace(/\s+/g,"");
+    if(kind==="int"){ s=s.replace(/,/g,""); return /^\d+$/.test(s) ? String(parseInt(s,10)) : null; }
+    if(kind==="ip") return normIp(s);
+    if(kind==="bin8") return bits(s);
+    if(kind==="binip"){ var p=s.split("."); if(p.length!==4) return null; p=p.map(bits); return p.indexOf(null)>-1?null:p.join("."); }
+    if(kind==="v6c" || kind==="v6full") return s;                 /* must be written in exactly the right form */
+    if(kind==="v6") return v6expand(s);                           /* any correct way of writing it */
+    if(kind==="iid"){ var g=s.indexOf(":")>-1 ? s.split(":") : s.match(/.{1,4}/g)||[]; if(g.length!==4||g.some(function(h){return !/^[0-9a-f]{1,4}$/.test(h);})) return null;
+      return g.map(function(h){return ("0000"+h).slice(-4);}).join(":"); }
+    return s;
+  }
+  function isRight(f, raw){
+    var a = norm(f.k, raw); if(a===null) return false;
+    var targets = [f.a].concat(f.alt||[]);
+    return targets.some(function(t){ return a === norm(f.k, t); });
+  }
+  function autoMarks(q){ var s=S(q.id), g=0; q.fields.forEach(function(f,i){ if(isRight(f, s.v[i])) g+=f.m; }); return g; }
+  function tickMarks(q){ var s=S(q.id), g=0; q.points.forEach(function(p,i){ if(s.ticks[i]) g+=p.m; }); return g; }
+  function attempted(q){ var s=S(q.id); return s.checked || Object.keys(s.ticks).some(function(k){return s.ticks[k];}); }
+  function got(q){ var s=S(q.id); return (s.checked?autoMarks(q):0) + tickMarks(q); }
+
+  /* ---- render ---- */
+  function renderSets(){
+    var h = '<button class="setbtn" data-s="all" aria-pressed="'+(filter==="all")+'">All '+Q.length+' questions <small>'+Q.length+'</small></button>';
+    Object.keys(SETS).forEach(function(k){
+      var n = Q.filter(function(q){return q.set===k;}).length, t = SETS[k].n.split(" — ");
+      h += '<button class="setbtn" data-s="'+k+'" aria-pressed="'+(filter===k)+'">'+esc(t[0]+": "+t[1])+' <small>'+n+'</small></button>';
+    });
+    $("sets").innerHTML = h;
+    Array.prototype.forEach.call(document.querySelectorAll(".setbtn"), function(b){
+      b.onclick = function(){ filter=b.dataset.s; renderSets(); renderList(); window.scrollTo({top:0}); };
+    });
+  }
+  function renderGrid(){
+    var h="", tot=0, sum=0;
+    Q.forEach(function(q){
+      var cls="";
+      if(attempted(q)){ var g=got(q); tot+=q.marks; sum+=g; cls = g===q.marks ? "done" : "part"; }
+      h += '<a href="#q'+q.id+'" class="'+cls+'">'+q.id+'</a>';
+    });
+    $("qgrid").innerHTML = h;
+    $("score").textContent = tot ? sum+" / "+tot : "none yet";
+  }
+  function qHtml(q){
+    var s=S(q.id), h='<article class="q" id="q'+q.id+'">';
+    h += '<div class="qhead"><span class="unit">Question '+q.id+'</span><span class="tag'+(q.set==="H"?' notin':'')+'">'+(q.set==="H"?'Not in your notes':'Set '+q.set)+'</span>'
+       + '<span class="qmarks">['+q.marks+' marks]</span></div>';
+    h += '<p class="qtext">'+q.text+'</p>';
+    if(q.note) h += '<div class="tip">'+q.note+'</div>';
+    if(q.fields.length){
+      h += '<div class="fields">';
+      q.fields.forEach(function(f,i){
+        var cls = s.checked && s.v[i] ? (isRight(f, s.v[i]) ? " ok" : " no") : "";
+        h += '<div class="field'+cls+'"><label for="f'+q.id+'_'+i+'">'+esc(f.l)+' <span style="opacity:.7">('+f.m+')</span></label>'
+           + '<div class="row"><input id="f'+q.id+'_'+i+'" data-q="'+q.id+'" data-i="'+i+'" autocomplete="off" spellcheck="false" inputmode="'+(f.k==="int"||f.k==="bin8"?"numeric":"text")+'" value="'+esc(s.v[i]||"")+'">'
+           + '<span class="tick">'+(cls===" ok"?"✓":cls===" no"?"✗":"")+'</span></div></div>';
+      });
+      h += '</div>';
+    }
+    if(q.points.length) h += '<textarea class="answerbox" data-q="'+q.id+'" placeholder="Write your answer here (it’s saved). Then open the memo and tick each point you got.">'+esc(s.txt||"")+'</textarea>';
+    var shown = s.open ? q.steps.length : Math.min(s.step, q.steps.length);
+    h += '<div class="btns">';
+    if(q.fields.length) h += '<button class="btn pri" data-act="check" data-q="'+q.id+'">Check my answers</button>';
+    if(q.steps.length && !s.open) h += '<button class="btn memo-btn" data-act="step" data-q="'+q.id+'"'+(shown>=q.steps.length?' disabled':'')+'>Show next step</button>';
+    h += '<button class="btn'+(q.fields.length?'':' pri')+'" data-act="memo" data-q="'+q.id+'">'+(s.open?'Hide memo':(q.points.length?'Show memo &amp; mark myself':'Show full memo'))+'</button>'
+       + '<button class="btn" data-act="clear" data-q="'+q.id+'">Clear</button>';
+    if(attempted(q)){ var g=got(q); h += '<span class="result'+(g===q.marks?' full':'')+'">'+g+' / '+q.marks+'</span>'; }
+    h += '</div>';
+    if(shown || s.open){
+      h += '<div class="memo">';
+      if(shown){ h += '<h5>Working</h5><ol class="steps">'; for(var k=0;k<shown;k++) h += '<li>'+q.steps[k]+'</li>'; h += '</ol>'; }
+      if(s.open){
+        if(q.table){
+          h += '<div class="tblwrap"><table><thead><tr>'+q.table.head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>';
+          q.table.rows.forEach(function(r){ h += '<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join('')+'</tr>'; });
+          h += '</tbody></table></div>';
+        }
+        if(q.answer) h += '<h5>Model answer</h5>'+q.answer;
+        if(q.points.length){
+          h += '<h5>Marking memo</h5><p class="selfnote">Tick each point your answer covers. Be strict: it only counts if you said it clearly.</p><ul class="points">';
+          q.points.forEach(function(p,i){
+            h += '<li><label><input type="checkbox" data-tick="'+i+'" data-q="'+q.id+'"'+(s.ticks[i]?' checked':'')+'><span>'+p.t+'</span><span class="pm">'+p.m+' mark'+(p.m>1?'s':'')+'</span></label></li>';
+          });
+          h += '</ul>';
+        }
+      }
+      h += '</div>';
+    }
+    return h + '</article>';
+  }
+  function renderList(){
+    var h="", last="";
+    Q.forEach(function(q){
+      if(filter!=="all" && q.set!==filter) return;
+      if(q.set!==last){ last=q.set; h += '<div class="sethead"><b>'+esc(SETS[q.set].n)+'</b><span>'+esc(SETS[q.set].d)+'</span></div>'; }
+      h += qHtml(q);
+    });
+    $("list").innerHTML = h; renderGrid();
+  }
+  function rerender(id){ var el=$("q"+id), t=document.createElement("div"); t.innerHTML=qHtml(byId(id)); el.replaceWith(t.firstChild); renderGrid(); }
+
+  document.addEventListener("input", function(e){
+    var t=e.target; if(!t.dataset || !t.dataset.q || t.type==="checkbox") return;
+    var s=S(+t.dataset.q); if(t.classList.contains("answerbox")) s.txt=t.value; else s.v[t.dataset.i]=t.value; save();
+  });
+  document.addEventListener("change", function(e){
+    var t=e.target; if(t.type!=="checkbox" || !t.dataset.q) return;
+    var id=+t.dataset.q, s=S(id); s.ticks[t.dataset.tick]=t.checked; save();
+    var y=window.scrollY; rerender(id); window.scrollTo({top:y,behavior:"instant"});
+  });
+  document.addEventListener("click", function(e){
+    var b=e.target.closest("[data-act]"); if(!b) return;
+    var id=+b.dataset.q, q=byId(id), s=S(id);
+    if(b.dataset.act==="check") s.checked=true;
+    if(b.dataset.act==="step") s.step=Math.min(s.step+1, q.steps.length);
+    if(b.dataset.act==="memo"){ s.open=!s.open; if(!s.open) s.step=0; }
+    if(b.dataset.act==="clear") st[id]={v:{},txt:"",checked:false,step:0,open:false,ticks:{}};
+    save(); rerender(id);
+  });
+  $("resetAll").onclick = function(){ if(confirm("Clear every answer on this page?")){ st={}; save(); renderList(); } };
+  renderSets(); renderList();
+})();
+</script>
+<script src="../icnf102-shared/theme.js"></script>
+</body>
+</html>
