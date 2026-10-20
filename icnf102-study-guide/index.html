@@ -4,45 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ICNF102 Field Reference</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+<link rel="stylesheet" href="../icnf102-shared/theme.css">
 <link rel="stylesheet" href="style.css">
-<style>
-  :root{ color-scheme: light dark; }
-  html,body{ margin:0; }
-  img{ max-width:100%; }
-  [hidden]{ display:none !important; }
-</style>
 </head>
 <body>
-<div class="titleblock">
-  <div class="tb-row tb-top">
-    <div class="tb-mark" aria-hidden="true">
-      <svg viewBox="0 0 40 40" width="30" height="30"><path d="M4 20h9M27 20h9M13 20a7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7z" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
-    </div>
-    <div class="tb-id">
-      <span class="tb-doc">DOC ICNF102-SG</span>
-      <span class="tb-title">Communication Network Fundamentals — Field Reference</span>
-    </div>
-    <div class="tb-sp"></div>
-    <div class="searchwrap">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="find a term…" autocomplete="off" aria-label="Filter the guide by keyword">
-    </div>
-    <button class="themebtn" id="themebtn" aria-label="Switch theme" title="Switch theme">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-    </button>
-    <button class="sheetbtn" id="menubtn" aria-expanded="false" aria-controls="toc">Sheet index</button>
-  </div>
-  <div class="tb-row tb-meta">
-    <span><b>REV</b> 2026.C</span><span><b>SCOPE</b> NQF 6 · 15 credits</span><span><b>SHEETS</b> 21 + reference</span>
-    <span class="tb-legend" aria-hidden="true">
-      <i data-w="orange"></i>Foundations &amp; L1–2<i data-w="green"></i>Layer 3<i data-w="blue"></i>L4–7 &amp; Services<i data-w="brown"></i>Practice
-    </span>
-  </div>
+<button class="themebtn" id="themebtn" type="button" aria-label="Switch theme"></button>
+<header class="top"><div class="inner">
+<a class="back" href="../">&larr; All modules</a>
+<h1>ICNF102 &mdash; Field Reference</h1>
+<p class="sub">Communication Network Fundamentals: 21 sheets from the rules of communication to a working router-on-a-stick, built from the course slide decks, the Packet Tracer labs and the 2026 study guide. Every sheet ends in a self-test.</p>
+<div class="badges">
+<span class="badge"><b>TM1</b> Theory 40%</span><span class="badge"><b>TM2</b> Practical 35%</span><span class="badge"><b>TM3</b> Case study 15%</span><span class="badge"><b>TM4</b> Weekly 10%</span><span class="badge"><b>Final</b> Course 40% + Exam 60%</span>
 </div>
-
-<div class="shell">
+<div class="tools">
+<input id="q" type="search" placeholder="Find a term&hellip;" autocomplete="off" aria-label="Filter the guide by keyword">
+<button class="badge sheetbtn" id="menubtn" type="button" aria-expanded="false" aria-controls="toc">Sheet index</button>
+</div>
+</div></header>
+<div class="wrap"><div class="layout">
 <nav class="toc" id="toc" aria-label="Sheet index">
   <div class="grp">Foundations</div>
   <a href="#m1" data-w="orange"><span class="n">01</span>Communication &amp; Rules</a>
@@ -76,17 +58,13 @@
 </nav>
 
 <main>
-<div class="hero">
-  <div class="hero-num" aria-hidden="true">SHEET 00</div>
-  <h1>Everything ICNF102 asks you to know, in the order it teaches it.</h1>
-  <p>Twenty-one sheets from the rules of communication to a working router-on-a-stick, drawn from the course slide decks, Packet Tracer labs and the 2026 study guide. Every sheet ends in a self-test you can answer before you look.</p>
-  <div class="facts">
-    <span>TM1 Theory 40%</span><span>TM2 Practical 35%</span><span>TM3 Case Study 15%</span><span>TM4 Weekly 10%</span><span>Course mark 40% + Exam 60%</span>
-  </div>
-</div>
+<section id="start">
+<h2>Everything ICNF102 asks you to know, in the order it teaches it</h2>
+<p class="lede">Twenty-one sheets from the rules of communication to a working router-on-a-stick. Each sheet ends in a self-test you can answer before you look &mdash; use the contents on the left (or <b>Sheet index</b> on a phone) to jump around, and the search box to filter by a term.</p>
+</section>
 
 <section id="m1" data-w="orange">
-<h2 data-sheet="01"><span class="num">01</span>Communication &amp; the Rules</h2>
+<h2 data-sheet="01"><span class="unit">Sheet 01</span>Communication &amp; the Rules</h2>
 <p class="lead">Before any protocol, three things must exist and a set of rules must govern them. Nearly every "why" answer later in the course traces back to one of the rules below.</p>
 
 <h3>The three elements of every communication</h3>
@@ -170,7 +148,7 @@
 </tbody></table>
 </div>
 
-<details class="st"><summary>Self-test — Module 01</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 01</summary><div class="body">
 <ol>
 <li>Which timing rule decides <i>when</i> a device may transmit?<span class="a">Access method.</span></li>
 <li>A protocol that tries to stop collisions happening at all is described as what?<span class="a">Proactive (CSMA/CA); a reactive protocol like CSMA/CD recovers after the collision.</span></li>
@@ -181,7 +159,7 @@
 </div></details>
 </section>
 <section id="m2" data-w="orange">
-<h2 data-sheet="02"><span class="num">02</span>Reference Models &amp; Encapsulation</h2>
+<h2 data-sheet="02"><span class="unit">Sheet 02</span>Reference Models &amp; Encapsulation</h2>
 <p class="lead">Two layered models, one encapsulation process, and the PDU names that go with it. Expect to be asked which layer a protocol lives at, and what the data is called at that point.</p>
 
 <h3>Why layer at all</h3>
@@ -268,7 +246,7 @@
 <p><b>Same network:</b> destination MAC = the MAC of the destination device.</p>
 <p><b>Remote network:</b> destination MAC = the MAC of the <b>default gateway</b> (nearest router interface). The router strips the Layer 2 information and adds new data link information before forwarding out the exit interface. The <b>IP addresses never change</b>.</p></div>
 
-<details class="st"><summary>Self-test — Module 02</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 02</summary><div class="body">
 <ol>
 <li>Which OSI layer handles compression and encryption?<span class="a">Presentation (layer 6).</span></li>
 <li>Name the PDUs in order, top of the stack to the wire.<span class="a">Data → Segment → Packet → Frame → Bits.</span></li>
@@ -280,7 +258,7 @@
 </section>
 
 <section id="m3" data-w="orange">
-<h2 data-sheet="03"><span class="num">03</span>Physical Layer &amp; Media</h2>
+<h2 data-sheet="03"><span class="unit">Sheet 03</span>Physical Layer &amp; Media</h2>
 <p class="lead">Layer 1 accepts a complete frame from the data link layer and encodes it as signals on the local media. Three media forms, three copper impairments, and a bandwidth/throughput/goodput distinction that gets asked almost every year.</p>
 
 <h3>What the physical layer does</h3>
@@ -381,7 +359,7 @@
 </div>
 <p><b>A wireless LAN needs:</b> a <b>wireless access point</b> (concentrates the wireless signals and connects to the existing copper infrastructure) and <b>wireless NIC adapters</b> in each host. Home and small-business wireless routers integrate <b>router + switch + access point</b> in one device.</p>
 
-<details class="st"><summary>Self-test — Module 03</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 03</summary><div class="body">
 <ol>
 <li>Bits travel at the speed of electricity on both a 10 Mb/s and a 100 Mb/s link. What actually differs?<span class="a">The number of bits transmitted per second — bandwidth is capacity, not speed.</span></li>
 <li>Throughput minus session, acknowledgement and encapsulation overhead is called what?<span class="a">Goodput.</span></li>
@@ -393,7 +371,7 @@
 </div></details>
 </section>
 <section id="m4" data-w="orange">
-<h2 data-sheet="04"><span class="num">04</span>Data Link Layer &amp; Ethernet</h2>
+<h2 data-sheet="04"><span class="unit">Sheet 04</span>Data Link Layer &amp; Ethernet</h2>
 <p class="lead">Layer 2 prepares network data for the physical network. Two sublayers, two duplex modes, two access methods, one frame you must know field by field.</p>
 
 <h3>The two sublayers</h3>
@@ -473,7 +451,7 @@
 </tbody></table>
 </div>
 
-<details class="st"><summary>Self-test — Module 04</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 04</summary><div class="body">
 <ol>
 <li>Which sublayer talks to the network layer, and which to the hardware?<span class="a">LLC talks to the network layer; MAC handles the hardware/media.</span></li>
 <li>Give the minimum and maximum valid Ethernet frame size, and the name for one below the minimum.<span class="a">64 to 1518 bytes; below 64 it is a collision fragment or runt frame.</span></li>
@@ -486,7 +464,7 @@
 </section>
 
 <section id="m5" data-w="orange">
-<h2 data-sheet="05"><span class="num">05</span>LAN Switching</h2>
+<h2 data-sheet="05"><span class="unit">Sheet 05</span>LAN Switching</h2>
 <p class="lead">A Layer 2 switch makes forwarding decisions using <b>only</b> the Layer 2 MAC addresses. How it learns them, how it forwards, and the three forwarding methods.</p>
 
 <h3>The MAC address table</h3>
@@ -532,7 +510,7 @@
 <h3>Auto-MDIX</h3>
 <p>Connections between specific device types — switch-to-switch, switch-to-router, switch-to-host, router-to-host — once required a specific <b>crossover</b> or <b>straight-through</b> cable. <span class="dfn">Auto-MDIX</span> (automatic medium-dependent interface crossover) lets the switch <b>detect the cable type and configure the interface accordingly</b>. Enabled by default since IOS 12.2(18)SE; the command is <code>mdix auto</code> in interface configuration mode.</p>
 
-<details class="st"><summary>Self-test — Module 05</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 05</summary><div class="body">
 <ol>
 <li>Which MAC address does a switch learn from, and which does it forward on?<span class="a">It learns from the source MAC and forwards using the destination MAC.</span></li>
 <li>A frame's destination MAC is not in the table. What happens, and what is this called?<span class="a">It is flooded out all ports except the incoming one — an unknown unicast.</span></li>
@@ -544,7 +522,7 @@
 </section>
 
 <section id="m6" data-w="green">
-<h2 data-sheet="06"><span class="num">06</span>Network Layer &amp; the IP Packet</h2>
+<h2 data-sheet="06"><span class="unit">Sheet 06</span>Network Layer &amp; the IP Packet</h2>
 <p class="lead">Four operations, three characteristics of IP, two packet headers, and how a host decides whether a destination is local or remote.</p>
 
 <h3>Four basic operations of the network layer</h3>
@@ -665,7 +643,7 @@
 </div>
 <div class="box exam"><span class="tag">Exam focus</span><p>The router uses the <b>longest subnet mask / prefix match</b>: the route with the greatest number of matching far-left bits against the destination IP is always the preferred route. A routing table entry also carries the <b>route source</b>, <b>destination network</b>, <b>administrative distance</b>, <b>metric</b>, <b>next-hop</b>, <b>route timestamp</b> and <b>outgoing interface</b>.</p></div>
 
-<details class="st"><summary>Self-test — Module 06</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 06</summary><div class="body">
 <ol>
 <li>List the three characteristics of IP.<span class="a">Connectionless, best effort, media independent.</span></li>
 <li>Which IPv4 field does Hop Limit replace, and which three IPv4 fields were removed in IPv6?<span class="a">Hop Limit replaces TTL; Flags, Fragment Offset and Header Checksum were removed.</span></li>
@@ -678,7 +656,7 @@
 </section>
 
 <section id="m7" data-w="green">
-<h2 data-sheet="07"><span class="num">07</span>Address Resolution — ARP &amp; ND</h2>
+<h2 data-sheet="07"><span class="unit">Sheet 07</span>Address Resolution — ARP &amp; ND</h2>
 <p class="lead">A device knows an IP address and needs the MAC address that goes with it. IPv4 uses ARP; IPv6 does <b>not</b> use ARP at all.</p>
 
 <h3>The two addresses on every Ethernet host</h3>
@@ -739,7 +717,7 @@ Interface: 192.168.1.124 --- 0x10
 </div>
 <div class="box key"><span class="tag">Mapping it across</span><p>ARP request ≈ <b>Neighbor Solicitation</b>. ARP reply ≈ <b>Neighbor Advertisement</b>. NS/NA are <b>device-to-device</b>; RS/RA are <b>device-to-router</b>.</p></div>
 
-<details class="st"><summary>Self-test — Module 07</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 07</summary><div class="body">
 <ol>
 <li>A host sends to 8.8.8.8. Whose MAC goes in the destination field of the frame?<span class="a">The default gateway's MAC — the destination is on a remote network.</span></li>
 <li>Which two ND messages replace the ARP request and reply?<span class="a">Neighbor Solicitation and Neighbor Advertisement.</span></li>
@@ -750,7 +728,7 @@ Interface: 192.168.1.124 --- 0x10
 </div></details>
 </section>
 <section id="m8" data-w="green">
-<h2 data-sheet="08"><span class="num">08</span>IPv4 Addressing</h2>
+<h2 data-sheet="08"><span class="unit">Sheet 08</span>IPv4 Addressing</h2>
 <p class="lead">Private ranges, special-use addresses, the legacy classes and why CIDR replaced them. These are pure recall marks — learn the numbers exactly.</p>
 
 <h3>Private addresses — RFC 1918</h3>
@@ -830,7 +808,7 @@ Interface: 192.168.1.124 --- 0x10
 </div>
 <p><code>ping</code> uses ICMP <b>echo (Type 8)</b> and <b>echo reply (Type 0)</b>. A Windows ping sends <b>four</b> messages; the IOS ping sends <b>five</b>. <b>Extended ping</b> is entered in privileged EXEC mode by typing <code>ping</code> with <b>no destination address</b>, which then prompts for parameters; the same applies to <b>extended traceroute</b>. In Windows, <b>Ctrl-C</b> interrupts a <code>tracert</code>.</p>
 
-<details class="st"><summary>Self-test — Module 08</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 08</summary><div class="body">
 <ol>
 <li>Give the three private ranges with prefixes, exactly.<span class="a">10.0.0.0/8, 172.16.0.0/12 (to 172.31.255.255), 192.168.0.0/16.</span></li>
 <li>A PC has 169.254.12.9. What has gone wrong?<span class="a">It could not reach a DHCP server, so it self-configured an APIPA link-local address.</span></li>
@@ -843,7 +821,7 @@ Interface: 192.168.1.124 --- 0x10
 </section>
 
 <section id="m9" data-w="green">
-<h2 data-sheet="09"><span class="num">09</span>IPv6 Addressing</h2>
+<h2 data-sheet="09"><span class="unit">Sheet 09</span>IPv6 Addressing</h2>
 <p class="lead">128 bits written as eight hextets, two compression rules, three address types, and the SLAAC/DHCPv6 decision tree. Compression questions are almost guaranteed marks if you apply the rules mechanically.</p>
 
 <h3>Migration and coexistence — three techniques</h3>
@@ -951,7 +929,7 @@ Interface: 192.168.1.124 --- 0x10
 <p>DAD is arguably unnecessary — a 64-bit interface ID gives 18 quintillion possibilities — but the <b>IETF recommends it</b>, so most operating systems perform DAD on <b>all</b> IPv6 unicast addresses regardless of how they were configured.</p>
 <p><b>Key multicast addresses:</b> <code>ff02::1</code> = all-nodes, <code>ff02::2</code> = all-routers.</p>
 
-<details class="st"><summary>Self-test — Module 09</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 09</summary><div class="body">
 <ol>
 <li>Compress <code>2001:0db8:0000:0000:00ab:0000:0000:1234</code>.<span class="a">2001:db8::ab:0:0:1234 — :: takes the first (leading) run of two zero hextets, and it can only be used once, so the later run compresses to 0:0 by rule 1. (Either run is a legal choice of length 2; the first is conventional.)</span></li>
 <li>Which prefix is a link-local address? A global unicast?<span class="a">FE80::/10 link-local; 2000::/3 global unicast.</span></li>
@@ -964,7 +942,7 @@ Interface: 192.168.1.124 --- 0x10
 </section>
 
 <section id="m10" data-w="green">
-<h2 data-sheet="10"><span class="num">10</span>Subnetting</h2>
+<h2 data-sheet="10"><span class="unit">Sheet 10</span>Subnetting</h2>
 <p class="lead">The method from the "Subnetting Made Easy" deck, applied step by step to two worked examples. Learn the procedure, not the answers — the exam changes the numbers.</p>
 
 <h3>Step 0 — the powers of 2 table</h3>
@@ -1042,7 +1020,7 @@ Interface: 192.168.1.124 --- 0x10
 </tbody></table>
 </div>
 
-<details class="st"><summary>Self-test — Module 10</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 10</summary><div class="body">
 <ol>
 <li>You need 100 hosts per subnet from a /24. What prefix, mask and increment?<span class="a">2⁷−2 = 126 ≥ 100, so keep 7 host bits → /25, 255.255.255.128, increment 128.</span></li>
 <li>Subnet 10.0.0.0/8 for 4000 hosts each. Prefix and increment?<span class="a">2¹²−2 = 4094 ≥ 4000 → 12 host bits → /20 (255.255.240.0). Network bits end in the 3rd octet with 4 host bits there, so increment 16 in the 3rd octet.</span></li>
@@ -1054,7 +1032,7 @@ Interface: 192.168.1.124 --- 0x10
 </section>
 
 <section id="m11" data-w="green">
-<h2 data-sheet="11"><span class="num">11</span>VLSM</h2>
+<h2 data-sheet="11"><span class="unit">Sheet 11</span>VLSM</h2>
 <p class="lead">VLSM is simply taking one of your existing subnets and subnetting it further using the same technique. The discipline is the ordering: <b>largest requirement first</b>.</p>
 
 <h3>The rule</h3>
@@ -1091,7 +1069,7 @@ Interface: 192.168.1.124 --- 0x10
 </ul>
 <div class="box exam"><span class="tag">Exam focus — the /30 and the /31 trap</span><p>A point-to-point serial or router-to-router link needs <b>two</b> usable addresses, which means a <b>/30 (255.255.255.252)</b> — four addresses total, minus network and broadcast. Students who reason "two hosts, so 2¹ = 2, so /31" lose the mark: 2¹ − 2 = <b>0</b> usable hosts. Always run the −2.</p></div>
 
-<details class="st"><summary>Self-test — Module 11</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 11</summary><div class="body">
 <ol>
 <li>Requirements are 12, 100, 28 and 2 hosts from 192.168.5.0/24. In what order do you allocate, and what are the four prefixes?<span class="a">100 first (/25), then 28 (/27), then 12 (/28), then 2 (/30).</span></li>
 <li>Complete that allocation.<span class="a">192.168.5.0/25 (100 hosts), 192.168.5.128/27 (28), 192.168.5.160/28 (12), 192.168.5.176/30 (2).</span></li>
@@ -1102,7 +1080,7 @@ Interface: 192.168.1.124 --- 0x10
 </div></details>
 </section>
 <section id="m12" data-w="blue">
-<h2 data-sheet="12"><span class="num">12</span>Transport Layer</h2>
+<h2 data-sheet="12"><span class="unit">Sheet 12</span>Transport Layer</h2>
 <p class="lead">The link between the application layer and the lower layers responsible for network transmission. TCP versus UDP, port numbers, the three-way handshake, and how reliability and flow control actually work.</p>
 
 <h3>Responsibilities</h3>
@@ -1289,7 +1267,7 @@ Active Connections
   <li><b>Client processes</b> — the client <b>dynamically selects</b> a port number from the private range as its source port; the destination is usually the well-known port of the server process. The <b>same pair of ports is used in all datagrams</b> of that transaction.</li>
 </ul>
 
-<details class="st"><summary>Self-test — Module 12</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 12</summary><div class="body">
 <ol>
 <li>How many bytes is a UDP header, and how many fields?<span class="a">8 bytes (64 bits), four fields: source port, destination port, length, checksum.</span></li>
 <li>Why is DNS mostly UDP but listed as both UDP and TCP on port 53?<span class="a">It is a simple request-and-reply application with minimal data where retransmission is quick, which suits UDP; TCP is used for larger transfers such as zone transfers.</span></li>
@@ -1303,7 +1281,7 @@ Active Connections
 </section>
 
 <section id="m13" data-w="blue">
-<h2 data-sheet="13"><span class="num">13</span>Application Layer</h2>
+<h2 data-sheet="13"><span class="unit">Sheet 13</span>Application Layer</h2>
 <p class="lead">The interface between applications and the network. The top three OSI layers, two network models, and the protocols that carry the web, email, names, addresses and files.</p>
 
 <h3>The upper three layers</h3>
@@ -1393,7 +1371,7 @@ Active Connections
 </tbody></table>
 </div>
 
-<details class="st"><summary>Self-test — Module 13</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 13</summary><div class="body">
 <ol>
 <li>Which OSI layer compresses and encrypts, and which restarts a disrupted dialog?<span class="a">Presentation compresses and encrypts; Session restarts disrupted or idle dialogs.</span></li>
 <li>In a P2P network, when is a peer a client and when a server?<span class="a">Roles are set on a per-request basis — it can be both, even simultaneously for different transactions.</span></li>
@@ -1406,7 +1384,7 @@ Active Connections
 </div></details>
 </section>
 <section id="m14" data-w="blue">
-<h2 data-sheet="14"><span class="num">14</span>DHCPv4</h2>
+<h2 data-sheet="14"><span class="unit">Sheet 14</span>DHCPv4</h2>
 <p class="lead">Four messages to get a lease, two to renew, and a router configuration you will be asked to reproduce from memory in the practical test.</p>
 
 <h3>Concepts</h3>
@@ -1492,7 +1470,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 <span class="p">R2#</span> <b>show ip interface brief</b>   <i>! confirm the DHCP-allocated address</i></pre>
 <p>Home routers are typically already set to <b>"Automatic Configuration – DHCP"</b> on the WAN page, so customers can plug in and connect.</p>
 
-<details class="st"><summary>Self-test — Module 14</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 14</summary><div class="body">
 <ol>
 <li>Name the four lease-acquisition messages in order.<span class="a">DHCPDISCOVER, DHCPOFFER, DHCPREQUEST, DHCPACK.</span></li>
 <li>Which two messages renew a lease, and is the first unicast or broadcast?<span class="a">DHCPREQUEST then DHCPACK; the renewal DHCPREQUEST is unicast directly to the original server.</span></li>
@@ -1505,7 +1483,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </section>
 
 <section id="m15" data-w="blue">
-<h2 data-sheet="15"><span class="num">15</span>NAT</h2>
+<h2 data-sheet="15"><span class="unit">Sheet 15</span>NAT</h2>
 <p class="lead">Three types, six terms, five advantages and five disadvantages, and the configuration for each type. NAT is configured at the <b>border router</b>.</p>
 
 <h3>What NAT is</h3>
@@ -1589,7 +1567,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </div>
 <div class="box exam"><span class="tag">Exam focus — the static NAT lab's lesson</span><p>In lab 6.4.5, before NAT is configured, packets from outside to the server's <b>private</b> address 172.16.16.1 <b>never leave the internet cloud</b> — private addresses are not routable on the internet. After <code>ip nat inside source static 172.16.16.1 64.100.50.1</code>, outside hosts reach the server at its <b>public</b> address instead. A ping to the router's own public interface succeeded even before NAT, because that address was already public — don't take that as evidence NAT was working.</p></div>
 
-<details class="st"><summary>Self-test — Module 15</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 15</summary><div class="body">
 <ol>
 <li>Which NAT type gives a one-to-one permanent mapping, and which gives many-to-one?<span class="a">Static NAT is one-to-one and permanent; PAT (NAT overload) is many-to-one.</span></li>
 <li>What happens under dynamic NAT when the pool is exhausted?<span class="a">Further inside devices cannot communicate with any external network until an address is released.</span></li>
@@ -1602,7 +1580,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </section>
 
 <section id="m16" data-w="blue">
-<h2 data-sheet="16"><span class="num">16</span>VLANs</h2>
+<h2 data-sheet="16"><span class="unit">Sheet 16</span>VLANs</h2>
 <p class="lead">A VLAN is a <b>logical partition of a Layer 2 network</b>. Segmentation, trunking, the four VLAN types, and the three inter-VLAN routing options.</p>
 
 <h3>Definition and behaviour</h3>
@@ -1678,7 +1656,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 <span class="p">B1(config-subif)#</span> <b>ip address</b> 172.16.20.254 255.255.255.0</pre>
 <div class="box trap"><span class="tag">Classic trap</span><p>Three things students forget on router-on-a-stick: the <b>physical</b> interface must be brought up with <code>no shutdown</code> (but gets <b>no IP address</b>); each sub-interface needs <code>encapsulation dot1Q <i>vlan-id</i></code> <b>before</b> its IP address; and the switch-side port must be <b>a trunk, not an access port</b>. The sub-interface address becomes the <b>PCs' default gateway</b>.</p></div>
 
-<details class="st"><summary>Self-test — Module 16</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 16</summary><div class="body">
 <ol>
 <li>How many broadcast domains do five VLANs create?<span class="a">Five — each VLAN is its own broadcast domain.</span></li>
 <li>What is a trunk, and which VLAN is it associated with?<span class="a">A point-to-point link carrying more than one VLAN; trunk ports are not associated with any VLAN.</span></li>
@@ -1692,7 +1670,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </section>
 
 <section id="m17" data-w="blue">
-<h2 data-sheet="17"><span class="num">17</span>Routing Concepts</h2>
+<h2 data-sheet="17"><span class="unit">Sheet 17</span>Routing Concepts</h2>
 <p class="lead">Static versus dynamic, what a routing table entry actually contains, and the two tie-breakers: administrative distance and metric.</p>
 
 <h3>Static routing</h3>
@@ -1755,7 +1733,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 <h3>IPv6 routing tables</h3>
 <p>Displayed with <code>show ipv6 route</code>. An IPv6 routing table includes directly connected, static and dynamically learned routes, with the same field set: route source (<b>C</b> directly connected, <b>L</b> local, <b>S</b> static, <b>R</b> RIP, <b>O</b> OSPF, <b>D</b> EIGRP), administrative distance, metric, next hop and outgoing interface.</p>
 
-<details class="st"><summary>Self-test — Module 17</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 17</summary><div class="body">
 <ol>
 <li>Four things dynamic routing does automatically?<span class="a">Discovers remote networks, maintains up-to-date information, chooses the best path, and finds a new best path after a topology change.</span></li>
 <li>Where are routing data structures kept?<span class="a">In RAM.</span></li>
@@ -1768,7 +1746,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </section>
 
 <section id="m18" data-w="blue">
-<h2 data-sheet="18"><span class="num">18</span>RIPv2</h2>
+<h2 data-sheet="18"><span class="unit">Sheet 18</span>RIPv2</h2>
 <p class="lead">The four facts about RIPv2, and the six commands that appear in both the lab and the case study.</p>
 
 <h3>The four facts</h3>
@@ -1816,7 +1794,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </div>
 <div class="box key"><span class="tag">Best route = longest match</span><p>Worth repeating here because it is the routing table's fundamental rule: the best match is the route with the <b>most far-left matching bits</b> against the destination IPv4 address. The route with the <b>longest match is always preferred</b>.</p></div>
 
-<details class="st"><summary>Self-test — Module 18</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 18</summary><div class="body">
 <ol>
 <li>RIPv2's metric, administrative distance and update interval?<span class="a">Hop count; AD 120; updates every 30 seconds.</span></li>
 <li>Why must you type <code>no auto-summary</code> in a VLSM design?<span class="a">RIPv2 automatically summarises at classful boundaries, which destroys VLSM subnet information.</span></li>
@@ -1828,7 +1806,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </div></details>
 </section>
 <section id="m19" data-w="brown">
-<h2 data-sheet="19"><span class="num">19</span>Small Networks, Security &amp; Troubleshooting</h2>
+<h2 data-sheet="19"><span class="unit">Sheet 19</span>Small Networks, Security &amp; Troubleshooting</h2>
 <p class="lead">Device selection, scaling, verification tools, the attack taxonomy and the six-step troubleshooting method. This module is where the theory test harvests easy marks.</p>
 
 <h3>Designing a small network</h3>
@@ -1971,7 +1949,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 <li><b>Document findings, actions and outcomes.</b> Very important for future reference.</li>
 </ol>
 
-<details class="st"><summary>Self-test — Module 19</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 19</summary><div class="body">
 <ol>
 <li>Which malware needs no host program and no human help to spread?<span class="a">A worm.</span></li>
 <li>Which malware must spread through user interaction and does not infect other files?<span class="a">A Trojan horse.</span></li>
@@ -1986,7 +1964,7 @@ IP address       Client-ID/Hardware address   Lease expiration   Type
 </section>
 
 <section id="m20" data-w="brown">
-<h2 data-sheet="20"><span class="num">20</span>IOS Configuration Essentials</h2>
+<h2 data-sheet="20"><span class="unit">Sheet 20</span>IOS Configuration Essentials</h2>
 <p class="lead">The initial-settings sequence from the switch and router labs, reproduced in full. In the practical test this is muscle memory — and the order matters.</p>
 
 <h3>The command modes</h3>
@@ -2079,7 +2057,7 @@ Building configuration...
 <span class="p">R1#</span> <b>copy startup-config flash</b></pre>
 <div class="box key"><span class="tag">Two things that catch everyone</span><p><b>1.</b> A router interface will not come up without <code>no shutdown</code>, and a directly connected route will not appear in the routing table until the interface is <b>up and addressed</b>. <b>2.</b> A switch uses <code>ip default-gateway</code> (global), not a route — it is a Layer 2 device with one management IP on an SVI.</p></div>
 
-<details class="st"><summary>Self-test — Module 20</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 20</summary><div class="body">
 <ol>
 <li>You set a console password but are never prompted for it. What did you omit?<span class="a">The login command under line console 0.</span></li>
 <li>Both <code>enable password</code> and <code>enable secret</code> are set. Which do you type?<span class="a">The enable secret — it overrides the enable password.</span></li>
@@ -2092,7 +2070,7 @@ Building configuration...
 </section>
 
 <section id="m21" data-w="brown">
-<h2 data-sheet="21"><span class="num">21</span>Case Study Walkthrough</h2>
+<h2 data-sheet="21"><span class="unit">Sheet 21</span>Case Study Walkthrough</h2>
 <p class="lead">The TM3 case study assembles almost everything in this guide into one build: addressing, VLANs, router-on-a-stick, RIPv2 and a redistributed default route. Here is the reasoning behind each requirement.</p>
 
 <h3>The topology and addressing logic</h3>
@@ -2190,7 +2168,7 @@ Building configuration...
 <li>Ping <b>1.1.1.1</b> from each PC. Failure here with everything else working points squarely at <code>default-information originate</code>.</li>
 </ol>
 
-<details class="st"><summary>Self-test — Module 21</summary><div class="body">
+<details class="wex q st"><summary>Self-test — Module 21</summary><div class="body">
 <ol>
 <li>PC3 is on 172.16.30.0/28. What is its gateway and why?<span class="a">172.16.30.14 — the last usable address (range .1–.14, broadcast .15), per the case study's convention.</span></li>
 <li>Why is 200.0.0.0 excluded from RIP on HQ?<span class="a">The brief excludes the ISP link; internal routers reach the internet via the redistributed default route instead.</span></li>
@@ -2202,7 +2180,7 @@ Building configuration...
 </div></details>
 </section>
 <section id="ref" data-w="brown">
-<h2 data-sheet="↘"><span class="num">↘</span>Reference — Tables &amp; Cheat Sheets</h2>
+<h2 data-sheet="↘"><span class="unit">Sheet ↘</span>Reference — Tables &amp; Cheat Sheets</h2>
 <p class="lead">The lookup tables worth knowing cold, in one place. If you memorise nothing else, memorise this section.</p>
 
 <h3>Subnet mask reference</h3>
@@ -2410,36 +2388,16 @@ Building configuration...
 </ol>
 </section>
 </main>
-</div>
+</div></div>
 
-<div class="footer">
+<footer class="foot">
   <span><b>ICNF102-SG</b> field reference</span>
   <span>Drawn from the 2026 study guide, ITN v7 modules 3, 8, 9, 14, 15, 17, SRWE modules 7–9, and the Packet Tracer labs</span>
   <span>Nelson Mandela University · School of Information Technology</span>
-</div>
+</footer>
 
 <script>
-(function(){
-  var themeBtn = document.getElementById('themebtn');
-  var THEME_KEY = 'icnf_sg_theme';
-  function applyTheme(t){
-    if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); }
-    else { document.documentElement.removeAttribute('data-theme'); }
-  }
-  function currentTheme(){
-    try{ return localStorage.getItem(THEME_KEY) || 'auto'; }catch(e){ return 'auto'; }
-  }
-  var theme = currentTheme();
-  applyTheme(theme);
-  themeBtn.addEventListener('click', function(){
-    var order = ['auto','light','dark'];
-    theme = order[(order.indexOf(theme)+1) % order.length];
-    applyTheme(theme);
-    try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
-    themeBtn.title = 'Theme: ' + theme;
-  });
-  themeBtn.title = 'Theme: ' + theme;
-})();
+
 (function(){
   var toc = document.getElementById('toc');
   var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
@@ -2526,5 +2484,6 @@ Building configuration...
 })();
 </script>
 
+<script src="../icnf102-shared/theme.js"></script>
 </body>
 </html>

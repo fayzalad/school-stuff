@@ -7,163 +7,85 @@
 <script>
 (function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
 </script>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Red+Hat+Mono:wght@400;500;600&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="../icnf102-shared/theme.css">
 <style>
-:root{
-  color-scheme:light;
-  --paper:#FBF8F1; --sheet:#FFFEFA; --sheet2:#F5F1E6; --ink:#1E1B16; --ink2:#55503F; --ink3:#8A8470;
-  --rule:#E4DCC6; --rule2:#CFC4A6; --margin:#E8A9A0;
-  --pen:#C0321F; --pensoft:#FBE7E2; --ok:#1F7A45; --oksoft:#E3F2E7; --blue:#264E8F; --bluesoft:#E7EEF8;
-  --code:#F1ECDF;
-  --f-text:"Literata",Georgia,serif; --f-mono:"Red Hat Mono",ui-monospace,Consolas,monospace; --f-pen:"Kalam",cursive;
-}
-@media screen{
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      color-scheme:dark;
-      --paper:#15140F; --sheet:#1C1A14; --sheet2:#24211A; --ink:#ECE6D6; --ink2:#BEB6A0; --ink3:#857E6A;
-      --rule:#333024; --rule2:#45402F; --margin:#6B2E26;
-      --pen:#F07A62; --pensoft:#3A1E18; --ok:#6CCB8E; --oksoft:#16281C; --blue:#8FB2EA; --bluesoft:#1A2333; --code:#26231B;
-    }
-  }
-  :root[data-theme="dark"]{
-    color-scheme:dark;
-    --paper:#15140F; --sheet:#1C1A14; --sheet2:#24211A; --ink:#ECE6D6; --ink2:#BEB6A0; --ink3:#857E6A;
-    --rule:#333024; --rule2:#45402F; --margin:#6B2E26;
-    --pen:#F07A62; --pensoft:#3A1E18; --ok:#6CCB8E; --oksoft:#16281C; --blue:#8FB2EA; --bluesoft:#1A2333; --code:#26231B;
-  }
-}
-*{box-sizing:border-box}
-html,body{margin:0}
-[hidden]{display:none!important}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-code{font-family:var(--f-mono);font-size:.86em;background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
-code b{color:var(--pen)}
-button{font:inherit;cursor:pointer}
+/* page pieces on top of ../icnf102-shared/theme.css (STAV look) */
+nav.toc .setbtns{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}
+.setbtn{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;border:0;background:none;
+  color:var(--ink);padding:6px 8px;border-radius:6px;font:.85rem/1.35 var(--ui);cursor:pointer;min-height:34px}
+.setbtn:hover{background:var(--tint);color:var(--accent)}
+.setbtn[aria-pressed="true"]{background:var(--tint);color:var(--accent);font-weight:600}
+.setbtn small{color:var(--muted);font-size:.75rem}
+.qgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.qgrid a{display:grid;place-items:center;height:34px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--ink);font:600 .8rem var(--ui);background:var(--opt)}
+.qgrid a:hover{border-color:var(--accent);color:var(--accent)}
+.qgrid a.done{background:var(--right);border-color:var(--ok);color:var(--ok)}
+.qgrid a.part{background:var(--wrong);border-color:var(--warn);color:var(--warn)}
+nav.toc .reset{margin-top:12px;width:100%;border:1px solid var(--line);background:none;color:var(--muted);border-radius:6px;padding:7px;font:.8rem var(--ui);cursor:pointer}
 
-/* top bar */
-.bar{position:sticky;top:0;z-index:20;background:var(--sheet);border-bottom:1px solid var(--rule2)}
-.bar-in{max-width:1380px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px}
-.bar a.home{color:var(--ink2);text-decoration:none;font-family:var(--f-mono);font-size:13px}
-.bar a.home:hover{color:var(--pen)}
-.bar .title{font-weight:700;font-size:16px}
-.bar .sp{flex:1}
-.score{font-family:var(--f-pen);font-size:22px;color:var(--pen);white-space:nowrap}
-.themebtn{border:1px solid var(--rule2);background:var(--sheet2);color:var(--ink2);border-radius:999px;
-  padding:6px 12px;font-family:var(--f-mono);font-size:12.5px;min-height:36px}
-.themebtn:hover{color:var(--ink)}
+.howto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:14px 0 4px}
+.sethead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:30px 0 12px}
+.sethead b{font-size:1.35rem;color:var(--accent)}
+.sethead span{font:.88rem var(--ui);color:var(--muted)}
 
-/* layout */
-.wrap{max-width:1380px;margin:0 auto;padding:22px 20px 80px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:34px;align-items:start}
-nav.side{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto;background:var(--sheet);border:1px solid var(--rule);
-  border-radius:12px;padding:16px}
-nav.side h4{margin:0 0 8px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:500}
-.setbtns{display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
-.setbtn{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;border:1px solid transparent;background:none;
-  color:var(--ink);padding:7px 9px;border-radius:7px;font-size:14.5px;min-height:38px}
-.setbtn:hover{background:var(--sheet2)}
-.setbtn[aria-pressed="true"]{background:var(--pensoft);border-color:var(--margin);color:var(--ink)}
-.setbtn small{font-family:var(--f-mono);font-size:11.5px;color:var(--ink3);white-space:nowrap}
-.qgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.qgrid a{display:grid;place-items:center;height:38px;border:1px solid var(--rule2);border-radius:7px;text-decoration:none;
-  color:var(--ink2);font-family:var(--f-mono);font-size:13px;background:var(--sheet)}
-.qgrid a.done{background:var(--oksoft);border-color:var(--ok);color:var(--ok)}
-.qgrid a.part{background:var(--pensoft);border-color:var(--pen);color:var(--pen)}
-.side .reset{margin-top:14px;width:100%;border:1px solid var(--rule2);background:none;color:var(--ink3);border-radius:7px;padding:8px;font-size:13px}
-
-main{min-width:0;max-width:980px}
-.intro h1{font-size:clamp(28px,3.6vw,40px);line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
-.intro p{color:var(--ink2);margin:0 0 10px;max-width:70ch}
-.howto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 26px}
-.howto div{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font-size:15px;color:var(--ink2)}
-.howto b{display:block;color:var(--ink);font-size:15.5px;margin-bottom:2px}
-.sethead{font-family:var(--f-mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--pen);
-  margin:30px 0 10px;padding-bottom:6px;border-bottom:1px dashed var(--rule2)}
-.sethead span{color:var(--ink3);text-transform:none;letter-spacing:0}
-
-/* question = exam sheet with a red margin rule */
-.q{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:4px;margin:0 0 22px;
-  padding:22px 26px 20px 74px;box-shadow:0 1px 0 var(--rule)}
-.q::before{content:"";position:absolute;left:54px;top:0;bottom:0;width:2px;background:var(--margin)}
-.qnum{position:absolute;left:12px;top:20px;width:34px;text-align:center;font-weight:700;font-size:20px}
-.qmarks{float:right;margin:0 0 6px 14px;font-family:var(--f-mono);font-size:14px;color:var(--ink2)}
-.qtext{margin:0 0 6px}
-.qnote{font-size:14px;color:var(--blue);margin:2px 0 8px}
-.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 18px;margin:16px 0 14px}
-.field label{display:block;font-family:var(--f-mono);font-size:12.5px;color:var(--ink2);margin-bottom:3px}
+article.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:22px;scroll-margin-top:16px}
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.qmarks{margin-left:auto;font:700 .85rem var(--ui);color:var(--muted)}
+.qtext{margin:0 0 6px;font-size:1.04rem}
+.qnote{margin:6px 0 0}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px 18px;margin:16px 0}
+.field label{display:block;font:600 .78rem var(--ui);color:var(--muted);margin-bottom:4px}
 .field .row{display:flex;align-items:center;gap:8px}
-.field input{flex:1;min-width:0;font-family:var(--f-mono);font-size:16px;color:var(--ink);background:transparent;border:0;
-  border-bottom:1.5px solid var(--rule2);padding:6px 2px;outline:none;border-radius:0}
-.field input:focus{border-bottom-color:var(--blue)}
-.tick{font-family:var(--f-pen);font-size:24px;line-height:1;width:24px;text-align:center}
-.field.ok .tick{color:var(--ok)} .field.no .tick{color:var(--pen)}
-.field.no input{color:var(--pen);text-decoration:line-through;text-decoration-color:var(--pen)}
+.field input{flex:1;min-width:0;font:1rem var(--mono);padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--opt);color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--tint)}
+.field.ok input{border-color:var(--ok);background:var(--right)}
+.field.no input{border-color:var(--warn);background:var(--wrong)}
+.tick{width:20px;text-align:center;font:700 1.1rem var(--ui)}
+.field.ok .tick{color:var(--ok)} .field.no .tick{color:var(--warn)}
 .btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.btn{border:1px solid var(--rule2);background:var(--sheet2);color:var(--ink);border-radius:7px;padding:8px 14px;font-size:15px;min-height:42px}
-.btn:hover{border-color:var(--ink3)}
-.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
-.btn.pen{color:var(--pen);border-color:var(--margin);background:var(--pensoft)}
-.result{font-family:var(--f-pen);font-size:24px;color:var(--pen);margin-left:auto}
+.btn.memo-btn{border-color:var(--accent2);color:var(--accent2)}
+.result{margin-left:auto;font:700 1.05rem var(--ui);color:var(--warn)}
 .result.full{color:var(--ok)}
+.memo{margin-top:16px;padding:12px 16px 14px;border-left:4px solid var(--ok);background:var(--okbg);border-radius:0 8px 8px 0}
+.memo h5{margin:0 0 4px;font:700 .72rem var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ok)}
+.memo ol{margin:0}
+.memo .tblwrap{margin-top:10px}
+.memo table{margin:0;background:var(--panel)}
+.memo td:nth-child(2){font-weight:700;color:var(--accent)}
+.memo td,.memo th{white-space:nowrap}
 
-/* memo = red pen */
-.memo{margin-top:16px;border-top:1px dashed var(--margin);padding-top:12px}
-.memo h5{margin:0 0 6px;font-family:var(--f-pen);font-weight:700;font-size:22px;color:var(--pen)}
-.memo ol{margin:0;padding-left:22px}
-.memo li{margin:6px 0;padding-left:4px}
-.memo li::marker{font-family:var(--f-pen);color:var(--pen);font-weight:700}
-.tbl{overflow-x:auto;margin:12px 0 0}
-table{border-collapse:collapse;font-family:var(--f-mono);font-size:14px;min-width:100%}
-th,td{border:1px solid var(--rule2);padding:6px 9px;text-align:left;white-space:nowrap}
-th{background:var(--sheet2);font-weight:600}
-td:nth-child(2){color:var(--pen);font-weight:600}
-.empty{color:var(--ink3);font-style:italic}
-
-/* desktop: bigger base size */
-@media (min-width:1280px){ body{font-size:18.5px} .q{padding:26px 32px 22px 80px} .q::before{left:58px} .qnum{left:14px} }
-/* tablet/phone: navigator moves to a strip at the top */
-@media (max-width:980px){
-  .wrap{grid-template-columns:1fr;gap:14px;padding-top:12px}
-  nav.side{position:static;max-height:none;padding:12px}
-  .setbtns{flex-direction:row;overflow-x:auto;margin-bottom:10px;padding-bottom:4px}
-  .setbtn{flex:none;white-space:nowrap}
-  .qgrid{display:flex;overflow-x:auto;gap:6px;padding-bottom:4px}
-  .qgrid a{flex:0 0 42px;height:40px}
-  .side .reset{margin-top:8px;padding:6px}
+@media (min-width:1300px){ .wrap,header.top .inner{max-width:1280px} }
+@media (max-width:900px){
+  nav.toc .setbtns{flex-direction:row;overflow-x:auto;padding-bottom:4px}
+  .setbtn{flex:none;white-space:nowrap;border:1px solid var(--line)}
+  .qgrid{display:flex;overflow-x:auto;padding-bottom:4px}
+  .qgrid a{flex:0 0 40px;height:38px}
   .howto{grid-template-columns:1fr}
 }
 @media (max-width:560px){
-  body{font-size:16.5px}
-  .bar-in{padding:8px 12px;gap:8px}
-  .bar .title{display:none}
-  .wrap{padding:10px 12px 60px}
-  .q{padding:18px 14px 16px 44px}
-  .q::before{left:32px}
-  .qnum{left:2px;width:28px;font-size:17px}
+  article.q{padding:18px 16px}
   .fields{grid-template-columns:1fr}
-  .btn{flex:1 1 auto}
+  .btns .btn{flex:1 1 auto}
   .result{margin-left:0;width:100%}
 }
-@media print{
-  .bar,nav.side,.btns,.howto{display:none!important}
-  .wrap{display:block;padding:0}
-  .q{break-inside:avoid;box-shadow:none}
-  .memo{display:block!important}
-}
+@media print{ .btns,.howto{display:none!important} .memo{display:block!important} article.q{break-inside:avoid} }
 </style>
 </head>
 <body>
-<header class="bar"><div class="bar-in">
-  <a class="home" href="../">&larr; All modules</a>
-  <span class="title">ICNF102 &middot; Subnetting long questions</span>
-  <span class="sp"></span>
-  <span class="score" id="score" title="Marks from questions you've checked"></span>
-  <button class="themebtn" id="themebtn" type="button">Theme: auto</button>
+<button class="themebtn" id="themebtn" type="button" aria-label="Switch theme"></button>
+<header class="top"><div class="inner">
+<a class="back" href="../">&larr; All modules</a>
+<h1>ICNF102 &mdash; Subnetting Long Questions</h1>
+<p class="sub">Twenty questions written like the long questions in the practice papers, from the exact past-paper question up to VLSM. Work each one on paper, type your answers to have them marked, then open the memo one step at a time.</p>
+<div class="badges">
+<span class="badge"><b>Your marks:</b> <span id="score">none checked yet</span></span>
+<span class="badge"><b>Masks:</b> type 255.255.255.192 or /26</span>
+<span class="badge"><b>Saved</b> in this browser</span>
+</div>
 </div></header>
 
-<div class="wrap">
-  <nav class="side" aria-label="Questions">
+<div class="wrap"><div class="layout">
+  <nav class="toc" aria-label="Questions">
     <h4>Question sets</h4>
     <div class="setbtns" id="sets"></div>
     <h4>Jump to</h4>
@@ -172,19 +94,17 @@ td:nth-child(2){color:var(--pen);font-weight:600}
   </nav>
 
   <main>
-    <div class="intro">
-      <h1>Subnetting long questions</h1>
-      <p>Twenty questions written like the long questions in the practice papers, from the exact past-paper question up to VLSM.
-        Work each one on paper first, type your answers in to have them marked, then open the memo to see the working one step at a time.</p>
-    </div>
-    <div class="howto">
-      <div><b>1. Work it on paper</b>Write every step: binary mask, bits borrowed, new mask, increment, hosts.</div>
-      <div><b>2. Type and check</b>Masks can be typed as 255.255.255.192 or /26. Ticks and crosses come back in red pen.</div>
-      <div><b>3. Read the memo</b>Reveal the next step to get unstuck without seeing the whole answer. Your work is saved in this browser.</div>
-    </div>
+    <section>
+      <h2>How to use this page</h2>
+      <div class="howto">
+        <div class="card"><h5>1. Work it on paper</h5>Write every step: the binary mask, bits borrowed, new mask, increment and hosts.</div>
+        <div class="card"><h5>2. Type and check</h5>Fill in the boxes and press <b>Check my answers</b>. Each box gets a tick or a cross and you get a mark.</div>
+        <div class="card"><h5>3. Read the memo</h5><b>Show next step</b> reveals the working one line at a time, so you can get unstuck without seeing the whole answer.</div>
+      </div>
+    </section>
     <div id="list"></div>
   </main>
-</div>
+</div></div>
 
 <script src="questions.js"></script>
 <script>
@@ -245,14 +165,14 @@ td:nth-child(2){color:var(--pen);font-weight:600}
       h += '<a href="#q'+q.id+'" class="'+cls+'" title="Question '+q.id+'">'+q.id+'</a>';
     });
     $("qgrid").innerHTML = h;
-    $("score").textContent = tot ? got+" / "+tot : "";
+    $("score").textContent = tot ? got+" / "+tot : "none checked yet";
   }
   function qHtml(q){
     var s=S(q.id), h='<article class="q" id="q'+q.id+'">';
-    h += '<div class="qnum">'+q.id+'</div><div class="qmarks">['+q.marks+' marks]</div>';
+    h += '<div class="qhead"><span class="unit">Question '+q.id+'</span><span class="tag" style="background:var(--tint);color:var(--accent)">Set '+q.set+'</span><span class="qmarks">['+q.marks+' marks]</span></div>';
     h += '<p class="qtext">'+q.text+'</p>';
-    if(q.note) h += '<p class="qnote">'+q.note+'</p>';
-    if(q.lab) h += '<p class="qnote">'+q.lab+'</p>';
+    if(q.note) h += '<div class="tip qnote">'+q.note+'</div>';
+    if(q.lab) h += '<div class="tip qnote">'+q.lab+'</div>';
     h += '<div class="fields">';
     q.fields.forEach(function(f,i){
       var cls = s.checked && s.v[i] ? (isRight(f, s.v[i]) ? " ok" : " no") : "";
@@ -263,17 +183,17 @@ td:nth-child(2){color:var(--pen);font-weight:600}
     });
     h += '</div><div class="btns">'
        + '<button class="btn pri" data-act="check" data-q="'+q.id+'">Check my answers</button>'
-       + '<button class="btn pen" data-act="step" data-q="'+q.id+'"'+(s.step>=q.steps.length?' disabled':'')+'>Show next step</button>'
+       + '<button class="btn memo-btn" data-act="step" data-q="'+q.id+'"'+(s.step>=q.steps.length?' disabled':'')+'>Show next step</button>'
        + '<button class="btn" data-act="all" data-q="'+q.id+'">'+(s.step>=q.steps.length?'Hide memo':'Show full memo')+'</button>'
        + '<button class="btn" data-act="clear" data-q="'+q.id+'">Clear</button>';
     if(s.checked){ var g=marksFor(q); h += '<span class="result'+(g===q.marks?' full':'')+'">'+g+' / '+q.marks+'</span>'; }
     h += '</div>';
     var shown = Math.min(s.step, q.steps.length);
-    h += '<div class="memo"'+(shown?'':' hidden')+'><h5>Memo</h5><ol>';
+    h += '<div class="memo"'+(shown?'':' hidden')+'><h5>Memo</h5><ol class="steps">';
     for(var k=0;k<shown;k++) h += '<li>'+q.steps[k]+'</li>';
     h += '</ol>';
     if(q.table && shown>=q.steps.length){
-      h += '<div class="tbl"><table><thead><tr>'+q.table.head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>';
+      h += '<div class="tblwrap"><table><thead><tr>'+q.table.head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>';
       q.table.rows.forEach(function(r){ h += '<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join('')+'</tr>'; });
       h += '</tbody></table></div>';
     }
@@ -284,7 +204,7 @@ td:nth-child(2){color:var(--pen);font-weight:600}
     var h="", last="";
     Q.forEach(function(q){
       if(filter!=="all" && q.set!==filter) return;
-      if(q.set!==last){ last=q.set; h += '<div class="sethead">'+esc(SETS[q.set].n)+' <span>· '+esc(SETS[q.set].d)+'</span></div>'; }
+      if(q.set!==last){ last=q.set; h += '<div class="sethead"><b>'+esc(SETS[q.set].n)+'</b><span>'+esc(SETS[q.set].d)+'</span></div>'; }
       h += qHtml(q);
     });
     $("list").innerHTML = h;
@@ -310,15 +230,10 @@ td:nth-child(2){color:var(--pen);font-weight:600}
   });
   $("resetAll").onclick = function(){ if(confirm("Clear every answer and memo on this page?")){ st={}; save(); renderList(); } };
 
-  /* ---- theme: auto -> light -> dark, shared key across the site ---- */
-  var TK="school_stuff_theme", order=["auto","light","dark"], tb=$("themebtn"), theme="auto";
-  try{ theme=localStorage.getItem(TK)||"auto"; }catch(e){}
-  function applyTheme(){ if(theme==="auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme",theme); tb.textContent="Theme: "+theme; }
-  tb.onclick=function(){ theme=order[(order.indexOf(theme)+1)%3]; try{localStorage.setItem(TK,theme);}catch(e){} applyTheme(); };
-  applyTheme();
 
   renderSets(); renderList();
 })();
 </script>
+<script src="../icnf102-shared/theme.js"></script>
 </body>
 </html>
