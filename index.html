@@ -82,6 +82,7 @@ main{max-width:1340px;margin:0 auto;padding:clamp(40px,7vw,90px) var(--gut) 40px
 .module-head h2{font-size:clamp(1.6rem,2.4vw,2rem);margin:7px 0 0;line-height:1.15}
 .page-count{color:var(--ink2);font-size:.82rem}
 .pages{border-top:1px solid var(--line)}
+.pages .sec{margin:0;padding:14px 23px 8px 30px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--m);border-bottom:1px solid var(--line)}
 .page{display:grid;grid-template-columns:62px 1fr 22px;gap:17px;align-items:start;min-height:64px;padding:20px 23px 20px 30px;
   border-bottom:1px solid var(--line);transition:background .12s}
 .page:last-child{border-bottom:0}
@@ -192,14 +193,26 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:
       tint: "#5B4B8A",
       tintDark: "#B3A6DB",
       sites: [
-        { label: "Question 1 Quiz", tag: "Quiz", href: "iaut202-quiz/",
+        { group: "1. Theory and robotics", label: "Question 1 Quiz", tag: "Quiz", href: "iaut202-quiz/",
           desc: "100 easy questions on the short-answer theory: control systems, sensors, PLCs, logic gates. Every answer explained, plus a memorise mode with the answers shown." },
-        { label: "Likely Question 1 (50)", tag: "Quiz", href: "iaut202-likely-q1/",
-          desc: "50 questions on the topics most likely to come up, in the style of past Question 1 papers: open and closed loop, logic and sequence control, levels of automation, PLC vs PC, gates, actuators. Quiz and memorise modes." },
-        { label: "Robotics Quiz (79)", tag: "Quiz", href: "iaut202-robotics-quiz/",
-          desc: "79 questions on Industrial Robotics (Chapter 8): the five joint types (L, O, R, T, V), the five robot configurations, wrist and drives, sensors, the four control types, end effectors, programming, and control resolution, accuracy and repeatability. Every answer explained." },
-        { label: "Practice Exam Papers", tag: "Practice", href: "iaut202-practice-paper/",
-          desc: "Two full 95-mark practice papers laid out like the real exam: theory (20), successive approximation ADC (6), PLC packaging scenario (25), robotics theory with robot pictures (20) and a pneumatic cascade sequence (24). Each question has a memo you can open." }
+        { group: "1. Theory and robotics", label: "Likely Question 1 (50)", tag: "Quiz", href: "iaut202-likely-q1/",
+          desc: "50 questions on the topics most likely to come up in Question 1: open and closed loop, logic and sequence control, levels of automation, PLC vs PC, gates, actuators." },
+        { group: "1. Theory and robotics", label: "ADC and Number Systems Quiz", tag: "Quiz", href: "iaut202-adc-quiz/",
+          desc: "Question 2 (6 marks): computed successive approximation conversions (digital code and encoded voltage), resolution, quantisation error and binary, decimal and hex conversions." },
+        { group: "1. Theory and robotics", label: "Robotics Quiz (79)", tag: "Quiz", href: "iaut202-robotics-quiz/",
+          desc: "Question 4: the five joint types (L, O, R, T, V), the five robot configurations, wrist and drives, sensors, the four control types, end effectors, programming, and control resolution, accuracy and repeatability." },
+        { group: "2. PLC", label: "PLC Quiz", tag: "Quiz", href: "iaut202-plc-quiz/",
+          desc: "Question 3 groundwork: scan cycle, contacts, seal-in and latches, on-delay and off-delay timers, counters, flashers, and turning a scenario into logic." },
+        { group: "2. PLC", label: "PLC Scenario Practice (6)", tag: "Practice", href: "iaut202-plc-scenarios/",
+          desc: "Six packaging and conveyor scenarios in the style of Question 3 (25 marks), each with an I/O table and full logic memo: carton line, crate line, labeller, shrink-wrap tunnel, two-conveyor accumulator, pallet layer counter." },
+        { group: "3. Pneumatics", label: "Pneumatics Quiz", tag: "Quiz", href: "iaut202-pneumatics-quiz/",
+          desc: "Question 5 groundwork: cylinders and valves, port numbers, sequence notation, the cascade method and the drawing conventions." },
+        { group: "3. Pneumatics", label: "Pneumatic Cascade Practice (9)", tag: "Practice", href: "iaut202-pneumatics-practice/",
+          desc: "Nine sequences to group and turn into an electrical cascade, each with a memo giving the groups, relay set and reset conditions and the solenoid table. One has a 3 s delay and one has four cylinders." },
+        { group: "4. Mock exams", label: "Mock Exam Papers A, B and C", tag: "Mock exam", href: "iaut202-practice-paper/",
+          desc: "Three full 95-mark papers in the exam layout: theory (20), ADC (6), PLC scenario (25), robotics with robot pictures (20) and a pneumatic sequence (24). Each question has a memo that opens on tap." },
+        { group: "4. Mock exams", label: "Mixed Mock Quiz (64)", tag: "Mock exam", href: "iaut202-mock-quiz/",
+          desc: "A mixed set drawn from every exam part (theory, ADC, PLC, robotics, pneumatics). Filter by part or run all of it as a quick mock." }
       ]
     }
   ];
@@ -223,7 +236,9 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:
       + '<h2>'+esc(mod.name)+'</h2></div>'
       + '<span class="page-count">'+mod.sites.length+' page'+(mod.sites.length===1?'':'s')+'</span></div>'
       + '<div class="pages">';
+    var lastGroup = null;
     mod.sites.forEach(function(s){
+      if(s.group && s.group !== lastGroup){ lastGroup = s.group; shelf += '<h3 class="sec">'+esc(s.group)+'</h3>'; }
       shelf += '<a class="page" href="'+esc(s.href)+'">'
         + '<span class="type-tag">'+esc(s.tag)+'</span>'
         + '<span class="page-copy"><strong>'+esc(s.label)+'</strong><small>'+esc(s.desc)+'</small></span>'
