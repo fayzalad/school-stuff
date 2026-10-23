@@ -37,5 +37,5 @@ Organised by exam part (5 questions, 95 marks).
 - **[Pneumatic Cascade Practice (9)](https://fayzalad.github.io/school-stuff/iaut202-pneumatics-practice/)** — nine sequences to group and turn into an electrical cascade, with memos (groups, relays, solenoids).
 
 **4. Mock exams**
-- **[Mock Exam Papers A, B and C](https://fayzalad.github.io/school-stuff/iaut202-practice-paper/)** — three full 95-mark papers in the exam layout, each question with a memo that opens on tap.
+- **[Mock Exam Papers A, B and C](https://fayzalad.github.io/school-stuff/iaut202-practice-paper/)** — three full 95-mark papers in the exam layout and the make-up paper's style (20 multiple-choice theory questions, 5-bit ADC, PLC scenario with I/O table and sequence of operation, robotics with pictures, pneumatic cascade with lamp), each question with a memo that opens on tap.
 - **[Mixed Mock Quiz (64)](https://fayzalad.github.io/school-stuff/iaut202-mock-quiz/)** — a mixed set sampled from every exam part, filterable by part.
