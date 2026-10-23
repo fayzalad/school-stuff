@@ -2,7 +2,7 @@ window.SUBQ = [
  {
   "set": "A",
   "marks": 5,
-  "text": "A company is given the network block <b>192.168.50.0/24</b>. They require <b>4 subnets</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
+  "text": "A company is given the network block <b>192.168.50.0/24</b>. They require <b>4 subnets</b>, each with at least <b>50 hosts</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
   "fields": [
    {
     "l": "(1) Bits borrowed",
@@ -28,15 +28,16 @@ window.SUBQ = [
    "Bits to borrow: smallest n where 2^n &ge; 4. <code>2^1 = 2 &nbsp;&middot;&nbsp; 2^2 = 4 &#10003;</code> &rarr; <b>borrow 2 bits</b>.",
    "New mask: turn 2 host bits into 1s &rarr; <code>11111111.11111111.11111111.<b>1</b><b>1</b>000000</code> = <b>/26</b>.",
    "Convert to decimal: the 4th octet has 2 ones = 128 + 64 = 192. Octets before it are 255, after it 0 &rarr; <b>255.255.255.192</b>.",
-   "Hosts per subnet: host bits = 32 &minus; 26 = 6 &rarr; 2^6 &minus; 2 = <b>62</b> usable (64 addresses; the network and broadcast addresses can't be used)."
+   "Hosts per subnet: host bits = 32 &minus; 26 = 6 &rarr; 2^6 &minus; 2 = <b>62</b> usable (64 addresses; the network and broadcast addresses can't be used).",
+   "Check the hosts fit: each subnet has <b>62</b> usable hosts and the question needs 50 &rarr; 62 &ge; 50 &#10003;"
   ],
-  "note": "This is Q42 from the practice paper, word for word.",
+  "note": "Based on Q42 from the practice paper (the paper left out the hosts; your exam gives them).",
   "id": 1
  },
  {
   "set": "A",
   "marks": 5,
-  "text": "A company is given the network block <b>192.168.1.0/24</b>. They require <b>6 subnets</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
+  "text": "A company is given the network block <b>192.168.1.0/24</b>. They require <b>6 subnets</b>, each with at least <b>25 hosts</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
   "fields": [
    {
     "l": "(1) Bits borrowed",
@@ -62,7 +63,8 @@ window.SUBQ = [
    "Bits to borrow: smallest n where 2^n &ge; 6. <code>2^1 = 2 &nbsp;&middot;&nbsp; 2^2 = 4 &nbsp;&middot;&nbsp; 2^3 = 8 &#10003;</code> &rarr; <b>borrow 3 bits</b>.",
    "New mask: turn 3 host bits into 1s &rarr; <code>11111111.11111111.11111111.<b>1</b><b>1</b><b>1</b>00000</code> = <b>/27</b>.",
    "Convert to decimal: the 4th octet has 3 ones = 128 + 64 + 32 = 224. Octets before it are 255, after it 0 &rarr; <b>255.255.255.224</b>.",
-   "Hosts per subnet: host bits = 32 &minus; 27 = 5 &rarr; 2^5 &minus; 2 = <b>30</b> usable (32 addresses; the network and broadcast addresses can't be used)."
+   "Hosts per subnet: host bits = 32 &minus; 27 = 5 &rarr; 2^5 &minus; 2 = <b>30</b> usable (32 addresses; the network and broadcast addresses can't be used).",
+   "Check the hosts fit: each subnet has <b>30</b> usable hosts and the question needs 25 &rarr; 30 &ge; 25 &#10003;"
   ],
   "note": null,
   "id": 2
@@ -70,7 +72,7 @@ window.SUBQ = [
  {
   "set": "A",
   "marks": 5,
-  "text": "A company is given the network block <b>192.168.100.0/24</b>. They require <b>12 subnets</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
+  "text": "A company is given the network block <b>192.168.100.0/24</b>. They require <b>12 subnets</b>, each with at least <b>10 hosts</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
   "fields": [
    {
     "l": "(1) Bits borrowed",
@@ -96,7 +98,8 @@ window.SUBQ = [
    "Bits to borrow: smallest n where 2^n &ge; 12. <code>2^1 = 2 &nbsp;&middot;&nbsp; 2^2 = 4 &nbsp;&middot;&nbsp; 2^3 = 8 &nbsp;&middot;&nbsp; 2^4 = 16 &#10003;</code> &rarr; <b>borrow 4 bits</b>.",
    "New mask: turn 4 host bits into 1s &rarr; <code>11111111.11111111.11111111.<b>1</b><b>1</b><b>1</b><b>1</b>0000</code> = <b>/28</b>.",
    "Convert to decimal: the 4th octet has 4 ones = 128 + 64 + 32 + 16 = 240. Octets before it are 255, after it 0 &rarr; <b>255.255.255.240</b>.",
-   "Hosts per subnet: host bits = 32 &minus; 28 = 4 &rarr; 2^4 &minus; 2 = <b>14</b> usable (16 addresses; the network and broadcast addresses can't be used)."
+   "Hosts per subnet: host bits = 32 &minus; 28 = 4 &rarr; 2^4 &minus; 2 = <b>14</b> usable (16 addresses; the network and broadcast addresses can't be used).",
+   "Check the hosts fit: each subnet has <b>14</b> usable hosts and the question needs 10 &rarr; 14 &ge; 10 &#10003;"
   ],
   "note": null,
   "id": 3
@@ -104,7 +107,7 @@ window.SUBQ = [
  {
   "set": "A",
   "marks": 5,
-  "text": "A company is given the network block <b>200.10.5.0/24</b>. They require <b>3 subnets</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
+  "text": "A company is given the network block <b>200.10.5.0/24</b>. They require <b>3 subnets</b>, each with at least <b>40 hosts</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
   "fields": [
    {
     "l": "(1) Bits borrowed",
@@ -130,7 +133,8 @@ window.SUBQ = [
    "Bits to borrow: smallest n where 2^n &ge; 3. <code>2^1 = 2 &nbsp;&middot;&nbsp; 2^2 = 4 &#10003;</code> &rarr; <b>borrow 2 bits</b>.",
    "New mask: turn 2 host bits into 1s &rarr; <code>11111111.11111111.11111111.<b>1</b><b>1</b>000000</code> = <b>/26</b>.",
    "Convert to decimal: the 4th octet has 2 ones = 128 + 64 = 192. Octets before it are 255, after it 0 &rarr; <b>255.255.255.192</b>.",
-   "Hosts per subnet: host bits = 32 &minus; 26 = 6 &rarr; 2^6 &minus; 2 = <b>62</b> usable (64 addresses; the network and broadcast addresses can't be used)."
+   "Hosts per subnet: host bits = 32 &minus; 26 = 6 &rarr; 2^6 &minus; 2 = <b>62</b> usable (64 addresses; the network and broadcast addresses can't be used).",
+   "Check the hosts fit: each subnet has <b>62</b> usable hosts and the question needs 40 &rarr; 62 &ge; 40 &#10003;"
   ],
   "note": null,
   "id": 4
@@ -138,7 +142,7 @@ window.SUBQ = [
  {
   "set": "A",
   "marks": 5,
-  "text": "A company is given the network block <b>192.168.10.0/24</b>. They require <b>30 subnets</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
+  "text": "A company is given the network block <b>192.168.10.0/24</b>. They require <b>30 subnets</b>, each with at least <b>5 hosts</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
   "fields": [
    {
     "l": "(1) Bits borrowed",
@@ -164,7 +168,8 @@ window.SUBQ = [
    "Bits to borrow: smallest n where 2^n &ge; 30. <code>2^1 = 2 &nbsp;&middot;&nbsp; 2^2 = 4 &nbsp;&middot;&nbsp; 2^3 = 8 &nbsp;&middot;&nbsp; 2^4 = 16 &nbsp;&middot;&nbsp; 2^5 = 32 &#10003;</code> &rarr; <b>borrow 5 bits</b>.",
    "New mask: turn 5 host bits into 1s &rarr; <code>11111111.11111111.11111111.<b>1</b><b>1</b><b>1</b><b>1</b><b>1</b>000</code> = <b>/29</b>.",
    "Convert to decimal: the 4th octet has 5 ones = 128 + 64 + 32 + 16 + 8 = 248. Octets before it are 255, after it 0 &rarr; <b>255.255.255.248</b>.",
-   "Hosts per subnet: host bits = 32 &minus; 29 = 3 &rarr; 2^3 &minus; 2 = <b>6</b> usable (8 addresses; the network and broadcast addresses can't be used)."
+   "Hosts per subnet: host bits = 32 &minus; 29 = 3 &rarr; 2^3 &minus; 2 = <b>6</b> usable (8 addresses; the network and broadcast addresses can't be used).",
+   "Check the hosts fit: each subnet has <b>6</b> usable hosts and the question needs 5 &rarr; 6 &ge; 5 &#10003;"
   ],
   "note": "Same network and count as the paper's MCQ Q4 (answer: 5 bits).",
   "id": 5
@@ -172,7 +177,7 @@ window.SUBQ = [
  {
   "set": "A",
   "marks": 5,
-  "text": "A company is given the network block <b>192.168.8.0/24</b>. They require <b>50 subnets</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
+  "text": "A company is given the network block <b>192.168.8.0/24</b>. They require <b>50 subnets</b>, each with at least <b>2 hosts</b>. Calculate: (1) bits borrowed, (2) the new subnet mask in decimal, and (3) the number of hosts per subnet.",
   "fields": [
    {
     "l": "(1) Bits borrowed",
@@ -198,7 +203,8 @@ window.SUBQ = [
    "Bits to borrow: smallest n where 2^n &ge; 50. <code>2^1 = 2 &nbsp;&middot;&nbsp; 2^2 = 4 &nbsp;&middot;&nbsp; 2^3 = 8 &nbsp;&middot;&nbsp; 2^4 = 16 &nbsp;&middot;&nbsp; 2^5 = 32 &nbsp;&middot;&nbsp; 2^6 = 64 &#10003;</code> &rarr; <b>borrow 6 bits</b>.",
    "New mask: turn 6 host bits into 1s &rarr; <code>11111111.11111111.11111111.<b>1</b><b>1</b><b>1</b><b>1</b><b>1</b><b>1</b>00</code> = <b>/30</b>.",
    "Convert to decimal: the 4th octet has 6 ones = 128 + 64 + 32 + 16 + 8 + 4 = 252. Octets before it are 255, after it 0 &rarr; <b>255.255.255.252</b>.",
-   "Hosts per subnet: host bits = 32 &minus; 30 = 2 &rarr; 2^2 &minus; 2 = <b>2</b> usable (4 addresses; the network and broadcast addresses can't be used)."
+   "Hosts per subnet: host bits = 32 &minus; 30 = 2 &rarr; 2^2 &minus; 2 = <b>2</b> usable (4 addresses; the network and broadcast addresses can't be used).",
+   "Check the hosts fit: each subnet has <b>2</b> usable hosts and the question needs 2 &rarr; 2 &ge; 2 &#10003;"
   ],
   "note": null,
   "id": 6
@@ -206,7 +212,7 @@ window.SUBQ = [
  {
   "set": "B",
   "marks": 8,
-  "text": "You must subnet <b>192.168.10.0/24</b> into <b>5 subnets</b> of equal size. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
+  "text": "You must subnet <b>192.168.10.0/24</b> into <b>5 subnets</b> of equal size, each with at least <b>20 hosts</b>. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
   "fields": [
    {
     "l": "Bits borrowed",
@@ -265,6 +271,7 @@ window.SUBQ = [
    "Increment: the last 1 is in the <b>4th octet</b>, which has 5 zeros left &rarr; 2^5 = <b>32</b>, added in the 4th octet.",
    "Hosts per subnet: host bits = 32 &minus; 27 = 5 &rarr; 2^5 &minus; 2 = <b>30</b> usable (32 addresses; the network and broadcast addresses can't be used).",
    "Subnets created: 2^3 = <b>8</b>.",
+   "Check the hosts fit: each subnet has <b>30</b> usable hosts and the question needs 20 &rarr; 30 &ge; 20 &#10003;",
    "List the subnets: start at the given network and add the increment each time. Broadcast = next network &minus; 1; usable hosts are everything in between."
   ],
   "table": {
@@ -311,7 +318,7 @@ window.SUBQ = [
  {
   "set": "B",
   "marks": 8,
-  "text": "You must subnet <b>192.168.70.0/24</b> into <b>10 subnets</b> of equal size. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
+  "text": "You must subnet <b>192.168.70.0/24</b> into <b>10 subnets</b> of equal size, each with at least <b>12 hosts</b>. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
   "fields": [
    {
     "l": "Bits borrowed",
@@ -370,6 +377,7 @@ window.SUBQ = [
    "Increment: the last 1 is in the <b>4th octet</b>, which has 4 zeros left &rarr; 2^4 = <b>16</b>, added in the 4th octet.",
    "Hosts per subnet: host bits = 32 &minus; 28 = 4 &rarr; 2^4 &minus; 2 = <b>14</b> usable (16 addresses; the network and broadcast addresses can't be used).",
    "Subnets created: 2^4 = <b>16</b>.",
+   "Check the hosts fit: each subnet has <b>14</b> usable hosts and the question needs 12 &rarr; 14 &ge; 12 &#10003;",
    "List the subnets: start at the given network and add the increment each time. Broadcast = next network &minus; 1; usable hosts are everything in between."
   ],
   "table": {
@@ -416,7 +424,7 @@ window.SUBQ = [
  {
   "set": "B",
   "marks": 8,
-  "text": "You must subnet <b>172.16.0.0/16</b> into <b>10 subnets</b> of equal size. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
+  "text": "You must subnet <b>172.16.0.0/16</b> into <b>10 subnets</b> of equal size, each with at least <b>3,000 hosts</b>. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
   "fields": [
    {
     "l": "Bits borrowed",
@@ -475,6 +483,7 @@ window.SUBQ = [
    "Increment: the last 1 is in the <b>3rd octet</b>, which has 4 zeros left &rarr; 2^4 = <b>16</b>, added in the 3rd octet.",
    "Hosts per subnet: host bits = 32 &minus; 20 = 12 &rarr; 2^12 &minus; 2 = <b>4094</b> usable (4096 addresses; the network and broadcast addresses can't be used).",
    "Subnets created: 2^4 = <b>16</b>.",
+   "Check the hosts fit: each subnet has <b>4094</b> usable hosts and the question needs 3000 &rarr; 4094 &ge; 3000 &#10003;",
    "List the subnets: start at the given network and add the increment each time. Broadcast = next network &minus; 1; usable hosts are everything in between."
   ],
   "table": {
@@ -521,7 +530,7 @@ window.SUBQ = [
  {
   "set": "B",
   "marks": 8,
-  "text": "You must subnet <b>172.20.0.0/16</b> into <b>50 subnets</b> of equal size. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
+  "text": "You must subnet <b>172.20.0.0/16</b> into <b>50 subnets</b> of equal size, each with at least <b>800 hosts</b>. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
   "fields": [
    {
     "l": "Bits borrowed",
@@ -580,6 +589,7 @@ window.SUBQ = [
    "Increment: the last 1 is in the <b>3rd octet</b>, which has 2 zeros left &rarr; 2^2 = <b>4</b>, added in the 3rd octet.",
    "Hosts per subnet: host bits = 32 &minus; 22 = 10 &rarr; 2^10 &minus; 2 = <b>1022</b> usable (1024 addresses; the network and broadcast addresses can't be used).",
    "Subnets created: 2^6 = <b>64</b>.",
+   "Check the hosts fit: each subnet has <b>1022</b> usable hosts and the question needs 800 &rarr; 1022 &ge; 800 &#10003;",
    "List the subnets: start at the given network and add the increment each time. Broadcast = next network &minus; 1; usable hosts are everything in between."
   ],
   "table": {
@@ -626,7 +636,7 @@ window.SUBQ = [
  {
   "set": "B",
   "marks": 8,
-  "text": "You must subnet <b>10.0.0.0/8</b> into <b>6 subnets</b> of equal size. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
+  "text": "You must subnet <b>10.0.0.0/8</b> into <b>6 subnets</b> of equal size, each with at least <b>1,000,000 hosts</b>. Determine the number of bits borrowed, the new subnet mask (decimal and prefix), the number of subnets created, the usable hosts per subnet and the increment. Then give the network address, usable host range and broadcast address of the first three subnets and the last subnet.",
   "fields": [
    {
     "l": "Bits borrowed",
@@ -685,6 +695,7 @@ window.SUBQ = [
    "Increment: the last 1 is in the <b>2nd octet</b>, which has 5 zeros left &rarr; 2^5 = <b>32</b>, added in the 2nd octet.",
    "Hosts per subnet: host bits = 32 &minus; 11 = 21 &rarr; 2^21 &minus; 2 = <b>2097150</b> usable (2097152 addresses; the network and broadcast addresses can't be used).",
    "Subnets created: 2^3 = <b>8</b>.",
+   "Check the hosts fit: each subnet has <b>2097150</b> usable hosts and the question needs 1000000 &rarr; 2097150 &ge; 1000000 &#10003;",
    "List the subnets: start at the given network and add the increment each time. Broadcast = next network &minus; 1; usable hosts are everything in between."
   ],
   "table": {

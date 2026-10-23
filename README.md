@@ -20,5 +20,22 @@ Study material, one module per folder. Open the [home page](https://fayzalad.git
 - **[Cheat Sheet](https://fayzalad.github.io/school-stuff/stav102-cheat-sheet/)** — one printable page of the decisions that aren't on the formula sheet: which distribution, which interval, which test, critical values, rejection rules and conclusion templates.
 
 ### IAUT202 — Introduction to Automation
-- **[Question 1 Quiz](https://fayzalad.github.io/school-stuff/iaut202-quiz/)** — 100 easy multiple-choice questions on the short-answer theory topics: control systems (open and closed loop), safety monitoring and diagnostics, levels of automation, process vs discrete industry, discrete control, sensors (including hysteresis and transfer functions), switches and actuators, logic gates and truth tables, PLCs and ladder logic, and ADC basics. Every answer is explained. Quiz mode filters by topic, shuffles the questions and the answer order, scores you and lists what you missed; memorise mode shows every answer up front, with an optional cover-and-tap tick to test yourself.
-- **[Likely Question 1 (50)](https://fayzalad.github.io/school-stuff/iaut202-likely-q1/)** — 50 multiple-choice questions on the Question 1 topics most likely to come up, written in the style of past Question 1 papers: open vs closed loop (7–8 questions), logic vs sequence control and event vs time driven changes, the five levels of automation, safety monitoring and the other advanced functions, PLC vs PC, ladder logic, counters, interlocks and polling, gates and truth tables (NAND vs XOR), and actuators, rotary-to-linear conversion and sensor terms (transfer function, static vs dynamic, hysteresis). Quiz and memorise modes, every answer explained. Hysteresis is not defined in the lecture slides, so its answers use the standard definition.
+Organised by exam part (5 questions, 95 marks).
+
+**1. Theory and robotics**
+- **[Question 1 Quiz](https://fayzalad.github.io/school-stuff/iaut202-quiz/)** — 100 easy multiple-choice questions on the short-answer theory topics, with quiz and memorise modes.
+- **[Likely Question 1 (50)](https://fayzalad.github.io/school-stuff/iaut202-likely-q1/)** — 50 questions on the Question 1 topics most likely to come up.
+- **[ADC and Number Systems Quiz](https://fayzalad.github.io/school-stuff/iaut202-adc-quiz/)** — 26 questions for Question 2: computed successive approximation conversions, resolution, quantisation error and number conversions.
+- **[Robotics Quiz (79)](https://fayzalad.github.io/school-stuff/iaut202-robotics-quiz/)** — Chapter 8: joint types L, O, R, T and V, the five robot configurations, wrist and drives, sensors, control types, end effectors, programming, and accuracy and repeatability.
+
+**2. PLC**
+- **[PLC Quiz](https://fayzalad.github.io/school-stuff/iaut202-plc-quiz/)** — 38 questions: scan cycle, contacts, latches, timers, counters, flashers and scenario design.
+- **[PLC Scenario Practice (6)](https://fayzalad.github.io/school-stuff/iaut202-plc-scenarios/)** — six packaging and conveyor scenarios in the style of Question 3, each with an I/O table and full logic memo.
+
+**3. Pneumatics**
+- **[Pneumatics Quiz](https://fayzalad.github.io/school-stuff/iaut202-pneumatics-quiz/)** — 34 questions: cylinders, valves, ports, sequence notation, the cascade method and drawing conventions.
+- **[Pneumatic Cascade Practice (9)](https://fayzalad.github.io/school-stuff/iaut202-pneumatics-practice/)** — nine sequences to group and turn into an electrical cascade, with memos (groups, relays, solenoids).
+
+**4. Mock exams**
+- **[Mock Exam Papers A, B and C](https://fayzalad.github.io/school-stuff/iaut202-practice-paper/)** — three full 95-mark papers in the exam layout and the make-up paper's style (20 multiple-choice theory questions, 5-bit ADC, PLC scenario with I/O table and sequence of operation, robotics with pictures, pneumatic cascade with lamp), each question with a memo that opens on tap.
+- **[Mixed Mock Quiz (64)](https://fayzalad.github.io/school-stuff/iaut202-mock-quiz/)** — a mixed set sampled from every exam part, filterable by part.

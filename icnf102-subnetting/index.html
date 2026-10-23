@@ -27,7 +27,7 @@
 <div class="wrap">
   <div class="hero">
     <p class="kicker">Practice one problem at a time</p>
-    <h1>Given a network and a number of subnets, work the whole problem by hand.</h1>
+    <h1>Given a network, the subnets and the hosts needed, work the whole problem by hand.</h1>
     <p>Every step explains the rule before you apply it — this is built to teach the method, not just mark it. Generate a new problem any time; nothing is timed.</p>
   </div>
 
@@ -45,6 +45,7 @@
       <div class="fm">1. Bits to borrow (n) — smallest n where 2^n &gt;= subnets needed
 2. New prefix = default prefix + n → convert to a dotted-decimal mask
 3. Usable hosts per subnet = 2^(32 − new prefix) − 2
+   → check it is at least the hosts the question needs
 4. Each subnet's network address = previous network + block size,
    where block size = 2^(32 − new prefix)</div>
       <p>The full worked walkthrough with diagrams lives in sheet 10 of the <a href="../icnf102-study-guide/#m10">field reference guide</a> — come back here to drill it once you've read it.</p>
@@ -106,6 +107,12 @@
     var hostBits = 32 - newPrefix;
     var hostsPerSubnet = Math.pow(2,hostBits) - 2;
     var totalSubnets = Math.pow(2,n);
+    // the exam gives hosts too: pick a count that fits (more than half of the usable hosts), rounded for big numbers
+    var hLo = Math.floor(hostsPerSubnet/2)+1;
+    var requiredHosts = hLo + Math.floor(Math.random()*(hostsPerSubnet-hLo+1));
+    var step = hostsPerSubnet >= 1000 ? 100 : hostsPerSubnet >= 100 ? 10 : 1;
+    requiredHosts = Math.floor(requiredHosts/step)*step;
+    if(requiredHosts < hLo) requiredHosts += step;
     var increment = Math.pow(2,hostBits);
     var baseInt = ipToInt(base);
     var subnets = [];
@@ -116,7 +123,7 @@
     }
     return {
       class:cls.name, base:base.join('.'), defaultPrefix:cls.defaultPrefix,
-      requiredSubnets:requiredSubnets, bitsNeeded:n, newPrefix:newPrefix, newMask:prefixToMask(newPrefix),
+      requiredSubnets:requiredSubnets, requiredHosts:requiredHosts, bitsNeeded:n, newPrefix:newPrefix, newMask:prefixToMask(newPrefix),
       hostsPerSubnet:hostsPerSubnet, totalSubnets:totalSubnets, increment:increment, subnets:subnets
     };
   }
@@ -137,7 +144,7 @@
       sub1:{network:"",first:"",last:"",broadcast:""} };
   }
   var STATE = LS.get(SESSION_KEY, null);
-  if(!STATE || !STATE.problem){ STATE = { problem: genProblem(), answers: blankAnswers(), checked:false, countedSolved:false }; }
+  if(!STATE || !STATE.problem || STATE.problem.requiredHosts == null){ STATE = { problem: genProblem(), answers: blankAnswers(), checked:false, countedSolved:false }; }
 
   var $ = function(id){ return document.getElementById(id); };
   function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
@@ -157,7 +164,7 @@
     fb.n = { ok: parseInt(a.n,10) === p.bitsNeeded, text: parseInt(a.n,10)===p.bitsNeeded ? "correct" : ("should be "+p.bitsNeeded) };
     fb.newPrefix = { ok: parseInt(a.newPrefix,10) === p.newPrefix, text: parseInt(a.newPrefix,10)===p.newPrefix ? "correct" : ("should be /"+p.newPrefix) };
     fb.newMask = { ok: parseIp(a.newMask) === p.newMask, text: parseIp(a.newMask)===p.newMask ? "correct" : ("should be "+p.newMask) };
-    fb.hosts = { ok: parseInt(a.hosts,10) === p.hostsPerSubnet, text: parseInt(a.hosts,10)===p.hostsPerSubnet ? "correct" : ("should be "+p.hostsPerSubnet) };
+    fb.hosts = { ok: parseInt(a.hosts,10) === p.hostsPerSubnet, text: parseInt(a.hosts,10)===p.hostsPerSubnet ? ("correct — "+p.hostsPerSubnet+" ≥ "+p.requiredHosts+", so it fits") : ("should be "+p.hostsPerSubnet) };
     fb.total = { ok: parseInt(a.total,10) === p.totalSubnets, text: parseInt(a.total,10)===p.totalSubnets ? "correct" : ("should be "+p.totalSubnets) };
     ["sub0","sub1"].forEach(function(sk,i){
       var target = p.subnets[i];
@@ -184,7 +191,7 @@
       + '<div class="problem-top"><span class="tag">Class '+p.class+' · default /'+p.defaultPrefix+'</span><span class="sp"></span>'
       + '<button class="btn sm" id="newProblem">New problem</button></div>'
       + '<h2>Given</h2>'
-      + '<p class="given">Network <b>'+p.base+'</b> — you need at least <b>'+p.requiredSubnets+'</b> subnets.</p>'
+      + '<p class="given">Network <b>'+p.base+'</b> — you need at least <b>'+p.requiredSubnets+'</b> subnets, each with at least <b>'+p.requiredHosts.toLocaleString("en-US")+'</b> hosts.</p>'
 
       + '<div class="step"><div class="step-h"><span class="n">1</span><h3>How many bits do you need to borrow?</h3></div>'
       + '<p class="explain">Subnetting borrows bits from the host portion. Each borrowed bit doubles the number of subnets you can make, so find the smallest n where 2<sup>n</sup> is at least the number of subnets you need.</p>'
@@ -199,7 +206,7 @@
       + '</div></div>'
 
       + '<div class="step"><div class="step-h"><span class="n">3</span><h3>Hosts per subnet, and how many subnets this makes</h3></div>'
-      + '<p class="explain">Whatever bits are left after the new prefix belong to hosts. Usable hosts = 2<sup>host bits</sup> − 2 (the all-zeros network address and all-ones broadcast address are reserved and not usable). Borrowing n bits always creates exactly 2<sup>n</sup> subnets, whether or not you need all of them.</p>'
+      + '<p class="explain">Whatever bits are left after the new prefix belong to hosts. Usable hosts = 2<sup>host bits</sup> − 2 (the all-zeros network address and all-ones broadcast address are reserved and not usable). Then check it fits: your usable hosts must be at least the <b>'+p.requiredHosts.toLocaleString("en-US")+'</b> hosts the question asks for. Borrowing n bits always creates exactly 2<sup>n</sup> subnets, whether or not you need all of them.</p>'
       + '<div class="fields">'
         + fieldHtml("hosts","Usable hosts / subnet", a.hosts, "sm", fb && fb.hosts)
         + fieldHtml("total","Total subnets created", a.total, "sm", fb && fb.total)
