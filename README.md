@@ -1,6 +1,6 @@
 # school-stuff
 
-Study material, one module per folder. Open the [home page](https://fayzalad.github.io/school-stuff/) to pick a module — new ones get added there as they go up.
+Study material, one module per folder. Open the [home page](https://fayzalad.github.io/school-stuff/) to pick a module; each module has its own page that sorts its guides, quizzes, drills and exam practice. To add a module or page, edit the `MODULES` list in `shared/site.js` (a new module also needs a copy of a `<slug>/index.html` folder).
 
 ## Modules
 
