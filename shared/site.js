@@ -47,6 +47,8 @@
       sites: [
         { label: "Exam Study Guide (Units 1-10)", tag: "Guide", href: "stav102-exam-guide/",
           desc: "The whole semester for the final: Units 1-4 and 5-8 from the test guides, plus new Units 9 (regression and correlation) and 10 (time series), what the past finals ask, reading Excel output, errata, traps and a 2-day plan." },
+        { label: "Past-Paper Questions (MCQs + long questions)", tag: "Practice", href: "stav102-past-papers/",
+          desc: "Only questions from 8 past tests and finals, repeats merged and the most-asked first. 170 MCQs with the working, and 31 long questions taught step by step until you can do them yourself." },
         { label: "Exam Quiz (275 questions)", tag: "Quiz", href: "stav102-exam-quiz/",
           desc: "Every unit, 1 to 10, with the working for every answer. Filter by unit or test, an exam sim of 50 questions in the real paper's unit mix, and a redo-what-I-got-wrong mode." },
         { label: "Study Guide", tag: "Guide", href: "stav102-study-guide/",

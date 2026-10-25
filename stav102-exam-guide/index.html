@@ -382,6 +382,7 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;font-family:system-
 <div class="card"><h5>If you have 2 hours</h5>Read <a href="#pattern">What the past papers ask</a>, then all of <a href="#u9">Unit 9</a> and <a href="#u10">Unit 10</a> (new, short, and worth about 9–13 marks), then do the quiz on Units 9–10.</div>
 <div class="card"><h5>If you have a day</h5>Follow the <a href="#plan">2-day plan</a>. Every unit section has worked examples (tap “show”) and the quiz page has questions for every unit.</div>
 </div>
+<div class="okbox"><b>Past papers only:</b> <a href="../stav102-past-papers/">STAV102 Past Papers</a>, one page with two tabs: <b>MCQs</b> (all 206 from 8 papers, repeats merged) and <b>Long questions</b> (all 43, as printed, with memos). Choose “Most likely first” to see the most-repeated questions at the top.</div>
 <div class="tip"><b>Companion page:</b> the <a href="../stav102-exam-quiz/"><b>STAV102 Exam Quiz</b></a> has questions from all ten units, a unit filter, a “50 random” exam simulation and an “only the ones I got wrong” mode. Answer explanations show the working.</div>
 </section>
 
@@ -430,7 +431,7 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;font-family:system-
 <tr><td class="l">9</td><td>44–48</td><td class="l">facts about ρ · <b>regression from Excel output</b> (taxi): a, b, r, prediction at 12 km</td></tr>
 <tr><td class="l">10</td><td>49–50</td><td class="l">a <b>5-point moving average</b> and a <b>4-point centred moving average</b> from a short series</td></tr>
 </table></div>
-
+<div class="okbox"><b>Questions that repeat word for word</b> across papers (learn these answers): the cricket 90% CI for p (0.245 ; 0.315) · the taxi regression (a = 7.623, b = 0.976, r = 0.920, 12 km ⇒ 19.335) · the cholesterol paired test (t Stat = 3.538) · the ATM data 2, 9, 1, 5, 2, 7, 7, 3, 4, 7 (Q3 = 7.00, P30 = 2.30) · the 94%-cure antibiotic with n = 158 (P = 0.5636) · binomial with μ = 5, p = 0.625 ⇒ P(X = 3) = 0.101 · BI(10, 0.9) “which is false” · “X̄ is normal for large n because of the CLT”.</div>
 </section>
 
 <section id="plan">
@@ -2536,7 +2537,7 @@ The conclusion always restates <b>H₁</b> in words — never "H₀ is true".</d
 <div class="def"><b>Independent variable x</b> (explanatory / predictor): the one you <i>use</i> to predict. Goes on the horizontal axis.</div>
 <div class="def"><b>Dependent variable y</b> (response): the one you <i>want to predict</i>. Goes on the vertical axis.</div>
 </div>
-<div class="tip"><b>How to tell which is x:</b> read the question for “estimate <b>y</b> using <b>x</b>” or “predict <b>y</b> from <b>x</b>”. Swapping them changes a, b and every prediction (but not r).</div>
+<div class="tip"><b>How to tell which is x:</b> read the question for “estimate <b>y</b> using <b>x</b>” or “predict <b>y</b> from <b>x</b>”. The November 2025 paper even gave a hint: “we want to estimate whiskey price using whiskey age. Thus price is y and age is x.”  Swapping them changes a, b and every prediction (but not r).</div>
 <p>A <b>scatter plot</b> is always the first step. Its pattern is one of three kinds:</p>
 <div class="grid3">
 <div class="card"><h5>Positive linear</h5>Points rise from left to right: as x increases, y increases. r &gt; 0, b &gt; 0.</div>
@@ -2565,9 +2566,39 @@ b = <span class="frac"><span class="n">S<sub>XY</sub></span><span class="d">S<su
 <li>Write the line with the variable names: e.g. <i>pricê = 219.926 + 9.012 × age</i>.</li>
 </ol>
 
+<details class="wex"><summary>Worked example — whiskey price vs age (November 2025 final, Q8)</summary><div class="body">
+<p>Price (R) is y, age (years) is x, n = 6.</p>
+<div class="tblwrap"><table>
+<tr><th>x (age)</th><th>y (price)</th><th>x²</th><th>y²</th><th>xy</th></tr>
+<tr><td>3</td><td>230</td><td>9</td><td>52 900</td><td>690</td></tr>
+<tr><td>8</td><td>288</td><td>64</td><td>82 944</td><td>2 304</td></tr>
+<tr><td>12</td><td>338</td><td>144</td><td>114 244</td><td>4 056</td></tr>
+<tr><td>9</td><td>289</td><td>81</td><td>83 521</td><td>2 601</td></tr>
+<tr><td>2</td><td>235</td><td>4</td><td>55 225</td><td>470</td></tr>
+<tr><td>3</td><td>273</td><td>9</td><td>74 529</td><td>819</td></tr>
+<tr class="tot"><td>Σx = 37</td><td>Σy = 1 653</td><td>Σx² = 311</td><td>Σy² = 463 363</td><td>Σxy = 10 940</td></tr>
+</table></div>
+<div class="calcstep">x̄ = 37/6 = 6.1667 &nbsp;·&nbsp; ȳ = 1653/6 = 275.5</div>
+<div class="calcstep">S<sub>XX</sub> = 311 − 37²/6 = 311 − 228.1667 = 82.8333</div>
+<div class="calcstep">S<sub>YY</sub> = 463 363 − 1653²/6 = 463 363 − 455 401.5 = 7 961.5</div>
+<div class="calcstep">S<sub>XY</sub> = 10 940 − (37)(1653)/6 = 10 940 − 10 193.5 = 746.5</div>
+<div class="calcstep">b = 746.5/82.8333 = 9.0121 &nbsp;·&nbsp; a = 275.5 − 9.0121(6.1667) = 219.926</div>
+<p><span class="ans">ŷ = 219.926 + 9.012x</span>: each extra year of ageing adds about R9.01 to the price.</p>
+<div class="calcstep">r = 746.5/√(82.8333 × 7961.5) = 746.5/812.08 = <span class="ans">0.919</span> → strong positive linear relationship between age and price.</div>
+<div class="calcstep">r² = 0.919² = <span class="ans">0.845</span> → 84.5% of the variation in whiskey price is explained by the variation in age.</div>
+<p>The memo awarded 3 marks for r (S-values, r, interpretation) and 2 for r² (value, interpretation).</p>
+</div></details>
 
-
-
+<details class="wex"><summary>Worked example — line from summary sums only (January 2026 final, Q9)</summary><div class="body">
+<p>Price x (cents) and demand y (thousand units), six market areas: n = 6, Σx = 82, Σy = 382, Σx² = 1 166, Σy² = 133 780, Σxy = 4 579, x̄ = 13.667, ȳ = 63.667.</p>
+<div class="calcstep">S<sub>XX</sub> = 1166 − 82²/6 = 45.3333 &nbsp;·&nbsp; S<sub>YY</sub> = 133 780 − 382²/6 = 109 459.3333</div>
+<div class="calcstep">S<sub>XY</sub> = 4579 − (82)(382)/6 = 4579 − 5220.6667 = −641.6667</div>
+<div class="calcstep">b = −641.6667/45.3333 = −14.1544 &nbsp;·&nbsp; a = 63.6667 − (−14.1544)(13.6667) = 257.110</div>
+<p><span class="ans">ŷ = 257.110 − 14.154x</span> (demand falls by about 14 154 units for every extra cent).</p>
+<div class="calcstep">At x = 15: ŷ = 257.110 − 14.154(15) = <span class="ans">44.794</span> thousand units</div>
+<div class="calcstep">r = −641.6667/√(45.3333 × 109 459.3333) = −0.288 &nbsp;⇒&nbsp; r² = <span class="ans">0.083</span> (only 8.3% of the variation in demand is explained by price).</div>
+<div class="warnbox">The official memo wrote S<sub>XY</sub> = −641.1667 (an arithmetic slip), so it shows b = −14.143, a = 256.960 and 44.815. Either working would earn the method marks; the value above is the correct one.</div>
+</div></details>
 
 <h3 id="u9-pred">9.3.3 Predicting and extrapolation</h3>
 <p>Substitute the new x into the line: ŷ* = a + bx*. Answer with units and a sentence.</p>
@@ -2645,7 +2676,7 @@ Sentence: “There is a <b>strong positive</b> linear relationship between [x] a
 <tr><td class="l">Coefficients — Intercept</td><td class="l">a</td></tr>
 <tr><td class="l">Coefficients — X Variable (the x name)</td><td class="l">b</td></tr>
 </table></div>
-
+<div class="okbox"><b>The taxi question (both 2025 finals, time y vs distance x, 15 trips):</b> Intercept a = 7.623, slope b = 0.976, Multiple R = r = 0.920, R Square = 0.847. Predicted time at 12 km: ŷ = 7.623 + 0.976(12) = <b>19.335</b>.</div>
 <div class="tip">In Excel: <code>=CORREL(x,y)</code> gives r, <code>=RSQ(y,x)</code> r², <code>=SLOPE(y,x)</code> b, <code>=INTERCEPT(y,x)</code> a. Data → Data Analysis → Regression gives the full table, and a scatter plot with “Add Trendline → Display equation and R²” shows the same line (Practical 6).</div>
 
 <h3>Unit 9 traps</h3>
@@ -2701,8 +2732,19 @@ Sentence: “There is a <b>strong positive</b> linear relationship between [x] a
 <p>A <b>4-point MA</b> of t = 1, 2, 3, 4 belongs at t = 2.5, a time point that doesn’t exist. Fix: take a <b>2-point average of consecutive 4-point MAs</b>. This is the <b>centred moving average</b> (CMA), and it falls on a real time point.</p>
 <div class="fml"><span class="lbl">Centred 4-point MA at t</span>CMA<sub>t</sub> = <span class="frac"><span class="n">MA<sub>t−0.5</sub> + MA<sub>t+0.5</sub></span><span class="d">2</span></span> &nbsp; = &nbsp;<span class="frac"><span class="n">y<sub>t−2</sub> + 2y<sub>t−1</sub> + 2y<sub>t</sub> + 2y<sub>t+1</sub> + y<sub>t+2</sub></span><span class="d">8</span></span></div>
 <div class="tip"><b>Shortcut for MCQs:</b> the second form gives a centred MA in one line. For quarterly data the first centred value is at t = 3 and you lose two values at each end.</div>
-
-
+<details class="wex"><summary>Worked example — November 2025 final, MCQ 49 and 50</summary><div class="body">
+<p>Series (t = 1 … 9): 24, 28, 34, 48, 21, 19, 41, 35, 20. ♪ is the 5-point MA next to 34 (t = 3); ◇ is the 4-point centred MA next to 19 (t = 6).</p>
+<div class="calcstep">♪ = (24 + 28 + 34 + 48 + 21)/5 = 155/5 = <span class="ans">31.0</span> (option b)</div>
+<p>For t = 6 we need the two 4-point MAs either side of 6: the one at 5.5 (averages t = 4–7) and the one at 6.5 (averages t = 5–8).</p>
+<div class="calcstep">MA<sub>5.5</sub> = (48 + 21 + 19 + 41)/4 = 32.25 &nbsp;·&nbsp; MA<sub>6.5</sub> = (21 + 19 + 41 + 35)/4 = 29.0</div>
+<div class="calcstep">◇ = (32.25 + 29.0)/2 = <span class="ans">30.625</span> (option d) &nbsp;·&nbsp; check with the shortcut: (48 + 2·21 + 2·19 + 2·41 + 35)/8 = 245/8 = 30.625 ✓</div>
+<div class="warnbox">The most common slip is averaging the wrong pair. Write each 4-point MA on the line <i>between</i> two time points, then average the two that sit just above and just below your target row.</div>
+</div></details>
+<details class="wex q"><summary>Try it — January 2026 final, MCQ 34 and 35</summary><div class="body">
+<p>Series: 45, 32, 21, 28, 35, 28, 17, 22, 33. ♪ = 5-point MA at t = 4; ◇ = 4-point centred MA at t = 6.</p>
+<div class="calcstep">♪ = (32 + 21 + 28 + 35 + 28)/5 = 144/5 = <span class="ans">28.8</span></div>
+<div class="calcstep">◇ = (28 + 2·35 + 2·28 + 2·17 + 22)/8 = 210/8 = <span class="ans">26.25</span></div>
+</div></details>
 <details class="wex q"><summary>Try it — road offences, 4-point centred MA (Unit 10 Q1)</summary><div class="body">
 <p>y<sub>t</sub> (t = 1 … 6): 150.4, 112.6, 134.1, 185.2, 160.1, 113.4 …</p>
 <div class="calcstep">MA<sub>2.5</sub> = (150.4 + 112.6 + 134.1 + 185.2)/4 = 145.575 · MA<sub>3.5</sub> = (112.6 + 134.1 + 185.2 + 160.1)/4 = 148.0</div>
@@ -2780,8 +2822,8 @@ Sentence: “There is a <b>strong positive</b> linear relationship between [x] a
 <tr><td class="l">P(T&lt;=t) one-tail / two-tail</td><td class="l">p-values (reject H₀ if p ≤ α)</td></tr>
 <tr><td class="l"><b>t Critical one-tail / two-tail</b></td><td class="l"><b>the critical value</b>: use one-tail for &lt; or &gt; in H₁, two-tail for ≠</td></tr>
 </table></div>
-
-
+<div class="okbox"><b>Cholesterol supplement (November 2025 MCQ 41–43 and January 2026 MCQ 25–27, the same question):</b> 28 people measured before and after 4 months ⇒ <b>paired</b>. “Significantly decreases” ⇒ H₁: μ<sub>after</sub> &lt; μ<sub>before</sub> (option c). Test statistic = the <b>t Stat</b> row = 3.538 (option c). The output shows t Critical one-tail = 2.473 and t Critical two-tail = 2.770. The test is <b>one-tailed</b>, so the critical value is 2.473, which isn’t listed ⇒ <b>(e)</b>. Option (d) 2.770 is the trap: it is the two-tail value. (6.364 and 5.989 are just the before/after means.)</div>
+<div class="tip"><b>Same idea, Descriptive Statistics (November 2025 MCQ 19–21):</b> Minimum 120, Maximum 982 ⇒ range = 862 (b). Count = 64, which isn’t an option ⇒ sample size (e). The output lists only Largest(2) = 935, so the 4th highest value can’t be read off ⇒ (e).</div>
 <div class="tip">This is also what Practical 5 did by hand and in Excel (oranges, cholesterol, techniques A/B). Regression output is explained in <a href="#u9-excel">Unit 9</a>.</div>
 </section>
 
@@ -2790,6 +2832,11 @@ Sentence: “There is a <b>strong positive</b> linear relationship between [x] a
 <p class="lede">Found while recomputing every worked example. If your answer disagrees with a printed one in these places, yours is probably right. Rows marked <b>new</b> are from Units 9–10 and the 2025 final memos; the rest are from the Test 2 guide.</p>
 <div class="tblwrap"><table>
 <tr><th class="l">Where</th><th class="l">Printed</th><th class="l">Correct</th></tr>
+<tr><td class="l"><b>new</b> · Jan 2026 memo Q6 1(b), BI(5, 0.69)</td><td class="l">P(X ≥ 1) = 0.00286</td><td class="l">0.00286 is P(X = 0); P(X ≥ 1) = 1 − 0.00286 = <b>0.997</b></td></tr>
+<tr><td class="l"><b>new</b> · Jan 2026 memo Q9</td><td class="l">S<sub>XY</sub> = −641.1667 ⇒ ŷ = 256.960 − 14.143x, ŷ(15) = 44.815</td><td class="l">S<sub>XY</sub> = −641.6667 ⇒ ŷ = 257.110 − 14.154x, ŷ(15) = <b>44.794</b> (r² = 0.083 either way)</td></tr>
+<tr><td class="l"><b>new</b> · Jan 2026 memo Q7(1)</td><td class="l">CI labelled “0.99”, “13.5 − 0.7” twice</td><td class="l">95% CI = [13.5 − 0.7 ; 13.5 + 0.7] = [12.8 ; 14.2]</td></tr>
+<tr><td class="l"><b>new</b> · Nov 2025 memo Q7</td><td class="l">“|t| = 1.885 &lt; t<sub>crit</sub> = 2.01”</td><td class="l">t<sub>40; 0.975</sub> = 2.021 (same decision: do not reject)</td></tr>
+<tr><td class="l"><b>new</b> · Nov 2025 memo MCQ 40</td><td class="l">answer (e)</td><td class="l">H₁: σ &gt; 0.2 at α = 10% gives χ²<sub>24; 0.90</sub> = 33.20, which is option (b). Ask your lecturer which is intended; in the exam, trust the table.</td></tr>
 <tr><td class="l"><b>new</b> · Unit 9 solutions Q1</td><td class="l">4th marketing value 23.1</td><td class="l">The notes’ data say 32.1. The solutions use 23.1 throughout (ŷ = −151.15 + 28.622x, r = 0.846). With 32.1: ŷ = −85.907 + 23.524x, r = 0.893, r² = 0.798.</td></tr>
 <tr><td class="l"><b>new</b> · Unit 9 solutions Q3</td><td class="l">S<sub>XX</sub> = 400 250</td><td class="l">S<sub>XX</sub> = 212.875 (copied from Q2; b = 0.459 already uses 212.875). a = 4.872 with full precision.</td></tr>
 <tr><td class="l"><b>new</b> · Notes 10.3.1</td><td class="l">first 5-pt MA “16 + 22 + 15 + 15 + 12”</td><td class="l">14 + 16 + 22 + 15 + 12 = 79, /5 = 15.8</td></tr>
