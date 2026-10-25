@@ -12,6 +12,10 @@ Study material, one module per folder. Open the [home page](https://fayzalad.git
 ### WRAV102 / MSEV102 — Semester Test 2 theory
 - **[Theory Drill](https://fayzalad.github.io/school-stuff/wrav102-drill/)** — 100 multiple-choice questions covering the Section A theory topics: sorting algorithms (bubble, selection, insertion), searching and sorted state (linear vs binary), classes/list classes/arraylists/arrays/text files/position rules, and code tracing and applied questions. Answers save to your browser. Four tabs, 25 questions each.
 
+### STAV102 — Business Statistics, final exam (Units 1–10)
+- **[Exam Study Guide](https://fayzalad.github.io/school-stuff/stav102-exam-guide/)** — all ten units: the Test 1 and Test 2 guide sections plus new Units 9 (regression and correlation) and 10 (time series), the exam layout and what past finals ask, reading MS Excel output, errata, traps, exam technique and a 2-day plan.
+- **[Exam Quiz](https://fayzalad.github.io/school-stuff/stav102-exam-quiz/)** — 275 multiple-choice questions across Units 1–10 with worked explanations; filter by unit, a 50-question exam sim in the paper's unit mix, and a redo-wrong-answers mode.
+
 ### STAV102 — Business Statistics, Semester Test 2 (Units 5–8)
 - **[Study Guide](https://fayzalad.github.io/school-stuff/stav102-study-guide/)** — probability distributions (discrete, binomial, Poisson, normal, inverse normal), sampling distributions and the CLT, confidence intervals (μ, p, σ², sample size) and hypothesis testing (one- and two-population, paired), with worked examples from the notes, example packs and unit memos, a "which test?" decision tree, what the lecture videos add, an errata table for the notes and memos, exam traps and a 7-day plan.
 - **[MCQ Drill](https://fayzalad.github.io/school-stuff/stav102-quiz/)** — 68 multiple-choice questions in the test's a)–e) style with a worked explanation for every answer. Filter by unit; "test sim" serves 20 random questions; wrong answers are remembered in your browser so you can redo only those.

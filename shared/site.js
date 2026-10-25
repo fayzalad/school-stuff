@@ -42,9 +42,13 @@
     },
     {
       slug: "stav102", code: "STAV102", name: "Business Statistics",
-      blurb: "Semester Test 2, Units 5 to 8: distributions, sampling, confidence intervals and hypothesis testing.",
+      blurb: "Final exam (Tue 27 Oct 2026), all ten units: descriptive statistics, probability, distributions, sampling, confidence intervals, hypothesis tests, regression and time series. Test 2 pages (Units 5 to 8) below.",
       tint: "#0F5B8C", tintDark: "#7DB8E0",
       sites: [
+        { label: "Exam Study Guide (Units 1-10)", tag: "Guide", href: "stav102-exam-guide/",
+          desc: "The whole semester for the final: Units 1-4 and 5-8 from the test guides, plus new Units 9 (regression and correlation) and 10 (time series), what the past finals ask, reading Excel output, errata, traps and a 2-day plan." },
+        { label: "Exam Quiz (275 questions)", tag: "Quiz", href: "stav102-exam-quiz/",
+          desc: "Every unit, 1 to 10, with the working for every answer. Filter by unit or test, an exam sim of 50 questions in the real paper's unit mix, and a redo-what-I-got-wrong mode." },
         { label: "Study Guide", tag: "Guide", href: "stav102-study-guide/",
           desc: "Units 5-8: probability distributions, sampling distributions, confidence intervals, hypothesis tests. Worked examples, lecture-video notes, errata, 7-day plan." },
         { label: "Cheat Sheet", tag: "Sheet", href: "stav102-cheat-sheet/",
