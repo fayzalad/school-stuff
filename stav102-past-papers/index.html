@@ -258,7 +258,9 @@ $("mode").value = "set";
 var TAB = (location.hash === "#long" || location.hash === "#mcq") ? location.hash.slice(1) : (store.get("stav-pp-tab") || "mcq");
 var DATA = {mcq: MCQ, long: LONGQ}, wrong = {mcq: store.get("stav-pastpaper-wrong") || {}, long: store.get("stav-pastpaper-long-wrong") || {}};
 var WKEY = {mcq: "stav-pastpaper-wrong", long: "stav-pastpaper-long-wrong"};
-var shown = [], answered = 0, correct = 0;
+var shown = [], answered = 0, correct = 0, FIRST = true;
+var ANS = store.get("stav-pp-ans") || {mcq:{}, long:{}}, UI = store.get("stav-pp-ui") || {}, ORD = store.get("stav-pp-ord") || {};
+function saveUI(){ store.set("stav-pp-ui", {unit:$("unit").value, set:$("set").value, mode:$("mode").value}); }
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 function $(id){return document.getElementById(id)}
 function imgs(list){return list.map(function(n){return '<img src="'+IMG[n]+'" alt="As printed in the paper">'}).join("")}
@@ -273,15 +275,18 @@ function setTab(t){
   var ns = t === "mcq" ? 7 : 3, sh = "";
   for (var k=1; k<=ns; k++) sh += '<option value="'+k+'">Set '+k+' — '+DATA[t].filter(function(q){return q.set===k}).length+' questions</option>';
   $("set").innerHTML = sh;
+  if (FIRST && UI.set) $("set").value = UI.set;
   $("mode").options[0].text = "One set at a time (every unit in each set)";
   $("mode").options[3].text = "Only repeats (asked 2+ times) — " + rep;
   $("mode").options[5].text = t === "mcq" ? "50 random" : "8 random";
   $("intro").innerHTML = t === "mcq"
     ? "Pick a <b>set</b> of about 25: every set has questions from every unit (Set 1 has the most-asked ones); switch “Show” for all of them at once. Multiple-choice questions from the 8 papers. Tap an option to see the answer and the working. The tag “Asked 3×” lists each paper it appeared in."
     : "Pick a <b>set</b> of about 10 long questions spread over all the units that have them; switch “Show” for all of them. Try it on paper, then tap <b>Start step 1</b>: each step says what to do and why, and <b>Show working</b> reveals the calculation. When you can do it without the steps, tap <b>I can do it myself</b>; otherwise <b>Practise again</b> keeps it in “Only ones I got wrong”.";
-  build();
+  if (FIRST && UI.unit) $("unit").value = UI.unit;
+  if (FIRST && UI.mode) $("mode").value = UI.mode;
+  build(false); FIRST = false;
 }
-function pool(){
+function pool(fresh){
   var u = $("unit").value, m = $("mode").value;
   var p = DATA[TAB].map(function(q,i){q.i=i;return q}).filter(function(q){return u==="all"||String(q.u)===u||(GRP[u]&&GRP[u].indexOf(q.u)>=0)});
   if (m === "set") p = p.filter(function(q){return String(q.set)===$("set").value});
@@ -289,18 +294,26 @@ function pool(){
   if (m === "rep") p = p.filter(function(q){return q.src.length>1});
   if (m === "fin") p = p.filter(function(q){return q.fin});
   if (m === "wrong") p = p.filter(function(q){return wrong[TAB][q.i]});
-  if (m === "rand") p = shuffle(p.slice()).slice(0, TAB === "mcq" ? 50 : 8);
+  if (m === "rand"){
+    var o = !fresh && ORD[TAB];
+    if (o && o.every(function(i){return DATA[TAB][i]})) p = o.map(function(i){return DATA[TAB][i]});
+    else { p = shuffle(p.slice()).slice(0, TAB === "mcq" ? 50 : 8); ORD[TAB] = p.map(function(q){return q.i}); store.set("stav-pp-ord", ORD); }
+  }
   return p;
 }
 function head(q,n){
   return '<div class="meta">Question '+(n+1)+'<span class="u">Unit '+q.u+'</span>'+(q.src.length>1?'<span class="rep">Asked '+q.src.length+'×</span>':'')+'</div>';
 }
-function mark(q, ok){
+function mark(q, ok, val){
+  ANS[TAB][q.i] = val; store.set("stav-pp-ans", ANS);
   answered++; if (ok){ correct++; delete wrong[TAB][q.i]; } else wrong[TAB][q.i] = 1;
   store.set(WKEY[TAB], wrong[TAB]); upd();
 }
-function build(){
-  shown = pool(); answered = 0; correct = 0;
+function build(fresh){
+  saveUI();
+  shown = pool(fresh);
+  if (fresh) shown.forEach(function(q){ delete ANS[TAB][q.i]; delete wrong[TAB][q.i]; });
+  if (fresh) { store.set("stav-pp-ans", ANS); store.set(WKEY[TAB], wrong[TAB]); } answered = 0; correct = 0;
   var list = $("list"); list.innerHTML = ""; list.className = $("showall").checked ? "show" : "";
   $("end").className = "end";
   if (!shown.length){ list.innerHTML = '<div class="q">Nothing here yet. Questions you get wrong are remembered on this device.</div>'; upd(); return; }
@@ -319,9 +332,15 @@ function build(){
           d.classList.add("done"); var k = +li.dataset.k;
           d.querySelectorAll("ol.op li")[q.a].classList.add("right");
           if (k !== q.a) li.classList.add("wrong");
-          mark(q, k === q.a);
+          mark(q, k === q.a, k);
         });
       });
+      var sv = ANS.mcq[q.i];
+      if (sv !== undefined && sv !== null){
+        d.classList.add("done"); var lis = d.querySelectorAll("ol.op li");
+        lis[q.a].classList.add("right"); if (sv !== q.a) lis[sv].classList.add("wrong");
+        answered++; if (sv === q.a) correct++;
+      }
     } else {
       var h = head(q,n) + '<h3>'+q.t+'</h3><div class="src">'+q.src.join(' · ')+'</div>';
       h += '<div class="lq">'+q.q+'</div>';
@@ -345,8 +364,10 @@ function build(){
         }
         go.addEventListener("click", function(){ if (idx < sts.length - 1) reveal(); });
         d.querySelectorAll(".sw").forEach(function(b){ b.addEventListener("click", function(){ b.parentNode.classList.add("w"); }); });
-        d.querySelector(".got").addEventListener("click", function(){ d.classList.add("marked"); d.querySelector(".res").textContent = "✓ well done"; mark(q, true); });
-        d.querySelector(".not").addEventListener("click", function(){ d.classList.add("marked"); d.querySelector(".res").textContent = "✗ saved to practise again"; mark(q, false); });
+        d.querySelector(".got").addEventListener("click", function(){ d.classList.add("marked"); d.querySelector(".res").textContent = "✓ well done"; mark(q, true, "got"); });
+        d.querySelector(".not").addEventListener("click", function(){ d.classList.add("marked"); d.querySelector(".res").textContent = "✗ saved to practise again"; mark(q, false, "not"); });
+        var sv = ANS.long[q.i];
+        if (sv){ d.classList.add("marked"); d.querySelector(".res").textContent = sv === "got" ? "✓ well done" : "✗ saved to practise again"; answered++; if (sv === "got") correct++; }
       })(d, q);
     }
     list.appendChild(d);
@@ -362,10 +383,10 @@ function upd(){
     $("end").className = "end on";
   }
 }
-$("go").addEventListener("click", build);
-$("mode").addEventListener("change", build);
-$("unit").addEventListener("change", build);
-$("set").addEventListener("change", function(){ $("mode").value = "set"; build(); });
+$("go").addEventListener("click", function(){ build(true); });
+$("mode").addEventListener("change", function(){ build(false); });
+$("unit").addEventListener("change", function(){ build(false); });
+$("set").addEventListener("change", function(){ $("mode").value = "set"; build(false); });
 $("showall").addEventListener("change", function(){ $("list").className = this.checked ? "show" : ""; });
 $("tmcq").addEventListener("click", function(){ setTab("mcq"); });
 $("tlong").addEventListener("click", function(){ setTab("long"); });
