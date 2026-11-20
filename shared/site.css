@@ -49,7 +49,7 @@ a{color:inherit;text-decoration:none}
 .crumb-sep{color:var(--ink2)}
 .crumb-here{font:500 .85rem var(--f-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .themebtn{min-height:46px;min-width:46px;padding:8px 16px;border-radius:10px;border:1px solid var(--line2);background:var(--surface);
-  color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;font:600 .95rem var(--f-ui);text-transform:capitalize}
+  color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:500 .95rem var(--f-ui);text-transform:capitalize}
 .themebtn:hover{border-color:var(--ink2)}
 .themebtn svg{flex:none}
 
