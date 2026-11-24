@@ -62,6 +62,16 @@ kbd{font:500 .8em var(--mono);border:1px solid var(--line2);border-bottom-width:
 .facts b{font:500 1.5rem/1.2 var(--serif);color:var(--ink)}
 @media (min-width:1000px){.head{grid-template-columns:1fr auto;align-items:end;padding-top:56px}}
 
+/* ---- the Oct 2026 paper strip ---- */
+.paper{max-width:1320px;margin:0 auto 32px;padding:0 20px}
+.paper .in{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:20px 22px}
+.paper h2{font:500 1.25rem/1.25 var(--serif);margin:0 0 4px}
+.paper p{margin:0 0 14px;color:var(--ink2);font-size:.95rem;max-width:80ch}
+.qlist{list-style:none;margin:0;padding:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+.qlist a{display:flex;flex-direction:column;gap:2px;min-height:56px;padding:10px 12px;border:1px solid var(--line2);border-radius:9px;color:var(--ink);text-decoration:none;font-size:.92rem;line-height:1.3;transition:border-color .15s ease,background-color .15s ease}
+.qlist a:hover{border-color:var(--accent);background:var(--tint)}
+.qlist span{font:500 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+
 /* ---- layout ---- */
 .layout{max-width:1320px;margin:0 auto;padding:0 20px 72px;display:grid;gap:24px}
 @media (min-width:1000px){.layout{grid-template-columns:300px minmax(0,1fr);gap:40px;align-items:start}}
@@ -196,14 +206,31 @@ footer.site a{color:var(--ink2)}
   <div>
     <div class="eyebrow">STAV102 · Business Statistics · Rewrite prep</div>
     <h1>Long-Question Workshop</h1>
-    <p class="lede">Every long-question type from this year's Funda tutorials and practicals, plus the ones the 2025–26 finals asked. Each one opens with <b>your class numbers</b>. Answer it, check it, learn it one step at a time, then press <b>New numbers</b> until you get it right twice.</p>
+    <p class="lede">Every long-question type from this year's Funda tutorials and practicals and the 2025–26 finals, including all 8 from the October 2026 exam. Each one opens with <b>your class numbers</b>. Answer it, check it, learn it one step at a time, then press <b>New numbers</b> until you get it right twice.</p>
   </div>
   <ul class="facts">
-    <li><b>19</b>question types</li>
-    <li><b>Units 5–9</b>the hard half</li>
+    <li><b>20</b>question types</li>
+    <li><b>Units 3, 5–9</b>every long-question unit</li>
     <li><b>∞</b>fresh numbers</li>
   </ul>
 </div>
+
+<section class="paper" aria-labelledby="pp26">
+  <div class="in">
+    <h2 id="pp26">The October 2026 exam, question by question</h2>
+    <p>The memo is on Funda. All 8 long questions had been asked before, most with the same numbers. Expect the rewrite to recycle the same pool.</p>
+    <ol class="qlist">
+      <li><a href="#grouped"><span>Q1 · 7 marks</span>Grouped data: sd and 30th percentile</a></li>
+      <li><a href="#pois"><span>Q2 · 6</span>Poisson, rescale λ, E and σ</a></li>
+      <li><a href="#xbar"><span>Q3 · 3</span>Sampling distribution of x̄</a></li>
+      <li><a href="#phat"><span>Q4 · 3</span>Sampling distribution of p̂</a></li>
+      <li><a href="#htvar"><span>Q5 · 4</span>Test for a variance (χ²)</a></li>
+      <li><a href="#htmean"><span>Q6 · 5</span>Test for a mean, σ known</a></li>
+      <li><a href="#pooled"><span>Q7 · 7</span>Two means, pooled t</a></li>
+      <li><a href="#reg"><span>Q8 · 5</span>Correlation r and r²</a></li>
+    </ol>
+  </div>
+</section>
 
 <div class="layout">
   <aside class="side" id="side" aria-label="Question types"></aside>
@@ -328,6 +355,39 @@ var SYM = { left: "&lt;", right: "&gt;", two: NE };
 var TOPICS = [];
 function topic(o) { TOPICS.push(o); }
 
+/* ---------------- Unit 3 ---------------- */
+topic({ id: "grouped", unit: 3, title: "Grouped data: mean, standard deviation, percentile", from: "2026 Test 1 Q3, asked again as October 2026 exam Q1",
+  spot: "A frequency table with classes like [11.0 – 16.5) and frequencies f. Asked: mean, variance / standard deviation, median, quartile or a percentile, plus “interpret”.",
+  formula: "x̄ = Σfm/n · s² = [Σfm² − (Σfm)²/n]/(n − 1) · P<sub>p</sub> = l + c(np/100 − F<sub>i−1</sub>)/f<sub>i</sub> (median: p = 50; Q₁: 25; Q₃: 75)",
+  gen: function (orig) {
+    var ctx = orig ? 0 : ri(0, 2), L0 = orig ? 0 : pick([0, 10, 20, 50]), c = orig ? 5.5 : pick([2, 4, 5, 5.5, 10]);
+    var f = orig ? [1, 2, 8, 10, 14] : [ri(1, 6), ri(3, 10), ri(5, 15), ri(4, 14), ri(1, 9)], p = orig ? 30 : pick([10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90]);
+    var CX = [["time (hours) taken to draft a commercial contract", "contracts", "hours"], ["delivery time (minutes) of online orders", "orders", "minutes"], ["weekly amount (R) spent on data by students", "students", "rand"]][ctx];
+    var n = sum(f), lo = f.map(function (_, i) { return R(L0 + i * c, 2); }), m = lo.map(function (l) { return R(l + c / 2, 3); });
+    var fm = f.map(function (v, i) { return v * m[i]; }), fm2 = f.map(function (v, i) { return v * m[i] * m[i]; }), Fc = [], run = 0;
+    f.forEach(function (v) { run += v; Fc.push(run); });
+    var Sfm = sum(fm), Sfm2 = sum(fm2), mean = Sfm / n, s2 = (Sfm2 - Sfm * Sfm / n) / (n - 1), sd = Math.sqrt(s2);
+    var tgt = n * p / 100, ci = 0; while (Fc[ci] < tgt) ci++;
+    var Fb = ci ? Fc[ci - 1] : 0, Pp = lo[ci] + c * (tgt - Fb) / f[ci];
+    var nm = p === 50 ? "median" : p === 25 ? "first quartile Q₁" : p === 75 ? "third quartile Q₃" : p + "th percentile";
+    var cls = function (i) { return "[" + G(lo[i]) + " – " + G(R(lo[i] + c, 2)) + ")"; };
+    return {
+      q: P("A sample of " + n + " " + CX[1] + " is summarised below (" + CX[0] + "):") + tbl(["Class", "Frequency (f)"], f.map(function (v, i) { return [cls(i), v]; })) +
+        P("Round to three decimals."),
+      parts: [num("a", "Mean", R(mean, 3), 3, 0.002), num("b", "Standard deviation", R(sd, 3), 3, 0.003), num("c", "The " + nm, R(Pp, 3), 3, 0.003),
+        pickp("d", "Interpret the " + nm, [p + "% of the " + CX[1] + " are at or below " + F(Pp, 3) + " " + CX[2], "The average is " + F(Pp, 3) + " " + CX[2], p + "% of the " + CX[1] + " are above " + F(Pp, 3) + " " + CX[2]], 0)],
+      steps: [S("Build one working table", "Midpoint m = (lower + upper)/2. Then fm, fm² and the running total F. Every part uses these columns, so do it once.",
+        tbl(["Class", "f", "m", "fm", "fm²", "F"], f.map(function (v, i) { return [cls(i), v, G(m[i]), F(fm[i], 3), F(fm2[i], 4), Fc[i]]; }).concat([["Total", n, "", F(Sfm, 3), F(Sfm2, 4), ""]]))),
+        S("(a) Mean", "x̄ = Σfm/n.", C("x̄ = " + F(Sfm, 3) + "/" + n + " = " + A(F(mean, 3) + " " + CX[2]))),
+        S("(b) Variance, then standard deviation", "Grouped formula from the sheet; n − 1 underneath. Keep Σfm² unrounded.",
+          C("s² = [" + F(Sfm2, 4) + " − (" + F(Sfm, 3) + ")²/" + n + "]/" + (n - 1) + " = " + F(s2, 3), "s = " + SQ + F(s2, 3) + " = " + A(F(sd, 3) + " " + CX[2]))),
+        S("(c) Find the class that holds the " + nm, "Grouped data: position = np/100 (no +1). The class is the first one whose F reaches it.",
+          C("np/100 = " + n + " × " + p + "/100 = " + F(tgt, 2), "F = " + Fc.join(", ") + " ⇒ class " + cls(ci) + ": l = " + G(lo[ci]) + ", c = " + G(c) + ", f = " + f[ci] + ", F<sub>i−1</sub> = " + Fb)),
+        S("(c) Substitute", "", C("P<sub>" + p + "</sub> = " + G(lo[ci]) + " + " + G(c) + "(" + F(tgt, 2) + " − " + Fb + ")/" + f[ci] + " = " + A(F(Pp, 3) + " " + CX[2]))),
+        S("(d) Interpret (1 mark)", "Say what percentage is at or below the value, in context.", P(p + "% of the " + CX[1] + " are at or below " + F(Pp, 3) + " " + CX[2] + " (and " + (100 - p) + "% are above)."))]
+    };
+  } });
+
 /* ---------------- Unit 5 ---------------- */
 topic({ id: "binom", unit: 5, title: "Binomial probabilities", from: "Tutorial Quiz 5, Q3 (clothing returns)",
   spot: "A fixed number of trials n, each one is a success or a failure, and the chance of success p is the same every time. Words: “out of n”, “exactly”, “at most”, “at least”.",
@@ -358,7 +418,7 @@ topic({ id: "binom", unit: 5, title: "Binomial probabilities", from: "Tutorial Q
     };
   } });
 
-topic({ id: "pois", unit: 5, title: "Poisson probabilities", from: "Tutorial Quiz 5, Q4 (speeding on campus)",
+topic({ id: "pois", unit: 5, title: "Poisson probabilities", from: "Tutorial Quiz 5, Q4 (speeding on campus); October 2026 exam Q2 is the same idea (insurance claims)",
   spot: "A count of events in a fixed stretch of time or space, with an average rate λ (“on average 3.1 per day”). No fixed n.",
   formula: "P(X = x) = λ<sup>x</sup>e<sup>−λ</sup>/x! &nbsp;·&nbsp; E(X) = V(X) = λ &nbsp;·&nbsp; change the period ⇒ change λ in proportion",
   gen: function (orig) {
@@ -371,14 +431,16 @@ topic({ id: "pois", unit: 5, title: "Poisson probabilities", from: "Tutorial Qui
       parts: [num("a", "The probability that, on a given day, exactly " + x + " motorists exceed the limit.", R(px, 4), 4),
         num("b", "The probability that, on a given day, more than " + m + " motorist" + (m > 1 ? "s" : "") + " exceed the limit.", R(1 - cum, 4), 4, 0.0006),
         num("c", "The expected number of motorists who exceed the limit in a " + t + "-day period.", R(l * t, 4), 2, 0.006),
-        num("d", "The probability that nobody exceeds the limit over " + t2 + " days.", R(p0, 4), 4)],
+        num("d", "The probability that nobody exceeds the limit over " + t2 + " days.", R(p0, 4), 4),
+        num("e", "The standard deviation of the number of motorists in a " + t + "-day period.", R(Math.sqrt(l * t), 4), 3, 0.002)],
       steps: [S("Name the distribution", "Events counted per day, with an average rate, no fixed number of trials ⇒ Poisson.", C("X ~ Poisson(λ = " + G(l) + " per day)")),
         S("(a) Exactly " + x, "Straight into the formula.", C("P(X = " + x + ") = " + G(l) + "<sup>" + x + "</sup>e<sup>−" + G(l) + "</sup>/" + x + "! = " + A(F(px, 4)))),
         S("(b) “More than " + m + "” = 1 − P(X " + LE + " " + m + ")", "A Poisson count has no top end, so you can't add “up to infinity”. Use the complement.",
           C.apply(null, terms.concat(["P(X &gt; " + m + ") = 1 − " + F(cum, 4) + " = " + A(F(1 - cum, 4))]))),
         S("(c) A longer period ⇒ a bigger λ", "The rate scales with the period: " + t + " days ⇒ λ × " + t + ". E(X) = λ.", C("E(X) = " + G(l) + " × " + t + " = " + A(F(l * t, 2)))),
         S("(d) New period, new λ, then P(X = 0)", "Rescale λ first, then use the formula with x = 0 (it becomes e<sup>−λ</sup>).",
-          C("λ for " + t2 + " days = " + G(l) + " × " + t2 + " = " + G(l2), "P(X = 0) = e<sup>−" + G(l2) + "</sup> = " + A(F(p0, 4))))]
+          C("λ for " + t2 + " days = " + G(l) + " × " + t2 + " = " + G(l2), "P(X = 0) = e<sup>−" + G(l2) + "</sup> = " + A(F(p0, 4)))),
+        S("(e) Standard deviation", "For a Poisson the variance equals the mean, so σ = " + SQ + "λ (use the " + t + "-day λ).", C("σ = " + SQ + F(l * t, 2) + " = " + A(F(Math.sqrt(l * t), 3))))]
     };
   } });
 
@@ -439,7 +501,7 @@ topic({ id: "invnorm", unit: 5, title: "Inverse normal: find the cut-off", from:
   } });
 
 /* ---------------- Unit 6 ---------------- */
-topic({ id: "xbar", unit: 6, title: "Sampling distribution of the mean", from: "Tutorial Quiz 6, Q1 (credit card debt)",
+topic({ id: "xbar", unit: 6, title: "Sampling distribution of the mean", from: "Tutorial Quiz 6, Q1 (credit card debt); October 2026 exam Q3",
   spot: "A question about the <b>mean of a sample</b> (“the mean debt of 25 accounts”), not one value. The population μ and σ are given.",
   formula: "σ<sub>" + XB + "</sub> = σ/" + SQ + "n &nbsp;·&nbsp; Z = (" + XB + " − μ)/(σ/" + SQ + "n)",
   gen: function (orig) {
@@ -460,7 +522,7 @@ topic({ id: "xbar", unit: 6, title: "Sampling distribution of the mean", from: "
     };
   } });
 
-topic({ id: "phat", unit: 6, title: "Sample proportions (normal approximation)", from: "Tutorial Quiz 6, Q2 (antibiotic): the most-missed tutorial question",
+topic({ id: "phat", unit: 6, title: "Sample proportions (normal approximation)", from: "Tutorial Quiz 6, Q2 (antibiotic), the most-missed tutorial question; October 2026 exam Q4",
   spot: "A percentage of the population (“cures 93% of the time”) and a <b>count out of a sample</b> (“fewer than 188 of 192 are cured”).",
   formula: PH + " = x/n &nbsp;·&nbsp; σ<sub>" + PH + "</sub> = " + SQ + "(p(1 − p)/n) &nbsp;·&nbsp; Z = (" + PH + " − p)/σ<sub>" + PH + "</sub>",
   gen: function (orig) {
@@ -595,25 +657,25 @@ function testSteps(o) {   // o: {h0,h1,why,a,tsLine(s),cvTxt,cv,ts,dir,claim, wh
     S("5. Decision rule and decision", "Write the rule, compare, decide.", C(d.rule, d.cmp + " ⇒ " + A(d.rej ? "reject " + H0 : "do not reject " + H0))),
     S("6. Conclusion in context", "Use the words of the question. “Insufficient evidence” when you don't reject; never “accept " + H0 + "”.", concl(d.rej, o.a, o.claim))] };
 }
-topic({ id: "htmean", unit: 8, title: "Hypothesis test for one mean", from: "Tutorial Quiz 8, Q1 and Q3 (Q3 is the t-versus-z trap)",
+topic({ id: "htmean", unit: 8, title: "Hypothesis test for one mean", from: "Tutorial Quiz 8, Q1 and Q3 (Q3 is the t-versus-z trap); October 2026 exam Q6 (σ known)",
   spot: "A claimed value of a mean (“believed to be R10 439”, “states the consumption is 6.9 l”) and a sample mean. Then: σ known or n " + GE + " 30 ⇒ z; only s and n &lt; 30 ⇒ t.",
   formula: "z = (" + XB + " − μ₀)/(σ/" + SQ + "n) or (" + XB + " − μ₀)/(s/" + SQ + "n) for n " + GE + " 30 &nbsp;·&nbsp; t = (" + XB + " − μ₀)/(s/" + SQ + "n), df = n − 1",
   gen: function (orig) {
-    var kind = orig ? "t" : pick(["t", "z"]), dir = orig ? "left" : pick(["left", "right", "two"]), a = orig ? 0.05 : pick([0.01, 0.05, 0.10]);
-    var mu0 = orig ? 10439 : ri(80, 140) * 100, n = orig ? 24 : (kind === "t" ? ri(10, 28) : ri(32, 80)), s = orig ? 1177 : ri(6, 16) * 100;
+    var kind = orig ? "t" : pick(["t", "z", "zs"]), dir = orig ? "left" : pick(["left", "right", "two"]), a = orig ? 0.05 : pick([0.01, 0.05, 0.10]);
+    var mu0 = orig ? 10439 : ri(80, 140) * 100, n = orig ? 24 : (kind === "t" ? ri(10, 28) : kind === "zs" ? ri(12, 60) : ri(32, 80)), s = orig ? 1177 : ri(6, 16) * 100;
     var se = s / Math.sqrt(n), shift = dir === "left" ? -rf(0.2, 2.8, 2) : dir === "right" ? rf(0.2, 2.8, 2) : pick([-1, 1]) * rf(0.4, 2.8, 2);
     var xb = orig ? 10337 : Math.round(mu0 + shift * se), ts = (xb - mu0) / se, cv;
     if (kind === "t") { var col = dir === "two" ? R(1 - a / 2, 3) : R(1 - a, 3); cv = tq(n - 1, col); if (dir === "left") cv = -cv; }
     else { cv = dir === "two" ? ZTWO[R(1 - a, 2)] : ZONE[a]; if (dir === "left") cv = -cv; }
     var claim = "the mean monthly electricity cost is " + (dir === "left" ? "less than" : dir === "right" ? "more than" : "different from") + " R" + mu0;
     var r = testSteps({ h0: MU + " = " + mu0, h1: MU + " " + SYM[dir] + " " + mu0, why: "The claim being tested goes in " + H1 + ". The question's words make it " + DIRW[dir] + ".", a: a,
-      which: kind === "t" ? "Only s is given and n = " + n + " &lt; 30 ⇒ t-statistic." : "n = " + n + " " + GE + " 30 ⇒ the z-statistic, even though only s is given (the Central Limit Theorem). Tutorial 8 Q3 wanted 1.96 here, not a t value.",
-      tsLines: [(kind === "t" ? "t" : "z") + " = (" + xb + " − " + mu0 + ")/(" + s + "/" + SQ + n + ") = " + (xb - mu0) + "/" + F(se, 4) + " = " + A(F(ts, 3))],
+      which: kind === "t" ? "Only s is given and n = " + n + " &lt; 30 ⇒ t-statistic." : kind === "zs" ? "The <b>population</b> σ is known ⇒ z-statistic, whatever the sample size (October 2026 Q6, the bakery)." : "n = " + n + " " + GE + " 30 ⇒ the z-statistic, even though only s is given (the Central Limit Theorem). Tutorial 8 Q3 wanted 1.96 here, not a t value.",
+      tsLines: [(kind === "t" ? "t" : "z") + " = (" + xb + " − " + mu0 + ")/(" + s + "/" + SQ + n + ") = " + (xb - mu0) + "/" + F(se, 4) + " = " + A(F(ts, 3)) + (kind === "zs" ? " (σ in place of s)" : "")],
       cvHow: kind === "t" ? "t-table, df = n − 1 = " + (n - 1) + ", column " + (dir === "two" ? "1 − α/2 = " + R(1 - a / 2, 3) : "1 − α = " + R(1 - a, 3)) + (dir === "left" ? "; left tail ⇒ negative." : dir === "two" ? "; two tails ⇒ ±." : ".")
         : "z critical values: " + (dir === "two" ? "z<sub>1−α/2</sub>, use ±." : "z<sub>1−α</sub>" + (dir === "left" ? ", negative for a left tail." : ".")),
       cvTxt: (dir === "two" ? "±" : "") + (kind === "t" ? "t" : "z") + "<sub>crit</sub> = " + (dir === "two" ? F(Math.abs(cv), 3) : F(cv, 3)), cv: cv, ts: ts, dir: dir, a: a, claim: claim });
     return {
-      q: P("The average monthly cost of electricity at a factory is believed to be R" + mu0 + ". A sample of " + n + " monthly payments has an average of R" + xb + " and a standard deviation of R" + s + ".") +
+      q: P("The average monthly cost of electricity at a factory is believed to be R" + mu0 + ". A sample of " + n + " monthly payments has an average of R" + xb + (kind === "zs" ? ". From years of records the population standard deviation is known to be R" + s + "." : " and a standard deviation of R" + s + ".")) +
         P("Test, at the " + pct(a) + " level, whether " + claim + ". Assume the payments are normally distributed. Round to three decimals."),
       parts: [num("ts", "Test statistic", R(ts, 3), 3, 0.0015), num("cv", "Critical value" + (dir === "two" ? " (positive one)" : ""), R(dir === "two" ? Math.abs(cv) : cv, 3), 3, 0.0015),
         pickp("dec", "Decision", DEC, r.rej ? 0 : 1)],
@@ -643,7 +705,7 @@ topic({ id: "htprop", unit: 8, title: "Hypothesis test for a proportion", from: 
     };
   } });
 
-topic({ id: "htvar", unit: 8, title: "Hypothesis test for a variance (chi-square)", from: "Tutorial Quiz 8, Q4 and the Jan 2026 exam Q8",
+topic({ id: "htvar", unit: 8, title: "Hypothesis test for a variance (chi-square)", from: "Tutorial Quiz 8, Q4; Jan 2026 exam Q8 = October 2026 exam Q5",
   spot: "A claim about the <b>standard deviation or variance</b>: consistency, spread, risk, “must be restarted if σ is greater than…”.",
   formula: CHI + " = (n − 1)s²/σ₀², df = n − 1 &nbsp;·&nbsp; right tail: " + CHI + "<sub>n−1; 1−α</sub> · left tail: " + CHI + "<sub>n−1; α</sub>",
   gen: function (orig) {
@@ -667,7 +729,7 @@ topic({ id: "htvar", unit: 8, title: "Hypothesis test for a variance (chi-square
     };
   } });
 
-topic({ id: "pooled", unit: 8, title: "Two means: pooled t-test", from: "November 2025 exam Q7 and Practical 5, Q1",
+topic({ id: "pooled", unit: 8, title: "Two means: pooled t-test", from: "November 2025 exam Q7 = October 2026 exam Q7, and Practical 5, Q1",
   spot: "Two <b>independent</b> groups (males vs females, company A vs B), each with its own mean and standard deviation, “equal but unknown variances”.",
   formula: "s<sub>p</sub>² = [(n₁ − 1)s₁² + (n₂ − 1)s₂²]/(n₁ + n₂ − 2) &nbsp;·&nbsp; t = (" + XB + "₁ − " + XB + "₂)/(s<sub>p</sub>" + SQ + "(1/n₁ + 1/n₂)), df = n₁ + n₂ − 2",
   gen: function (orig) {
@@ -732,7 +794,7 @@ function randData(n, slope) {
   for (var i = 0; i < n; i++) { var xv = rf(1, 20, 1); x.push(xv); y.push(R(a0 + b0 * xv + rf(-3, 3, 1), 1)); }
   return { x: x, y: y };
 }
-topic({ id: "reg", unit: 9, title: "Regression and correlation from data", from: "Tutorial Quiz 9 and Practical 6",
+topic({ id: "reg", unit: 9, title: "Regression and correlation from data", from: "Tutorial Quiz 9 and Practical 6; October 2026 exam Q8 (whiskey: r and r²)",
   spot: "Pairs (x, y), “estimate the line ŷ = a + bx”, “estimate y when x = …”, “correlation”, “test whether ρ = 0”.",
   formula: "S<sub>XX</sub> = Σx² − (Σx)²/n · S<sub>YY</sub> = Σy² − (Σy)²/n · S<sub>XY</sub> = Σxy − ΣxΣy/n · b = S<sub>XY</sub>/S<sub>XX</sub> · a = ȳ − b" + XB + " · r = S<sub>XY</sub>/" + SQ + "(S<sub>XX</sub>S<sub>YY</sub>) · t = r" + SQ + "(n − 2)/" + SQ + "(1 − r²)",
   gen: function (orig) {
@@ -823,7 +885,7 @@ topic({ id: "regxl", unit: 9, title: "Regression from Excel output", from: "Prac
 if (typeof module !== "undefined") module.exports = { TOPICS: TOPICS, setTables: function (t) { TABLES = t; }, R: R, phi: phi, zFor: zFor };
 
 (function () {
-  var UNITS = { 5: "Unit 5 · Probability distributions", 6: "Unit 6 · Sampling distributions", 7: "Unit 7 · Confidence intervals", 8: "Unit 8 · Hypothesis testing", 9: "Unit 9 · Regression and correlation" };
+  var UNITS = { 3: "Unit 3 · Numeric measures", 5: "Unit 5 · Probability distributions", 6: "Unit 6 · Sampling distributions", 7: "Unit 7 · Confidence intervals", 8: "Unit 8 · Hypothesis testing", 9: "Unit 9 · Regression and correlation" };
   var store = { get: function (k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
   var prog = store.get("stav-ws-progress") || {};
   var cur = null, prob = null, orig = true, shown = 0;
@@ -910,7 +972,7 @@ if (typeof module !== "undefined") module.exports = { TOPICS: TOPICS, setTables:
   function open(id, keep) {
     var t = TOPICS.filter(function (x) { return x.id === id; })[0] || TOPICS[0];
     cur = t; orig = true; prob = t.gen(true); render(); buildNav();
-    if (!keep) window.scrollTo({ top: Math.min(window.scrollY, document.querySelector(".layout").offsetTop - 64) });
+    if (!keep) window.scrollTo({ top: document.querySelector(".layout").offsetTop - 64, behavior: "smooth" });
   }
   $("pick").addEventListener("change", function () { location.hash = this.value; });
   window.addEventListener("hashchange", function () { open(location.hash.slice(1)); });
