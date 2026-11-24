@@ -56,11 +56,11 @@ footer{font-size:.85rem;color:var(--muted);margin-top:24px}
 
 /* ---------- dark theme (screen only; print stays light) ---------- */
 @media screen and (prefers-color-scheme:dark){
-:root:not([data-theme="light"]){--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#7db8e0;
+:root:not([data-theme="light"]):not([data-theme="paper"]){--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#7db8e0;
   --ok:#62c98f;--okbg:#17331f;--note:#232930;--warn:#f08f76;color-scheme:dark}
-:root:not([data-theme="light"]) nav.topics a{background:#1c2026}
+:root:not([data-theme="light"]):not([data-theme="paper"]) nav.topics a{background:#1c2026}
 
-:root:not([data-theme="light"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+:root:not([data-theme="light"]):not([data-theme="paper"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
 }
 @media screen{
 :root[data-theme="dark"]{--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#7db8e0;

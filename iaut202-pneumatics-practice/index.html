@@ -38,9 +38,9 @@ label{font-size:.95rem}
 .themebtn svg{display:block}
 @media print{.themebtn,.controls,button,select{display:none!important}.card{break-inside:avoid}}
 @media screen and (prefers-color-scheme:dark){
-:root:not([data-theme="light"]){--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#B3A6DB;--onaccent:#14171b;
+:root:not([data-theme="light"]):not([data-theme="paper"]){--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#B3A6DB;--onaccent:#14171b;
   --ok:#8fd4a9;--okbg:#1f3a2a;--bad:#f0a89a;--badbg:#4a2a24;--note:#242830}
-:root:not([data-theme="light"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
+:root:not([data-theme="light"]):not([data-theme="paper"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}
 }
 :root[data-theme="dark"]{--bg:#14171b;--panel:#1c2026;--ink:#e6e2da;--muted:#a8a194;--line:#343a42;--accent:#B3A6DB;--onaccent:#14171b;
   --ok:#8fd4a9;--okbg:#1f3a2a;--bad:#f0a89a;--badbg:#4a2a24;--note:#242830}

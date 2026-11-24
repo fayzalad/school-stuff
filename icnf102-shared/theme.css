@@ -14,7 +14,7 @@
   color-scheme:light;
 }
 @media screen and (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
+  :root:not([data-theme="light"]):not([data-theme="paper"]){
     --bg:#14171b; --panel:#1c2026; --ink:#e6e2da; --muted:#a8a194; --line:#343a42;
     --accent:#7db8e0; --accent2:#e0b44a; --ok:#62c98f; --warn:#f08f76; --code:#252a31;
     --tint:#26303a; --th:#262d35; --def:#1d2933; --tipbg:#2a2518; --warnbg:#33211c; --okbg:#1a2c22;
@@ -135,7 +135,7 @@ footer.foot{text-align:center;color:var(--muted);font-size:.85rem;font-family:va
 .btn:hover{border-color:var(--accent);background:var(--opth)}
 .btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 :root[data-theme="dark"] .btn.pri{color:#0e1a24}
-@media screen and (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.pri{color:#0e1a24}}
+@media screen and (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="paper"]) .btn.pri{color:#0e1a24}}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 
 /* theme button (identical to STAV) */
@@ -144,7 +144,7 @@ footer.foot{text-align:center;color:var(--muted);font-size:.85rem;font-family:va
   display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15);padding:0}
 .themebtn:hover{transform:scale(1.06)}
 .themebtn svg{display:block}
-@media screen and (prefers-color-scheme:dark){:root:not([data-theme="light"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}}
+@media screen and (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="paper"]) .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}}
 @media screen{:root[data-theme="dark"] .themebtn{background:rgba(40,44,50,.92);color:#e6e2da;border-color:rgba(255,255,255,.2)}}
 
 /* responsive */
