@@ -1,6 +1,6 @@
 # school-stuff
 
-Study material, one module per folder. Open the [home page](https://fayzalad.github.io/school-stuff/) to pick a module; each module has its own page that sorts its guides, quizzes, drills and exam practice. To add a module or page, edit the `MODULES` list in `shared/site.js` (a new module also needs a copy of a `<slug>/index.html` folder).
+Study material, one module per folder. Open the [home page](https://fayzalad.github.io/school-stuff/) to pick a module; each module has its own page that sorts its guides, quizzes, drills and exam practice. To add a module or page, edit the `MODULES` list in `shared/site.js` (a new module also needs a copy of a `<slug>/index.html` folder). Every study page ends with `<script src="../shared/chrome.js" defer></script>`, which draws the shared top bar (School Stuff / module / page, theme button) and footer; `shared/look.css` styles it.
 
 ## Modules
 
@@ -12,10 +12,11 @@ Study material, one module per folder. Open the [home page](https://fayzalad.git
 ### WRAV102 / MSEV102 — Semester Test 2 theory
 - **[Theory Drill](https://fayzalad.github.io/school-stuff/wrav102-drill/)** — 100 multiple-choice questions covering the Section A theory topics: sorting algorithms (bubble, selection, insertion), searching and sorted state (linear vs binary), classes/list classes/arraylists/arrays/text files/position rules, and code tracing and applied questions. Answers save to your browser. Four tabs, 25 questions each.
 
-### STAV102 — Business Statistics, final exam (Units 1–10)
+### STAV102 — Business Statistics, rewrite / final exam (Units 1–10)
+- **[Long-Question Workshop](https://fayzalad.github.io/school-stuff/stav102-long-questions/)** — 19 long-question types for Units 5–9 (binomial, Poisson, normal and inverse normal, sampling distributions, every confidence interval, sample size, one- and two-sample hypothesis tests, regression from data, sums or Excel output). Each opens with the numbers from the 2026 Funda tutorial quizzes and practicals; answers are auto-marked, the solution is taught one step at a time, and "New numbers" makes a fresh version.
 - **[Exam Study Guide](https://fayzalad.github.io/school-stuff/stav102-exam-guide/)** — all ten units: the Test 1 and Test 2 guide sections plus new Units 9 (regression and correlation) and 10 (time series), the exam layout and what past finals ask, reading MS Excel output, errata, traps, exam technique and a 2-day plan.
 - **[Past-Paper Questions](https://fayzalad.github.io/school-stuff/stav102-past-papers/)** — every MCQ and long question from 8 past STAV102 tests and finals (typed out, repeats merged, most-asked first). MCQs show the working; long questions are taught step by step with a practise-again list.
-- **[Exam Quiz](https://fayzalad.github.io/school-stuff/stav102-exam-quiz/)** — 275 multiple-choice questions across Units 1–10 with worked explanations; filter by unit, a 50-question exam sim in the paper's unit mix, and a redo-wrong-answers mode.
+- **[Exam Quiz](https://fayzalad.github.io/school-stuff/stav102-exam-quiz/)** — opens on the 170 real past-paper MCQs (sources shown, most-asked-first option, 2026-tests-only and finals-only filters) plus 275 practice questions across Units 1–10 with worked explanations; a 50-question exam sim and a redo-wrong-answers mode.
 
 ### STAV102 — Business Statistics, Semester Test 2 (Units 5–8)
 - **[Study Guide](https://fayzalad.github.io/school-stuff/stav102-study-guide/)** — probability distributions (discrete, binomial, Poisson, normal, inverse normal), sampling distributions and the CLT, confidence intervals (μ, p, σ², sample size) and hypothesis testing (one- and two-population, paired), with worked examples from the notes, example packs and unit memos, a "which test?" decision tree, what the lecture videos add, an errata table for the notes and memos, exam traps and a 7-day plan.

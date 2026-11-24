@@ -11,11 +11,11 @@
 @media screen {
   /* ---------- core tokens (light) ---------- */
   :root {
-    --k-paper: #F2EDE3; --k-surface: #FBF8F1; --k-surface2: #E9E2D3;
-    --k-ink: #211C15; --k-ink2: #645B4C; --k-line: #D7CEBB; --k-line2: #B8AC92;
+    --k-paper: #F5F3EE; --k-surface: #FDFCF9; --k-surface2: #EEEBE4;
+    --k-ink: #1D1F23; --k-ink2: #5A5E66; --k-line: #E0DCD3; --k-line2: #C6C1B6;
     --k-ok: #1D7046; --k-okbg: #E2F2E8; --k-bad: #A23B28; --k-badbg: #F8E5DF;
     --k-gold: #8C6400; --k-goldbg: #F5EBCF;
-    --k-shadow: 0 10px 34px rgb(50 39 20 / 8%);
+    --k-shadow: 0 1px 2px rgb(30 28 24 / 6%), 0 8px 24px rgb(30 28 24 / 6%);
     --k-hero-dark: #15100B; --k-hero-mix: 42%;
     --k-accent-l: #0F5B8C; --k-accent-d: #7DB8E0; --k-accent: var(--k-accent-l);
     color-scheme: light;
@@ -28,8 +28,8 @@
   /* ---------- core tokens (dark: auto follows the system, or forced) ---------- */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]):not([data-theme="paper"]) {
-      --k-paper: #171410; --k-surface: #201C16; --k-surface2: #2A241B;
-      --k-ink: #EEE7DA; --k-ink2: #B9B09E; --k-line: #3D3528; --k-line2: #5A4F3B;
+      --k-paper: #131518; --k-surface: #1A1D21; --k-surface2: #23272C;
+      --k-ink: #E9E7E2; --k-ink2: #A4A8AE; --k-line: #2E3339; --k-line2: #454B53;
       --k-ok: #72D09A; --k-okbg: #183725; --k-bad: #F19379; --k-badbg: #3D211B;
       --k-gold: #E1B64D; --k-goldbg: #2F2815;
       --k-shadow: 0 10px 34px rgb(0 0 0 / 28%);
@@ -39,8 +39,8 @@
     }
   }
   :root[data-theme="dark"] {
-    --k-paper: #171410; --k-surface: #201C16; --k-surface2: #2A241B;
-    --k-ink: #EEE7DA; --k-ink2: #B9B09E; --k-line: #3D3528; --k-line2: #5A4F3B;
+    --k-paper: #131518; --k-surface: #1A1D21; --k-surface2: #23272C;
+    --k-ink: #E9E7E2; --k-ink2: #A4A8AE; --k-line: #2E3339; --k-line2: #454B53;
     --k-ok: #72D09A; --k-okbg: #183725; --k-bad: #F19379; --k-badbg: #3D211B;
     --k-gold: #E1B64D; --k-goldbg: #2F2815;
     --k-shadow: 0 10px 34px rgb(0 0 0 / 28%);
@@ -79,7 +79,7 @@
     --hl: color-mix(in srgb, var(--k-gold) 26%, transparent);
     --h4: var(--k-ink); --link: var(--k-accent); --unit: var(--k-accent-l); --stepdot: var(--k-accent-l);
     --onaccent: var(--k-paper);
-    --hdr: linear-gradient(145deg, color-mix(in srgb, var(--k-accent-l), var(--k-hero-dark) var(--k-hero-mix)), var(--k-accent-l));
+    --hdr: color-mix(in srgb, var(--k-accent-l), var(--k-hero-dark) 18%);
     /* WRAV102 names */
     --ground: var(--k-paper); --surface: var(--k-surface); --surface2: var(--k-surface2);
     --accent-soft: var(--tint); --good: var(--k-ok); --good-soft: var(--k-okbg); --bad-soft: var(--k-badbg);
@@ -95,22 +95,22 @@
     /* ----- hero card (replaces the full-width coloured header) ----- */
     header.top, body > header:not(.top), .wrap > header {
       position: relative; overflow: hidden; color: #fff; background: var(--hdr);
-      border-radius: 20px; margin: 20px auto 0; width: calc(100% - 32px); max-width: 1240px;
-      padding: clamp(28px, 5vw, 56px);
+      border-radius: 14px; margin: 24px auto 0; width: calc(100% - 32px); max-width: 1240px;
+      padding: clamp(22px, 3.6vw, 40px);
     }
     .wrap > header { width: 100%; border-bottom: 0; margin-top: 8px; padding: clamp(26px, 4vw, 44px); }
     header.top::after, body > header:not(.top)::after, .wrap > header::after {
-      content: ""; position: absolute; width: 440px; height: 440px; border: 1px solid rgb(255 255 255 / 20%);
+      content: none; position: absolute; width: 440px; height: 440px; border: 1px solid rgb(255 255 255 / 20%);
       border-radius: 50%; right: -120px; top: -230px; pointer-events: none;
       box-shadow: 0 0 0 70px rgb(255 255 255 / 4%), 0 0 0 140px rgb(255 255 255 / 3%);
     }
     header .in, header.top .inner { max-width: none; padding-inline: 0; margin: 0; position: relative; z-index: 1; }
     header.top h1, body > header:not(.top) h1, .wrap > header h1 {
       font-family: "Newsreader", Georgia, serif; font-weight: 500; letter-spacing: -.02em; line-height: 1.04;
-      font-size: clamp(2.3rem, 5.2vw, 4.4rem); margin: 10px 0 12px; color: #fff; text-wrap: balance;
+      font-size: clamp(1.9rem, 3.6vw, 2.9rem); margin: 6px 0 10px; color: #fff; text-wrap: balance;
     }
     header.top .sub, header.top p, body > header:not(.top) p, .wrap > header .sub {
-      color: rgb(255 255 255 / 86%); opacity: 1; font-size: 1.04rem; max-width: 72ch; line-height: 1.55;
+      color: rgb(255 255 255 / 88%); opacity: 1; font-size: 1rem; max-width: 72ch; line-height: 1.55;
     }
     header a.back, .wrap > header .eyebrow {
       color: rgb(255 255 255 / 82%); opacity: 1; font-family: "DM Mono", ui-monospace, monospace; font-size: .76rem;
@@ -135,8 +135,8 @@
     section, .card, .bar, .q:has(ol, .opts), .box, details.wex {
       background: var(--k-surface); border-color: var(--k-line); box-shadow: none;
     }
-    section { border-radius: 20px; box-shadow: var(--k-shadow); }
-    .card, .bar, .q:has(ol, .opts), details.wex { border-radius: 16px; }
+    section { border-radius: 14px; box-shadow: var(--k-shadow); }
+    .card, .bar, .q:has(ol, .opts), details.wex { border-radius: 12px; }
     .box { border-radius: 13px; }
     .def, .tip, .warnbox, .okbox { border-radius: 0 13px 13px 0; }
     h2 { color: var(--k-accent); }
@@ -169,7 +169,7 @@
 
     /* ----- answer options ----- */
     .opt, .q li, .opts li, .options label, .answer {
-      background: var(--k-paper); border: 1px solid var(--k-line); border-radius: 13px; min-height: 52px;
+      background: var(--k-paper); border: 1px solid var(--k-line); border-radius: 10px; min-height: 48px;
     }
     .opt:hover:not(:disabled), .q li:hover, .opts li:hover { border-color: var(--k-accent); background: var(--opth); }
     .opt.correct, .q li.right, body:not(.hide) .opts li.right, .q.done li.right:hover { background: var(--k-okbg); border-color: var(--k-ok); color: var(--k-ok); }
@@ -208,6 +208,30 @@
     .box h2 { font-family: "DM Mono", ui-monospace, monospace; font-weight: 500; }
     .box { background: var(--k-surface); }
 
+    /* ----- site chrome (shared/chrome.js, 2026-11-24): sticky top bar + footer on every study page ----- */
+    .ss-bar { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--k-paper) 92%, transparent);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--k-line); }
+    .ss-bar .ss-in, .ss-foot .ss-in { max-width: 1320px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+    .ss-bar .ss-in { min-height: 56px; }
+    .ss-crumbs { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; font: 500 .78rem "DM Mono", ui-monospace, monospace;
+      letter-spacing: .04em; background: none; }
+    .ss-crumbs a { color: var(--k-ink2); text-decoration: none; white-space: nowrap; }
+    .ss-crumbs a:hover { color: var(--k-ink); text-decoration: underline; }
+    .ss-brand { display: flex; align-items: center; gap: 8px; color: var(--k-ink) !important; }
+    .ss-mark { width: 24px; height: 24px; border-radius: 6px; background: var(--k-ink); color: var(--k-paper); display: grid; place-items: center;
+      font: 600 .8rem "Newsreader", Georgia, serif; }
+    .ss-sep { color: var(--k-line2); }
+    .ss-here { color: var(--k-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ss-slot { display: flex; }
+    .ss-bar .themebtn { position: static; inset: auto; width: 38px; height: 38px; border-radius: 9px; box-shadow: none; margin: 0;
+      background: var(--k-surface); border: 1px solid var(--k-line2); color: var(--k-ink); display: grid; place-items: center; transform: none; }
+    .ss-bar .themebtn:hover { border-color: var(--k-accent); transform: none; }
+    @media (max-width: 560px) { .ss-name { display: none; } .ss-bar .ss-in { padding: 8px 14px; } }
+    .ss-foot { border-top: 1px solid var(--k-line); margin-top: 48px; color: var(--k-ink2); font: 400 .78rem "DM Mono", ui-monospace, monospace; }
+    .ss-foot .ss-in { justify-content: space-between; flex-wrap: wrap; padding: 20px; }
+    .ss-foot a { color: var(--k-ink2); }
+    .ss-chrome header.top, .ss-chrome body > header:not(.top) { margin-top: 24px; }
+
     /* ----- unslop polish (2026-11-20): aligned figures, calmer motion ----- */
     td, th, .score, .qnum, .setmeta, .badge b { font-variant-numeric: tabular-nums; }
     @media (prefers-reduced-motion: reduce) {
@@ -215,3 +239,4 @@
     }
   }
 }
+@media print { .ss-bar, .ss-foot { display: none !important; } }

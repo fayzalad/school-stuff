@@ -42,15 +42,19 @@
     },
     {
       slug: "stav102", code: "STAV102", name: "Business Statistics",
-      blurb: "Final exam (Tue 27 Oct 2026), all ten units: descriptive statistics, probability, distributions, sampling, confidence intervals, hypothesis tests, regression and time series. Test 2 pages (Units 5 to 8) below.",
+      blurb: "Rewrite (supplementary) exam prep, all ten units. The pass plan: the past-paper MCQs repeat, so drill them until they're automatic, and win the long-question marks with the Units 5 to 9 workshop built from this year's tutorials and practicals.",
+      focus: { title: "Start here for the rewrite", note: "The three pages that move the mark. Do them in this order, a little every day.",
+               hrefs: ["stav102-long-questions/", "stav102-exam-quiz/", "stav102-past-papers/"] },
       tint: "#0F5B8C", tintDark: "#7DB8E0",
       sites: [
+        { label: "Long-Question Workshop (Units 5-9)", tag: "Practice", href: "stav102-long-questions/", isNew: true,
+          desc: "19 long-question types from the 2026 Funda tutorial quizzes 5-9, practicals 3-6 and the 2025-26 finals. Each opens with the class numbers: type your answers to have them marked, learn it one step at a time, then get fresh numbers until it sticks." },
         { label: "Exam Study Guide (Units 1-10)", tag: "Guide", href: "stav102-exam-guide/",
           desc: "The whole semester for the final: Units 1-4 and 5-8 from the test guides, plus new Units 9 (regression and correlation) and 10 (time series), what the past finals ask, reading Excel output, errata, traps and a 2-day plan." },
         { label: "Past-Paper Questions (MCQs + long questions)", tag: "Practice", href: "stav102-past-papers/",
           desc: "Only questions from 8 past tests and finals, repeats merged and the most-asked first. 170 MCQs with the working, and 31 long questions taught step by step until you can do them yourself." },
-        { label: "Exam Quiz (275 questions)", tag: "Quiz", href: "stav102-exam-quiz/",
-          desc: "Every unit, 1 to 10, with the working for every answer. Filter by unit or test, an exam sim of 50 questions in the real paper's unit mix, and a redo-what-I-got-wrong mode." },
+        { label: "Exam Quiz: past papers + practice (445)", tag: "Quiz", href: "stav102-exam-quiz/", isNew: true,
+          desc: "Opens on the 170 real past-paper MCQs (repeats merged, each tagged with the papers it came from, most-asked first if you like), with 275 practice questions alongside. Filter by unit, 2026 tests only or finals only; a 50-question exam sim and a redo-what-I-got-wrong mode." },
         { label: "Study Guide", tag: "Guide", href: "stav102-study-guide/",
           desc: "Units 5-8: probability distributions, sampling distributions, confidence intervals, hypothesis tests. Worked examples, lecture-video notes, errata, 7-day plan." },
         { label: "Cheat Sheet", tag: "Sheet", href: "stav102-cheat-sheet/",
@@ -97,6 +101,12 @@
   var ARROW = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   function accent(m){ return ' accent" style="--a-l:'+m.tint+';--a-d:'+m.tintDark; }
 
+  function card(s, step){
+    return '<a class="card'+(step ? ' star' : '')+'" href="../'+esc(s.href)+'"><span class="tags"><span class="type-tag">'+(step ? 'Step '+step+' · ' : '')+esc(s.tag)+'</span>'
+      + (s.isNew ? '<span class="new-tag">New</span>' : '')+'</span><strong>'+esc(s.label)+'</strong>'
+      + '<small>'+esc(s.desc)+'</small><span class="open">Open '+ARROW+'</span></a>';
+  }
+
   function grouped(mod){
     return CATS.map(function(c){
       return { cat: c, items: mod.sites.filter(function(s){ return c.tags.indexOf(s.tag) >= 0; }) };
@@ -122,17 +132,20 @@
       + '<section class="mhero"><p class="module-code">'+esc(mod.code)+'</p><h1>'+esc(mod.name)+'</h1><p>'+esc(mod.blurb)+'</p>'
       + '<p class="stat">'+plural(mod.sites.length,"page")+' in '+plural(groups.length,"section")+'</p></section>'
       + '<div class="layout"><aside class="side"><h3>In this module</h3><nav aria-label="Sections">'
+      + (mod.focus ? '<a class="tab" href="#start">'+esc(mod.focus.title.split(" for ")[0])+'<span>'+mod.focus.hrefs.length+'</span></a>' : '')
       + groups.map(function(g){ return '<a class="tab" href="#'+g.cat.id+'">'+esc(g.cat.title)+'<span>'+g.items.length+'</span></a>'; }).join("")
       + '</nav><div class="others"><h3>Other modules</h3>'
       + MODULES.filter(function(m){ return m !== mod; }).map(function(m){
           return '<a class="'+accent(m).slice(1)+'" href="../'+m.slug+'/"><span class="dot"></span>'+esc(m.code.split(" / ")[0])+'</a>'; }).join("")
       + '</div></aside><div>'
+      + (mod.focus ? '<section class="cat" id="start"><div class="cat-head"><h2>'+esc(mod.focus.title)+'</h2><span>'+mod.focus.hrefs.length+'</span></div>'
+          + '<p class="cat-note">'+esc(mod.focus.note)+'</p><div class="cards">'
+          + mod.focus.hrefs.map(function(h,i){ var x = mod.sites.filter(function(s){ return s.href===h; })[0]; return x ? card(x, i+1) : ""; }).join("")
+          + '</div></section>' : '')
       + groups.map(function(g){
           return '<section class="cat" id="'+g.cat.id+'"><div class="cat-head"><h2>'+esc(g.cat.title)+'</h2><span>'+g.items.length+'</span></div>'
             + '<p class="cat-note">'+esc(g.cat.note)+'</p><div class="cards">'
-            + g.items.map(function(s){
-                return '<a class="card" href="../'+esc(s.href)+'"><span class="type-tag">'+esc(s.tag)+'</span><strong>'+esc(s.label)+'</strong>'
-                  + '<small>'+esc(s.desc)+'</small><span class="open">Open '+ARROW+'</span></a>'; }).join("")
+            + g.items.map(function(s){ return card(s); }).join("")
             + '</div></section>'; }).join("")
       + '</div></div><footer><a href="../">&larr; All modules</a><span>'+esc(mod.code)+'</span></footer></main>';
   } else {

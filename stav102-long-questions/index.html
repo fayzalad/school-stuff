@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en" data-mod="stav">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Long-Question Workshop · STAV102</title>
+<meta name="description" content="STAV102 long questions from the 2026 tutorials, practicals and finals: try it, check it, learn it step by step, then get new numbers.">
+<script>
+(function(){try{var t=localStorage.getItem("school_stuff_theme");if(t==="light"||t==="dark"||t==="paper")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F5F3EE;--surface:#FDFCF9;--surface2:#EEEBE4;--ink:#1D1F23;--ink2:#5A5E66;--line:#E0DCD3;--line2:#C6C1B6;
+  --accent:#0F5B8C;--accent-ink:#FDFCF9;--tint:#E8EFF4;--ok:#1D7046;--okbg:#E3F1E8;--bad:#A23B28;--badbg:#F7E4DE;--gold:#8C6400;--goldbg:#F4EBD3;
+  --shadow:0 1px 2px rgb(30 28 24 / 6%),0 8px 24px rgb(30 28 24 / 6%);
+  --serif:"Newsreader",Georgia,serif;--ui:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"DM Mono",ui-monospace,Consolas,monospace;
+  --r:10px;color-scheme:light
+}
+@media screen{
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="paper"]){
+    --paper:#131518;--surface:#1A1D21;--surface2:#23272C;--ink:#E9E7E2;--ink2:#A4A8AE;--line:#2E3339;--line2:#454B53;
+    --accent:#7DB8E0;--accent-ink:#131518;--tint:#1C2A35;--ok:#74CF9B;--okbg:#17301F;--bad:#F09A82;--badbg:#3A211B;--gold:#E1B64D;--goldbg:#2E2716;
+    --shadow:0 1px 2px rgb(0 0 0 / 30%),0 8px 24px rgb(0 0 0 / 25%);color-scheme:dark}}
+  :root[data-theme="dark"]{
+    --paper:#131518;--surface:#1A1D21;--surface2:#23272C;--ink:#E9E7E2;--ink2:#A4A8AE;--line:#2E3339;--line2:#454B53;
+    --accent:#7DB8E0;--accent-ink:#131518;--tint:#1C2A35;--ok:#74CF9B;--okbg:#17301F;--bad:#F09A82;--badbg:#3A211B;--gold:#E1B64D;--goldbg:#2E2716;
+    --shadow:0 1px 2px rgb(0 0 0 / 30%),0 8px 24px rgb(0 0 0 / 25%);color-scheme:dark}
+  :root[data-theme="paper"]{--paper:#F0E4C8;--surface:#F8EFD9;--surface2:#E7D8B5;--ink:#3A2D1E;--ink2:#6B5A42;--line:#D6C59F;--line2:#B9A474;--tint:#EADFC4;--okbg:#DFEAC8;--badbg:#F1DAC2;--goldbg:#EFDFAE}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--ui);font-variant-numeric:tabular-nums}
+@media (min-width:1280px){body{font-size:18px}}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+kbd{font:500 .8em var(--mono);border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;padding:0 5px;background:var(--surface)}
+
+/* ---- top bar (same on every School Stuff page) ---- */
+.sitebar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.sitebar .in{max-width:1320px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;min-height:56px}
+.crumbs{display:flex;align-items:center;gap:8px;font:500 .78rem var(--mono);letter-spacing:.04em;min-width:0;flex:1}
+.crumbs a{color:var(--ink2);text-decoration:none;white-space:nowrap}
+.crumbs a:hover{color:var(--ink);text-decoration:underline}
+.crumbs .brand{display:flex;align-items:center;gap:8px;color:var(--ink);font-weight:500}
+.crumbs .mark{width:24px;height:24px;border-radius:6px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font:600 .8rem var(--serif)}
+.crumbs .sep{color:var(--line2)}
+.crumbs .here{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:520px){.crumbs .brand span:last-child{display:none}.themebtn span{display:none}.themebtn{width:40px;padding:0;justify-content:center}}
+.themebtn{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 12px;border:1px solid var(--line2);border-radius:8px;background:var(--surface);color:var(--ink);font:500 .78rem var(--mono);cursor:pointer;transition:border-color .15s ease,background-color .15s ease}
+.themebtn:hover{border-color:var(--accent)}
+.themebtn svg{width:16px;height:16px}
+
+/* ---- page header ---- */
+.head{max-width:1320px;margin:0 auto;padding:40px 20px 28px;display:grid;gap:24px}
+.eyebrow{font:500 .74rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.head h1{font:500 clamp(2rem,4.2vw,3.1rem)/1.08 var(--serif);letter-spacing:-.02em;margin:8px 0 12px;text-wrap:balance}
+.head .lede{margin:0;color:var(--ink2);max-width:68ch;font-size:1.02rem}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0;padding:0;list-style:none}
+.facts li{display:flex;flex-direction:column;font-size:.86rem;color:var(--ink2)}
+.facts b{font:500 1.5rem/1.2 var(--serif);color:var(--ink)}
+@media (min-width:1000px){.head{grid-template-columns:1fr auto;align-items:end;padding-top:56px}}
+
+/* ---- layout ---- */
+.layout{max-width:1320px;margin:0 auto;padding:0 20px 72px;display:grid;gap:24px}
+@media (min-width:1000px){.layout{grid-template-columns:300px minmax(0,1fr);gap:40px;align-items:start}}
+.side{display:none}
+@media (min-width:1000px){.side{display:block;position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto;padding-right:4px}}
+.side h2{font:500 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:20px 0 6px}
+.side h2:first-child{margin-top:0}
+.side a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:.92rem;line-height:1.3;transition:background-color .15s ease}
+.side a:hover{background:var(--surface2)}
+.side a.on{background:var(--tint);color:var(--accent);font-weight:500}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--line2)}
+.dot.d1{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 35%,transparent)}
+.dot.d2{border-color:var(--ok);background:var(--ok)}
+.picker{display:block;margin-bottom:24px}
+@media (min-width:1000px){.picker{display:none}}
+.picker label{display:block;font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:6px}
+select{width:100%;font:500 1rem var(--ui);padding:12px 14px;border-radius:var(--r);border:1px solid var(--line2);background:var(--surface);color:var(--ink)}
+
+/* ---- topic ---- */
+.topic-head .eyebrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.topic-head h2{font:500 clamp(1.6rem,2.6vw,2.2rem)/1.15 var(--serif);letter-spacing:-.01em;margin:6px 0 4px}
+.from{margin:0;color:var(--ink2);font-size:.92rem}
+.from b{color:var(--ink);font-weight:500}
+.know{display:grid;gap:12px;margin:20px 0 24px}
+@media (min-width:760px){.know{grid-template-columns:1fr 1fr}}
+.know div{border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;background:var(--surface)}
+.know h3{font:500 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0 0 6px}
+.know p{margin:0;font-size:.95rem}
+.know .fx p{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1rem;line-height:1.7}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.card .qbody{padding:22px 24px 6px}
+@media (max-width:600px){.card .qbody{padding:18px 16px 4px}}
+.qbody p{margin:0 0 10px;max-width:75ch}
+.qtag{display:inline-flex;align-items:center;gap:6px;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:99px;border:1px solid var(--line2);color:var(--ink2)}
+.qtag.new{border-color:var(--gold);color:var(--gold)}
+.tw{overflow-x:auto;margin:6px 0 14px}
+table{border-collapse:collapse;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:6px 11px;text-align:right;white-space:nowrap}
+th{background:var(--surface2);font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);text-align:center}
+td:first-child{text-align:left}
+.calc{font-family:"Cambria Math",Cambria,Georgia,serif;background:var(--surface2);padding:10px 14px;border-radius:8px;margin:8px 0;overflow-x:auto;line-height:1.75}
+.ans{color:var(--ok);font-weight:600}
+
+.parts{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--line)}
+.part{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:14px 24px;border-bottom:1px solid var(--line);align-items:center}
+@media (min-width:760px){.part{grid-template-columns:44px minmax(0,1fr) 210px 28px}}
+@media (max-width:600px){.part{padding:14px 16px}}
+.part .pl{font:500 .82rem var(--mono);color:var(--ink2)}
+.part .pq{font-size:.96rem}
+.part .pin{grid-column:1 / -1;display:flex;gap:8px;align-items:center}
+@media (min-width:760px){.part .pin{grid-column:auto}}
+.part input{width:100%;font:500 1rem var(--mono);padding:10px 12px;border-radius:8px;border:1px solid var(--line2);background:var(--paper);color:var(--ink);min-height:44px;transition:border-color .15s ease,background-color .15s ease}
+.part input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.part.ok input,.part.ok .seg button.on{border-color:var(--ok);background:var(--okbg)}
+.part.no input,.part.no .seg button.on{border-color:var(--bad);background:var(--badbg)}
+.part .mk{font-weight:600;font-size:1.05rem;text-align:center;min-width:20px}
+.part.ok .mk{color:var(--ok)}.part.no .mk{color:var(--bad)}
+.part .fix{grid-column:1 / -1;font-size:.86rem;color:var(--bad);display:none}
+.part.no .fix{display:block}
+@media (min-width:760px){.part .fix{grid-column:2 / -1}}
+.seg{display:flex;gap:6px;flex-wrap:wrap;width:100%}
+.seg button{flex:1;min-height:44px;font:500 .88rem var(--ui);border:1px solid var(--line2);background:var(--paper);color:var(--ink);border-radius:8px;cursor:pointer;padding:8px 10px;transition:border-color .15s ease,background-color .15s ease}
+.seg button:hover{border-color:var(--accent)}
+.seg button.on{border-color:var(--accent);background:var(--tint);color:var(--ink)}
+@media (min-width:760px){.part.wide{grid-template-columns:44px minmax(0,1fr) 330px 28px}}
+
+.actions{display:flex;flex-wrap:wrap;gap:8px;padding:16px 24px 20px;align-items:center}
+@media (max-width:600px){.actions{padding:14px 16px 18px}.actions .btn{flex:1 1 100%}}
+.btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:500 .92rem var(--ui);padding:10px 16px;border-radius:9px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);cursor:pointer;transition:border-color .15s ease,background-color .15s ease,transform .1s ease}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.pri:hover{background:color-mix(in srgb,var(--ink) 86%,var(--accent))}
+.btn.acc{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+.actions .sp{flex:1}
+.result{margin:0 24px 18px;padding:12px 16px;border-radius:var(--r);font-weight:500;display:none}
+.result.on{display:block}
+.result.good{background:var(--okbg);color:var(--ok)}
+.result.part{background:var(--goldbg);color:var(--gold)}
+@media (max-width:600px){.result{margin:0 16px 16px}}
+
+/* ---- steps ---- */
+.steps{list-style:none;margin:20px 0 0;padding:0;counter-reset:st}
+.step{position:relative;padding:0 0 22px 46px;counter-increment:st;animation:in .2s ease-out}
+.step::before{content:counter(st);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:600 .82rem var(--mono)}
+.step::after{content:"";position:absolute;left:14.5px;top:34px;bottom:4px;width:1px;background:var(--line2)}
+.step:last-child::after{display:none}
+.step h4{margin:2px 0 4px;font:600 1rem var(--ui)}
+.step .how{margin:0 0 6px;color:var(--ink2);max-width:72ch}
+.step .how:empty{display:none}
+.step p{margin:6px 0}
+.step .wk{display:none}
+.step.w .wk{display:block}
+.step .show{font:500 .84rem var(--ui);padding:7px 12px;border-radius:7px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;min-height:36px}
+.step.w .show{display:none}
+@keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.step{animation:none}*{transition-duration:.01ms!important}}
+.stepsbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.secttl{font:500 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:28px 0 0}
+
+.nav2{display:flex;justify-content:space-between;gap:12px;margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}
+.nav2 a{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);font-weight:500;max-width:48%}
+.nav2 a span{font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.nav2 a.nx{text-align:right;margin-left:auto}
+
+.notes{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;color:var(--ink2);font-size:.9rem;max-width:80ch}
+.notes h3{font:500 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px}
+.notes ul{margin:0;padding-left:18px}
+.notes li{margin:4px 0}
+footer.site{border-top:1px solid var(--line);color:var(--ink2);font:400 .8rem var(--mono);letter-spacing:.02em}
+footer.site .in{max-width:1320px;margin:0 auto;padding:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+footer.site a{color:var(--ink2)}
+@media print{
+  .sitebar,.side,.picker,.actions,.nav2,.themebtn,.stepsbar{display:none!important}
+  body{background:#fff;color:#111}.card{box-shadow:none}.step .wk{display:block!important}.step .show{display:none}
+}
+</style>
+</head>
+<body>
+<header class="sitebar"><div class="in">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a class="brand" href="../"><span class="mark" aria-hidden="true">S</span><span>School Stuff</span></a>
+    <span class="sep" aria-hidden="true">/</span><a href="../stav102/">STAV102</a>
+    <span class="sep" aria-hidden="true">/</span><span class="here" aria-current="page">Long-Question Workshop</span>
+  </nav>
+  <button class="themebtn" id="themebtn" type="button" aria-label="Colour theme"></button>
+</div></header>
+
+<div class="head">
+  <div>
+    <div class="eyebrow">STAV102 · Business Statistics · Rewrite prep</div>
+    <h1>Long-Question Workshop</h1>
+    <p class="lede">Every long-question type from this year's Funda tutorials and practicals, plus the ones the 2025–26 finals asked. Each one opens with <b>your class numbers</b>. Answer it, check it, learn it one step at a time, then press <b>New numbers</b> until you get it right twice.</p>
+  </div>
+  <ul class="facts">
+    <li><b>19</b>question types</li>
+    <li><b>Units 5–9</b>the hard half</li>
+    <li><b>∞</b>fresh numbers</li>
+  </ul>
+</div>
+
+<div class="layout">
+  <aside class="side" id="side" aria-label="Question types"></aside>
+  <main id="main">
+    <div class="picker"><label for="pick">Question type</label><select id="pick"></select></div>
+    <div id="topic"></div>
+    <section class="notes" aria-labelledby="rn">
+      <h3 id="rn">How the answers are rounded (same as the memos)</h3>
+      <ul>
+        <li>z is rounded to 2 decimals before you use the table; table probabilities have 4 decimals.</li>
+        <li>Critical values come from the 2026 formula sheet: z 1.645 / 1.96 / 2.326 / 2.576, the t-table (3 dp) and the χ² table (2 dp).</li>
+        <li>Answers within a small rounding margin are marked right, so 2.57 vs 2.576 won't cost you a tick here (but use the sheet's value in the exam).</li>
+        <li>Sample proportions use the normal approximation without a continuity correction, as Funda and the memos do.</li>
+      </ul>
+    </section>
+  </main>
+</div>
+<footer class="site"><div class="in"><span>School Stuff · STAV102 Business Statistics</span><span>Built from the 2026 Funda tutorial quizzes 5–9, practicals 3–6 and the 2025–26 papers. Your progress stays on this device.</span></div></footer>
+
+<script>
+/* STAV102 Long-Question Workshop: question generators.
+   Every topic has gen(orig): orig=true gives the numbers from the user's own Funda tutorial/practical
+   (or the past paper named in `from`), orig=false gives fresh numbers in the same shape.
+   Rounding follows the course memos: z to 2 dp before the table, table values from the 2026 formula
+   sheet (TABLES, built by build_workshop.py), final answers to 3-4 dp.  Runs in the browser and in node (test_workshop.js). */
+var TABLES = {"phi":[0.5,0.504,0.508,0.512,0.516,0.5199,0.5239,0.5279,0.5319,0.5359,0.5398,0.5438,0.5478,0.5517,0.5557,0.5596,0.5636,0.5675,0.5714,0.5753,0.5793,0.5832,0.5871,0.591,0.5948,0.5987,0.6026,0.6064,0.6103,0.6141,0.6179,0.6217,0.6255,0.6293,0.6331,0.6368,0.6406,0.6443,0.648,0.6517,0.6554,0.6591,0.6628,0.6664,0.67,0.6736,0.6772,0.6808,0.6844,0.6879,0.6915,0.695,0.6985,0.7019,0.7054,0.7088,0.7123,0.7157,0.719,0.7224,0.7257,0.7291,0.7324,0.7357,0.7389,0.7422,0.7454,0.7486,0.7517,0.7549,0.758,0.7611,0.7642,0.7673,0.7704,0.7734,0.7764,0.7794,0.7823,0.7852,0.7881,0.791,0.7939,0.7967,0.7995,0.8023,0.8051,0.8078,0.8106,0.8133,0.8159,0.8186,0.8212,0.8238,0.8264,0.8289,0.8315,0.834,0.8365,0.8389,0.8413,0.8438,0.8461,0.8485,0.8508,0.8531,0.8554,0.8577,0.8599,0.8621,0.8643,0.8665,0.8686,0.8708,0.8729,0.8749,0.877,0.879,0.881,0.883,0.8849,0.8869,0.8888,0.8907,0.8925,0.8944,0.8962,0.898,0.8997,0.9015,0.9032,0.9049,0.9066,0.9082,0.9099,0.9115,0.9131,0.9147,0.9162,0.9177,0.9192,0.9207,0.9222,0.9236,0.9251,0.9265,0.9279,0.9292,0.9306,0.9319,0.9332,0.9345,0.9357,0.937,0.9382,0.9394,0.9406,0.9418,0.9429,0.9441,0.9452,0.9463,0.9474,0.9484,0.9495,0.9505,0.9515,0.9525,0.9535,0.9545,0.9554,0.9564,0.9573,0.9582,0.9591,0.9599,0.9608,0.9616,0.9625,0.9633,0.9641,0.9649,0.9656,0.9664,0.9671,0.9678,0.9686,0.9693,0.9699,0.9706,0.9713,0.9719,0.9726,0.9732,0.9738,0.9744,0.975,0.9756,0.9761,0.9767,0.9772,0.9778,0.9783,0.9788,0.9793,0.9798,0.9803,0.9808,0.9812,0.9817,0.9821,0.9826,0.983,0.9834,0.9838,0.9842,0.9846,0.985,0.9854,0.9857,0.9861,0.9864,0.9868,0.9871,0.9875,0.9878,0.9881,0.9884,0.9887,0.989,0.9893,0.9896,0.9898,0.9901,0.9904,0.9906,0.9909,0.9911,0.9913,0.9916,0.9918,0.992,0.9922,0.9925,0.9927,0.9929,0.9931,0.9932,0.9934,0.9936,0.9938,0.994,0.9941,0.9943,0.9945,0.9946,0.9948,0.9949,0.9951,0.9952,0.9953,0.9955,0.9956,0.9957,0.9959,0.996,0.9961,0.9962,0.9963,0.9964,0.9965,0.9966,0.9967,0.9968,0.9969,0.997,0.9971,0.9972,0.9973,0.9974,0.9974,0.9975,0.9976,0.9977,0.9977,0.9978,0.9979,0.9979,0.998,0.9981,0.9981,0.9982,0.9982,0.9983,0.9984,0.9984,0.9985,0.9985,0.9986,0.9986,0.9987,0.9987,0.9987,0.9988,0.9988,0.9989,0.9989,0.9989,0.999,0.999,0.999,0.9991,0.9991,0.9991,0.9992,0.9992,0.9992,0.9992,0.9993,0.9993,0.9993,0.9993,0.9994,0.9994,0.9994,0.9994,0.9994,0.9995,0.9995,0.9995,0.9995,0.9995,0.9995,0.9996,0.9996,0.9996,0.9996,0.9996,0.9996,0.9997,0.9997,0.9997,0.9997,0.9997,0.9997,0.9997,0.9997,0.9997,0.9997,0.9998],"tcols":[0.75,0.9,0.95,0.975,0.99,0.995],"t":{"1":[1.0,3.078,6.314,12.706,31.821,63.657],"2":[0.816,1.886,2.92,4.303,6.965,9.925],"3":[0.765,1.638,2.353,3.182,4.541,5.841],"4":[0.741,1.533,2.132,2.776,3.747,4.604],"5":[0.727,1.476,2.015,2.571,3.365,4.032],"6":[0.718,1.44,1.943,2.447,3.143,3.707],"7":[0.711,1.415,1.895,2.365,2.998,3.499],"8":[0.706,1.397,1.86,2.306,2.896,3.355],"9":[0.703,1.383,1.833,2.262,2.821,3.25],"10":[0.7,1.372,1.812,2.228,2.764,3.169],"11":[0.697,1.363,1.796,2.201,2.718,3.106],"12":[0.695,1.356,1.782,2.179,2.681,3.055],"13":[0.694,1.35,1.771,2.16,2.65,3.012],"14":[0.692,1.345,1.761,2.145,2.624,2.977],"15":[0.691,1.341,1.753,2.131,2.602,2.947],"16":[0.69,1.337,1.746,2.12,2.583,2.921],"17":[0.689,1.333,1.74,2.11,2.567,2.898],"18":[0.688,1.33,1.734,2.101,2.552,2.878],"19":[0.688,1.328,1.729,2.093,2.539,2.861],"20":[0.687,1.325,1.725,2.086,2.528,2.845],"21":[0.686,1.323,1.721,2.08,2.518,2.831],"22":[0.686,1.321,1.717,2.074,2.508,2.819],"23":[0.685,1.319,1.714,2.069,2.5,2.807],"24":[0.685,1.318,1.711,2.064,2.492,2.797],"25":[0.684,1.316,1.708,2.06,2.485,2.787],"26":[0.684,1.315,1.706,2.056,2.479,2.779],"27":[0.684,1.314,1.703,2.052,2.473,2.771],"28":[0.683,1.313,1.701,2.048,2.467,2.763],"29":[0.683,1.311,1.699,2.045,2.462,2.756],"30":[0.683,1.31,1.697,2.042,2.457,2.75],"35":[0.682,1.306,1.69,2.03,2.438,2.724],"40":[0.681,1.303,1.684,2.021,2.423,2.704],"45":[0.68,1.301,1.679,2.014,2.412,2.69],"50":[0.679,1.299,1.676,2.009,2.403,2.678],"60":[0.679,1.296,1.671,2.0,2.39,2.66],"70":[0.678,1.294,1.667,1.994,2.381,2.648],"80":[0.678,1.292,1.664,1.99,2.374,2.639],"90":[0.677,1.291,1.662,1.987,2.368,2.632],"100":[0.677,1.29,1.66,1.984,2.364,2.626],"inf":[0.674,1.282,1.645,1.96,2.326,2.576]},"ccols":[0.005,0.01,0.025,0.05,0.1,0.9,0.95,0.975,0.99,0.995],"chi":{"1":[0.0,0.0,0.001,0.004,0.016,2.71,3.84,5.02,6.63,7.88],"2":[0.01,0.02,0.051,0.103,0.211,4.61,5.99,7.38,9.21,10.6],"3":[0.072,0.115,0.216,0.352,0.584,6.25,7.81,9.35,11.34,12.84],"4":[0.207,0.297,0.484,0.711,1.06,7.78,9.49,11.14,13.28,14.86],"5":[0.412,0.554,0.831,1.15,1.61,9.24,11.07,12.83,15.09,16.75],"6":[0.676,0.872,1.24,1.64,2.2,10.64,12.59,14.45,16.81,18.55],"7":[0.989,1.24,1.69,2.17,2.83,12.02,14.07,16.01,18.48,20.28],"8":[1.34,1.65,2.18,2.73,3.49,13.36,15.51,17.53,20.09,21.95],"9":[1.73,2.09,2.7,3.33,4.17,14.68,16.92,19.02,21.67,23.59],"10":[2.16,2.56,3.25,3.94,4.87,15.99,18.31,20.48,23.21,25.19],"11":[2.6,3.05,3.82,4.57,5.58,17.28,19.68,21.92,24.72,26.76],"12":[3.07,3.57,4.4,5.23,6.3,18.55,21.03,23.34,26.22,28.3],"13":[3.57,4.11,5.01,5.89,7.04,19.81,22.36,24.74,27.69,29.82],"14":[4.07,4.66,5.63,6.57,7.79,21.06,23.68,26.12,29.14,31.32],"15":[4.6,5.23,6.26,7.26,8.55,22.31,25.0,27.49,30.58,32.8],"16":[5.14,5.81,6.91,7.96,9.31,23.54,26.3,28.85,32.0,34.27],"17":[5.7,6.41,7.56,8.67,10.09,24.77,27.59,30.19,33.41,35.72],"18":[6.26,7.01,8.23,9.39,10.86,25.99,28.87,31.53,34.81,37.16],"19":[6.84,7.63,8.91,10.12,11.65,27.2,30.14,32.85,36.19,38.58],"20":[7.43,8.26,9.59,10.85,12.44,28.41,31.41,34.17,37.57,40.0],"21":[8.03,8.9,10.28,11.59,13.24,29.62,32.67,35.48,38.93,41.4],"22":[8.64,9.54,10.98,12.34,14.04,30.81,33.92,36.78,40.29,42.8],"23":[9.26,10.2,11.69,13.09,14.85,32.01,35.17,38.08,41.64,44.18],"24":[9.89,10.86,12.4,13.85,15.66,33.2,36.42,39.36,42.98,45.56],"25":[10.52,11.52,13.12,14.61,16.47,34.38,37.65,40.65,44.31,46.93],"26":[11.16,12.2,13.84,15.38,17.29,35.56,38.89,41.92,45.64,48.29],"27":[11.81,12.88,14.57,16.15,18.11,36.74,40.11,43.19,46.96,49.64],"28":[12.46,13.56,15.31,16.93,18.94,37.92,41.34,44.46,48.28,50.99],"29":[13.12,14.26,16.05,17.71,19.77,39.09,42.56,45.72,49.59,52.34],"30":[13.79,14.95,16.79,18.49,20.6,40.26,43.77,46.98,50.89,53.67],"40":[20.71,22.16,24.43,26.51,29.05,51.81,55.76,59.34,63.69,66.77],"50":[27.99,29.71,32.36,34.76,37.69,63.17,67.5,71.42,76.15,79.49],"60":[35.53,37.48,40.48,43.19,46.46,74.4,79.08,83.3,88.38,91.95],"70":[43.28,45.44,48.76,51.74,55.33,85.53,90.53,95.02,100.43,104.21],"80":[51.17,53.54,57.15,60.39,64.28,96.58,101.88,106.63,112.33,116.32]}};
+
+/* ---------- maths helpers ---------- */
+function R(x, d) { var m = Math.pow(10, d); return Math.sign(x) * Math.round(Math.abs(x) * m + 1e-9) / m; }
+function F(x, d) { var s = R(x, d).toFixed(d); if (s.charAt(0) === "-" && /^-0\.?0*$/.test(s)) s = s.slice(1); return s.replace("-", "−"); }
+function G(x) { return String(x).replace("-", "−"); }                     // show a given number as typed
+function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+function ri(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+function rf(a, b, d) { return R(a + Math.random() * (b - a), d); }
+function sum(a) { return a.reduce(function (s, x) { return s + x; }, 0); }
+function comb(n, k) { var c = 1; for (var i = 1; i <= k; i++) c = c * (n - k + i) / i; return c; }
+function fact(n) { var f = 1; for (var i = 2; i <= n; i++) f *= i; return f; }
+function bpmf(n, p, x) { return comb(n, x) * Math.pow(p, x) * Math.pow(1 - p, n - x); }
+function ppmf(l, x) { return Math.exp(-l) * Math.pow(l, x) / fact(x); }
+function phi(z) {           // the formula-sheet table: P(Z <= z), z rounded to 2 dp
+  var z2 = R(z, 2);
+  if (z2 < 0) return R(1 - phi(-z2), 4);
+  if (z2 > 3.49) return 1;
+  return TABLES.phi[Math.round(z2 * 100)];
+}
+function zFor(area) {       // inverse look-up: the table z whose P(Z <= z) is closest to `area`
+  if (area < 0.5) return -zFor(1 - area);
+  var best = 0, bd = 9;
+  for (var i = 0; i < 350; i++) { var d = Math.abs(TABLES.phi[i] - area); if (d < bd - 1e-12) { bd = d; best = i; } }
+  return best / 100;
+}
+var ZTWO = { 0.90: 1.645, 0.95: 1.96, 0.98: 2.326, 0.99: 2.576 };      // z_{1-a/2} for a confidence level
+var ZONE = { 0.10: 1.282, 0.05: 1.645, 0.02: 2.054, 0.01: 2.326, 0.005: 2.576 }; // z_{1-a}
+function tq(df, p) { var row = TABLES.t[String(df)]; return row[TABLES.tcols.indexOf(p)]; }
+function cq(df, p) { var row = TABLES.chi[String(df)]; return row[TABLES.ccols.indexOf(p)]; }
+function pct(c) { return Math.round(c * 100) + "%"; }
+function lgamma(x) {        // Lanczos
+  var g = 7, c = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059,
+    12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+  if (x < 0.5) return Math.log(Math.PI / Math.sin(Math.PI * x)) - lgamma(1 - x);
+  x -= 1; var a = c[0], t = x + g + 0.5;
+  for (var i = 1; i < 9; i++) a += c[i] / (x + i);
+  return 0.5 * Math.log(2 * Math.PI) + (x + 0.5) * Math.log(t) - t + Math.log(a);
+}
+function betacf(a, b, x) {
+  var qab = a + b, qap = a + 1, qam = a - 1, c = 1, d = 1 - qab * x / qap; if (Math.abs(d) < 1e-30) d = 1e-30; d = 1 / d; var h = d;
+  for (var m = 1; m <= 200; m++) {
+    var m2 = 2 * m, aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+    d = 1 + aa * d; if (Math.abs(d) < 1e-30) d = 1e-30; c = 1 + aa / c; if (Math.abs(c) < 1e-30) c = 1e-30; d = 1 / d; h *= d * c;
+    aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+    d = 1 + aa * d; if (Math.abs(d) < 1e-30) d = 1e-30; c = 1 + aa / c; if (Math.abs(c) < 1e-30) c = 1e-30; d = 1 / d;
+    var del = d * c; h *= del; if (Math.abs(del - 1) < 3e-12) break;
+  }
+  return h;
+}
+function ibeta(a, b, x) {
+  if (x <= 0) return 0; if (x >= 1) return 1;
+  var bt = Math.exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+  return x < (a + 1) / (a + b + 2) ? bt * betacf(a, b, x) / a : 1 - bt * betacf(b, a, 1 - x) / b;
+}
+function tP2(tv, df) { return ibeta(df / 2, 0.5, df / (df + tv * tv)); }  // two-tailed p-value (Excel's P-value)
+
+/* ---------- HTML helpers ---------- */
+function C() { return '<div class="calc">' + Array.prototype.slice.call(arguments).join("<br>") + "</div>"; }
+function A(s) { return '<b class="ans">' + s + "</b>"; }
+function P(s) { return "<p>" + s + "</p>"; }
+function S(t, h, w) { return { t: t, h: h || "", w: w || "" }; }
+function num(l, q, ans, d, tol) { return { l: l, q: q, ans: ans, d: d, tol: tol == null ? Math.max(0.6 * Math.pow(10, -d), 0) : tol }; }
+function pickp(l, q, opts, ans) { return { l: l, q: q, choice: opts, ans: ans }; }
+function tbl(head, rows) {
+  return '<div class="tw"><table><tr>' + head.map(function (h) { return "<th>" + h + "</th>"; }).join("") + "</tr>" +
+    rows.map(function (r) { return "<tr>" + r.map(function (c) { return "<td>" + c + "</td>"; }).join("") + "</tr>"; }).join("") + "</table></div>";
+}
+var LE = "≤", GE = "≥", NE = "≠", MU = "μ", SIG = "σ", AL = "α", CHI = "χ²", XB = "x̄", PH = "p̂", SQ = "√";
+var H0 = "H₀", H1 = "H₁";
+var DEC = ["Reject " + H0, "Do not reject " + H0];
+
+/* the decision + conclusion steps shared by every test */
+function decide(dir, ts, cv, cv2) {   // returns {rej, rule, cmp}
+  var rej, rule, cmp;
+  if (dir === "two") {
+    var c = Math.abs(cv); rej = Math.abs(ts) >= c;
+    rule = "Reject " + H0 + " if |test statistic| " + GE + " " + F(c, 3) + (cv2 != null ? "" : "");
+    cmp = "|" + F(ts, 3) + "| = " + F(Math.abs(ts), 3) + (rej ? " " + GE + " " : " &lt; ") + F(c, 3);
+  } else if (dir === "left") {
+    rej = ts <= cv; rule = "Reject " + H0 + " if test statistic " + LE + " " + F(cv, 3);
+    cmp = F(ts, 3) + (rej ? " " + LE + " " : " &gt; ") + F(cv, 3);
+  } else {
+    rej = ts >= cv; rule = "Reject " + H0 + " if test statistic " + GE + " " + F(cv, 3);
+    cmp = F(ts, 3) + (rej ? " " + GE + " " : " &lt; ") + F(cv, 3);
+  }
+  return { rej: rej, rule: rule, cmp: cmp };
+}
+function concl(rej, a, claim) {
+  return P("At the " + pct(a) + " level of significance there is " + (rej ? "<b>sufficient</b>" : "<b>insufficient</b>") +
+    " evidence to conclude that " + claim + ".");
+}
+var DIRW = { left: "left-tailed (" + H1 + " has &lt;)", right: "right-tailed (" + H1 + " has &gt;)", two: "two-tailed (" + H1 + " has " + NE + ")" };
+var SYM = { left: "&lt;", right: "&gt;", two: NE };
+
+/* ======================================================================================== */
+var TOPICS = [];
+function topic(o) { TOPICS.push(o); }
+
+/* ---------------- Unit 5 ---------------- */
+topic({ id: "binom", unit: 5, title: "Binomial probabilities", from: "Tutorial Quiz 5, Q3 (clothing returns)",
+  spot: "A fixed number of trials n, each one is a success or a failure, and the chance of success p is the same every time. Words: “out of n”, “exactly”, “at most”, “at least”.",
+  formula: "P(X = x) = <sub>n</sub>C<sub>x</sub> p<sup>x</sup>(1 − p)<sup>n − x</sup> &nbsp;·&nbsp; E(X) = np &nbsp;·&nbsp; V(X) = np(1 − p)",
+  gen: function (orig) {
+    var ctx = orig ? 0 : ri(0, 2);
+    var p = orig ? 0.16 : ri(5, 35) / 100, n = orig ? 9 : ri(6, 14), k = orig ? 2 : ri(1, 3);
+    var C3 = [["The records of a clothing store show that " + R(p * 100, 1) + "% of customers return clothing to exchange it. Suppose there are " + n + " customers standing in the queue to pay.", "customers", "will return the clothing"],
+      ["A call centre finds that " + R(p * 100, 1) + "% of calls are complaints. " + n + " calls are received in the next hour.", "calls", "are complaints"],
+      ["" + R(p * 100, 1) + "% of the light bulbs made by a factory are defective. A box holds " + n + " bulbs.", "bulbs", "are defective"]][ctx];
+    var q = 1 - p, terms = [], tsum = 0;
+    for (var x = 0; x <= k; x++) { var v = bpmf(n, p, x); tsum += v; terms.push("P(X = " + x + ") = <sub>" + n + "</sub>C<sub>" + x + "</sub>(" + G(p) + ")<sup>" + x + "</sup>(" + F(q, 2) + ")<sup>" + (n - x) + "</sup> = " + F(v, 4)); }
+    var p0 = bpmf(n, p, 0);
+    return {
+      q: P(C3[0]) + P("Round answers to four decimal places."),
+      parts: [num("a", "The probability that none of the " + n + " " + C3[1] + " " + C3[2] + ".", R(p0, 4), 4),
+        num("b", "The probability that at most " + k + " of them " + C3[2] + ".", R(tsum, 4), 4, 0.0006),
+        num("c", "The probability that at least one of them " + C3[2] + ".", R(1 - p0, 4), 4),
+        num("d", "The expected number that " + C3[2] + ".", R(n * p, 4), 2, 0.006)],
+      steps: [S("Name the distribution", "n is the count of trials, p is the percentage in the first sentence (as a decimal). Write it down: examiners give a mark for it.",
+        C("X = number of " + C3[1] + " that " + C3[2], "X ~ Bin(n = " + n + ", p = " + G(p) + ")")),
+        S("(a) “None” means X = 0", "Any number to the power 0 is 1 and <sub>n</sub>C<sub>0</sub> = 1, so only (1 − p)<sup>n</sup> is left.",
+          C("P(X = 0) = (1 − " + G(p) + ")<sup>" + n + "</sup> = " + F(q, 2) + "<sup>" + n + "</sup> = " + A(F(p0, 4)))),
+        S("(b) “At most " + k + "” means 0, 1, …, " + k, "Work out each probability with the formula, then add. Calculator: nCr is <kbd>SHIFT</kbd> <kbd>÷</kbd> on a Casio.",
+          C.apply(null, terms.concat(["P(X " + LE + " " + k + ") = " + A(F(tsum, 4))]))),
+        S("(c) “At least one” = everything except none", "Never add 1, 2, …, n. Use the complement.", C("P(X " + GE + " 1) = 1 − P(X = 0) = 1 − " + F(p0, 4) + " = " + A(F(1 - p0, 4)))),
+        S("(d) Expected value", "For a binomial the mean is np.", C("E(X) = np = " + n + " × " + G(p) + " = " + A(F(n * p, 2))))]
+    };
+  } });
+
+topic({ id: "pois", unit: 5, title: "Poisson probabilities", from: "Tutorial Quiz 5, Q4 (speeding on campus)",
+  spot: "A count of events in a fixed stretch of time or space, with an average rate λ (“on average 3.1 per day”). No fixed n.",
+  formula: "P(X = x) = λ<sup>x</sup>e<sup>−λ</sup>/x! &nbsp;·&nbsp; E(X) = V(X) = λ &nbsp;·&nbsp; change the period ⇒ change λ in proportion",
+  gen: function (orig) {
+    var l = orig ? 3.1 : rf(1.2, 6.5, 1), x = orig ? 5 : ri(2, 6), m = orig ? 1 : ri(1, 2), t = orig ? 4 : ri(2, 7), t2 = orig ? 2 : pick([2, 3]);
+    var px = ppmf(l, x), cum = 0, terms = [];
+    for (var i = 0; i <= m; i++) { var v = ppmf(l, i); cum += v; terms.push("P(X = " + i + ") = " + G(l) + "<sup>" + i + "</sup>e<sup>−" + G(l) + "</sup>/" + i + "! = " + F(v, 4)); }
+    var l2 = R(l * t2, 4), p0 = Math.exp(-l2);
+    return {
+      q: P("The maximum speed limit on campus roads is 40 km/h. The average number of motorists who exceed this limit per day is " + G(l) + ".") + P("Round answers to four decimal places."),
+      parts: [num("a", "The probability that, on a given day, exactly " + x + " motorists exceed the limit.", R(px, 4), 4),
+        num("b", "The probability that, on a given day, more than " + m + " motorist" + (m > 1 ? "s" : "") + " exceed the limit.", R(1 - cum, 4), 4, 0.0006),
+        num("c", "The expected number of motorists who exceed the limit in a " + t + "-day period.", R(l * t, 4), 2, 0.006),
+        num("d", "The probability that nobody exceeds the limit over " + t2 + " days.", R(p0, 4), 4)],
+      steps: [S("Name the distribution", "Events counted per day, with an average rate, no fixed number of trials ⇒ Poisson.", C("X ~ Poisson(λ = " + G(l) + " per day)")),
+        S("(a) Exactly " + x, "Straight into the formula.", C("P(X = " + x + ") = " + G(l) + "<sup>" + x + "</sup>e<sup>−" + G(l) + "</sup>/" + x + "! = " + A(F(px, 4)))),
+        S("(b) “More than " + m + "” = 1 − P(X " + LE + " " + m + ")", "A Poisson count has no top end, so you can't add “up to infinity”. Use the complement.",
+          C.apply(null, terms.concat(["P(X &gt; " + m + ") = 1 − " + F(cum, 4) + " = " + A(F(1 - cum, 4))]))),
+        S("(c) A longer period ⇒ a bigger λ", "The rate scales with the period: " + t + " days ⇒ λ × " + t + ". E(X) = λ.", C("E(X) = " + G(l) + " × " + t + " = " + A(F(l * t, 2)))),
+        S("(d) New period, new λ, then P(X = 0)", "Rescale λ first, then use the formula with x = 0 (it becomes e<sup>−λ</sup>).",
+          C("λ for " + t2 + " days = " + G(l) + " × " + t2 + " = " + G(l2), "P(X = 0) = e<sup>−" + G(l2) + "</sup> = " + A(F(p0, 4))))]
+    };
+  } });
+
+topic({ id: "norm", unit: 5, title: "Normal probabilities", from: "Tutorial Quiz 5, Q5 and Practical 3",
+  spot: "A continuous measurement that is “normally distributed with mean μ and standard deviation σ (or variance σ²)”, and a question about less than / more than / between.",
+  formula: "Z = (X − μ)/σ, rounded to 2 dp &nbsp;·&nbsp; P(Z &gt; z) = 1 − P(Z " + LE + " z) &nbsp;·&nbsp; P(Z &lt; −z) = P(Z &gt; z)",
+  gen: function (orig) {
+    var c, mu, sd, useVar, u, lo, hi, b1, b2;
+    if (orig) { c = 0; mu = 7.4; sd = 2.6; useVar = false; lo = 6; hi = 4.9; b1 = 5; b2 = 10; }
+    else {
+      c = ri(0, 2);
+      if (c === 0) { mu = rf(5, 12, 1); sd = rf(1.5, 4, 1); }
+      else if (c === 1) { mu = ri(98, 115); sd = ri(10, 16); }
+      else { mu = ri(25, 40) * 100; sd = ri(12, 20) * 50; }
+      var d = c === 0 ? 1 : 0;
+      lo = R(mu + sd * rf(-1.6, 1.2, 2), d); hi = R(mu + sd * rf(-1.4, 1.4, 2), d);
+      b1 = R(mu - sd * rf(0.3, 1.5, 2), d); b2 = R(mu + sd * rf(0.2, 1.6, 2), d);
+      useVar = c === 2 || Math.random() < 0.3;
+    }
+    var nm = [["the annual return on an investment", "%", "return"], ["the IQ scores of adults in a certain country", "", "IQ score"], ["the amount claimed per year by policy holders", " (rand)", "claim"]][c];
+    var given = useVar ? "variance " + G(R(sd * sd, 2)) + (c === 2 ? " rand²" : "") : "standard deviation " + G(sd) + nm[1].replace(" (rand)", "");
+    var z1 = R((lo - mu) / sd, 2), z2 = R((hi - mu) / sd, 2), z3 = R((b1 - mu) / sd, 2), z4 = R((b2 - mu) / sd, 2);
+    var pa = phi(z1), pb = R(1 - phi(z2), 4), pc = R(phi(z4) - phi(z3), 4);
+    var steps = [];
+    if (useVar) steps.push(S("Variance given ⇒ take the square root first", "Z divides by the standard deviation, never the variance. This is the most common lost mark.", C(SIG + " = " + SQ + G(R(sd * sd, 2)) + " = " + G(sd))));
+    steps.push(S("(a) Standardise, then read the table", "z = (x − μ)/σ, rounded to 2 decimals. The table gives P(Z " + LE + " z). For a negative z use 1 − the table value at +z.",
+      C("z = (" + G(lo) + " − " + G(mu) + ")/" + G(sd) + " = " + F(z1, 2), "P(X &lt; " + G(lo) + ") = P(Z &lt; " + F(z1, 2) + ") = " + (z1 < 0 ? "1 − " + F(phi(-z1), 4) + " = " : "") + A(F(pa, 4)))));
+    steps.push(S("(b) “More than” ⇒ 1 − table", "Sketch the curve: “more than” is the area to the right.",
+      C("z = (" + G(hi) + " − " + G(mu) + ")/" + G(sd) + " = " + F(z2, 2), "P(Z &gt; " + F(z2, 2) + ") = 1 − P(Z " + LE + " " + F(z2, 2) + ") = 1 − " + F(phi(z2), 4) + " = " + A(F(pb, 4)))));
+    steps.push(S("(c) “Between” ⇒ big area − small area", "Standardise both ends. P(a &lt; X &lt; b) = P(Z &lt; z<sub>b</sub>) − P(Z &lt; z<sub>a</sub>).",
+      C("z<sub>1</sub> = (" + G(b1) + " − " + G(mu) + ")/" + G(sd) + " = " + F(z3, 2) + " &nbsp;·&nbsp; z<sub>2</sub> = (" + G(b2) + " − " + G(mu) + ")/" + G(sd) + " = " + F(z4, 2),
+        "P = " + F(phi(z4), 4) + " − " + F(phi(z3), 4) + " = " + A(F(pc, 4)))));
+    return {
+      q: P("Suppose " + nm[0] + " is normally distributed with mean " + G(mu) + nm[1].replace(" (rand)", "") + " and " + given + ".") + P("Round z-scores to two decimals and answers to four decimals."),
+      parts: [num("a", "P(" + nm[2] + " &lt; " + G(lo) + ")", pa, 4), num("b", "P(" + nm[2] + " &gt; " + G(hi) + ")", pb, 4), num("c", "P(" + G(b1) + " &lt; " + nm[2] + " &lt; " + G(b2) + ")", pc, 4)],
+      steps: steps
+    };
+  } });
+
+topic({ id: "invnorm", unit: 5, title: "Inverse normal: find the cut-off", from: "Tutorial Quiz 5, Q6 (shortest 10%)",
+  spot: "The percentage is given and the value of X is asked: “the shortest 10%”, “the top 5% earn more than…”, “what score is exceeded by…”.",
+  formula: "Find z in the body of the table, then x = μ + zσ",
+  gen: function (orig) {
+    var mu = orig ? 172 : ri(150, 185), sd = orig ? 5 : ri(4, 12), low = orig ? true : Math.random() < 0.5, p = orig ? 10 : pick([1, 2.5, 5, 10, 15, 20, 25]);
+    var useVar = orig ? true : Math.random() < 0.5;
+    var left = low ? p / 100 : 1 - p / 100, z = zFor(left), x = R(mu + z * sd, 2);
+    var look = low ? 1 - p / 100 : 1 - p / 100;
+    return {
+      q: P("In a large statistics class the heights of students are normally distributed with a mean of " + mu + " cm and a " + (useVar ? "variance of " + (sd * sd) + " cm²" : "standard deviation of " + sd + " cm") + ".") +
+        P("Only the " + (low ? "shortest" : "tallest") + " " + p + "% of students are selected for a task. What is the cut-off height?"),
+      parts: [num("", "Cut-off height (cm)", x, 2, Math.max(0.02 * sd, 0.05))],
+      steps: [(useVar ? S("Standard deviation first", "The variance is given, so take the square root.", C(SIG + " = " + SQ + (sd * sd) + " = " + sd)) : S("Picture it", "Draw the curve and shade the " + p + "% tail. The cut-off sits at the edge of the shading.", "")),
+        S("Area to the left of the cut-off", low ? "The shortest " + p + "% are to the left, so the area to the left is " + p / 100 + ". The table only has areas above 0.5, so look up 1 − " + p / 100 + " = " + R(look, 4) + " and make z negative."
+          : "The tallest " + p + "% are to the right, so the area to the left is 1 − " + p / 100 + " = " + R(left, 4) + ".",
+          C("Look in the body of the table for the value closest to " + R(look, 4) + " ⇒ z = " + F(Math.abs(z), 2), low ? "Left tail ⇒ z = " + F(z, 2) : "")),
+        S("Un-standardise", "Rearranging z = (x − μ)/σ gives x = μ + zσ.", C("x = " + mu + " + (" + F(z, 2) + ")(" + sd + ") = " + A(F(x, 2) + " cm")))]
+    };
+  } });
+
+/* ---------------- Unit 6 ---------------- */
+topic({ id: "xbar", unit: 6, title: "Sampling distribution of the mean", from: "Tutorial Quiz 6, Q1 (credit card debt)",
+  spot: "A question about the <b>mean of a sample</b> (“the mean debt of 25 accounts”), not one value. The population μ and σ are given.",
+  formula: "σ<sub>" + XB + "</sub> = σ/" + SQ + "n &nbsp;·&nbsp; Z = (" + XB + " − μ)/(σ/" + SQ + "n)",
+  gen: function (orig) {
+    var mu = orig ? 1098 : ri(70, 160) * 10, sd = orig ? 342 : ri(20, 45) * 10, n = orig ? 25 : pick([16, 25, 30, 36, 40, 49, 50, 64]);
+    var se = sd / Math.sqrt(n);
+    var a = orig ? 1022 : Math.round(mu + se * rf(-1.8, -0.3, 2)), b1 = orig ? 1030 : Math.round(mu - se * rf(0.4, 1.6, 2)), b2 = orig ? 1146 : Math.round(mu + se * rf(0.3, 1.8, 2));
+    var za = R((a - mu) / se, 2), z1 = R((b1 - mu) / se, 2), z2 = R((b2 - mu) / se, 2);
+    var pa = R(1 - phi(za), 4), pb = R(phi(z2) - phi(z1), 4);
+    return {
+      q: P("A large bank knows that the average credit card debt of its card holders is R" + mu + " with a standard deviation of R" + sd + ". The bank takes a random sample of " + n + " credit card accounts.") + P("Round answers to four decimal places."),
+      parts: [num("a", "P(the mean debt of the sample is more than R" + a + ")", pa, 4), num("b", "P(the mean debt of the sample is between R" + b1 + " and R" + b2 + ")", pb, 4)],
+      steps: [S("It's about a sample mean ⇒ use the standard error", "Means of samples vary less than single values. Divide σ by " + SQ + "n.", C("σ<sub>" + XB + "</sub> = " + sd + "/" + SQ + n + " = " + F(se, 4))),
+        S("(a) Standardise with the standard error", "Same z-formula as before, but divide by σ/" + SQ + "n. “More than” ⇒ 1 − table.",
+          C("z = (" + a + " − " + mu + ")/" + F(se, 4) + " = " + F(za, 2), "P(" + XB + " &gt; " + a + ") = 1 − P(Z " + LE + " " + F(za, 2) + ") = 1 − " + F(phi(za), 4) + " = " + A(F(pa, 4)))),
+        S("(b) Between ⇒ two z-values", "", C("z<sub>1</sub> = (" + b1 + " − " + mu + ")/" + F(se, 4) + " = " + F(z1, 2) + " &nbsp;·&nbsp; z<sub>2</sub> = (" + b2 + " − " + mu + ")/" + F(se, 4) + " = " + F(z2, 2),
+          "P = " + F(phi(z2), 4) + " − " + F(phi(z1), 4) + " = " + A(F(pb, 4)))),
+        S("Why may we use the normal curve?", "If n " + GE + " 30 the Central Limit Theorem makes " + XB + " approximately normal whatever the population looks like; for smaller n the population itself must be normal. Examiners ask this as a 1-mark question.", "")]
+    };
+  } });
+
+topic({ id: "phat", unit: 6, title: "Sample proportions (normal approximation)", from: "Tutorial Quiz 6, Q2 (antibiotic): the most-missed tutorial question",
+  spot: "A percentage of the population (“cures 93% of the time”) and a <b>count out of a sample</b> (“fewer than 188 of 192 are cured”).",
+  formula: PH + " = x/n &nbsp;·&nbsp; σ<sub>" + PH + "</sub> = " + SQ + "(p(1 − p)/n) &nbsp;·&nbsp; Z = (" + PH + " − p)/σ<sub>" + PH + "</sub>",
+  gen: function (orig) {
+    var p = orig ? 0.93 : ri(85, 96) / 100, n1 = orig ? 192 : ri(120, 260), n2 = orig ? 35 : ri(30, 50);
+    var se1 = Math.sqrt(p * (1 - p) / n1), se2 = Math.sqrt(p * (1 - p) / n2);
+    var c1 = orig ? 188 : Math.round(n1 * (p + se1 * rf(-0.8, 2.2, 2))), c2 = orig ? 32 : Math.min(n2 - 1, Math.round(n2 * (p + se2 * rf(-1, 0.6, 2))));
+    var ph1 = c1 / n1, ph2 = c2 / n2, z1 = R((ph1 - p) / se1, 2), z2 = R((ph2 - p) / se2, 2);
+    var pa = phi(z1), pb = R(1 - phi(z2), 4);
+    return {
+      q: P("A new antibiotic cures a certain disease " + Math.round(p * 100) + "% of the time.") + P("Round answers to four decimal places."),
+      parts: [num("a", "Doctors prescribe it to " + n1 + " patients. What is the probability that fewer than " + c1 + " are cured?", pa, 4),
+        num("b", "Another hospital prescribes it to " + n2 + " patients. What is the probability that more than " + c2 + " are cured?", pb, 4)],
+      steps: [S("Turn the count into a sample proportion", "The count out of n becomes " + PH + " = x/n. The " + Math.round(p * 100) + "% is the population p.", C(PH + " = " + c1 + "/" + n1 + " = " + F(ph1, 4) + " &nbsp;·&nbsp; p = " + G(p))),
+        S("(a) Standard error, then z", "σ<sub>" + PH + "</sub> uses the population p, not " + PH + ". “Fewer than” ⇒ read the table directly.",
+          C("σ<sub>" + PH + "</sub> = " + SQ + "(" + G(p) + " × " + F(1 - p, 2) + "/" + n1 + ") = " + F(se1, 4), "z = (" + F(ph1, 4) + " − " + G(p) + ")/" + F(se1, 4) + " = " + F(z1, 2),
+            "P(" + PH + " &lt; " + F(ph1, 4) + ") = P(Z &lt; " + F(z1, 2) + ") = " + A(F(pa, 4)))),
+        S("(b) Same method, new n", "A smaller sample means a bigger standard error. “More than” ⇒ 1 − table.",
+          C(PH + " = " + c2 + "/" + n2 + " = " + F(ph2, 4) + " &nbsp;·&nbsp; σ<sub>" + PH + "</sub> = " + SQ + "(" + G(p) + " × " + F(1 - p, 2) + "/" + n2 + ") = " + F(se2, 4),
+            "z = (" + F(ph2, 4) + " − " + G(p) + ")/" + F(se2, 4) + " = " + F(z2, 2), "P(Z &gt; " + F(z2, 2) + ") = 1 − " + F(phi(z2), 4) + " = " + A(F(pb, 4)))),
+        S("Two things that cost marks here", "1) Funda and the memos do <b>not</b> use a continuity correction (no ±0.5). 2) Strictly the approximation needs np " + GE + " 5 and n(1 − p) " + GE + " 5; part (b) fails that (" + n2 + " × " + F(1 - p, 2) + " = " + F(n2 * (1 - p), 2) + "), but the tutorial memo still used the z method, so do it their way. Working with counts gives the same z: μ = np, σ = " + SQ + "(np(1 − p)).", "")]
+    };
+  } });
+
+/* ---------------- Unit 7 ---------------- */
+function ciSteps(lbl, est, crit, critTxt, se, seTxt, lo, hi, d, interp) {
+  return [S("Pick the right interval", lbl, ""),
+    S("Critical value", critTxt, C(crit)),
+    S("Standard error and margin of error", "Margin = critical value × standard error.", C(seTxt, "margin = " + est.mtxt)),
+    S("The interval", "Estimate ± margin. Keep the lower limit first, in square brackets.", C("[" + est.txt + " − " + F(est.m, d + 1) + " ; " + est.txt + " + " + F(est.m, d + 1) + "] = " + A("[" + F(lo, d) + " ; " + F(hi, d) + "]"))),
+    S("Interpret (1 mark)", "Name the confidence level and the population parameter, in context.", P(interp))];
+}
+topic({ id: "ciz", unit: 7, title: "Confidence interval for μ (σ known)", from: "Tutorial Quiz 7, Q5 (water intake)",
+  spot: "Estimate a population mean and the <b>population</b> standard deviation σ is known (“is known to be normally distributed with standard deviation…”).",
+  formula: "[" + XB + " ± z<sub>1−α/2</sub> σ/" + SQ + "n] &nbsp;·&nbsp; 90% → 1.645 · 95% → 1.96 · 98% → 2.326 · 99% → 2.576",
+  gen: function (orig) {
+    var sd = orig ? 0.65 : rf(0.4, 1.2, 2), n = orig ? 35 : ri(20, 60), xb = orig ? 1.61 : rf(1.4, 2.6, 2), cf = orig ? 0.99 : pick([0.90, 0.95, 0.98, 0.99]);
+    var z = ZTWO[cf], se = sd / Math.sqrt(n), m = z * se, lo = xb - m, hi = xb + m;
+    return {
+      q: P("The daily water intake of adults is normally distributed with a standard deviation of " + G(sd) + " litres. A sample of " + n + " adults has a mean daily intake of " + G(xb) + " litres.") +
+        P("Construct a " + pct(cf) + " confidence interval for the mean daily water intake of adults. Round to four decimals."),
+      parts: [num("L", "Lower limit", R(lo, 4), 4, 0.0015), num("U", "Upper limit", R(hi, 4), 4, 0.0015)],
+      steps: ciSteps("σ is the <b>population</b> standard deviation ⇒ z-interval: " + XB + " ± z σ/" + SQ + "n.", { txt: G(xb), m: m, mtxt: G(z) + " × " + F(se, 5) + " = " + F(m, 5) },
+        "z<sub>1−α/2</sub> = " + G(z), "Confidence " + pct(cf) + " ⇒ α = " + R(1 - cf, 2) + ", α/2 = " + R((1 - cf) / 2, 3) + ". Read z<sub>1−α/2</sub> from the critical-value table on the formula sheet.",
+        se, "σ/" + SQ + "n = " + G(sd) + "/" + SQ + n + " = " + F(se, 5), lo, hi, 4,
+        "We are " + pct(cf) + " confident that the true mean daily water intake of adults lies between " + F(lo, 4) + " and " + F(hi, 4) + " litres.")
+    };
+  } });
+
+topic({ id: "cit", unit: 7, title: "Confidence interval for μ (σ unknown, t)", from: "Tutorial Quiz 7, Q1 (light bulbs) and Practical 4",
+  spot: "Estimate a mean, only the <b>sample</b> standard deviation s is given and the sample is small (n &lt; 30), population normal.",
+  formula: "[" + XB + " ± t<sub>n−1; 1−α/2</sub> s/" + SQ + "n]",
+  gen: function (orig) {
+    var n = orig ? 16 : ri(8, 25), xb = orig ? 233 : ri(180, 420), s = orig ? 30 : ri(12, 45), cf = orig ? 0.95 : pick([0.90, 0.95, 0.98, 0.99]);
+    var col = R(1 - (1 - cf) / 2, 3), t = tq(n - 1, col), se = s / Math.sqrt(n), m = t * se;
+    return {
+      q: P("The lifetime of a certain light bulb is investigated. A sample of " + n + " bulbs has an average lifetime of " + xb + " hours with a sample standard deviation of " + s + " hours.") +
+        P("Assuming lifetimes are normally distributed, calculate a " + pct(cf) + " confidence interval for the average lifetime. Round to four decimals."),
+      parts: [num("L", "Lower limit", R(xb - m, 4), 4, 0.002), num("U", "Upper limit", R(xb + m, 4), 4, 0.002)],
+      steps: ciSteps("Only s is given and n = " + n + " &lt; 30 ⇒ t-interval with n − 1 = " + (n - 1) + " degrees of freedom.", { txt: G(xb), m: m, mtxt: G(t) + " × " + F(se, 4) + " = " + F(m, 4) },
+        "t<sub>" + (n - 1) + "; " + col + "</sub> = " + G(t), "Use the t-table: row df = n − 1 = " + (n - 1) + ", column 1 − α/2 = " + col + ".",
+        se, "s/" + SQ + "n = " + s + "/" + SQ + n + " = " + F(se, 4), xb - m, xb + m, 4,
+        "We are " + pct(cf) + " confident that the true mean lifetime of the bulbs lies between " + F(xb - m, 4) + " and " + F(xb + m, 4) + " hours.")
+    };
+  } });
+
+topic({ id: "cip", unit: 7, title: "Confidence interval for a proportion", from: "Tutorial Quiz 7, Q3 (wisdom teeth) and Practical 4",
+  spot: "Estimate a population <b>percentage/proportion</b> from “x out of n” in a sample.",
+  formula: "[" + PH + " ± z<sub>1−α/2</sub> " + SQ + "(" + PH + "(1 − " + PH + ")/n)]",
+  gen: function (orig) {
+    var n = orig ? 316 : ri(150, 600), x = orig ? 78 : ri(Math.round(n * 0.15), Math.round(n * 0.45)), comp = orig ? true : Math.random() < 0.5, cf = orig ? 0.95 : pick([0.90, 0.95, 0.99]);
+    var k = comp ? n - x : x, ph = k / n, z = ZTWO[cf], se = Math.sqrt(ph * (1 - ph) / n), m = z * se;
+    return {
+      q: P("A dentist wants the proportion of adults who have had their wisdom teeth removed. In a random sample of " + n + " adults, " + x + (comp ? " still had their wisdom teeth." : " had had their wisdom teeth removed.")) +
+        P("Construct an approximate " + pct(cf) + " confidence interval for the proportion of adults who have had their wisdom teeth <b>removed</b>. Round to four decimals."),
+      parts: [num("L", "Lower limit", R(ph - m, 4), 4, 0.0012), num("U", "Upper limit", R(ph + m, 4), 4, 0.0012)],
+      steps: [S("Read the question twice", comp ? "The " + x + " is the people who <b>still have</b> their teeth; the interval is for those who had them <b>removed</b>. Use the complement: " + n + " − " + x + " = " + k + ". This trap is in the tutorial on purpose." : "The count given is already the group asked about.",
+        C(PH + " = " + k + "/" + n + " = " + F(ph, 5))),
+        S("Critical value", "Proportions always use z.", C("z<sub>1−α/2</sub> = " + G(z))),
+        S("Standard error and margin", "Here the standard error uses " + PH + " (there is no known p).", C(SQ + "(" + F(ph, 5) + " × " + F(1 - ph, 5) + "/" + n + ") = " + F(se, 5), "margin = " + G(z) + " × " + F(se, 5) + " = " + F(m, 5))),
+        S("The interval", "", C("[" + F(ph, 5) + " − " + F(m, 5) + " ; " + F(ph, 5) + " + " + F(m, 5) + "] = " + A("[" + F(ph - m, 4) + " ; " + F(ph + m, 4) + "]"))),
+        S("Interpret", "", P("We are " + pct(cf) + " confident that the true proportion of adults who have had their wisdom teeth removed is between " + F(ph - m, 4) + " and " + F(ph + m, 4) + "."))]
+    };
+  } });
+
+topic({ id: "civar", unit: 7, title: "Confidence interval for σ² (chi-square)", from: "Tutorial Quiz 7, Q2 (heating elements)",
+  spot: "Words about <b>variation, consistency, spread</b> (“does not vary by a large amount”) and a confidence interval for the variance or standard deviation.",
+  formula: "[(n − 1)s²/" + CHI + "<sub>n−1; 1−α/2</sub> ; (n − 1)s²/" + CHI + "<sub>n−1; α/2</sub>] &nbsp;·&nbsp; for σ take the square root of both limits",
+  gen: function (orig) {
+    var n = orig ? 22 : ri(8, 30), s = orig ? 28 : ri(6, 40), cf = orig ? 0.95 : pick([0.90, 0.95, 0.99]), xb = orig ? 210 : ri(120, 300);
+    var a = R(1 - cf, 2), hiC = cq(n - 1, R(1 - a / 2, 3)), loC = cq(n - 1, R(a / 2, 3)), num1 = (n - 1) * s * s;
+    var L = num1 / hiC, U = num1 / loC;
+    return {
+      q: P("A manufacturer requires that the size of its heating elements does not vary much. In a sample of " + n + " elements the mean size was " + xb + " mm and the sample standard deviation was " + s + " mm.") +
+        P("Assuming sizes are normally distributed, construct a " + pct(cf) + " confidence interval for the <b>variance</b> of the size, and then for the standard deviation. Round to four decimals."),
+      parts: [num("L", "Variance: lower limit", R(L, 4), 4, Math.max(0.002 * L, 0.01)), num("U", "Variance: upper limit", R(U, 4), 4, Math.max(0.002 * U, 0.01)),
+        num("σL", "Standard deviation: lower limit", R(Math.sqrt(L), 4), 4, 0.01), num("σU", "Standard deviation: upper limit", R(Math.sqrt(U), 4), 4, 0.01)],
+      steps: [S("Variance ⇒ chi-square", "The mean (" + xb + ") is a distractor: it isn't used anywhere. You need n, s² and two " + CHI + " values with df = n − 1 = " + (n - 1) + ".", C("(n − 1)s² = " + (n - 1) + " × " + s + "² = " + num1)),
+        S("Two critical values", "α = " + a + ". The table's columns are lower-tail probabilities: look up 1 − α/2 = " + R(1 - a / 2, 3) + " and α/2 = " + R(a / 2, 3) + " in row " + (n - 1) + ".",
+          C(CHI + "<sub>" + (n - 1) + "; " + R(1 - a / 2, 3) + "</sub> = " + G(hiC) + " &nbsp;·&nbsp; " + CHI + "<sub>" + (n - 1) + "; " + R(a / 2, 3) + "</sub> = " + G(loC))),
+        S("Divide: the BIG " + CHI + " gives the LOWER limit", "Dividing by a bigger number gives a smaller answer, so the larger table value goes under the lower limit.",
+          C("L = " + num1 + "/" + G(hiC) + " = " + A(F(L, 4)), "U = " + num1 + "/" + G(loC) + " = " + A(F(U, 4)))),
+        S("For σ, square-root both ends", "", C("[" + SQ + F(L, 4) + " ; " + SQ + F(U, 4) + "] = " + A("[" + F(Math.sqrt(L), 4) + " ; " + F(Math.sqrt(U), 4) + "] mm")))]
+    };
+  } });
+
+topic({ id: "nsize", unit: 7, title: "Sample size", from: "Tutorial Quiz 7, Q4 and Practical 4, Q3",
+  spot: "“How large a sample is needed to be 95% confident of being within E of the true…?”",
+  formula: "mean: n = (z<sub>1−α/2</sub> σ/e)² &nbsp;·&nbsp; proportion: n = (z<sub>1−α/2</sub>/e)² p(1 − p) &nbsp;·&nbsp; always round <b>up</b>",
+  gen: function (orig) {
+    var E = orig ? 12 : ri(5, 25), sd = orig ? 98 : ri(40, 150), cf = orig ? 0.95 : pick([0.90, 0.95, 0.98, 0.99]);
+    var z = ZTWO[cf], raw = Math.pow(z * sd / E, 2), n = Math.ceil(raw - 1e-9);
+    var e2 = orig ? 0.03 : pick([0.02, 0.03, 0.04, 0.05]), pp = orig ? null : pick([null, 0.2, 0.3, 0.6]), p2 = pp == null ? 0.5 : pp, cf2 = orig ? 0.95 : pick([0.90, 0.95, 0.99]);
+    var z2 = ZTWO[cf2], raw2 = Math.pow(z2 / e2, 2) * p2 * (1 - p2), n2 = Math.ceil(raw2 - 1e-9);
+    return {
+      q: P("(a) A financial aid officer wants to estimate the mean cost of textbooks per semester to within R" + E + " of the true mean, with " + pct(cf) + " confidence. The population standard deviation is R" + sd + ".") +
+        P("(b) The officer also wants the proportion of students who buy second-hand books to within " + G(e2) + " (that is " + R(e2 * 100, 0) + " percentage points), with " + pct(cf2) + " confidence. " + (pp == null ? "There is no earlier estimate of the proportion." : "An earlier study found " + Math.round(pp * 100) + "%.")),
+      parts: [num("a", "Sample size for the mean", n, 0, 0.1), num("b", "Sample size for the proportion", n2, 0, 0.1)],
+      steps: [S("(a) Substitute", "z from the confidence level, σ, and e = the “within” amount.", C("n = (" + G(z) + " × " + sd + "/" + E + ")² = " + F(raw, 3))),
+        S("(a) Round UP, always", "Rounding down would give less than the required confidence, even if the decimal is small.", C("n = " + A(String(n)))),
+        S("(b) Proportion version", pp == null ? "No earlier estimate ⇒ use p = 0.5 (it gives the largest, safest n)." : "Use the earlier estimate p = " + G(pp) + ".", C("n = (" + G(z2) + "/" + G(e2) + ")² × " + G(p2) + " × " + G(R(1 - p2, 2)) + " = " + F(raw2, 3), "round up ⇒ " + A(String(n2))))]
+    };
+  } });
+
+/* ---------------- Unit 8 ---------------- */
+function testSteps(o) {   // o: {h0,h1,why,a,tsLine(s),cvTxt,cv,ts,dir,claim, which}
+  var d = decide(o.dir, o.ts, o.cv);
+  return { rej: d.rej, steps: [
+    S("1. Hypotheses", o.why, C(H0 + ": " + o.h0, H1 + ": " + o.h1)),
+    S("2. Significance level", "Given in the question.", C(AL + " = " + o.a)),
+    S("3. Test statistic", o.which, C.apply(null, o.tsLines)),
+    S("4. Critical value", o.cvHow, C(o.cvTxt)),
+    S("5. Decision rule and decision", "Write the rule, compare, decide.", C(d.rule, d.cmp + " ⇒ " + A(d.rej ? "reject " + H0 : "do not reject " + H0))),
+    S("6. Conclusion in context", "Use the words of the question. “Insufficient evidence” when you don't reject; never “accept " + H0 + "”.", concl(d.rej, o.a, o.claim))] };
+}
+topic({ id: "htmean", unit: 8, title: "Hypothesis test for one mean", from: "Tutorial Quiz 8, Q1 and Q3 (Q3 is the t-versus-z trap)",
+  spot: "A claimed value of a mean (“believed to be R10 439”, “states the consumption is 6.9 l”) and a sample mean. Then: σ known or n " + GE + " 30 ⇒ z; only s and n &lt; 30 ⇒ t.",
+  formula: "z = (" + XB + " − μ₀)/(σ/" + SQ + "n) or (" + XB + " − μ₀)/(s/" + SQ + "n) for n " + GE + " 30 &nbsp;·&nbsp; t = (" + XB + " − μ₀)/(s/" + SQ + "n), df = n − 1",
+  gen: function (orig) {
+    var kind = orig ? "t" : pick(["t", "z"]), dir = orig ? "left" : pick(["left", "right", "two"]), a = orig ? 0.05 : pick([0.01, 0.05, 0.10]);
+    var mu0 = orig ? 10439 : ri(80, 140) * 100, n = orig ? 24 : (kind === "t" ? ri(10, 28) : ri(32, 80)), s = orig ? 1177 : ri(6, 16) * 100;
+    var se = s / Math.sqrt(n), shift = dir === "left" ? -rf(0.2, 2.8, 2) : dir === "right" ? rf(0.2, 2.8, 2) : pick([-1, 1]) * rf(0.4, 2.8, 2);
+    var xb = orig ? 10337 : Math.round(mu0 + shift * se), ts = (xb - mu0) / se, cv;
+    if (kind === "t") { var col = dir === "two" ? R(1 - a / 2, 3) : R(1 - a, 3); cv = tq(n - 1, col); if (dir === "left") cv = -cv; }
+    else { cv = dir === "two" ? ZTWO[R(1 - a, 2)] : ZONE[a]; if (dir === "left") cv = -cv; }
+    var claim = "the mean monthly electricity cost is " + (dir === "left" ? "less than" : dir === "right" ? "more than" : "different from") + " R" + mu0;
+    var r = testSteps({ h0: MU + " = " + mu0, h1: MU + " " + SYM[dir] + " " + mu0, why: "The claim being tested goes in " + H1 + ". The question's words make it " + DIRW[dir] + ".", a: a,
+      which: kind === "t" ? "Only s is given and n = " + n + " &lt; 30 ⇒ t-statistic." : "n = " + n + " " + GE + " 30 ⇒ the z-statistic, even though only s is given (the Central Limit Theorem). Tutorial 8 Q3 wanted 1.96 here, not a t value.",
+      tsLines: [(kind === "t" ? "t" : "z") + " = (" + xb + " − " + mu0 + ")/(" + s + "/" + SQ + n + ") = " + (xb - mu0) + "/" + F(se, 4) + " = " + A(F(ts, 3))],
+      cvHow: kind === "t" ? "t-table, df = n − 1 = " + (n - 1) + ", column " + (dir === "two" ? "1 − α/2 = " + R(1 - a / 2, 3) : "1 − α = " + R(1 - a, 3)) + (dir === "left" ? "; left tail ⇒ negative." : dir === "two" ? "; two tails ⇒ ±." : ".")
+        : "z critical values: " + (dir === "two" ? "z<sub>1−α/2</sub>, use ±." : "z<sub>1−α</sub>" + (dir === "left" ? ", negative for a left tail." : ".")),
+      cvTxt: (dir === "two" ? "±" : "") + (kind === "t" ? "t" : "z") + "<sub>crit</sub> = " + (dir === "two" ? F(Math.abs(cv), 3) : F(cv, 3)), cv: cv, ts: ts, dir: dir, a: a, claim: claim });
+    return {
+      q: P("The average monthly cost of electricity at a factory is believed to be R" + mu0 + ". A sample of " + n + " monthly payments has an average of R" + xb + " and a standard deviation of R" + s + ".") +
+        P("Test, at the " + pct(a) + " level, whether " + claim + ". Assume the payments are normally distributed. Round to three decimals."),
+      parts: [num("ts", "Test statistic", R(ts, 3), 3, 0.0015), num("cv", "Critical value" + (dir === "two" ? " (positive one)" : ""), R(dir === "two" ? Math.abs(cv) : cv, 3), 3, 0.0015),
+        pickp("dec", "Decision", DEC, r.rej ? 0 : 1)],
+      steps: r.steps
+    };
+  } });
+
+topic({ id: "htprop", unit: 8, title: "Hypothesis test for a proportion", from: "Tutorial Quiz 8, Q2 (election poll)",
+  spot: "A claimed percentage (“at least 76% of the vote”) tested with x out of n in a sample.",
+  formula: "z = (" + PH + " − p₀)/" + SQ + "(p₀(1 − p₀)/n) &nbsp;·&nbsp; note: p₀ in the standard error, not " + PH,
+  gen: function (orig) {
+    var p0 = orig ? 0.76 : ri(20, 80) / 100, n = orig ? 1019 : ri(150, 1200), dir = orig ? "right" : pick(["left", "right", "two"]), a = orig ? 0.05 : pick([0.01, 0.05, 0.10]);
+    var se = Math.sqrt(p0 * (1 - p0) / n), shift = dir === "left" ? -rf(0.3, 2.8, 2) : dir === "right" ? rf(0.3, 2.8, 2) : pick([-1, 1]) * rf(0.4, 2.8, 2);
+    var x = orig ? 789 : Math.round(n * (p0 + shift * se)), ph = x / n, ts = (ph - p0) / se;
+    var cv = dir === "two" ? ZTWO[R(1 - a, 2)] : ZONE[a]; if (dir === "left") cv = -cv;
+    var claim = "the candidate's support is " + (dir === "left" ? "less than" : dir === "right" ? "more than" : "different from") + " " + Math.round(p0 * 100) + "%";
+    var r = testSteps({ h0: "p = " + G(p0), h1: "p " + SYM[dir] + " " + G(p0), why: "Percentages are tested as proportions. " + DIRW[dir] + ".", a: a,
+      which: "Proportion ⇒ z. First " + PH + ", then the standard error with p₀.",
+      tsLines: [PH + " = " + x + "/" + n + " = " + F(ph, 5), "σ<sub>" + PH + "</sub> = " + SQ + "(" + G(p0) + " × " + G(R(1 - p0, 2)) + "/" + n + ") = " + F(se, 5), "z = (" + F(ph, 5) + " − " + G(p0) + ")/" + F(se, 5) + " = " + A(F(ts, 3))],
+      cvHow: dir === "two" ? "z<sub>1−α/2</sub>, use ±." : "z<sub>1−α</sub>" + (dir === "left" ? ", negative for a left tail." : "."),
+      cvTxt: (dir === "two" ? "±" : "") + "z<sub>crit</sub> = " + (dir === "two" ? F(Math.abs(cv), 3) : F(cv, 3)), cv: cv, ts: ts, dir: dir, a: a, claim: claim });
+    return {
+      q: P("A candidate wants to know whether their support is " + (dir === "left" ? "below" : dir === "right" ? "above" : "different from") + " " + Math.round(p0 * 100) + "% of the vote. In a poll of " + n + " voters, " + x + " said they would vote for the candidate.") +
+        P("Test this at the " + pct(a) + " level of significance. Round to three decimals."),
+      parts: [num("ts", "Test statistic", R(ts, 3), 3, 0.0025), num("cv", "Critical value" + (dir === "two" ? " (positive one)" : ""), R(dir === "two" ? Math.abs(cv) : cv, 3), 3, 0.0015), pickp("dec", "Decision", DEC, r.rej ? 0 : 1)],
+      steps: r.steps
+    };
+  } });
+
+topic({ id: "htvar", unit: 8, title: "Hypothesis test for a variance (chi-square)", from: "Tutorial Quiz 8, Q4 and the Jan 2026 exam Q8",
+  spot: "A claim about the <b>standard deviation or variance</b>: consistency, spread, risk, “must be restarted if σ is greater than…”.",
+  formula: CHI + " = (n − 1)s²/σ₀², df = n − 1 &nbsp;·&nbsp; right tail: " + CHI + "<sub>n−1; 1−α</sub> · left tail: " + CHI + "<sub>n−1; α</sub>",
+  gen: function (orig) {
+    var dir = orig ? "right" : pick(["right", "left"]), s0 = orig ? 5.6 : rf(2, 9, 1), n = orig ? 19 : ri(6, 30), a = orig ? 0.01 : pick([0.01, 0.05, 0.10]);
+    var s = orig ? 8.9 : R(s0 * (dir === "right" ? rf(1.05, 1.7, 2) : rf(0.45, 0.95, 2)), 1);
+    var ts = (n - 1) * s * s / (s0 * s0), cv = dir === "right" ? cq(n - 1, R(1 - a, 2)) : cq(n - 1, a);
+    var claim = dir === "right" ? "the standard deviation is greater than " + G(s0) + " units, so the process must be restarted" : "the standard deviation is less than " + G(s0) + " units";
+    var d = decide(dir, ts, cv);
+    var steps = [S("1. Hypotheses", "About spread ⇒ test σ (or σ²). " + DIRW[dir] + ".", C(H0 + ": σ = " + G(s0), H1 + ": σ " + SYM[dir] + " " + G(s0))),
+      S("2. Significance level", "", C(AL + " = " + a)),
+      S("3. Test statistic", "Use the <b>squares</b> of both standard deviations.", C(CHI + " = (" + n + " − 1)(" + G(s) + ")²/(" + G(s0) + ")² = " + F((n - 1) * s * s, 2) + "/" + F(s0 * s0, 2) + " = " + A(F(ts, 3)))),
+      S("4. Critical value", dir === "right" ? "Right tail ⇒ column 1 − α = " + R(1 - a, 2) + ", row df = " + (n - 1) + "." : "Left tail ⇒ column α = " + a + ", row df = " + (n - 1) + ". Chi-square values are never negative.", C(CHI + "<sub>crit</sub> = " + G(cv))),
+      S("5. Decision", "", C(d.rule, d.cmp + " ⇒ " + A(d.rej ? "reject " + H0 : "do not reject " + H0))),
+      S("6. Conclusion", "", concl(d.rej, a, claim))];
+    return {
+      q: P(dir === "right" ? "If the standard deviation of a manufacturing process's output is greater than " + G(s0) + " units, the process must be stopped and restarted. A sample of " + n + " output values has a standard deviation of " + G(s) + " units. Output values are normally distributed."
+        : "A machine is adjusted and the owner hopes the standard deviation of its output is now less than " + G(s0) + " units. A sample of " + n + " output values has a standard deviation of " + G(s) + " units. Output values are normally distributed.") +
+        P("Test at the " + pct(a) + " level of significance. Round to three decimals."),
+      parts: [num("ts", "Test statistic", R(ts, 3), 3, 0.004), num("cv", "Critical value", cv, 2, 0.006), pickp("dec", "Decision", DEC, d.rej ? 0 : 1)],
+      steps: steps
+    };
+  } });
+
+topic({ id: "pooled", unit: 8, title: "Two means: pooled t-test", from: "November 2025 exam Q7 and Practical 5, Q1",
+  spot: "Two <b>independent</b> groups (males vs females, company A vs B), each with its own mean and standard deviation, “equal but unknown variances”.",
+  formula: "s<sub>p</sub>² = [(n₁ − 1)s₁² + (n₂ − 1)s₂²]/(n₁ + n₂ − 2) &nbsp;·&nbsp; t = (" + XB + "₁ − " + XB + "₂)/(s<sub>p</sub>" + SQ + "(1/n₁ + 1/n₂)), df = n₁ + n₂ − 2",
+  gen: function (orig) {
+    var n1 = orig ? 23 : ri(8, 16), n2 = orig ? 19 : ri(8, 16), m1 = orig ? 712 : ri(600, 760), s1 = orig ? 44 : ri(20, 50), s2 = orig ? 28 : ri(20, 50);
+    var dir = orig ? "two" : pick(["two", "left", "right"]), a = orig ? 0.05 : pick([0.01, 0.05, 0.10]);
+    var sp2 = ((n1 - 1) * s1 * s1 + (n2 - 1) * s2 * s2) / (n1 + n2 - 2), sp = Math.sqrt(sp2), se = sp * Math.sqrt(1 / n1 + 1 / n2);
+    var shift = dir === "left" ? -rf(0.3, 3, 2) : dir === "right" ? rf(0.3, 3, 2) : pick([-1, 1]) * rf(0.4, 3, 2);
+    var m2 = orig ? 734 : Math.round(m1 - shift * se), ts = (m1 - m2) / se, df = n1 + n2 - 2;
+    var col = dir === "two" ? R(1 - a / 2, 3) : R(1 - a, 3), cv = tq(df, col); if (dir === "left") cv = -cv;
+    var claim = "the mean reaction time of males is " + (dir === "left" ? "less than" : dir === "right" ? "greater than" : "different from") + " that of females";
+    var r = testSteps({ h0: MU + "<sub>M</sub> = " + MU + "<sub>F</sub>", h1: MU + "<sub>M</sub> " + SYM[dir] + " " + MU + "<sub>F</sub>", why: "Group 1 = males, group 2 = females (keep this order everywhere). " + DIRW[dir] + ".", a: a,
+      which: "Two independent small samples, equal unknown variances ⇒ pool the variances first, then t.",
+      tsLines: ["s<sub>p</sub>² = [(" + n1 + " − 1)(" + s1 + ")² + (" + n2 + " − 1)(" + s2 + ")²]/(" + n1 + " + " + n2 + " − 2) = " + F(sp2, 3) + " ⇒ s<sub>p</sub> = " + F(sp, 3),
+        "t = (" + m1 + " − " + m2 + ")/(" + F(sp, 3) + " × " + SQ + "(1/" + n1 + " + 1/" + n2 + ")) = " + (m1 - m2) + "/" + F(se, 3) + " = " + A(F(ts, 3))],
+      cvHow: "df = n₁ + n₂ − 2 = " + df + ", column " + col + (dir === "two" ? ", use ±." : dir === "left" ? ", negative for a left tail." : "."),
+      cvTxt: (dir === "two" ? "±" : "") + "t<sub>crit</sub> = " + (dir === "two" ? F(Math.abs(cv), 3) : F(cv, 3)), cv: cv, ts: ts, dir: dir, a: a, claim: claim });
+    return {
+      q: P("Reaction times (ms) are measured. " + n1 + " males have a mean of " + m1 + " and a standard deviation of " + s1 + "; " + n2 + " females have a mean of " + m2 + " and a standard deviation of " + s2 + ". Both populations are normal with equal but unknown variances.") +
+        P("Test at the " + pct(a) + " level whether " + claim + ". Round to three decimals."),
+      parts: [num("sp", "Pooled standard deviation s<sub>p</sub>", R(sp, 3), 3, 0.003), num("ts", "Test statistic", R(ts, 3), 3, 0.003),
+        num("cv", "Critical value" + (dir === "two" ? " (positive one)" : ""), R(dir === "two" ? Math.abs(cv) : cv, 3), 3, 0.0015), pickp("dec", "Decision", DEC, r.rej ? 0 : 1)],
+      steps: r.steps
+    };
+  } });
+
+topic({ id: "paired", unit: 8, title: "Two means: paired t-test", from: "Practical 5, Q2 (pre-test and post-test)",
+  spot: "The <b>same people measured twice</b> (before and after, pre-test and post-test) or matched pairs. Work with the differences.",
+  formula: "d = after − before &nbsp;·&nbsp; d̄ = Σd/n &nbsp;·&nbsp; s<sub>d</sub> = " + SQ + "[(Σd² − (Σd)²/n)/(n − 1)] &nbsp;·&nbsp; t = d̄/(s<sub>d</sub>/" + SQ + "n), df = n − 1",
+  gen: function (orig) {
+    var b, af;
+    if (orig) { b = [52, 48, 60, 55, 49, 57]; af = [56, 50, 63, 54, 55, 60]; }
+    else { var n0 = ri(6, 9), mean = ri(1, 4); b = []; af = []; for (var i = 0; i < n0; i++) { var x = ri(40, 75); b.push(x); af.push(x + mean + ri(-4, 4)); } }
+    var a = orig ? 0.05 : pick([0.01, 0.05, 0.10]), n = b.length, d = af.map(function (v, i) { return v - b[i]; });
+    var sd_ = sum(d), sd2 = sum(d.map(function (v) { return v * v; })), dbar = sd_ / n, sdd = Math.sqrt((sd2 - sd_ * sd_ / n) / (n - 1));
+    if (!(sdd > 0)) return this.gen(false);
+    var ts = dbar / (sdd / Math.sqrt(n)), cv = tq(n - 1, R(1 - a, 3));
+    var claim = "the training increases the typing speed";
+    var r = testSteps({ h0: MU + "<sub>d</sub> = 0", h1: MU + "<sub>d</sub> &gt; 0", why: "With d = after − before, “increases” means the mean difference is positive ⇒ right tail.", a: a,
+      which: "Same employees twice ⇒ paired. Make the differences, then their mean and standard deviation.",
+      tsLines: ["d = " + d.map(G).join(", "), "Σd = " + sd_ + " &nbsp;·&nbsp; Σd² = " + sd2, "d̄ = " + sd_ + "/" + n + " = " + F(dbar, 3) + " &nbsp;·&nbsp; s<sub>d</sub> = " + SQ + "[(" + sd2 + " − " + sd_ + "²/" + n + ")/" + (n - 1) + "] = " + F(sdd, 3),
+        "t = " + F(dbar, 3) + "/(" + F(sdd, 3) + "/" + SQ + n + ") = " + A(F(ts, 3))],
+      cvHow: "df = n − 1 = " + (n - 1) + ", column 1 − α = " + R(1 - a, 3) + ".", cvTxt: "t<sub>crit</sub> = " + F(cv, 3), cv: cv, ts: ts, dir: "right", a: a, claim: claim });
+    return {
+      q: P("A company records the typing speed (words per minute) of " + n + " employees before and after a training course:") +
+        tbl(["Employee"].concat(b.map(function (_, i) { return i + 1; })), [["Before"].concat(b), ["After"].concat(af)]) +
+        P("Test at the " + pct(a) + " level whether the training increases typing speed. Use d = after − before. Round to three decimals."),
+      parts: [num("db", "Mean difference d̄", R(dbar, 3), 3, 0.0015), num("sd", "Standard deviation of the differences s<sub>d</sub>", R(sdd, 3), 3, 0.002),
+        num("ts", "Test statistic", R(ts, 3), 3, 0.004), num("cv", "Critical value", cv, 3, 0.0015), pickp("dec", "Decision", DEC, r.rej ? 0 : 1)],
+      steps: r.steps
+    };
+  } });
+
+/* ---------------- Unit 9 ---------------- */
+function regCalc(x, y) {
+  var n = x.length, Sx = sum(x), Sy = sum(y), Sxx = sum(x.map(function (v) { return v * v; })) - Sx * Sx / n,
+    Syy = sum(y.map(function (v) { return v * v; })) - Sy * Sy / n, Sxy = sum(x.map(function (v, i) { return v * y[i]; })) - Sx * Sy / n;
+  var b = Sxy / Sxx, a = Sy / n - b * Sx / n, r = Sxy / Math.sqrt(Sxx * Syy);
+  return { n: n, Sx: Sx, Sy: Sy, Sx2: sum(x.map(function (v) { return v * v; })), Sy2: sum(y.map(function (v) { return v * v; })), Sxy0: sum(x.map(function (v, i) { return v * y[i]; })), Sxx: Sxx, Syy: Syy, Sxy: Sxy, b: b, a: a, r: r };
+}
+function randData(n, slope) {
+  var x = [], y = [], a0 = rf(-5, 20, 1), b0 = slope;
+  for (var i = 0; i < n; i++) { var xv = rf(1, 20, 1); x.push(xv); y.push(R(a0 + b0 * xv + rf(-3, 3, 1), 1)); }
+  return { x: x, y: y };
+}
+topic({ id: "reg", unit: 9, title: "Regression and correlation from data", from: "Tutorial Quiz 9 and Practical 6",
+  spot: "Pairs (x, y), “estimate the line ŷ = a + bx”, “estimate y when x = …”, “correlation”, “test whether ρ = 0”.",
+  formula: "S<sub>XX</sub> = Σx² − (Σx)²/n · S<sub>YY</sub> = Σy² − (Σy)²/n · S<sub>XY</sub> = Σxy − ΣxΣy/n · b = S<sub>XY</sub>/S<sub>XX</sub> · a = ȳ − b" + XB + " · r = S<sub>XY</sub>/" + SQ + "(S<sub>XX</sub>S<sub>YY</sub>) · t = r" + SQ + "(n − 2)/" + SQ + "(1 − r²)",
+  gen: function (orig) {
+    var dat = orig ? { x: [13.2, 0.7, 17.3, 5.8, 18], y: [-3.3, 2.8, -6, -1.1, -5.5] } : randData(ri(5, 7), pick([-1, 1]) * rf(0.3, 1.8, 2));
+    var c = regCalc(dat.x, dat.y), x0 = orig ? 10 : ri(3, 18), yh = c.a + c.b * x0, df = c.n - 2, ts = c.r * Math.sqrt(df) / Math.sqrt(1 - c.r * c.r), cv = tq(df, 0.975);
+    if (!isFinite(ts)) return this.gen(false);
+    return {
+      q: P("Consider the following data for an independent variable X and a dependent variable Y.") + tbl(["x"].concat(dat.x.map(G)), [["y"].concat(dat.y.map(G))]) +
+        P("A simple linear regression model ŷ = a + bx is fitted. Round to three decimals.") +
+        P("Then a test of " + H0 + ": ρ = 0 against " + H1 + ": ρ " + NE + " 0 is done at the 5% level."),
+      parts: [num("a", "Intercept a", R(c.a, 3), 3, 0.004), num("b", "Slope b", R(c.b, 3), 3, 0.0015), num("y", "Estimate y when x = " + x0, R(yh, 3), 3, 0.01),
+        num("r", "Correlation coefficient r", R(c.r, 3), 3, 0.0015), num("r2", "Coefficient of determination r²", R(c.r * c.r, 3), 3, 0.002),
+        num("ts", "Test statistic for ρ = 0", R(ts, 3), 3, 0.03), num("cv", "Critical value (positive one)", cv, 3, 0.0015)],
+      steps: [S("Make the five sums", "A table with columns x, y, x², y², xy is the safest way. Calculator: STAT mode gives these too.",
+        C("n = " + c.n + " · Σx = " + F(c.Sx, 2) + " · Σy = " + F(c.Sy, 2), "Σx² = " + F(c.Sx2, 2) + " · Σy² = " + F(c.Sy2, 2) + " · Σxy = " + F(c.Sxy0, 2))),
+        S("The three S values", "", C("S<sub>XX</sub> = " + F(c.Sx2, 2) + " − (" + F(c.Sx, 2) + ")²/" + c.n + " = " + F(c.Sxx, 4), "S<sub>YY</sub> = " + F(c.Sy2, 2) + " − (" + F(c.Sy, 2) + ")²/" + c.n + " = " + F(c.Syy, 4),
+          "S<sub>XY</sub> = " + F(c.Sxy0, 2) + " − (" + F(c.Sx, 2) + ")(" + F(c.Sy, 2) + ")/" + c.n + " = " + F(c.Sxy, 4))),
+        S("Slope first, then intercept", "b = S<sub>XY</sub>/S<sub>XX</sub>; a = ȳ − b" + XB + ". Keep b unrounded when you work out a.",
+          C("b = " + F(c.Sxy, 4) + "/" + F(c.Sxx, 4) + " = " + A(F(c.b, 3)), "a = " + F(c.Sy / c.n, 4) + " − (" + F(c.b, 5) + ")(" + F(c.Sx / c.n, 4) + ") = " + A(F(c.a, 3)), "ŷ = " + F(c.a, 3) + (c.b < 0 ? " − " : " + ") + F(Math.abs(c.b), 3) + "x")),
+        S("Predict", "Substitute x into the line.", C("ŷ = " + F(c.a, 3) + (c.b < 0 ? " − " : " + ") + F(Math.abs(c.b), 3) + "(" + x0 + ") = " + A(F(yh, 3)))),
+        S("Correlation and r²", "r has the same sign as b. r² is the share of the variation in y explained by x.",
+          C("r = " + F(c.Sxy, 4) + "/" + SQ + "(" + F(c.Sxx, 4) + " × " + F(c.Syy, 4) + ") = " + A(F(c.r, 3)), "r² = " + A(F(c.r * c.r, 3)) + " ⇒ " + F(c.r * c.r * 100, 1) + "% of the variation in y is explained by x")),
+        S("Test " + H0 + ": ρ = 0", "t = r" + SQ + "(n − 2)/" + SQ + "(1 − r²), df = n − 2 = " + df + ", two-tailed at 5% ⇒ column 0.975.",
+          C("t = " + F(c.r, 5) + " × " + SQ + df + "/" + SQ + "(1 − " + F(c.r * c.r, 5) + ") = " + A(F(ts, 3)), "t<sub>crit</sub> = ±" + G(cv) + " ⇒ " + (Math.abs(ts) >= cv ? "reject " + H0 + ": there is a significant linear relationship" : "do not reject " + H0 + ": no significant linear relationship")))]
+    };
+  } });
+
+topic({ id: "regsum", unit: 9, title: "Regression from summary sums", from: "January 2026 exam Q9",
+  spot: "Only the sums are given (Σx, Σy, Σx², Σy², Σxy). Same formulas, less arithmetic.",
+  formula: "b = S<sub>XY</sub>/S<sub>XX</sub> · a = ȳ − b" + XB + " · r = S<sub>XY</sub>/" + SQ + "(S<sub>XX</sub>S<sub>YY</sub>)",
+  gen: function (orig) {
+    var c, x0;
+    if (orig) { c = { n: 6, Sx: 82, Sy: 382, Sx2: 1166, Sy2: 133780, Sxy0: 4579 }; x0 = 15; }
+    else {
+      var n = ri(6, 10), b0 = -rf(4, 18, 1), a0 = ri(150, 300), xs = [], ys = [];
+      for (var i = 0; i < n; i++) { var xv = ri(8, 20); xs.push(xv); ys.push(Math.max(1, Math.round(a0 + b0 * xv + ri(-40, 40)))); }
+      c = regCalc(xs, ys); x0 = ri(9, 19);
+    }
+    c.Sxx = c.Sx2 - c.Sx * c.Sx / c.n; c.Syy = c.Sy2 - c.Sy * c.Sy / c.n; c.Sxy = c.Sxy0 - c.Sx * c.Sy / c.n;
+    c.b = c.Sxy / c.Sxx; c.a = c.Sy / c.n - c.b * c.Sx / c.n; c.r = c.Sxy / Math.sqrt(c.Sxx * c.Syy);
+    if (!(c.Syy > 0) || Math.abs(c.r) < 0.05) return this.gen(false);
+    var yh = c.a + c.b * x0;
+    return {
+      q: P("The price (cents, x) and the demand (thousand units, y) of a product were recorded in " + c.n + " market areas:") +
+        C("Σx = " + c.Sx + " · Σy = " + c.Sy + " · Σx² = " + c.Sx2 + " · Σy² = " + c.Sy2 + " · Σxy = " + c.Sxy0) + P("Round to three decimals."),
+      parts: [num("b", "Slope b", R(c.b, 3), 3, 0.002), num("a", "Intercept a", R(c.a, 3), 3, 0.02), num("y", "Estimated demand at a price of " + x0 + " cents", R(yh, 3), 3, 0.03),
+        num("r2", "Coefficient of determination r²", R(c.r * c.r, 3), 3, 0.002)],
+      steps: [S("S values", "", C("S<sub>XX</sub> = " + c.Sx2 + " − " + c.Sx + "²/" + c.n + " = " + F(c.Sxx, 3), "S<sub>XY</sub> = " + c.Sxy0 + " − (" + c.Sx + ")(" + c.Sy + ")/" + c.n + " = " + F(c.Sxy, 3), "S<sub>YY</sub> = " + c.Sy2 + " − " + c.Sy + "²/" + c.n + " = " + F(c.Syy, 3))),
+        S("Slope and intercept", "x̄ = Σx/n and ȳ = Σy/n.", C("b = " + F(c.Sxy, 3) + "/" + F(c.Sxx, 3) + " = " + A(F(c.b, 3)), "a = " + F(c.Sy / c.n, 3) + " − (" + F(c.b, 4) + ")(" + F(c.Sx / c.n, 3) + ") = " + A(F(c.a, 3)))),
+        S("Predict", "", C("ŷ = " + F(c.a, 3) + (c.b < 0 ? " − " : " + ") + F(Math.abs(c.b), 3) + "(" + x0 + ") = " + A(F(yh, 3)))),
+        S("r, then r²", "Interpretation: r² × 100% of the variation in demand is explained by price.", C("r = " + F(c.Sxy, 3) + "/" + SQ + "(" + F(c.Sxx, 3) + " × " + F(c.Syy, 3) + ") = " + F(c.r, 3), "r² = " + A(F(c.r * c.r, 3))))]
+    };
+  } });
+
+topic({ id: "regxl", unit: 9, title: "Regression from Excel output", from: "Practical 6 (taxi), November 2025 and January 2026 exams",
+  spot: "An MS Excel “SUMMARY OUTPUT” table. Everything is read off, nothing is calculated except a prediction.",
+  formula: "a = Intercept coefficient · b = the x-variable's coefficient · r = ±Multiple R (sign of b) · r² = R Square",
+  gen: function (orig) {
+    var rows, out, x0, names = ["Distance (km)", "Time (min)", "Distance"];
+    if (orig) { out = { R: 0.92038, R2: 0.847099, adj: 0.835338, se: 2.671399, n: 15, a: 7.623355, sea: 2.530324, ta: 3.012798, pa: "0.00999", b: 0.976186, seb: 0.115027, tb: 8.486613, pb: "1.16E-06" }; x0 = 12; }
+    else {
+      var neg = Math.random() < 0.45, n = ri(10, 20), xs = [], ys = [], a0 = rf(3, 15, 1), b0 = (neg ? -1 : 1) * rf(0.4, 1.6, 2);
+      if (neg) names = ["Age of car (years)", "Price (R'000)", "Age"];
+      for (var i = 0; i < n; i++) { var xv = rf(1, 25, 1); xs.push(xv); ys.push(R((neg ? 40 : 0) + a0 + b0 * xv + rf(-4, 4, 1), 1)); }
+      var c = regCalc(xs, ys), sse = c.Syy - c.b * c.Sxy, se = Math.sqrt(sse / (n - 2)), seb = se / Math.sqrt(c.Sxx), sea = se * Math.sqrt(1 / n + Math.pow(c.Sx / n, 2) / c.Sxx);
+      var ex = function (p) { return p < 1e-4 ? p.toExponential(2).toUpperCase().replace("E-", "E-0").replace(/E-0(\d\d)/, "E-$1") : p.toFixed(5); };
+      out = { R: Math.abs(c.r), R2: c.r * c.r, adj: 1 - (1 - c.r * c.r) * (n - 1) / (n - 2), se: se, n: n, a: c.a, sea: sea, ta: c.a / sea, pa: ex(tP2(c.a / sea, n - 2)), b: c.b, seb: seb, tb: c.b / seb, pb: ex(tP2(c.b / seb, n - 2)) };
+      x0 = ri(3, 20);
+    }
+    var r = (out.b < 0 ? -1 : 1) * out.R, yh = out.a + out.b * x0;
+    var f6 = function (v) { return F(v, 6); };
+    return {
+      q: P("A business models " + names[1].toLowerCase() + " (y) from " + names[0].toLowerCase() + " (x) with ŷ = a + bx, using a sample of " + out.n + " observations. MS Excel regression output:") +
+        tbl(["Regression Statistics", ""], [["Multiple R", f6(out.R)], ["R Square", f6(out.R2)], ["Adjusted R Square", f6(out.adj)], ["Standard Error", f6(out.se)], ["Observations", out.n]]) +
+        tbl(["", "Coefficients", "Standard Error", "t Stat", "P-value"], [["Intercept", f6(out.a), f6(out.sea), f6(out.ta), out.pa], [names[2], f6(out.b), f6(out.seb), f6(out.tb), out.pb]]) +
+        P("Round to three decimals."),
+      parts: [num("a", "Intercept a", R(out.a, 3), 3, 0.0015), num("b", "Slope b", R(out.b, 3), 3, 0.0015), num("r", "Correlation coefficient r", R(r, 3), 3, 0.0015),
+        num("r2", "Coefficient of determination r²", R(out.R2, 3), 3, 0.0015), num("y", "Estimate y when x = " + x0, R(yh, 3), 3, 0.01)],
+      steps: [S("a and b come from the Coefficients column", "Intercept row ⇒ a. The row named after the x-variable ⇒ b. Ignore Standard Error, t Stat and P-value unless asked.",
+        C("a = " + A(F(out.a, 3)) + " · b = " + A(F(out.b, 3)), "ŷ = " + F(out.a, 3) + (out.b < 0 ? " − " : " + ") + F(Math.abs(out.b), 3) + "x")),
+        S("r is Multiple R with the sign of b", "Excel always prints Multiple R as positive. " + (out.b < 0 ? "Here b is negative, so r is negative: this is the trap." : "Here b is positive, so r is positive."),
+          C("r = " + (out.b < 0 ? "−" : "+") + F(out.R, 3) + " = " + A(F(r, 3)))),
+        S("r² is R Square", "Not Adjusted R Square.", C("r² = " + A(F(out.R2, 3)) + " ⇒ " + F(out.R2 * 100, 1) + "% of the variation in y is explained by x")),
+        S("Predict", "", C("ŷ = " + F(out.a, 3) + (out.b < 0 ? " − " : " + ") + F(Math.abs(out.b), 3) + "(" + x0 + ") = " + A(F(yh, 3))))]
+    };
+  } });
+
+if (typeof module !== "undefined") module.exports = { TOPICS: TOPICS, setTables: function (t) { TABLES = t; }, R: R, phi: phi, zFor: zFor };
+
+(function () {
+  var UNITS = { 5: "Unit 5 · Probability distributions", 6: "Unit 6 · Sampling distributions", 7: "Unit 7 · Confidence intervals", 8: "Unit 8 · Hypothesis testing", 9: "Unit 9 · Regression and correlation" };
+  var store = { get: function (k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+  var prog = store.get("stav-ws-progress") || {};
+  var cur = null, prob = null, orig = true, shown = 0;
+  var $ = function (id) { return document.getElementById(id); };
+
+  function dotCls(id) { var n = (prog[id] || 0); return "dot" + (n >= 2 ? " d2" : n >= 1 ? " d1" : ""); }
+  function buildNav() {
+    var h = "", o = "", last = null;
+    TOPICS.forEach(function (t) {
+      if (t.unit !== last) { if (last !== null) o += "</optgroup>"; h += "<h2>" + UNITS[t.unit] + "</h2>"; o += '<optgroup label="' + UNITS[t.unit] + '">'; last = t.unit; }
+      h += '<a href="#' + t.id + '" data-id="' + t.id + '"' + (cur && cur.id === t.id ? ' class="on" aria-current="true"' : "") + '><span class="' + dotCls(t.id) + '" aria-hidden="true"></span>' + t.title + "</a>";
+      o += '<option value="' + t.id + '">' + t.title + (prog[t.id] ? "  ✓" : "") + "</option>";
+    });
+    $("side").innerHTML = h; $("pick").innerHTML = o + "</optgroup>";
+    if (cur) $("pick").value = cur.id;
+  }
+  function parseNum(s) { s = String(s).trim().replace(/[−–]/g, "-").replace(/\s/g, "").replace(",", "."); if (s === "" || s === "-") return NaN; return Number(s); }
+
+  function render() {
+    var t = cur, i = TOPICS.indexOf(t), prev = TOPICS[i - 1], next = TOPICS[i + 1];
+    var h = '<div class="topic-head"><div class="eyebrow"><span>' + UNITS[t.unit] + '</span></div><h2 id="tt">' + t.title + "</h2>" +
+      '<p class="from">From your class work: <b>' + t.from + "</b></p></div>" +
+      '<div class="know"><div><h3>Spot it</h3><p>' + t.spot + '</p></div><div class="fx"><h3>Formula</h3><p>' + t.formula + "</p></div></div>" +
+      '<article class="card" aria-labelledby="tt"><div class="qbody"><p><span class="qtag' + (orig ? "" : " new") + '">' + (orig ? "Your class numbers" : "New numbers") + "</span></p>" + prob.q + "</div>" +
+      '<ol class="parts">' + prob.parts.map(function (p, k) {
+        var inp = p.choice ? '<div class="seg" role="group" aria-label="' + p.q + '">' + p.choice.map(function (c, j) { return '<button type="button" data-j="' + j + '">' + c + "</button>"; }).join("") + "</div>"
+          : '<input type="text" inputmode="decimal" autocomplete="off" spellcheck="false" id="in' + k + '" aria-label="' + (p.l ? "(" + p.l + ") " : "") + p.q.replace(/<[^>]+>/g, "") + '">';
+        return '<li class="part' + (p.choice ? " wide" : "") + '" data-k="' + k + '"><span class="pl">' + (p.l ? "(" + p.l + ")" : "") + '</span><span class="pq">' + p.q + '</span><span class="pin">' + inp + '</span><span class="mk" aria-live="polite"></span><span class="fix"></span></li>';
+      }).join("") + "</ol>" +
+      '<div class="actions"><button class="btn pri" id="check" type="button">Check my answers</button><button class="btn" id="teach" type="button">Teach me step by step</button>' +
+      '<button class="btn" id="all" type="button">Show the full solution</button><span class="sp"></span>' +
+      '<button class="btn acc" id="newq" type="button">New numbers</button>' + (orig ? "" : '<button class="btn" id="origq" type="button">Class numbers</button>') + "</div>" +
+      '<div class="result" id="res" role="status"></div></article>' +
+      '<div id="stepsw"></div>' +
+      '<nav class="nav2" aria-label="Next and previous">' + (prev ? '<a class="pv" href="#' + prev.id + '"><span>← Previous</span>' + prev.title + "</a>" : "") + (next ? '<a class="nx" href="#' + next.id + '"><span>Next →</span>' + next.title + "</a>" : "") + "</nav>";
+    $("topic").innerHTML = h; shown = 0;
+    document.querySelectorAll(".seg").forEach(function (g) {
+      g.querySelectorAll("button").forEach(function (b) { b.addEventListener("click", function () { g.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); x.removeAttribute("aria-pressed"); }); b.classList.add("on"); b.setAttribute("aria-pressed", "true"); }); });
+    });
+    document.querySelectorAll(".part input").forEach(function (inp) { inp.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); }); });
+    $("check").onclick = check; $("teach").onclick = function () { teach(false); }; $("all").onclick = function () { teach(true); };
+    $("newq").onclick = function () { orig = false; prob = cur.gen(false); render(); $("tt").scrollIntoView({ block: "start", behavior: "smooth" }); };
+    if ($("origq")) $("origq").onclick = function () { orig = true; prob = cur.gen(true); render(); };
+  }
+  function check() {
+    var right = 0, tried = 0;
+    prob.parts.forEach(function (p, k) {
+      var li = document.querySelector('.part[data-k="' + k + '"]'), ok, given;
+      if (p.choice) { var on = li.querySelector(".seg button.on"); if (!on) { li.className = li.className.replace(/ (ok|no)/g, ""); li.querySelector(".mk").textContent = ""; return; } given = +on.dataset.j; ok = given === p.ans; }
+      else { var v = parseNum(li.querySelector("input").value); if (isNaN(v)) { li.className = li.className.replace(/ (ok|no)/g, ""); li.querySelector(".mk").textContent = ""; return; } ok = Math.abs(v - p.ans) <= p.tol + 1e-9; given = v; }
+      tried++; if (ok) right++;
+      li.className = li.className.replace(/ (ok|no)/g, "") + (ok ? " ok" : " no");
+      li.querySelector(".mk").textContent = ok ? "✓" : "✗";
+      li.querySelector(".mk").setAttribute("aria-label", ok ? "correct" : "not yet");
+      var hint = "Not yet. Try again, or press “Teach me step by step”.";
+      if (!ok && !p.choice && p.ans !== 0 && Math.abs(Math.abs(given) - Math.abs(p.ans)) <= p.tol + 1e-9) hint = "Right size, wrong sign. Check the direction (left tail ⇒ negative; r has the sign of b).";
+      else if (!ok && !p.choice && p.ans !== 0 && Math.abs(given / p.ans - 100) < 1) hint = "Looks like a percentage. Give it as a decimal (0.2946, not 29.46).";
+      li.querySelector(".fix").textContent = ok ? "" : hint;
+    });
+    var r = $("res"), all = prob.parts.length;
+    if (!tried) { r.className = "result on part"; r.textContent = "Type an answer in at least one box first."; return; }
+    if (right === all) {
+      prog[cur.id] = (prog[cur.id] || 0) + 1; store.set("stav-ws-progress", prog); buildNav();
+      r.className = "result on good"; r.textContent = "All " + all + " right. " + (prog[cur.id] >= 2 ? "That's this type done twice: move on, or press New numbers once more for luck." : "Press New numbers and do it once more to lock it in.");
+    } else { r.className = "result on part"; r.textContent = right + " of " + all + " right" + (tried < all ? " (" + (all - tried) + " left blank)" : "") + ". Fix the red ones, or open the steps."; }
+  }
+  function teach(full) {
+    var w = $("stepsw");
+    if (!w.firstChild) w.innerHTML = '<h3 class="secttl">Worked solution</h3><ol class="steps" id="steps"></ol><div class="stepsbar"><button class="btn" id="more" type="button">Next step</button></div>';
+    var ol = $("steps"), add = function () {
+      var s = prob.steps[shown]; if (!s) return;
+      var li = document.createElement("li"); li.className = "step" + (full ? " w" : "");
+      li.innerHTML = "<h4>" + s.t + "</h4><p class=\"how\">" + s.h + "</p>" + (s.w ? '<div class="wk">' + s.w + '</div><button class="show" type="button">Show the working</button>' : "");
+      var b = li.querySelector(".show"); if (b) b.onclick = function () { li.classList.add("w"); };
+      if (!s.w) li.classList.add("w");
+      ol.appendChild(li); shown++;
+    };
+    if (full) { ol.querySelectorAll(".step").forEach(function (x) { x.classList.add("w"); }); while (shown < prob.steps.length) add(); }
+    else add();
+    var more = $("more"); more.onclick = function () { add(); upd(); }; upd();
+    function upd() { more.disabled = shown >= prob.steps.length; more.textContent = shown >= prob.steps.length ? "That's every step" : "Next step (" + (shown + 1) + " of " + prob.steps.length + ")"; }
+    if (!full && shown === 1) w.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+  function open(id, keep) {
+    var t = TOPICS.filter(function (x) { return x.id === id; })[0] || TOPICS[0];
+    cur = t; orig = true; prob = t.gen(true); render(); buildNav();
+    if (!keep) window.scrollTo({ top: Math.min(window.scrollY, document.querySelector(".layout").offsetTop - 64) });
+  }
+  $("pick").addEventListener("change", function () { location.hash = this.value; });
+  window.addEventListener("hashchange", function () { open(location.hash.slice(1)); });
+  open(location.hash.slice(1) || TOPICS[0].id, true);
+
+  /* theme: auto -> light -> dark -> paper, shared with the whole site */
+  var ORDER = ["auto", "light", "dark", "paper"], NAMES = { auto: "Auto", light: "Light", dark: "Dark", paper: "Paper" };
+  var ICON = { auto: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>',
+    light: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    dark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+    paper: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></svg>' };
+  function cur_t() { try { return localStorage.getItem("school_stuff_theme") || "auto"; } catch (e) { return "auto"; } }
+  function paint() { var t = cur_t(); if (ORDER.indexOf(t) < 0) t = "auto"; var b = $("themebtn"); b.innerHTML = ICON[t] + "<span>" + NAMES[t] + "</span>"; b.title = "Theme: " + NAMES[t] + " (click to change)"; }
+  $("themebtn").addEventListener("click", function () {
+    var t = ORDER[(ORDER.indexOf(cur_t()) + 1) % ORDER.length];
+    try { localStorage.setItem("school_stuff_theme", t); } catch (e) {}
+    if (t === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t);
+    paint();
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
