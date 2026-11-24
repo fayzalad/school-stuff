@@ -379,7 +379,7 @@ topic({ id: "grouped", unit: 3, title: "Grouped data: mean, standard deviation, 
         pickp("d", "Interpret the " + nm, [p + "% of the " + CX[1] + " are at or below " + F(Pp, 3) + " " + CX[2], "The average is " + F(Pp, 3) + " " + CX[2], p + "% of the " + CX[1] + " are above " + F(Pp, 3) + " " + CX[2]], 0)],
       steps: [S("Build one working table", "Small f<sub>i</sub> is the frequency of class i (given). m<sub>i</sub> is the class midpoint, (lower + upper)/2. Multiply to get f<sub>i</sub>m<sub>i</sub>, then f<sub>i</sub>m<sub>i</sub>² (f times m squared). Capital F<sub>i</sub> is the cumulative frequency: the running total of the small f's. Every part uses these columns, so do it once.",
         tbl(["Class", "f<sub>i</sub><span class=\"thd\">frequency</span>", "m<sub>i</sub><span class=\"thd\">midpoint</span>", "f<sub>i</sub>m<sub>i</sub><span class=\"thd\">f × m</span>", "f<sub>i</sub>m<sub>i</sub>²<span class=\"thd\">f × m²</span>", "F<sub>i</sub><span class=\"thd\">cumulative f</span>"], f.map(function (v, i) { return [cls(i), v, G(m[i]), F(fm[i], 3), F(fm2[i], 4), Fc[i]]; }).concat([["Total", n, "", F(Sfm, 3), F(Sfm2, 4), ""]]))),
-        S("(a) Mean", "x̄ = Σf<sub>i</sub>m<sub>i</sub>/n: the total of the f<sub>i</sub>m<sub>i</sub> column over n.", C("x̄ = " + F(Sfm, 3) + "/" + n + " = " + A(F(mean, 3) + " " + CX[2]))),
+        S("(a) Mean", "Mean = (total of all the values) ÷ (how many values). The exact values are lost in a frequency table, so every value in a class is taken to be its midpoint m<sub>i</sub>. A class with f<sub>i</sub> values then adds up to f<sub>i</sub> × m<sub>i</sub>, so Σf<sub>i</sub>m<sub>i</sub> is the total of all the values and n = Σf<sub>i</sub> is how many there are. Don't just average the midpoints: that treats a class with 1 value the same as a class with 14.", C("x̄ = " + F(Sfm, 3) + "/" + n + " = " + A(F(mean, 3) + " " + CX[2]))),
         S("(b) Variance, then standard deviation", "Grouped formula from the sheet; n − 1 underneath. Keep Σf<sub>i</sub>m<sub>i</sub>² unrounded.",
           C("s² = [" + F(Sfm2, 4) + " − (" + F(Sfm, 3) + ")²/" + n + "]/" + (n - 1) + " = " + F(s2, 3), "s = " + SQ + F(s2, 3) + " = " + A(F(sd, 3) + " " + CX[2]))),
         S("(c) Find the class that holds the " + nm, "Grouped data: position = np/100 (no +1). The class is the first one whose cumulative F<sub>i</sub> reaches it.",
@@ -653,7 +653,7 @@ function testSteps(o) {   // o: {h0,h1,why,a,tsLine(s),cvTxt,cv,ts,dir,claim, wh
   return { rej: d.rej, steps: [
     S("1. Hypotheses", o.why, C(H0 + ": " + o.h0, H1 + ": " + o.h1)),
     S("2. Significance level", "Given in the question.", C(AL + " = " + o.a)),
-    S("3. Test statistic", o.which, C.apply(null, o.tsLines)),
+    S("3. Test statistic", o.which, (o.tsTable || "") + C.apply(null, o.tsLines)),
     S("4. Critical value", o.cvHow, C(o.cvTxt)),
     S("5. Decision rule and decision", "Write the rule, compare, decide.", C(d.rule, d.cmp + " ⇒ " + A(d.rej ? "reject " + H0 : "do not reject " + H0))),
     S("6. Conclusion in context", "Use the words of the question. “Insufficient evidence” when you don't reject; never “accept " + H0 + "”.", concl(d.rej, o.a, o.claim))] };
@@ -770,7 +770,9 @@ topic({ id: "paired", unit: 8, title: "Two means: paired t-test", from: "Practic
     var claim = "the training increases the typing speed";
     var r = testSteps({ h0: MU + "<sub>d</sub> = 0", h1: MU + "<sub>d</sub> &gt; 0", why: "With d = after − before, “increases” means the mean difference is positive ⇒ right tail.", a: a,
       which: "Same employees twice ⇒ paired. Make the differences, then their mean and standard deviation.",
-      tsLines: ["d = " + d.map(G).join(", "), "Σd = " + sd_ + " &nbsp;·&nbsp; Σd² = " + sd2, "d̄ = " + sd_ + "/" + n + " = " + F(dbar, 3) + " &nbsp;·&nbsp; s<sub>d</sub> = " + SQ + "[(" + sd2 + " − " + sd_ + "²/" + n + ")/" + (n - 1) + "] = " + F(sdd, 3),
+      tsTable: tbl(["Employee", "Before", "After", "d<span class=\"thd\">after − before</span>", "d²<span class=\"thd\">d × d</span>"],
+        b.map(function (v, i) { return [i + 1, v, af[i], d[i], d[i] * d[i]]; }).concat([["Total", "", "", sd_, sd2]])),
+      tsLines: ["Σd = " + sd_ + " &nbsp;·&nbsp; Σd² = " + sd2, "d̄ = " + sd_ + "/" + n + " = " + F(dbar, 3) + " &nbsp;·&nbsp; s<sub>d</sub> = " + SQ + "[(" + sd2 + " − " + sd_ + "²/" + n + ")/" + (n - 1) + "] = " + F(sdd, 3),
         "t = " + F(dbar, 3) + "/(" + F(sdd, 3) + "/" + SQ + n + ") = " + A(F(ts, 3))],
       cvHow: "df = n − 1 = " + (n - 1) + ", column 1 − α = " + R(1 - a, 3) + ".", cvTxt: "t<sub>crit</sub> = " + F(cv, 3), cv: cv, ts: ts, dir: "right", a: a, claim: claim });
     return {
@@ -809,7 +811,10 @@ topic({ id: "reg", unit: 9, title: "Regression and correlation from data", from:
       parts: [num("a", "Intercept a", R(c.a, 3), 3, 0.004), num("b", "Slope b", R(c.b, 3), 3, 0.0015), num("y", "Estimate y when x = " + x0, R(yh, 3), 3, 0.01),
         num("r", "Correlation coefficient r", R(c.r, 3), 3, 0.0015), num("r2", "Coefficient of determination r²", R(c.r * c.r, 3), 3, 0.002),
         num("ts", "Test statistic for ρ = 0", R(ts, 3), 3, 0.03), num("cv", "Critical value (positive one)", cv, 3, 0.0015)],
-      steps: [S("Make the five sums", "A table with columns x, y, x², y², xy is the safest way. Calculator: STAT mode gives these too.",
+      steps: [S("Make the five sums", "Square each x, square each y, and multiply each x by its own y. The totals row gives the five sums. (Calculator STAT mode gives them too.)",
+        tbl(["x<span class=\"thd\">given</span>", "y<span class=\"thd\">given</span>", "x²<span class=\"thd\">x × x</span>", "y²<span class=\"thd\">y × y</span>", "xy<span class=\"thd\">x × y</span>"],
+          dat.x.map(function (v, i) { var w = dat.y[i]; return [G(v), G(w), G(R(v * v, 4)), G(R(w * w, 4)), G(R(v * w, 4))]; })
+            .concat([["Σx = " + G(R(c.Sx, 4)), "Σy = " + G(R(c.Sy, 4)), "Σx² = " + G(R(c.Sx2, 4)), "Σy² = " + G(R(c.Sy2, 4)), "Σxy = " + G(R(c.Sxy0, 4))]])) +
         C("n = " + c.n + " · Σx = " + F(c.Sx, 2) + " · Σy = " + F(c.Sy, 2), "Σx² = " + F(c.Sx2, 2) + " · Σy² = " + F(c.Sy2, 2) + " · Σxy = " + F(c.Sxy0, 2))),
         S("The three S values", "", C("S<sub>XX</sub> = " + F(c.Sx2, 2) + " − (" + F(c.Sx, 2) + ")²/" + c.n + " = " + F(c.Sxx, 4), "S<sub>YY</sub> = " + F(c.Sy2, 2) + " − (" + F(c.Sy, 2) + ")²/" + c.n + " = " + F(c.Syy, 4),
           "S<sub>XY</sub> = " + F(c.Sxy0, 2) + " − (" + F(c.Sx, 2) + ")(" + F(c.Sy, 2) + ")/" + c.n + " = " + F(c.Sxy, 4))),
