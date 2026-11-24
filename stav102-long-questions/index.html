@@ -111,7 +111,8 @@ select{width:100%;font:500 1rem var(--ui);padding:12px 14px;border-radius:var(--
 .tw{overflow-x:auto;margin:6px 0 14px}
 table{border-collapse:collapse;font-size:.9rem}
 th,td{border:1px solid var(--line);padding:6px 11px;text-align:right;white-space:nowrap}
-th{background:var(--surface2);font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);text-align:center}
+th{background:var(--surface2);font-weight:600;color:var(--ink);text-align:center;vertical-align:bottom}
+.thd{display:block;font-size:.72rem;font-weight:400;color:var(--ink2);margin-top:2px}
 td:first-child{text-align:left}
 .calc{font-family:"Cambria Math",Cambria,Georgia,serif;background:var(--surface2);padding:10px 14px;border-radius:8px;margin:8px 0;overflow-x:auto;line-height:1.75}
 .ans{color:var(--ok);font-weight:600}
@@ -358,7 +359,7 @@ function topic(o) { TOPICS.push(o); }
 /* ---------------- Unit 3 ---------------- */
 topic({ id: "grouped", unit: 3, title: "Grouped data: mean, standard deviation, percentile", from: "2026 Test 1 Q3, asked again as October 2026 exam Q1",
   spot: "A frequency table with classes like [11.0 – 16.5) and frequencies f. Asked: mean, variance / standard deviation, median, quartile or a percentile, plus “interpret”.",
-  formula: "x̄ = Σfm/n · s² = [Σfm² − (Σfm)²/n]/(n − 1) · P<sub>p</sub> = l + c(np/100 − F<sub>i−1</sub>)/f<sub>i</sub> (median: p = 50; Q₁: 25; Q₃: 75)",
+  formula: "x̄ = Σf<sub>i</sub>m<sub>i</sub>/n · s² = [Σf<sub>i</sub>m<sub>i</sub>² − (Σf<sub>i</sub>m<sub>i</sub>)²/n]/(n − 1) · P<sub>p</sub> = l<sub>i</sub> + c(np/100 − F<sub>i−1</sub>)/f<sub>i</sub> (median: p = 50; Q₁: 25; Q₃: 75)",
   gen: function (orig) {
     var ctx = orig ? 0 : ri(0, 2), L0 = orig ? 0 : pick([0, 10, 20, 50]), c = orig ? 5.5 : pick([2, 4, 5, 5.5, 10]);
     var f = orig ? [1, 2, 8, 10, 14] : [ri(1, 6), ri(3, 10), ri(5, 15), ri(4, 14), ri(1, 9)], p = orig ? 30 : pick([10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90]);
@@ -372,17 +373,17 @@ topic({ id: "grouped", unit: 3, title: "Grouped data: mean, standard deviation, 
     var nm = p === 50 ? "median" : p === 25 ? "first quartile Q₁" : p === 75 ? "third quartile Q₃" : p + "th percentile";
     var cls = function (i) { return "[" + G(lo[i]) + " – " + G(R(lo[i] + c, 2)) + ")"; };
     return {
-      q: P("A sample of " + n + " " + CX[1] + " is summarised below (" + CX[0] + "):") + tbl(["Class", "Frequency (f)"], f.map(function (v, i) { return [cls(i), v]; })) +
+      q: P("A sample of " + n + " " + CX[1] + " is summarised below (" + CX[0] + "):") + tbl(["Class", "Frequency (f<sub>i</sub>)"], f.map(function (v, i) { return [cls(i), v]; })) +
         P("Round to three decimals."),
       parts: [num("a", "Mean", R(mean, 3), 3, 0.002), num("b", "Standard deviation", R(sd, 3), 3, 0.003), num("c", "The " + nm, R(Pp, 3), 3, 0.003),
         pickp("d", "Interpret the " + nm, [p + "% of the " + CX[1] + " are at or below " + F(Pp, 3) + " " + CX[2], "The average is " + F(Pp, 3) + " " + CX[2], p + "% of the " + CX[1] + " are above " + F(Pp, 3) + " " + CX[2]], 0)],
-      steps: [S("Build one working table", "Midpoint m = (lower + upper)/2. Then fm, fm² and the running total F. Every part uses these columns, so do it once.",
-        tbl(["Class", "f", "m", "fm", "fm²", "F"], f.map(function (v, i) { return [cls(i), v, G(m[i]), F(fm[i], 3), F(fm2[i], 4), Fc[i]]; }).concat([["Total", n, "", F(Sfm, 3), F(Sfm2, 4), ""]]))),
-        S("(a) Mean", "x̄ = Σfm/n.", C("x̄ = " + F(Sfm, 3) + "/" + n + " = " + A(F(mean, 3) + " " + CX[2]))),
-        S("(b) Variance, then standard deviation", "Grouped formula from the sheet; n − 1 underneath. Keep Σfm² unrounded.",
+      steps: [S("Build one working table", "Small f<sub>i</sub> is the frequency of class i (given). m<sub>i</sub> is the class midpoint, (lower + upper)/2. Multiply to get f<sub>i</sub>m<sub>i</sub>, then f<sub>i</sub>m<sub>i</sub>² (f times m squared). Capital F<sub>i</sub> is the cumulative frequency: the running total of the small f's. Every part uses these columns, so do it once.",
+        tbl(["Class", "f<sub>i</sub><span class=\"thd\">frequency</span>", "m<sub>i</sub><span class=\"thd\">midpoint</span>", "f<sub>i</sub>m<sub>i</sub><span class=\"thd\">f × m</span>", "f<sub>i</sub>m<sub>i</sub>²<span class=\"thd\">f × m²</span>", "F<sub>i</sub><span class=\"thd\">cumulative f</span>"], f.map(function (v, i) { return [cls(i), v, G(m[i]), F(fm[i], 3), F(fm2[i], 4), Fc[i]]; }).concat([["Total", n, "", F(Sfm, 3), F(Sfm2, 4), ""]]))),
+        S("(a) Mean", "x̄ = Σf<sub>i</sub>m<sub>i</sub>/n: the total of the f<sub>i</sub>m<sub>i</sub> column over n.", C("x̄ = " + F(Sfm, 3) + "/" + n + " = " + A(F(mean, 3) + " " + CX[2]))),
+        S("(b) Variance, then standard deviation", "Grouped formula from the sheet; n − 1 underneath. Keep Σf<sub>i</sub>m<sub>i</sub>² unrounded.",
           C("s² = [" + F(Sfm2, 4) + " − (" + F(Sfm, 3) + ")²/" + n + "]/" + (n - 1) + " = " + F(s2, 3), "s = " + SQ + F(s2, 3) + " = " + A(F(sd, 3) + " " + CX[2]))),
-        S("(c) Find the class that holds the " + nm, "Grouped data: position = np/100 (no +1). The class is the first one whose F reaches it.",
-          C("np/100 = " + n + " × " + p + "/100 = " + F(tgt, 2), "F = " + Fc.join(", ") + " ⇒ class " + cls(ci) + ": l = " + G(lo[ci]) + ", c = " + G(c) + ", f = " + f[ci] + ", F<sub>i−1</sub> = " + Fb)),
+        S("(c) Find the class that holds the " + nm, "Grouped data: position = np/100 (no +1). The class is the first one whose cumulative F<sub>i</sub> reaches it.",
+          C("np/100 = " + n + " × " + p + "/100 = " + F(tgt, 2), "F<sub>i</sub> = " + Fc.join(", ") + " ⇒ class " + cls(ci) + ": l<sub>i</sub> = " + G(lo[ci]) + ", c = " + G(c) + ", f = " + f[ci] + ", F<sub>i−1</sub> = " + Fb)),
         S("(c) Substitute", "", C("P<sub>" + p + "</sub> = " + G(lo[ci]) + " + " + G(c) + "(" + F(tgt, 2) + " − " + Fb + ")/" + f[ci] + " = " + A(F(Pp, 3) + " " + CX[2]))),
         S("(d) Interpret (1 mark)", "Say what percentage is at or below the value, in context.", P(p + "% of the " + CX[1] + " are at or below " + F(Pp, 3) + " " + CX[2] + " (and " + (100 - p) + "% are above)."))]
     };

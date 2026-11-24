@@ -148,8 +148,8 @@
     nav.topics { background: var(--k-paper); }
 
     /* ----- tables ----- */
-    th { background: var(--k-surface2); font: 500 .72rem "DM Mono", ui-monospace, monospace; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--k-ink2); }
+    /* no uppercase: table headers hold symbols where case matters (f vs F, x vs X, mA vs MA) */
+    th { background: var(--k-surface2); font-weight: 600; color: var(--k-ink); }
     th, td { border-color: var(--k-line); }
     kbd, code { font-family: "DM Mono", ui-monospace, monospace; }
 
