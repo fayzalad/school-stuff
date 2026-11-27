@@ -306,7 +306,7 @@ const Q = [
 {q:"A list contains marks where -1 means not yet assessed. What does an unguarded running-MINIMUM return?",o:["The lowest real mark","-1, because it is smaller than every real mark","0","An exception"],a:1,e:"The sentinel wins the comparison every time. Any statistic over marks must skip records where the mark is -1."},
 {q:"What does (0 + 9) / 2 evaluate to in C# when both operands are int?",o:["4.5","5","4","4.0"],a:2,e:"Integer division truncates toward zero, so 9 / 2 is 4. This is exactly what you want for a binary search mid."},
 {q:"This loop is meant to add a passenger while keeping an ascending list sorted. What does it compute?",c:"int pos = 0;\nwhile ((pos <= List.Count - 1) &&\n       (newOne.GetID() > ((Passenger)List[pos]).GetID()))\n{\n    pos++;\n}\nList.Insert(pos, newOne);",o:["The position of a matching ID","The first position whose ID is not smaller than the new one","The last position in the list","The midpoint of the list"],a:1,e:"It walks forward while the new ID still belongs further on, stopping at the first element that should come after it. Inserting there preserves the order."},
-{q:"After the AddInOrder method above runs on a list with sortedState = 1, what should sortedState become?",o:["0, because the list changed","It stays 1, because the order was preserved","2","-1"],a:1,e:"That is the whole point of inserting in position. Contrast with a plain Add on the end, which must reset the state to 0."},
+{q:"The loop in the question before is the body of an AddInOrder method (it inserts the new passenger at its sorted position). After AddInOrder runs on a list with sortedState = 1, what should sortedState become?",o:["0, because the list changed","It stays 1, because the order was preserved","2","-1"],a:1,e:"That is the whole point of inserting in position. Contrast with a plain Add on the end, which must reset the state to 0."},
 {q:"ReadData reads a line and Split returns 4 fields where most lines have 5. What should happen?",o:["Skip the line","Call the overloaded constructor that assigns a default for the missing value","Throw an error message","Pad the line with a zero"],a:1,e:"if (fields.Length == 5) use the full constructor, else use the overload. The missing field gets its sentinel or default."},
 {q:"What does this Display code print when TestMark is -1.0?",c:"if (TestMark == -1.0)\n{\n    Console.WriteLine(\"Not yet assessed\");\n}\nelse\n{\n    Console.WriteLine(\"{0:F1}\", TestMark);\n}",o:["-1.0","Not yet assessed","0.0","Nothing"],a:1,e:"The sentinel is intercepted before formatting, so the reader sees words rather than a meaningless -1."},
 {q:"A method must return true only for students who passed AND have been assessed. Which condition is right?",o:["mark >= 50","mark >= 50 && mark != -1","mark > 50 || mark != -1","mark != -1"],a:1,e:"Checking the mark alone is not enough, though in practice -1 already fails >= 50. Being explicit documents the intent and protects against a changed pass mark."},
@@ -357,9 +357,12 @@ const sp=new Split({key:"wrav102-drill",mount:spm,onChange:(why)=>{
   save(); render();
 }});
 function store(){return state.set===MIX?state.mix:state.answers;}
+// Questions that only make sense together (the AddInOrder one uses the loop in the question before it):
+// they stay side by side, in order, when the "All 100" tab is mixed and split.
+const LINK=(()=>{const g={}, k=Q.findIndex(x=>/AddInOrder method/.test(x.q)); if(k>0){g[k-1]="addin"; g[k]="addin";} return g;})();
 function shown(){
   if(state.set!==MIX){sp.take([],""); const [lo,hi]=setRange(state.set), a=[]; for(let i=lo;i<hi;i++) a.push(i); return a;}
-  return sp.take(Q.map((_,i)=>i),"all",{id:i=>i});
+  return sp.take(Q.map((_,i)=>i),"all",{id:i=>i, group:i=>LINK[i], rank:i=>i});
 }
 
 function renderTabs(){
