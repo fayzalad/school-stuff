@@ -51,6 +51,10 @@
     <div class="setsH"><h2>Question sets</h2><span id="setsHint"></span></div>
     <div class="rack" id="sets"></div>
 
+    <div class="setsH"><h2>All 200, mixed</h2><span>Split them into parts of the size you want, then start a part.</span></div>
+    <div id="spm"></div>
+    <button class="btn pri" id="mixStart" type="button">Start</button>
+
     <div class="foot">
       <span><b>Line Test</b> — practice for the ICNF102 field reference</span>
       <span>Progress is saved in this browser only</span>
@@ -116,6 +120,7 @@
 </div>
 
 <script src="questions.js"></script>
+<script src="../shared/split.js"></script>
 <script>
 (function(){
   "use strict";
@@ -221,6 +226,7 @@
     Array.prototype.forEach.call($("sets").querySelectorAll(".card"), function(el){
       el.onclick = function(){ start(parseInt(el.dataset.i,10)); };
     });
+    if(sp) mixBar();
   }
 
   function show(which){
@@ -236,10 +242,12 @@
   };
 
   /* ---------- QUIZ ---------- */
-  function start(i){
+  function start(i, ks, name){
     var items = [];
-    for(var k=i*SIZE;k<(i+1)*SIZE;k++){
-      var q = BANK[k];
+    if(!ks){ ks=[]; for(var k0=i*SIZE;k0<(i+1)*SIZE;k0++) ks.push(k0); }
+    name = name || "Set "+(i+1)+" · "+SETS[i].n;
+    for(var j=0;j<ks.length;j++){
+      var k = ks[j], q = BANK[k];
       if(!q) continue;
       var ord = order(k, q.o.length);
       items.push({
@@ -248,9 +256,9 @@
         ans: ord.indexOf(q.a)
       });
     }
-    S = {set:i, items:items, answers:items.map(function(){return null;}), checked:items.map(function(){return false;}), hinted:items.map(function(){return false;}), cur:0};
+    S = {set:i, name:name, items:items, answers:items.map(function(){return null;}), checked:items.map(function(){return false;}), hinted:items.map(function(){return false;}), cur:0};
     saveSession();
-    $("qSetName").textContent = "Set "+(i+1)+" · "+SETS[i].n;
+    $("qSetName").textContent = name;
     show("quiz"); renderQ();
   }
 
@@ -258,7 +266,7 @@
     var saved = LS.get(SESSION_KEY, null);
     if(!saved || !saved.items || !saved.items.length) return false;
     S = saved;
-    $("qSetName").textContent = "Set "+(S.set+1)+" · "+SETS[S.set].n;
+    $("qSetName").textContent = S.name || ("Set "+(S.set+1)+" · "+SETS[S.set].n);
     show("quiz"); renderQ();
     return true;
   }
@@ -373,7 +381,7 @@
       byTopic[t].n++; if(ok) byTopic[t].c++;
     }
     var pct = Math.round(correct/S.items.length*100);
-    if(best[S.set]===undefined || correct>best[S.set]){ best[S.set]=correct; LS.set("pd_best_v1", best); }
+    if(S.set!=="m" && (best[S.set]===undefined || correct>best[S.set])){ best[S.set]=correct; LS.set("pd_best_v1", best); }
 
     $("rPct").textContent = pct+"%";
     $("rOf").textContent = correct+" / "+S.items.length;
@@ -396,7 +404,7 @@
     var bandEl = $("rBand");
     bandEl.textContent = band;
     bandEl.style.color = pct>=76 ? "var(--ok)" : pct>=60 ? "var(--accent2)" : "var(--warn)";
-    $("rTitle").textContent = "Set "+(S.set+1)+" · "+SETS[S.set].n;
+    $("rTitle").textContent = S.name || ("Set "+(S.set+1)+" · "+SETS[S.set].n);
     $("rMsg").textContent = msg;
 
     var names = Object.keys(byTopic).sort(function(a,b){
@@ -435,13 +443,33 @@
 
     var nextI = S.set+1;
     var nb = $("rNextSet");
-    if(nextI<SETS.length){ nb.hidden=false; nb.textContent = "Next set · "+SETS[nextI].n; nb.onclick=function(){ start(nextI); }; }
+    if(S.set==="m"){
+      sp.score(correct, S.items.length, S.items.length);
+      var spn = sp.nextButton(); nb.hidden = !spn;
+      if(spn){ nb.textContent = spn.textContent; nb.onclick = function(){ spn.click(); }; }
+    }
+    else if(nextI<SETS.length){ nb.hidden=false; nb.textContent = "Next set · "+SETS[nextI].n; nb.onclick=function(){ start(nextI); }; }
     else { nb.hidden=true; }
     clearSession();
     show("res");
   }
 
-  $("rRetry").onclick = function(){ start(S.set); };
+  $("rRetry").onclick = function(){ if(S.set==="m") startMix(); else start(S.set); };
+
+  /* ---------- ALL 200, MIXED: split into parts of the size you pick (shared/split.js) ---------- */
+  var sp = new Split({key:"icnf102-quiz", mount:$("spm"), onChange:function(why){ if(why==="parts"){ mixBar(); return; } startMix(); }});
+  function mixAll(){ var a=[]; for(var k=0;k<BANK.length;k++) a.push(k); return a; }
+  function mixBar(){
+    sp.take(mixAll(), "all", {id:function(k){ return k; }});
+    $("mixStart").textContent = sp.active ? "Start " + sp.label() : "Start all "+BANK.length+" mixed";
+  }
+  function startMix(){
+    var ks = sp.take(mixAll(), "all", {id:function(k){ return k; }});
+    if(!sp.active){ ks = ks.slice(); for(var i=ks.length-1;i>0;i--){ var r=Math.floor(Math.random()*(i+1)), t=ks[i]; ks[i]=ks[r]; ks[r]=t; } }
+    start("m", ks, sp.active ? "All "+BANK.length+" mixed · "+sp.label() : "All "+BANK.length+" mixed");
+  }
+  $("mixStart").onclick = startMix;
+  mixBar();
   $("rHome").onclick = function(){ S=null; renderHome(); show("home"); };
 
 

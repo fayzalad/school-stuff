@@ -184,7 +184,7 @@
   <header>
     <p class="eyebrow">WRAV102 / MSEV102 &middot; Semester Test 2</p>
     <h1>Theory Drill</h1>
-    <p class="sub">100 questions across four sets, on the Section A topics: sorting algorithms, searching and sorted state, class structure, and code tracing. Answers save automatically, so a refresh keeps your place.</p>
+    <p class="sub">100 questions across four sets (or all 100 mixed, split into parts of the size you pick), on the Section A topics: sorting algorithms, searching and sorted state, class structure, and code tracing. Answers save automatically, so a refresh keeps your place.</p>
   </header>
 
   <nav>
@@ -204,6 +204,7 @@
   </footer>
 </div>
 
+<script src="../shared/split.js"></script>
 <script>
 const SETS = [
   {name:"Sorting algorithms", short:"Sorting"},
@@ -324,8 +325,8 @@ const Q = [
 
 // ---- state ----
 const KEY="wrav102-theory-drill-v1";
-let state={set:0,answers:{}};
-try{const raw=localStorage.getItem(KEY); if(raw){const p=JSON.parse(raw); if(p&&typeof p==="object"){state.set=Number(p.set)||0; state.answers=p.answers||{};}}}catch(e){}
+let state={set:0,answers:{},mix:{}};
+try{const raw=localStorage.getItem(KEY); if(raw){const p=JSON.parse(raw); if(p&&typeof p==="object"){state.set=Number(p.set)||0; state.answers=p.answers||{}; state.mix=p.mix||{}; if(state.set>SETS.length) state.set=0;}}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
 
 const tabsEl=document.getElementById("tabs");
@@ -346,30 +347,58 @@ function scoreFor(s){
   return {done,right};
 }
 
+// ---- "All 100" tab: every question, split into parts of the size you pick (shared/split.js).
+// Its answers are kept in state.mix, apart from the four topic sets.
+const MIX=SETS.length;
+const spm=document.createElement("div"); qEl.parentNode.insertBefore(spm,qEl);
+const sp=new Split({key:"wrav102-drill",mount:spm,onChange:(why)=>{
+  if(why==="redo") sp.partIds().forEach(i=>{delete state.mix[i];});
+  if(why==="shuffle") state.mix={};
+  save(); render();
+}});
+function store(){return state.set===MIX?state.mix:state.answers;}
+function shown(){
+  if(state.set!==MIX){sp.take([],""); const [lo,hi]=setRange(state.set), a=[]; for(let i=lo;i<hi;i++) a.push(i); return a;}
+  return sp.take(Q.map((_,i)=>i),"all",{id:i=>i});
+}
+
 function renderTabs(){
   tabsEl.innerHTML="";
-  SETS.forEach((s,i)=>{
-    const {done,right}=scoreFor(i);
+  SETS.concat([{short:"All "+Q.length}]).forEach((s,i)=>{
+    let done=0,right=0;
+    if(i===MIX){for(const k in state.mix){done++; if(state.mix[k]===Q[k].a) right++;}}
+    else ({done,right}=scoreFor(i));
     const b=document.createElement("button");
     b.className="tab"; b.type="button"; b.role="tab";
     b.setAttribute("aria-selected", i===state.set?"true":"false");
-    b.innerHTML=s.short+' <span class="score">'+(done?right+"/"+done:"0/25")+'</span>';
+    b.innerHTML=s.short+' <span class="score">'+(done?right+"/"+done:(i===MIX?"0/"+Q.length:"0/25"))+'</span>';
     b.addEventListener("click",()=>{state.set=i; save(); render();});
     tabsEl.appendChild(b);
   });
 }
 
 function renderQuestions(){
-  const [lo,hi]=setRange(state.set);
-  const {done,right}=scoreFor(state.set);
-  nameEl.innerHTML=(state.set+1)+". "+SETS[state.set].name;
-  metaEl.textContent="Q"+(lo+1)+"–"+hi+"  ·  "+done+" answered  ·  "+right+" correct";
-  noteEl.textContent=done===25
-    ? "Set complete: "+right+" out of 25."
-    : (25-done)+" left in this set. Progress is saved as you go.";
+  const idx=shown(), A=store(), mix=state.set===MIX;
+  let done=0,right=0;
+  idx.forEach(i=>{if(A[i]!==undefined){done++; if(A[i]===Q[i].a) right++;}});
+  const unit=mix&&sp.active?"part":"set";
+  if(mix){
+    nameEl.innerHTML=(MIX+1)+". All "+Q.length+" questions"+(sp.active?" · "+sp.label():"");
+    metaEl.textContent=done+" answered  ·  "+right+" correct";
+    sp.score(right,done,idx.length);
+  }else{
+    const [lo,hi]=setRange(state.set);
+    nameEl.innerHTML=(state.set+1)+". "+SETS[state.set].name;
+    metaEl.textContent="Q"+(lo+1)+"–"+hi+"  ·  "+done+" answered  ·  "+right+" correct";
+  }
+  noteEl.textContent=done===idx.length
+    ? (unit==="part"?"Part":"Set")+" complete: "+right+" out of "+idx.length+"."
+    : (idx.length-done)+" left in this "+unit+". Progress is saved as you go.";
+  if(done===idx.length){const nb=sp.nextButton(); if(nb) noteEl.appendChild(nb);}
+  document.getElementById("reset").textContent="Clear this "+unit;
 
   qEl.innerHTML="";
-  for(let i=lo;i<hi;i++){
+  idx.forEach(i=>{
     const item=Q[i];
     const card=document.createElement("div"); card.className="q";
 
@@ -381,7 +410,7 @@ function renderQuestions(){
     if(item.c){const pre=document.createElement("pre"); pre.textContent=item.c; card.appendChild(pre);}
 
     const opts=document.createElement("div"); opts.className="opts";
-    const chosen=state.answers[i];
+    const chosen=A[i];
     item.o.forEach((text,oi)=>{
       const b=document.createElement("button");
       b.className="opt"; b.type="button";
@@ -392,7 +421,7 @@ function renderQuestions(){
         if(oi===item.a) b.classList.add("correct");
         else if(oi===chosen) b.classList.add("wrong");
       }else{
-        b.addEventListener("click",()=>{state.answers[i]=oi; save(); render();});
+        b.addEventListener("click",()=>{A[i]=oi; save(); render();});
       }
       opts.appendChild(b);
     });
@@ -406,14 +435,13 @@ function renderQuestions(){
       exp.appendChild(lab); exp.appendChild(p); card.appendChild(exp);
     }
     qEl.appendChild(card);
-  }
+  });
 }
 
 function render(){renderTabs(); renderQuestions();}
 
 document.getElementById("reset").addEventListener("click",()=>{
-  const [lo,hi]=setRange(state.set);
-  for(let i=lo;i<hi;i++) delete state.answers[i];
+  const A=store(); shown().forEach(i=>{delete A[i];});
   save(); render(); window.scrollTo({top:0,behavior:"smooth"});
 });
 

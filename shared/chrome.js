@@ -36,4 +36,32 @@
   foot.innerHTML = '<div class="ss-in"><span>School Stuff' + (code ? " · " + code : "") + "</span><span>" +
     (code ? '<a href="../' + mod + '/">All ' + code + " pages</a> · " : "") + '<a href="../">All modules</a></span></div>';
   document.body.appendChild(foot);
+
+  // Phones (2026-11-27): a table wider than its box or the screen gets its own sideways-scrolling box
+  // (.ss-scroll in look.css), so the page itself never becomes wider than the screen. Quizzes draw
+  // their questions and open their answers later, so this runs again whenever the page changes.
+  function fit() {
+    var W = document.documentElement.clientWidth, body = document.body;
+    [].forEach.call(document.querySelectorAll("table"), function (t) {
+      if (t.closest(".ss-bar")) return;
+      var r = t.getBoundingClientRect(), p = t.parentElement;
+      if (!r.width || !p || (r.width <= p.clientWidth + 1 && r.right <= W + 1 && r.left >= -1)) return;
+      // a flex or grid item will not shrink below its content unless told to
+      for (var e = p; e && e !== body; e = e.parentElement) {
+        if (e.parentElement && /flex|grid/.test(getComputedStyle(e.parentElement).display)) e.style.minWidth = "0";
+      }
+      // unless a box around it already scrolls sideways, give the table one
+      for (var s = p; s && s !== body; s = s.parentElement) if (/auto|scroll/.test(getComputedStyle(s).overflowX)) return;
+      var w = document.createElement("div");
+      w.className = "ss-scroll";
+      p.insertBefore(w, t); w.appendChild(t);
+    });
+  }
+  var queued = false;
+  function later() { if (!queued) { queued = true; requestAnimationFrame(function () { queued = false; fit(); }); } }
+  fit();
+  window.addEventListener("load", later);
+  window.addEventListener("resize", later);
+  document.addEventListener("click", function () { setTimeout(later, 30); }, true);
+  if (window.MutationObserver) new MutationObserver(later).observe(document.body, { childList: true, subtree: true });
 })();

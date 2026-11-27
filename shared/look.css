@@ -240,3 +240,20 @@
   }
 }
 @media print { .ss-bar, .ss-foot { display: none !important; } }
+
+/* ---------- Phones (2026-11-27): nothing may make the page wider than the screen ----------
+   Wide tables used to push some pages past the screen edge, which left a blank strip on the right
+   and let the page slide sideways while scrolling. chrome.js wraps any table, picture or code block
+   that is wider than its box in a .ss-scroll box, so it scrolls sideways on its own. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html, body { max-width: 100%; overflow-x: clip; }
+body { overflow-wrap: break-word; }
+img, video, canvas { max-width: 100%; height: auto; }
+svg { max-width: 100%; }
+pre { max-width: 100%; overflow-x: auto; }
+.ss-scroll { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+.ss-scroll > table { margin-top: 0; }
+@media (max-width: 700px), (pointer: coarse) {
+  /* iPhones zoom the page when a box with text under 16px is tapped, and stay zoomed */
+  select, input:not([type="checkbox"]):not([type="radio"]), textarea { font-size: 16px !important; }
+}

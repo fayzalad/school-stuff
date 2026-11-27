@@ -86,6 +86,7 @@ label{font-size:.95rem}
   <label id="cover-wrap" hidden><input type="checkbox" id="cover"> Cover the answers (tap a card to reveal)</label>
   <button id="start" type="button" class="primary">Start</button>
 </div>
+<div id="spm"></div>
 
 <div id="quiz" hidden>
   <div class="stat"><span id="progress"></span> &middot; Score: <span id="score">0</span></div>
@@ -98,6 +99,7 @@ label{font-size:.95rem}
 <p class="muted" style="margin-top:32px">Everything here follows the three Industrial Robotics (Chapter 8) lecture decks. Calculations use the control resolution and accuracy formulas from Part 3.</p>
 </div>
 
+<script src="../shared/split.js"></script>
 <script>
 var QS = [
 ["Joints and links", "In an industrial robot, a joint is the part that:", ["Provides relative motion between two links", "Is a rigid member between two links", "Stores the program", "Grips the workpiece"], 0, "Joints give relative motion. Links are the rigid members between joints."],
@@ -209,11 +211,20 @@ function pool() {
   return QS.filter(function (q) { return !topic || q[0] === topic; });
 }
 
+// Split into parts: the questions of the chosen topic are mixed once and shared out evenly
+var sp = new Split({key: location.pathname, mount: $('spm'), onChange: function (why) {
+  if (why === 'parts') { bar(); return; }
+  if (mode === 'quiz') startQuiz(); else showMemorise();
+}});
+function qid(q) { return QS.indexOf(q); }
+function bar() { sp.take(pool(), $('topic').value, {id: qid}); $('count-wrap').hidden = mode !== 'quiz' || sp.active; }
+$('topic').addEventListener('change', bar);
+
 function setMode(m) {
   mode = m;
   $('mode-quiz').className = m === 'quiz' ? 'active' : '';
   $('mode-mem').className = m === 'mem' ? 'active' : '';
-  $('count-wrap').hidden = m !== 'quiz';
+  $('count-wrap').hidden = m !== 'quiz' || sp.active;
   $('cover-wrap').hidden = m !== 'mem';
   $('start').textContent = m === 'quiz' ? 'Start' : 'Show questions';
   $('quiz').hidden = true; $('result').hidden = true; $('memorise').hidden = true;
@@ -225,9 +236,10 @@ $('start').addEventListener('click', function () { if (mode === 'quiz') startQui
 $('next').addEventListener('click', function () { idx++; showQuestion(); });
 
 function startQuiz() {
-  var p = pool();
+  var p = pool(), part = sp.take(p, $('topic').value, {id: qid});
+  if (sp.active) p = part;
   if ($('shuffle').checked) p = shuffled(p);
-  list = p.slice(0, parseInt($('count').value, 10));
+  list = sp.active ? p : p.slice(0, parseInt($('count').value, 10));
   if ($('shuffle').checked) list = list.map(shuffleOptions);
   idx = 0; score = 0; missed = [];
   $('result').hidden = true; $('memorise').hidden = true; $('quiz').hidden = false;
@@ -261,6 +273,7 @@ function answer(i) {
   var e = document.createElement('div'); e.className = 'exp'; e.textContent = q[4];
   $('qcard').appendChild(e);
   $('score').textContent = score;
+  sp.score(score, idx + 1, list.length);
   $('next').textContent = idx === list.length - 1 ? 'See results' : 'Next';
   $('next').hidden = false;
 }
@@ -274,6 +287,7 @@ function finish() {
   h.appendChild(s);
   var again = document.createElement('button'); again.type = 'button'; again.className = 'primary'; again.textContent = 'Try again';
   again.addEventListener('click', startQuiz); h.appendChild(again);
+  var nb = sp.nextButton(); if (nb) h.appendChild(nb);
   r.appendChild(h);
   if (missed.length) {
     var m = document.createElement('div'); m.className = 'topic'; m.textContent = 'Questions you missed:'; r.appendChild(m);
@@ -303,13 +317,14 @@ function memCard(q, cover) {
 function showMemorise() {
   $('quiz').hidden = true; $('result').hidden = true;
   var m = $('memorise'); m.textContent = ''; m.hidden = false;
-  var p = pool(), cover = $('cover').checked;
+  var p = sp.take(pool(), $('topic').value, {id: qid}), cover = $('cover').checked;
   var n = document.createElement('div'); n.className = 'topic'; n.textContent = p.length + ' questions, in order. The correct answer is highlighted' + (cover ? ' after you tap a card.' : '.'); m.appendChild(n);
   p.forEach(function (q) { m.appendChild(memCard(q, cover)); });
 }
 
 
 setMode('quiz');
+bar();
 </script>
 <script src="../shared/chrome.js" defer></script>
 </body>
